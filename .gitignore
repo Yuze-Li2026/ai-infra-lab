@@ -1,0 +1,11 @@
+dist/
+artifacts/
+node_modules/
+*.log
+.DS_Store
+__pycache__/
+.venv/
+.env
+.env.*
+.codex/
+提示词.txt

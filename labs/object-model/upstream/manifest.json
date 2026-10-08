@@ -1,0 +1,68 @@
+{
+  "repository": "https://github.com/aosabook/500lines",
+  "commit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+  "author": "Carl Friedrich Bolz",
+  "license": "MIT (software); CC BY 3.0 (written material)",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "f7a7853492bdcf538d2069848ae51348a5a0b667c0eea09ce732189ae5ed3aeb",
+      "bytes": 2642,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/LICENSE.md"
+    },
+    {
+      "path": "objmodel/README.txt",
+      "sha256": "9588b946ec16b8bc5b3f2d0f97bb2dcb2c828c2ce948de55f9893f3707909172",
+      "bytes": 1474,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/README.txt"
+    },
+    {
+      "path": "objmodel/code/01-smalltalk-like/objmodel.py",
+      "sha256": "fabfafba8de7878b5db94f90a26fdd1df6816289aadac3ce1e4acefdacb0fc29",
+      "bytes": 2538,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/01-smalltalk-like/objmodel.py"
+    },
+    {
+      "path": "objmodel/code/01-smalltalk-like/test_objmodel.py",
+      "sha256": "7f041088c625ef7a52cd6a0633d5b571361e4df1c17b24feb29018286e897c9b",
+      "bytes": 3093,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/01-smalltalk-like/test_objmodel.py"
+    },
+    {
+      "path": "objmodel/code/02-attr-based/objmodel.py",
+      "sha256": "1f4cb4651071976560a3fca892a0a9a4d98597387adcbc9c900300ef84b8deee",
+      "bytes": 2979,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/02-attr-based/objmodel.py"
+    },
+    {
+      "path": "objmodel/code/02-attr-based/test_objmodel.py",
+      "sha256": "f1d4847b2b3d887c181f6942d12944893c906454b48322600b8ac1d30d306d5c",
+      "bytes": 3905,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/02-attr-based/test_objmodel.py"
+    },
+    {
+      "path": "objmodel/code/03-customizable/objmodel.py",
+      "sha256": "81520ad6c68e409365584aa95bc209ef7ffd20df2eb4f1ac1d79111341ca2e33",
+      "bytes": 3291,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/03-customizable/objmodel.py"
+    },
+    {
+      "path": "objmodel/code/03-customizable/test_objmodel.py",
+      "sha256": "3041da2bc839a6d750d1909a6c690102c64f70d4e1d4db5ad2367d822daadb04",
+      "bytes": 6244,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/03-customizable/test_objmodel.py"
+    },
+    {
+      "path": "objmodel/code/04-maps/objmodel.py",
+      "sha256": "6efe2ed8166e9e33864c055a54ca01de26c7c41803cd15702977ffeca0c4d805",
+      "bytes": 4332,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/04-maps/objmodel.py"
+    },
+    {
+      "path": "objmodel/code/04-maps/test_objmodel.py",
+      "sha256": "75e079682642e654e6fcc995fcee0e25822c60df7516df5b104873fec3429c09",
+      "bytes": 7034,
+      "source": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/objmodel/code/04-maps/test_objmodel.py"
+    }
+  ]
+}

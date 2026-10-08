@@ -1,0 +1,2225 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-08",
+  "stages": [
+    {
+      "id": 0,
+      "title": "起点 · 电脑与第一行代码",
+      "description": "从文件、数字和函数开始"
+    },
+    {
+      "id": 1,
+      "title": "基础 · 数学与程序设计",
+      "description": "建立推理和实现能力"
+    },
+    {
+      "id": 2,
+      "title": "系统 · 理解计算机",
+      "description": "从内存、并发到网络"
+    },
+    {
+      "id": 3,
+      "title": "模型 · 搭建学习系统",
+      "description": "张量、梯度与训练框架"
+    },
+    {
+      "id": 4,
+      "title": "工程 · 加速与规模化",
+      "description": "GPU、分布式、推理与可靠性"
+    }
+  ],
+  "sources": [
+    {
+      "id": "cs50",
+      "title": "CS50 Python",
+      "author": "David J. Malan / Harvard",
+      "url": "https://cs50.harvard.edu/python/",
+      "version": "在线课程，审阅日期快照",
+      "language": "en",
+      "license": "CC BY-NC-SA 4.0",
+      "licenseUrl": "https://cs50.harvard.edu/python/license/",
+      "prerequisites": "零基础",
+      "coverage": "函数、分支、循环、异常、测试、文件处理",
+      "reason": "面向无经验学习者，作业与讲授相连",
+      "limitations": "英文；部分外部平台可能需要账号",
+      "verification": "课程页面已访问；免费内容可直接阅读",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：David J. Malan / Harvard；原始来源见链接",
+        "accuracy": "课程页面已访问；免费内容可直接阅读",
+        "depth": "函数、分支、循环、异常、测试、文件处理",
+        "engineeringValue": "面向无经验学习者，作业与讲授相连",
+        "coverage": "函数、分支、循环、异常、测试、文件处理",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "零基础",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "课程页面已访问；免费内容可直接阅读",
+        "maintenance": "在线课程，审阅日期快照",
+        "licensing": "CC BY-NC-SA 4.0",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://cs50.harvard.edu/python/",
+          "checkedAt": "2026-10-08",
+          "finding": "课程页面已访问；免费内容可直接阅读"
+        }
+      ]
+    },
+    {
+      "id": "openstax",
+      "title": "Prealgebra 2e",
+      "author": "Lynn Marecek 等 / OpenStax",
+      "url": "https://openstax.org/books/prealgebra-2e/pages/1-introduction",
+      "version": "2e，在线页面快照",
+      "language": "en",
+      "license": "页面标示 CC BY-NC-SA；附加使用条款需逐项复核",
+      "licenseUrl": "https://openstax.org/books/prealgebra-2e/pages/1-introduction",
+      "prerequisites": "无数学先修",
+      "coverage": "算术与代数入门",
+      "reason": "允许数学基础不足者有明确起点",
+      "limitations": "英文；不转载，不接入 AI 内容摄取",
+      "verification": "章节入口已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Lynn Marecek 等 / OpenStax；原始来源见链接",
+        "accuracy": "章节入口已访问",
+        "depth": "算术与代数入门",
+        "engineeringValue": "允许数学基础不足者有明确起点",
+        "coverage": "算术与代数入门",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "无数学先修",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "章节入口已访问",
+        "maintenance": "2e，在线页面快照",
+        "licensing": "页面标示 CC BY-NC-SA；附加使用条款需逐项复核",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://openstax.org/books/prealgebra-2e/pages/1-introduction",
+          "checkedAt": "2026-10-08",
+          "finding": "章节入口已访问"
+        }
+      ]
+    },
+    {
+      "id": "missing",
+      "title": "The Missing Semester",
+      "author": "MIT Missing Semester 团队",
+      "url": "https://missing.csail.mit.edu/",
+      "version": "在线课程，审阅日期快照",
+      "language": "en",
+      "license": "待核实，仅链接",
+      "licenseUrl": "https://missing.csail.mit.edu/",
+      "prerequisites": "文件与基本电脑操作",
+      "coverage": "终端、Git、调试与开发工具",
+      "reason": "补齐课程通常默认已有的工程工具能力",
+      "limitations": "Shell 教学以类 Unix 为主；Windows 需要单独指导",
+      "verification": "主页已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：MIT Missing Semester 团队；原始来源见链接",
+        "accuracy": "主页已访问",
+        "depth": "终端、Git、调试与开发工具",
+        "engineeringValue": "补齐课程通常默认已有的工程工具能力",
+        "coverage": "终端、Git、调试与开发工具",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "文件与基本电脑操作",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "主页已访问",
+        "maintenance": "在线课程，审阅日期快照",
+        "licensing": "待核实，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://missing.csail.mit.edu/",
+          "checkedAt": "2026-10-08",
+          "finding": "主页已访问"
+        }
+      ]
+    },
+    {
+      "id": "missing-cn",
+      "title": "计算机教育中缺失的一课",
+      "author": "Missing Semester 中文翻译社区",
+      "url": "https://missing-semester-cn.github.io/",
+      "version": "中文社区在线版本",
+      "language": "zh",
+      "license": "待核实，仅链接",
+      "licenseUrl": "https://missing-semester-cn.github.io/",
+      "prerequisites": "基本电脑操作",
+      "coverage": "终端、Git 与工具中文辅助",
+      "reason": "降低英文阅读门槛；保留原课对照",
+      "limitations": "社区译文；未逐句复核，不能标为官方翻译",
+      "verification": "主页已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Missing Semester 中文翻译社区；原始来源见链接",
+        "accuracy": "主页已访问",
+        "depth": "终端、Git 与工具中文辅助",
+        "engineeringValue": "降低英文阅读门槛；保留原课对照",
+        "coverage": "终端、Git 与工具中文辅助",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "基本电脑操作",
+        "languageFriendliness": "中文；术语及具体代码仍需复核",
+        "accessibility": "主页已访问",
+        "maintenance": "中文社区在线版本",
+        "licensing": "待核实，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://missing-semester-cn.github.io/",
+          "checkedAt": "2026-10-08",
+          "finding": "主页已访问"
+        }
+      ]
+    },
+    {
+      "id": "composing",
+      "title": "Composing Programs",
+      "author": "John DeNero",
+      "url": "https://composingprograms.com/3ed/",
+      "version": "第 3 版，部分章节仍在补充",
+      "language": "en",
+      "license": "CC BY-NC-SA 4.0",
+      "licenseUrl": "https://composingprograms.com/3ed/",
+      "prerequisites": "Python 入门",
+      "coverage": "抽象、递归、数据组织",
+      "reason": "以抽象和问题求解补充初学编程",
+      "limitations": "第三版未完结，旧版可作补充",
+      "verification": "目录与许可声明已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：John DeNero；原始来源见链接",
+        "accuracy": "目录与许可声明已访问",
+        "depth": "抽象、递归、数据组织",
+        "engineeringValue": "以抽象和问题求解补充初学编程",
+        "coverage": "抽象、递归、数据组织",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "Python 入门",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "目录与许可声明已访问",
+        "maintenance": "第 3 版，部分章节仍在补充",
+        "licensing": "CC BY-NC-SA 4.0",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://composingprograms.com/3ed/",
+          "checkedAt": "2026-10-08",
+          "finding": "目录与许可声明已访问"
+        }
+      ]
+    },
+    {
+      "id": "linear",
+      "title": "MIT 18.06 线性代数",
+      "author": "Gilbert Strang / MIT OCW",
+      "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+      "version": "Spring 2010",
+      "language": "en",
+      "license": "OCW 许可，以页面与材料例外为准",
+      "licenseUrl": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+      "prerequisites": "代数与函数",
+      "coverage": "向量、矩阵、特征值、正定矩阵",
+      "reason": "有讲授、作业和考试，适合张量计算前置",
+      "limitations": "只精选与 AI 系统相关章节；中文辅助待审校",
+      "verification": "课程目录已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Gilbert Strang / MIT OCW；原始来源见链接",
+        "accuracy": "课程目录已访问",
+        "depth": "向量、矩阵、特征值、正定矩阵",
+        "engineeringValue": "有讲授、作业和考试，适合张量计算前置",
+        "coverage": "向量、矩阵、特征值、正定矩阵",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "代数与函数",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "课程目录已访问",
+        "maintenance": "Spring 2010",
+        "licensing": "OCW 许可，以页面与材料例外为准",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+          "checkedAt": "2026-10-08",
+          "finding": "课程目录已访问"
+        }
+      ]
+    },
+    {
+      "id": "calculus",
+      "title": "MIT 18.01SC 微积分",
+      "author": "David Jerison / MIT OCW",
+      "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+      "version": "Fall 2010",
+      "language": "en",
+      "license": "OCW 许可，以页面与材料例外为准",
+      "licenseUrl": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+      "prerequisites": "代数、函数",
+      "coverage": "导数、链式法则、优化、积分",
+      "reason": "适合自学的分段结构与习题",
+      "limitations": "多变量偏导仍需增补；不可把此课当完整梯度先修",
+      "verification": "课程目录已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：David Jerison / MIT OCW；原始来源见链接",
+        "accuracy": "课程目录已访问",
+        "depth": "导数、链式法则、优化、积分",
+        "engineeringValue": "适合自学的分段结构与习题",
+        "coverage": "导数、链式法则、优化、积分",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "代数、函数",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "课程目录已访问",
+        "maintenance": "Fall 2010",
+        "licensing": "OCW 许可，以页面与材料例外为准",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+          "checkedAt": "2026-10-08",
+          "finding": "课程目录已访问"
+        }
+      ]
+    },
+    {
+      "id": "discrete",
+      "title": "MIT 6.042J 计算机数学",
+      "author": "MIT OCW 教学团队",
+      "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+      "version": "Spring 2015",
+      "language": "en",
+      "license": "OCW 许可，以页面与材料例外为准",
+      "licenseUrl": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+      "prerequisites": "基础代数",
+      "coverage": "证明、离散结构与概率基础",
+      "reason": "支撑算法分析和随机性推理",
+      "limitations": "不要求完整修完所有离散数学；概率统计覆盖仍需审计",
+      "verification": "课程入口已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：MIT OCW 教学团队；原始来源见链接",
+        "accuracy": "课程入口已访问",
+        "depth": "证明、离散结构与概率基础",
+        "engineeringValue": "支撑算法分析和随机性推理",
+        "coverage": "证明、离散结构与概率基础",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "基础代数",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "课程入口已访问",
+        "maintenance": "Spring 2015",
+        "licensing": "OCW 许可，以页面与材料例外为准",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+          "checkedAt": "2026-10-08",
+          "finding": "课程入口已访问"
+        }
+      ]
+    },
+    {
+      "id": "ostep",
+      "title": "Operating Systems: Three Easy Pieces",
+      "author": "Remzi H. Arpaci-Dusseau / Andrea C. Arpaci-Dusseau",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "version": "作者在线版本，未固定 PDF 修订号",
+      "language": "en",
+      "license": "待核实，仅链接；免费阅读不等于可转载",
+      "licenseUrl": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "prerequisites": "C、数据结构与计算机组织",
+      "coverage": "虚拟化、并发、持久化",
+      "reason": "围绕系统核心机制，配套项目值得深入评估",
+      "limitations": "项目版本、运行环境和再分发授权未验证",
+      "verification": "作者主页已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Remzi H. Arpaci-Dusseau / Andrea C. Arpaci-Dusseau；原始来源见链接",
+        "accuracy": "作者主页已访问",
+        "depth": "虚拟化、并发、持久化",
+        "engineeringValue": "围绕系统核心机制，配套项目值得深入评估",
+        "coverage": "虚拟化、并发、持久化",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "C、数据结构与计算机组织",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "作者主页已访问",
+        "maintenance": "作者在线版本，未固定 PDF 修订号",
+        "licensing": "待核实，仅链接；免费阅读不等于可转载",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "checkedAt": "2026-10-08",
+          "finding": "作者主页已访问"
+        }
+      ]
+    },
+    {
+      "id": "d2l",
+      "title": "动手学深度学习",
+      "author": "Aston Zhang / Zachary Lipton / Mu Li / Alexander Smola",
+      "url": "https://zh.d2l.ai/",
+      "version": "中文站 2.0.0 文档",
+      "language": "zh",
+      "license": "文字与代码分开授权；以仓库 LICENSE 为准",
+      "licenseUrl": "https://github.com/d2l-ai/d2l-zh/blob/master/LICENSE",
+      "prerequisites": "Python、线性代数、微积分、概率",
+      "coverage": "张量、自动微分、优化、模型训练",
+      "reason": "中文原始维护资源，结合代码与数学",
+      "limitations": "旧依赖组合需复现；不能保证所有 Notebook 即开即用",
+      "verification": "中文目录和许可证入口已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Aston Zhang / Zachary Lipton / Mu Li / Alexander Smola；原始来源见链接",
+        "accuracy": "中文目录和许可证入口已访问",
+        "depth": "张量、自动微分、优化、模型训练",
+        "engineeringValue": "中文原始维护资源，结合代码与数学",
+        "coverage": "张量、自动微分、优化、模型训练",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "Python、线性代数、微积分、概率",
+        "languageFriendliness": "中文；术语及具体代码仍需复核",
+        "accessibility": "中文目录和许可证入口已访问",
+        "maintenance": "中文站 2.0.0 文档",
+        "licensing": "文字与代码分开授权；以仓库 LICENSE 为准",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://zh.d2l.ai/",
+          "checkedAt": "2026-10-08",
+          "finding": "中文目录和许可证入口已访问"
+        }
+      ]
+    },
+    {
+      "id": "dlsys",
+      "title": "Deep Learning Systems",
+      "author": "CMU Deep Learning Systems 教学团队",
+      "url": "https://dlsyscourse.org/",
+      "version": "Fall 2026 课程页",
+      "language": "en",
+      "license": "待核实，仅链接",
+      "licenseUrl": "https://dlsyscourse.org/",
+      "prerequisites": "系统编程、线性代数、微积分、概率、Python/C++、ML",
+      "coverage": "自动微分、NDArray、CPU/CUDA 后端",
+      "reason": "Needle 作业提供从原理到实现的完整项目链",
+      "limitations": "GPU 成本；mugrade/课程服务不保证校外可用",
+      "verification": "先修、目标和 HW0–HW4 描述已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：CMU Deep Learning Systems 教学团队；原始来源见链接",
+        "accuracy": "先修、目标和 HW0–HW4 描述已访问",
+        "depth": "自动微分、NDArray、CPU/CUDA 后端",
+        "engineeringValue": "Needle 作业提供从原理到实现的完整项目链",
+        "coverage": "自动微分、NDArray、CPU/CUDA 后端",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "系统编程、线性代数、微积分、概率、Python/C++、ML",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "先修、目标和 HW0–HW4 描述已访问",
+        "maintenance": "Fall 2026 课程页",
+        "licensing": "待核实，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://dlsyscourse.org/",
+          "checkedAt": "2026-10-08",
+          "finding": "先修、目标和 HW0–HW4 描述已访问"
+        }
+      ]
+    },
+    {
+      "id": "cs336",
+      "title": "Stanford CS336",
+      "author": "Percy Liang / Tatsunori Hashimoto / Stanford",
+      "url": "https://cs336.stanford.edu/",
+      "version": "Spring 2026 课程页",
+      "language": "en",
+      "license": "待核实，仅链接；作业仓库逐个核实",
+      "licenseUrl": "https://cs336.stanford.edu/",
+      "prerequisites": "Python、深度学习与系统能力",
+      "coverage": "语言模型、内核、并行、推理、数据与评估",
+      "reason": "资源核算和实际系统问题紧密关联",
+      "limitations": "高阶材料；显存与算力要求必须逐作业标明",
+      "verification": "2026 教学日程已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Percy Liang / Tatsunori Hashimoto / Stanford；原始来源见链接",
+        "accuracy": "2026 教学日程已访问",
+        "depth": "语言模型、内核、并行、推理、数据与评估",
+        "engineeringValue": "资源核算和实际系统问题紧密关联",
+        "coverage": "语言模型、内核、并行、推理、数据与评估",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "Python、深度学习与系统能力",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "2026 教学日程已访问",
+        "maintenance": "Spring 2026 课程页",
+        "licensing": "待核实，仅链接；作业仓库逐个核实",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://cs336.stanford.edu/",
+          "checkedAt": "2026-10-08",
+          "finding": "2026 教学日程已访问"
+        }
+      ]
+    },
+    {
+      "id": "distributed",
+      "title": "MIT 6.5840 分布式系统",
+      "author": "MIT PDOS 教学团队",
+      "url": "https://pdos.csail.mit.edu/6.5840/",
+      "version": "Spring 2026",
+      "language": "en",
+      "license": "待核实，仅链接",
+      "licenseUrl": "https://pdos.csail.mit.edu/6.5840/",
+      "prerequisites": "编程、操作系统、网络基础",
+      "coverage": "容错与分布式系统实验",
+      "reason": "以真实故障语义支撑分布式训练的系统思维",
+      "limitations": "Go 先修、各实验本地评测与许可仍待审查",
+      "verification": "课程主页已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：MIT PDOS 教学团队；原始来源见链接",
+        "accuracy": "课程主页已访问",
+        "depth": "容错与分布式系统实验",
+        "engineeringValue": "以真实故障语义支撑分布式训练的系统思维",
+        "coverage": "容错与分布式系统实验",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "编程、操作系统、网络基础",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "课程主页已访问",
+        "maintenance": "Spring 2026",
+        "licensing": "待核实，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://pdos.csail.mit.edu/6.5840/",
+          "checkedAt": "2026-10-08",
+          "finding": "课程主页已访问"
+        }
+      ]
+    },
+    {
+      "id": "cuda",
+      "title": "CUDA Programming Guide",
+      "author": "NVIDIA",
+      "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+      "version": "滚动文档，未固定 CUDA 版本",
+      "language": "en",
+      "license": "厂商文档条款；仅链接",
+      "licenseUrl": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+      "prerequisites": "C/C++、体系结构和并发",
+      "coverage": "GPU 执行、内存与并行编程",
+      "reason": "硬件编程的一手依据",
+      "limitations": "必须固定工具链、驱动与硬件；本次未安装 CUDA",
+      "verification": "官方目录已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：NVIDIA；原始来源见链接",
+        "accuracy": "官方目录已访问",
+        "depth": "GPU 执行、内存与并行编程",
+        "engineeringValue": "硬件编程的一手依据",
+        "coverage": "GPU 执行、内存与并行编程",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "C/C++、体系结构和并发",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "官方目录已访问",
+        "maintenance": "滚动文档，未固定 CUDA 版本",
+        "licensing": "厂商文档条款；仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方目录已访问"
+        }
+      ]
+    },
+    {
+      "id": "torch",
+      "title": "PyTorch Distributed",
+      "author": "PyTorch contributors",
+      "url": "https://docs.pytorch.org/docs/stable/distributed.html",
+      "version": "stable 滚动文档，具体发行版待锁定",
+      "language": "en",
+      "license": "待逐项核实文档许可，仅链接",
+      "licenseUrl": "https://docs.pytorch.org/docs/stable/distributed.html",
+      "prerequisites": "PyTorch、进程、网络和并行算法",
+      "coverage": "通信与分布式训练",
+      "reason": "生产框架官方 API 作为实现对照",
+      "limitations": "这里只验证入口重定向，未验证多卡程序",
+      "verification": "入口可访问，正文深审待完成",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：PyTorch contributors；原始来源见链接",
+        "accuracy": "入口可访问，正文深审待完成",
+        "depth": "通信与分布式训练",
+        "engineeringValue": "生产框架官方 API 作为实现对照",
+        "coverage": "通信与分布式训练",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "PyTorch、进程、网络和并行算法",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "入口可访问，正文深审待完成",
+        "maintenance": "stable 滚动文档，具体发行版待锁定",
+        "licensing": "待逐项核实文档许可，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.pytorch.org/docs/stable/distributed.html",
+          "checkedAt": "2026-10-08",
+          "finding": "入口可访问，正文深审待完成"
+        }
+      ]
+    },
+    {
+      "id": "vllm",
+      "title": "vLLM",
+      "author": "vLLM project contributors",
+      "url": "https://docs.vllm.ai/en/latest/",
+      "version": "latest 滚动文档，发行版待锁定",
+      "language": "en",
+      "license": "待核实文档与代码各自许可，仅链接",
+      "licenseUrl": "https://docs.vllm.ai/en/latest/",
+      "prerequisites": "模型推理、GPU 与服务基础",
+      "coverage": "高吞吐推理与部署",
+      "reason": "工业系统用于验证性能和部署能力",
+      "limitations": "不是零基础教材；模型许可及硬件需求必须单独核查",
+      "verification": "官方文档入口已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：vLLM project contributors；原始来源见链接",
+        "accuracy": "官方文档入口已访问",
+        "depth": "高吞吐推理与部署",
+        "engineeringValue": "工业系统用于验证性能和部署能力",
+        "coverage": "高吞吐推理与部署",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "模型推理、GPU 与服务基础",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "官方文档入口已访问",
+        "maintenance": "latest 滚动文档，发行版待锁定",
+        "licensing": "待核实文档与代码各自许可，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.vllm.ai/en/latest/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方文档入口已访问"
+        }
+      ]
+    },
+    {
+      "id": "mlsys",
+      "title": "Machine Learning Systems",
+      "author": "Harvard MLSysBook 教学团队",
+      "url": "https://mlsysbook.ai/",
+      "version": "站点标示 2026 双卷版本",
+      "language": "en",
+      "license": "站点标示 CC BY-NC-SA 4.0；各工具单独核查",
+      "licenseUrl": "https://mlsysbook.ai/",
+      "prerequisites": "编程和 ML 基础",
+      "coverage": "从单机到规模化系统，伴随 TinyTorch 与实验",
+      "reason": "用于交叉检查系统能力边界与遗漏",
+      "limitations": "不把教材的完整性宣称作为本项目已验证事实",
+      "verification": "总览、目录入口与许可页脚已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Harvard MLSysBook 教学团队；原始来源见链接",
+        "accuracy": "总览、目录入口与许可页脚已访问",
+        "depth": "从单机到规模化系统，伴随 TinyTorch 与实验",
+        "engineeringValue": "用于交叉检查系统能力边界与遗漏",
+        "coverage": "从单机到规模化系统，伴随 TinyTorch 与实验",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "编程和 ML 基础",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "总览、目录入口与许可页脚已访问",
+        "maintenance": "站点标示 2026 双卷版本",
+        "licensing": "站点标示 CC BY-NC-SA 4.0；各工具单独核查",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://mlsysbook.ai/",
+          "checkedAt": "2026-10-08",
+          "finding": "总览、目录入口与许可页脚已访问"
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Kubernetes Security",
+      "author": "Kubernetes contributors",
+      "url": "https://kubernetes.io/docs/concepts/security/",
+      "version": "官方滚动文档",
+      "language": "en",
+      "license": "待核实，仅链接",
+      "licenseUrl": "https://kubernetes.io/docs/concepts/security/",
+      "prerequisites": "网络、操作系统与部署基础",
+      "coverage": "基础设施权限与安全隔离",
+      "reason": "补充只关注性能的路线容易漏掉的运维能力",
+      "limitations": "进阶分支；零基础不先装集群",
+      "verification": "官方安全文档入口已访问",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
+      "reuse": "仅链接与原创简短导读，不镜像、不转载",
+      "evaluation": {
+        "authority": "作者与机构：Kubernetes contributors；原始来源见链接",
+        "accuracy": "官方安全文档入口已访问",
+        "depth": "基础设施权限与安全隔离",
+        "engineeringValue": "补充只关注性能的路线容易漏掉的运维能力",
+        "coverage": "基础设施权限与安全隔离",
+        "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
+        "difficulty": "网络、操作系统与部署基础",
+        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "accessibility": "官方安全文档入口已访问",
+        "maintenance": "官方滚动文档",
+        "licensing": "待核实，仅链接",
+        "stability": "可变在线资源；正式实验集成前固定版本或 commit"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://kubernetes.io/docs/concepts/security/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方安全文档入口已访问"
+        }
+      ]
+    },
+    {
+      "id": "algorithms-mit",
+      "title": "MIT 6.006 Introduction to Algorithms",
+      "author": "Erik Demaine / Srini Devadas",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+      "version": "Fall 2011",
+      "language": "en",
+      "prerequisites": "Python、离散数学",
+      "coverage": "数据结构、排序、图搜索、最短路与动态规划",
+      "reason": "相较单纯刷题，保留证明和成本模型；旧作业运行环境需单独处理",
+      "limitations": "相较单纯刷题，保留证明和成本模型；旧作业运行环境需单独处理",
+      "verification": "课程页与 syllabus 明确 Python / 离散数学先修；作业采用理论与代码结合。",
+      "license": "OCW 许可与单项例外，暂仅链接",
+      "licenseUrl": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Erik Demaine / Srini Devadas；原始来源见链接",
+        "accuracy": "课程页与 syllabus 明确 Python / 离散数学先修；作业采用理论与代码结合。",
+        "depth": "数据结构、排序、图搜索、最短路与动态规划",
+        "engineeringValue": "相较单纯刷题，保留证明和成本模型；旧作业运行环境需单独处理",
+        "coverage": "数据结构、排序、图搜索、最短路与动态规划",
+        "teachingQuality": "理论题与编程作业配合，覆盖复杂度与实现",
+        "difficulty": "Python、离散数学",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "Fall 2011",
+        "licensing": "OCW 许可与单项例外，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+          "checkedAt": "2026-10-08",
+          "finding": "课程页与 syllabus 明确 Python / 离散数学先修；作业采用理论与代码结合。"
+        }
+      ]
+    },
+    {
+      "id": "algebra-text",
+      "title": "Algebra and Trigonometry 2e",
+      "author": "Jay Abramson / OpenStax",
+      "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+      "version": "2e 在线版",
+      "language": "en",
+      "prerequisites": "四则运算、分数与比例",
+      "coverage": "方程、函数、多项式、指数、对数及三角基础",
+      "reason": "相较直接进入大学微积分，提供中间桥梁；不要求所有章节必修",
+      "limitations": "相较直接进入大学微积分，提供中间桥梁；不要求所有章节必修",
+      "verification": "原书章节入口已访问，完整习题体验未做学习者试用。",
+      "license": "以书页版权及使用条款为准，暂仅链接",
+      "licenseUrl": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Jay Abramson / OpenStax；原始来源见链接",
+        "accuracy": "原书章节入口已访问，完整习题体验未做学习者试用。",
+        "depth": "方程、函数、多项式、指数、对数及三角基础",
+        "engineeringValue": "相较直接进入大学微积分，提供中间桥梁；不要求所有章节必修",
+        "coverage": "方程、函数、多项式、指数、对数及三角基础",
+        "teachingQuality": "承接前代数，为微积分与数量关系建模提供教材路径",
+        "difficulty": "四则运算、分数与比例",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "2e 在线版",
+        "licensing": "以书页版权及使用条款为准，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+          "checkedAt": "2026-10-08",
+          "finding": "原书章节入口已访问，完整习题体验未做学习者试用。"
+        }
+      ]
+    },
+    {
+      "id": "beej-c",
+      "title": "Beej’s Guide to C Programming",
+      "author": "Brian “Beej Jorgensen” Hall",
+      "url": "https://beej.us/guide/bgc/html/split/",
+      "version": "作者在线版，2026-10-08 查阅",
+      "language": "en",
+      "prerequisites": "已有一种编程语言基础",
+      "coverage": "C 类型、指针、数组、结构体、文件与内存",
+      "reason": "作为 C 入门辅助，不替代计算机组织课；现代 C++ 另有课程",
+      "limitations": "作为 C 入门辅助，不替代计算机组织课；现代 C++ 另有课程",
+      "verification": "作者目录已访问，覆盖指针与内存相关主题。",
+      "license": "以作者版权说明为准，暂仅链接",
+      "licenseUrl": "https://beej.us/guide/bgc/html/split/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Brian “Beej Jorgensen” Hall；原始来源见链接",
+        "accuracy": "作者目录已访问，覆盖指针与内存相关主题。",
+        "depth": "C 类型、指针、数组、结构体、文件与内存",
+        "engineeringValue": "作为 C 入门辅助，不替代计算机组织课；现代 C++ 另有课程",
+        "coverage": "C 类型、指针、数组、结构体、文件与内存",
+        "teachingQuality": "按主题分章，适合从 Python 过渡到系统语言",
+        "difficulty": "已有一种编程语言基础",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "作者在线版，2026-10-08 查阅",
+        "licensing": "以作者版权说明为准，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://beej.us/guide/bgc/html/split/",
+          "checkedAt": "2026-10-08",
+          "finding": "作者目录已访问，覆盖指针与内存相关主题。"
+        }
+      ]
+    },
+    {
+      "id": "cs61c",
+      "title": "Berkeley CS61C",
+      "author": "Dan Garcia / UC Berkeley 教学团队",
+      "url": "https://cs61c.org/fa26/",
+      "version": "Fall 2026",
+      "language": "en",
+      "prerequisites": "程序设计、基本数据结构",
+      "coverage": "C、数值表示、RISC-V、缓存与并行基础",
+      "reason": "较 OSTEP 更靠近计算机组织前置；校内媒体和评分可能不可访问",
+      "limitations": "较 OSTEP 更靠近计算机组织前置；校内媒体和评分可能不可访问",
+      "verification": "日程可见 C 入门、指针/数组、内存管理和浮点数讲次。",
+      "license": "课程材料与代码须分别核实，暂仅链接",
+      "licenseUrl": "https://cs61c.org/fa26/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Dan Garcia / UC Berkeley 教学团队；原始来源见链接",
+        "accuracy": "日程可见 C 入门、指针/数组、内存管理和浮点数讲次。",
+        "depth": "C、数值表示、RISC-V、缓存与并行基础",
+        "engineeringValue": "较 OSTEP 更靠近计算机组织前置；校内媒体和评分可能不可访问",
+        "coverage": "C、数值表示、RISC-V、缓存与并行基础",
+        "teachingQuality": "课程日程将讲授、实验和项目串联",
+        "difficulty": "程序设计、基本数据结构",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "Fall 2026",
+        "licensing": "课程材料与代码须分别核实，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://cs61c.org/fa26/",
+          "checkedAt": "2026-10-08",
+          "finding": "日程可见 C 入门、指针/数组、内存管理和浮点数讲次。"
+        }
+      ]
+    },
+    {
+      "id": "cs106l",
+      "title": "Stanford CS106L Standard C++ Programming",
+      "author": "Stanford CS106L 教学团队",
+      "url": "https://web.stanford.edu/class/cs106l/",
+      "version": "2026-10-08 在线课程页",
+      "language": "en",
+      "prerequisites": "程序设计与抽象基础",
+      "coverage": "现代 C++、类型、标准库与资源管理",
+      "reason": "C 入门不等于掌握 C++；本课放在系统实现前按需学习",
+      "limitations": "C 入门不等于掌握 C++；本课放在系统实现前按需学习",
+      "verification": "官方课程入口已访问，具体作业环境尚未复现。",
+      "license": "逐项核实课程与作业许可，暂仅链接",
+      "licenseUrl": "https://web.stanford.edu/class/cs106l/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Stanford CS106L 教学团队；原始来源见链接",
+        "accuracy": "官方课程入口已访问，具体作业环境尚未复现。",
+        "depth": "现代 C++、类型、标准库与资源管理",
+        "engineeringValue": "C 入门不等于掌握 C++；本课放在系统实现前按需学习",
+        "coverage": "现代 C++、类型、标准库与资源管理",
+        "teachingQuality": "为 C++ 系统课程提供独立语言桥梁",
+        "difficulty": "程序设计与抽象基础",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "2026-10-08 在线课程页",
+        "licensing": "逐项核实课程与作业许可，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://web.stanford.edu/class/cs106l/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方课程入口已访问，具体作业环境尚未复现。"
+        }
+      ]
+    },
+    {
+      "id": "cs144",
+      "title": "Stanford CS144 Computer Networking",
+      "author": "Keith Winstein / Stanford",
+      "url": "https://cs144.github.io/",
+      "version": "Fall 2026",
+      "language": "en",
+      "prerequisites": "C++、数据结构、操作系统基础",
+      "coverage": "数据报、可靠传输、TCP 与字节流",
+      "reason": "作为网络主课；其 Linux/C++ 环境尚未在此 Windows 主机复现",
+      "limitations": "作为网络主课；其 Linux/C++ 环境尚未在此 Windows 主机复现",
+      "verification": "官方日程含 byte stream 与 TCP receiver 检查点，校内提交不可当本站评分。",
+      "license": "课程与实验代码分别核实，暂仅链接",
+      "licenseUrl": "https://cs144.github.io/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Keith Winstein / Stanford；原始来源见链接",
+        "accuracy": "官方日程含 byte stream 与 TCP receiver 检查点，校内提交不可当本站评分。",
+        "depth": "数据报、可靠传输、TCP 与字节流",
+        "engineeringValue": "作为网络主课；其 Linux/C++ 环境尚未在此 Windows 主机复现",
+        "coverage": "数据报、可靠传输、TCP 与字节流",
+        "teachingQuality": "分阶段网络实验连接协议语义与实现",
+        "difficulty": "C++、数据结构、操作系统基础",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "Fall 2026",
+        "licensing": "课程与实验代码分别核实，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://cs144.github.io/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方日程含 byte stream 与 TCP receiver 检查点，校内提交不可当本站评分。"
+        }
+      ]
+    },
+    {
+      "id": "multivariable",
+      "title": "MIT 18.02SC Multivariable Calculus",
+      "author": "MIT OCW 教学团队",
+      "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+      "version": "Fall 2010",
+      "language": "en",
+      "prerequisites": "单变量微积分、向量",
+      "coverage": "偏导、梯度、方向导数与多变量优化",
+      "reason": "按梯度与优化需要选章，向量场积分作为按需深入",
+      "limitations": "按梯度与优化需要选章，向量场积分作为按需深入",
+      "verification": "官方课程目录与独立学习结构入口已访问。",
+      "license": "OCW 许可与单项例外，暂仅链接",
+      "licenseUrl": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：MIT OCW 教学团队；原始来源见链接",
+        "accuracy": "官方课程目录与独立学习结构入口已访问。",
+        "depth": "偏导、梯度、方向导数与多变量优化",
+        "engineeringValue": "按梯度与优化需要选章，向量场积分作为按需深入",
+        "coverage": "偏导、梯度、方向导数与多变量优化",
+        "teachingQuality": "为自动微分补齐单变量课程以外的数学环节",
+        "difficulty": "单变量微积分、向量",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "Fall 2010",
+        "licensing": "OCW 许可与单项例外，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方课程目录与独立学习结构入口已访问。"
+        }
+      ]
+    },
+    {
+      "id": "stat110",
+      "title": "Harvard Statistics 110",
+      "author": "Joseph K. Blitzstein / Harvard",
+      "url": "https://stat110.hsites.harvard.edu/",
+      "version": "官方在线课程入口",
+      "language": "en",
+      "prerequisites": "代数、基础微积分、组合推理",
+      "coverage": "条件概率、随机变量、期望和常见分布",
+      "reason": "6.042J 提供离散基础，本课系统展开概率；统计推断另配 OpenIntro",
+      "limitations": "6.042J 提供离散基础，本课系统展开概率；统计推断另配 OpenIntro",
+      "verification": "官方课程入口已访问；数学衔接为本项目设计。",
+      "license": "以原站和教材授权为准，暂仅链接",
+      "licenseUrl": "https://stat110.hsites.harvard.edu/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Joseph K. Blitzstein / Harvard；原始来源见链接",
+        "accuracy": "官方课程入口已访问；数学衔接为本项目设计。",
+        "depth": "条件概率、随机变量、期望和常见分布",
+        "engineeringValue": "6.042J 提供离散基础，本课系统展开概率；统计推断另配 OpenIntro",
+        "coverage": "条件概率、随机变量、期望和常见分布",
+        "teachingQuality": "大学概率课程与公开材料作为概率主线",
+        "difficulty": "代数、基础微积分、组合推理",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "官方在线课程入口",
+        "licensing": "以原站和教材授权为准，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://stat110.hsites.harvard.edu/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方课程入口已访问；数学衔接为本项目设计。"
+        }
+      ]
+    },
+    {
+      "id": "openintro",
+      "title": "OpenIntro Statistics",
+      "author": "David Diez / Mine Çetinkaya-Rundel / Christopher Barr",
+      "url": "https://www.openintro.org/book/os/",
+      "version": "第 4 版资源页，2026-10-08 查阅",
+      "language": "en",
+      "prerequisites": "代数、概率基础",
+      "coverage": "抽样、估计、置信区间、检验与回归",
+      "reason": "补充概率课不能独自覆盖的推断；不作为完整研究统计训练",
+      "limitations": "补充概率课不能独自覆盖的推断；不作为完整研究统计训练",
+      "verification": "教材官方入口已访问；资料与数据文件许可需分别检查。",
+      "license": "以各下载文件许可为准，暂仅链接",
+      "licenseUrl": "https://www.openintro.org/book/os/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：David Diez / Mine Çetinkaya-Rundel / Christopher Barr；原始来源见链接",
+        "accuracy": "教材官方入口已访问；资料与数据文件许可需分别检查。",
+        "depth": "抽样、估计、置信区间、检验与回归",
+        "engineeringValue": "补充概率课不能独自覆盖的推断；不作为完整研究统计训练",
+        "coverage": "抽样、估计、置信区间、检验与回归",
+        "teachingQuality": "将统计判断与实验结果解释连接",
+        "difficulty": "代数、概率基础",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "第 4 版资源页，2026-10-08 查阅",
+        "licensing": "以各下载文件许可为准，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://www.openintro.org/book/os/",
+          "checkedAt": "2026-10-08",
+          "finding": "教材官方入口已访问；资料与数据文件许可需分别检查。"
+        }
+      ]
+    },
+    {
+      "id": "sre",
+      "title": "Site Reliability Engineering",
+      "author": "Google SRE 作者团队",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "version": "作者在线版本",
+      "language": "en",
+      "prerequisites": "网络、操作系统、服务部署",
+      "coverage": "服务目标、监控、过载、故障排查与应急响应",
+      "reason": "补足仅学 Kubernetes 配置的局限；案例需迁移到教学规模",
+      "limitations": "补足仅学 Kubernetes 配置的局限；案例需迁移到教学规模",
+      "verification": "官方目录已访问，作为运行能力选章依据。",
+      "license": "作者在线阅读条款，暂仅链接",
+      "licenseUrl": "https://sre.google/sre-book/table-of-contents/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：Google SRE 作者团队；原始来源见链接",
+        "accuracy": "官方目录已访问，作为运行能力选章依据。",
+        "depth": "服务目标、监控、过载、故障排查与应急响应",
+        "engineeringValue": "补足仅学 Kubernetes 配置的局限；案例需迁移到教学规模",
+        "coverage": "服务目标、监控、过载、故障排查与应急响应",
+        "teachingQuality": "从真实生产运行视角组织可靠性实践",
+        "difficulty": "网络、操作系统、服务部署",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "作者在线版本",
+        "licensing": "作者在线阅读条款，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方目录已访问，作为运行能力选章依据。"
+        }
+      ]
+    },
+    {
+      "id": "mlir",
+      "title": "MLIR Toy Tutorial",
+      "author": "LLVM / MLIR contributors",
+      "url": "https://mlir.llvm.org/docs/Tutorials/Toy/",
+      "version": "滚动教程，集成前固定 LLVM 版本",
+      "language": "en",
+      "prerequisites": "C++、编译器基础、张量和图优化",
+      "coverage": "语言前端、IR、优化与 lowering",
+      "reason": "作为编译器方向项目；不是无前置零基础教程",
+      "limitations": "作为编译器方向项目；不是无前置零基础教程",
+      "verification": "官方教程入口已访问；编译工具链尚未复现。",
+      "license": "LLVM 文档与代码许可分别复核，暂仅链接",
+      "licenseUrl": "https://mlir.llvm.org/docs/Tutorials/Toy/",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "目录与教学结构审阅；未完成全课程试学",
+      "reuse": "只提供链接与原创导读",
+      "evaluation": {
+        "authority": "作者与机构：LLVM / MLIR contributors；原始来源见链接",
+        "accuracy": "官方教程入口已访问；编译工具链尚未复现。",
+        "depth": "语言前端、IR、优化与 lowering",
+        "engineeringValue": "作为编译器方向项目；不是无前置零基础教程",
+        "coverage": "语言前端、IR、优化与 lowering",
+        "teachingQuality": "官方逐步构造语言的工程教程",
+        "difficulty": "C++、编译器基础、张量和图优化",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "滚动教程，集成前固定 LLVM 版本",
+        "licensing": "LLVM 文档与代码许可分别复核，暂仅链接",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://mlir.llvm.org/docs/Tutorials/Toy/",
+          "checkedAt": "2026-10-08",
+          "finding": "官方教程入口已访问；编译工具链尚未复现。"
+        }
+      ]
+    },
+    {
+      "id": "object-model",
+      "title": "A Simple Object Model",
+      "author": "Carl Friedrich Bolz / AOSA",
+      "url": "https://aosabook.org/en/500L/a-simple-object-model.html",
+      "version": "500lines commit fba689d101eb5600f5c8f4d7fd79912498e950e2",
+      "language": "en",
+      "prerequisites": "Python 类、字典、递归、异常和测试",
+      "coverage": "属性查找、方法绑定、可定制对象与共享布局",
+      "reason": "比简单语法题更接近运行时设计；是教学简化模型，不是生产虚拟机",
+      "limitations": "比简单语法题更接近运行时设计；是教学简化模型，不是生产虚拟机",
+      "verification": "已固定提交、保留原文与哈希；Python 3.12.14 / Windows 下 28 项原测试通过。",
+      "license": "代码 MIT；文字 CC BY 3.0；upstream/LICENSE.md 已核对",
+      "licenseUrl": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/LICENSE.md",
+      "reviewedAt": "2026-10-08",
+      "reviewLevel": "原始代码及测试在指定环境复现",
+      "reuse": "保留 MIT 原代码、测试、许可和作者；章节仅链接",
+      "evaluation": {
+        "authority": "作者与机构：Carl Friedrich Bolz / AOSA；原始来源见链接",
+        "accuracy": "已固定提交、保留原文与哈希；Python 3.12.14 / Windows 下 28 项原测试通过。",
+        "depth": "属性查找、方法绑定、可定制对象与共享布局",
+        "engineeringValue": "比简单语法题更接近运行时设计；是教学简化模型，不是生产虚拟机",
+        "coverage": "属性查找、方法绑定、可定制对象与共享布局",
+        "teachingQuality": "四阶段原代码及原测试，适合普通 CPU 实验",
+        "difficulty": "Python 类、字典、递归、异常和测试",
+        "languageFriendliness": "英文主资源；本站提供选读、验收和术语中文辅助，不声称已完整翻译",
+        "accessibility": "官方公开入口；具体媒体、作业服务或下载访问另行确认",
+        "maintenance": "500lines commit fba689d101eb5600f5c8f4d7fd79912498e950e2",
+        "licensing": "代码 MIT；文字 CC BY 3.0；upstream/LICENSE.md 已核对",
+        "stability": "固定学期或版本信息；滚动内容在实际集成前再次锁定"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://aosabook.org/en/500L/a-simple-object-model.html",
+          "checkedAt": "2026-10-08",
+          "finding": "已固定提交、保留原文与哈希；Python 3.12.14 / Windows 下 28 项原测试通过。"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "computer",
+      "title": "认识文件与运行程序",
+      "stage": 0,
+      "prerequisites": [],
+      "resources": [
+        "cs50"
+      ],
+      "category": "core",
+      "objective": "找到文件、分清编辑器与终端，运行一次程序",
+      "guidance": "按“文件操作与原课环境起步”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "截图与运行步骤；说明文件路径与程序输出的区别",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "文件操作与原课环境起步",
+      "steps": [
+        {
+          "title": "建立工作目录",
+          "task": "建立学习文件夹，理解文件、扩展名和路径"
+        },
+        {
+          "title": "运行第一份程序",
+          "task": "打开编辑器并运行输出程序，区分编辑与执行"
+        },
+        {
+          "title": "读懂错误信息",
+          "task": "故意制造一个错误，记录原始信息并定位"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "arithmetic",
+      "title": "数字、比例与算术",
+      "stage": 0,
+      "prerequisites": [],
+      "resources": [
+        "openstax"
+      ],
+      "category": "core",
+      "objective": "理解整数、小数、分数、比例和单位",
+      "guidance": "按“四则运算、分数、小数、比例”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "独立计算吞吐量、容量单位与百分比，并解释步骤",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "四则运算、分数、小数、比例",
+      "steps": [
+        {
+          "title": "掌握基本运算",
+          "task": "整数、分数、小数和四则运算"
+        },
+        {
+          "title": "理解比例与单位",
+          "task": "比例、百分比、单位换算"
+        },
+        {
+          "title": "计算资源吞吐量",
+          "task": "用数据量÷耗时解释吞吐量，并检查单位"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "python",
+      "title": "第一段 Python 程序",
+      "stage": 0,
+      "prerequisites": [
+        "computer"
+      ],
+      "resources": [
+        "cs50"
+      ],
+      "category": "core",
+      "objective": "掌握输入输出、变量、字符串和函数",
+      "guidance": "按“CS50 Python 第 0 周及原始 Problem Set 0”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "通过本地 Indoor Voice 检查，提交代码并解释 lower() 的行为",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "CS50 Python 第 0 周及原始 Problem Set 0",
+      "steps": [
+        {
+          "title": "理解输入与函数",
+          "task": "第 0 周：输入、输出、变量、字符串与函数"
+        },
+        {
+          "title": "独立完成原题",
+          "task": "独立完成原题 Indoor Voice，再运行本地补充检查"
+        },
+        {
+          "title": "复核边界输入",
+          "task": "解释失败案例，并用自己的输入复核"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "tools",
+      "title": "终端、Git 与可复现环境",
+      "stage": 1,
+      "prerequisites": [
+        "computer",
+        "python"
+      ],
+      "resources": [
+        "missing",
+        "missing-cn"
+      ],
+      "category": "core",
+      "objective": "保存版本、定位错误并复现运行步骤",
+      "guidance": "按“shell、版本控制、调试相关讲次”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "提交 Git 历史、一次错误定位记录与可复现 README",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "shell、版本控制、调试相关讲次",
+      "steps": [
+        {
+          "title": "使用终端与路径",
+          "task": "shell 与文件路径；Windows 和类 Unix 命令分别对照"
+        },
+        {
+          "title": "管理版本与撤回",
+          "task": "Git 提交、查看差异、分支和一次安全撤回"
+        },
+        {
+          "title": "留下复现步骤",
+          "task": "调试、日志与 README 中的复现步骤"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "algebra",
+      "title": "代数、函数与指数",
+      "stage": 1,
+      "prerequisites": [
+        "arithmetic"
+      ],
+      "resources": [
+        "algebra-text",
+        "openstax"
+      ],
+      "category": "core",
+      "objective": "理解变量、方程、函数图像和指数",
+      "guidance": "按“先修复习、方程、函数、指数/对数与必要三角基础”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "推导一个内存容量公式，画函数图并解释指数增长",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "先修复习、方程、函数、指数/对数与必要三角基础",
+      "steps": [
+        {
+          "title": "从方程进入代数",
+          "task": "基础运算与方程：从前代数进入代数教材"
+        },
+        {
+          "title": "理解函数与增长",
+          "task": "函数、图像、多项式、指数与对数"
+        },
+        {
+          "title": "连接三角与微积分",
+          "task": "微积分前补齐三角函数基础；用函数描述资源增长"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "programming",
+      "title": "抽象、递归与测试",
+      "stage": 1,
+      "prerequisites": [
+        "python"
+      ],
+      "resources": [
+        "composing",
+        "cs50",
+        "object-model"
+      ],
+      "category": "core",
+      "objective": "将需求拆解为函数与可测试程序",
+      "guidance": "按“Composing Programs 函数/数据部分 + CS50 测试与项目”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "提交 CS50 Final Project 或相当项目，含边界测试与设计解释",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "Composing Programs 函数/数据部分 + CS50 测试与项目",
+      "steps": [
+        {
+          "title": "用抽象组织程序",
+          "task": "函数分解、递归、序列、字典与对象抽象"
+        },
+        {
+          "title": "完成综合项目",
+          "task": "异常、模块、测试与文件 I/O；完成综合原课项目"
+        },
+        {
+          "title": "设计对象运行时",
+          "task": "进入对象模型原项目，先写设计再对照测试"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "discrete",
+      "title": "证明与离散结构",
+      "stage": 1,
+      "prerequisites": [
+        "algebra",
+        "programming"
+      ],
+      "resources": [
+        "discrete"
+      ],
+      "category": "core",
+      "objective": "理解不变量、集合、图与归纳证明",
+      "guidance": "按“证明、图、递归与组合基础”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "为算法写循环不变量与证明；构建并检测一个有向图的环",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "证明、图、递归与组合基础",
+      "steps": [
+        {
+          "title": "建立逻辑基础",
+          "task": "逻辑、集合、归纳与不变量"
+        },
+        {
+          "title": "理解图与计数",
+          "task": "图与递归结构、计数方法"
+        },
+        {
+          "title": "论证程序正确性",
+          "task": "给算法和依赖图写出可检查的正确性论证"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "linear",
+      "title": "向量、矩阵与线性代数",
+      "stage": 1,
+      "prerequisites": [
+        "algebra"
+      ],
+      "resources": [
+        "linear"
+      ],
+      "category": "core",
+      "objective": "理解线性变换、矩阵乘法和特征值",
+      "guidance": "按“18.06 中矩阵、空间、正交与特征值主题”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "独立完成选定原课习题并解释矩阵乘法形状",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "18.06 中矩阵、空间、正交与特征值主题",
+      "steps": [
+        {
+          "title": "理解向量与矩阵",
+          "task": "线性方程、向量空间与矩阵运算"
+        },
+        {
+          "title": "分析空间与分解",
+          "task": "正交、最小二乘、特征值及正定性"
+        },
+        {
+          "title": "连接张量与变换",
+          "task": "将张量形状与线性变换联系，完成原课习题"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "calculus",
+      "title": "导数与梯度",
+      "stage": 1,
+      "prerequisites": [
+        "algebra",
+        "linear"
+      ],
+      "resources": [
+        "calculus",
+        "multivariable"
+      ],
+      "category": "core",
+      "objective": "理解导数、链式法则和优化",
+      "guidance": "按“18.01SC 微分基础 → 18.02SC 偏导与优化”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "手算链式法则，做有限差分检查并说明误差",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "18.01SC 微分基础 → 18.02SC 偏导与优化",
+      "steps": [
+        {
+          "title": "建立单变量基础",
+          "task": "单变量导数、链式法则、积分与优化"
+        },
+        {
+          "title": "推导多变量梯度",
+          "task": "向量、偏导、梯度与多变量链式法则"
+        },
+        {
+          "title": "用数值方法复核",
+          "task": "对简单函数手算梯度，用有限差分检验"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "probability",
+      "title": "概率与统计推理",
+      "stage": 1,
+      "prerequisites": [
+        "algebra",
+        "discrete",
+        "calculus"
+      ],
+      "resources": [
+        "stat110",
+        "openintro",
+        "discrete"
+      ],
+      "category": "core",
+      "objective": "理解随机变量、期望、方差与实验置信度",
+      "guidance": "按“Stat110 概率主线 + OpenIntro 抽样与推断选章”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "模拟抽样并报告方差；说明单次 benchmark 为什么不充分",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "Stat110 概率主线 + OpenIntro 抽样与推断选章",
+      "steps": [
+        {
+          "title": "理解随机性",
+          "task": "条件概率、随机变量、期望、方差与分布"
+        },
+        {
+          "title": "进行统计推断",
+          "task": "抽样、置信区间和假设检验；辨别统计假设"
+        },
+        {
+          "title": "解释测量不确定性",
+          "task": "对多次性能测量报告离散程度，解释不确定性"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "algorithms",
+      "title": "数据结构与复杂度",
+      "stage": 2,
+      "prerequisites": [
+        "programming",
+        "discrete"
+      ],
+      "resources": [
+        "algorithms-mit",
+        "composing"
+      ],
+      "category": "core",
+      "objective": "选择数据结构，分析时间和空间成本",
+      "guidance": "按“6.006 数据结构、图算法和动态规划主题”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "实现并测量不同索引方案，解释规模增长与复杂度",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "6.006 数据结构、图算法和动态规划主题",
+      "steps": [
+        {
+          "title": "分析数据结构成本",
+          "task": "复杂度、排序、散列与树结构"
+        },
+        {
+          "title": "设计图与动态规划算法",
+          "task": "图搜索、最短路与动态规划"
+        },
+        {
+          "title": "同时验证实现与论证",
+          "task": "选原课编程和理论题，提交实现、证明与成本测量"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "architecture",
+      "title": "C/C++、内存与计算机组织",
+      "stage": 2,
+      "prerequisites": [
+        "programming",
+        "tools",
+        "arithmetic"
+      ],
+      "resources": [
+        "beej-c",
+        "cs61c",
+        "cs106l"
+      ],
+      "category": "core",
+      "objective": "理解地址、缓存、指针和编译流程",
+      "guidance": "按“C 语言桥梁 → 计算机组织 → 按需 C++”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "分析缓存行为，检查越界并解释编译与链接",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "C 语言桥梁 → 计算机组织 → 按需 C++",
+      "steps": [
+        {
+          "title": "掌握 C 与内存",
+          "task": "C 类型、指针、数组、结构体和内存管理"
+        },
+        {
+          "title": "理解机器执行",
+          "task": "CS61C 数值表示、机器指令、缓存与并行主题"
+        },
+        {
+          "title": "补齐 C++ 工程基础",
+          "task": "进入 C++ 实验前补 CS106L 类型、容器和资源管理"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "os",
+      "title": "操作系统与并发",
+      "stage": 2,
+      "prerequisites": [
+        "architecture",
+        "algorithms"
+      ],
+      "resources": [
+        "ostep"
+      ],
+      "category": "core",
+      "objective": "理解进程、虚拟内存、同步与持久化",
+      "guidance": "按“OSTEP 虚拟化、并发、持久化三部分”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "提交竞态复现、同步正确性测试和持久化故障分析",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "OSTEP 虚拟化、并发、持久化三部分",
+      "steps": [
+        {
+          "title": "理解进程与地址空间",
+          "task": "进程、地址空间和虚拟内存"
+        },
+        {
+          "title": "处理并发与同步",
+          "task": "线程、锁、条件变量与竞态"
+        },
+        {
+          "title": "验证持久化与故障",
+          "task": "文件和持久化机制，选原书项目并测试故障"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "network",
+      "title": "网络与存储 I/O",
+      "stage": 2,
+      "prerequisites": [
+        "os"
+      ],
+      "resources": [
+        "cs144"
+      ],
+      "category": "core",
+      "objective": "分析通信延迟、带宽和存储成本",
+      "guidance": "按“CS144 讲授及按顺序完成的网络检查点”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "解释一次请求的路径并测量 I/O 与网络瓶颈",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "CS144 讲授及按顺序完成的网络检查点",
+      "steps": [
+        {
+          "title": "追踪请求路径",
+          "task": "数据报、分层与应用请求路径"
+        },
+        {
+          "title": "理解可靠传输",
+          "task": "可靠传输、重组、TCP 与流量控制"
+        },
+        {
+          "title": "实现并测量字节流",
+          "task": "原课 checkpoint 从字节流开始；记录带宽与延迟"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "numerics",
+      "title": "数值稳定性与性能测量",
+      "stage": 3,
+      "prerequisites": [
+        "linear",
+        "calculus",
+        "probability",
+        "architecture"
+      ],
+      "resources": [
+        "d2l",
+        "dlsys",
+        "cs61c"
+      ],
+      "category": "core",
+      "objective": "判断精度、溢出和测量误差",
+      "guidance": "按“浮点与数值计算；框架课程资源核算”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "比较数值误差和性能分布，报告精度容差与实验条件",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "浮点与数值计算；框架课程资源核算",
+      "steps": [
+        {
+          "title": "理解浮点误差",
+          "task": "浮点表示、舍入、溢出与 dtype"
+        },
+        {
+          "title": "实现稳定数值计算",
+          "task": "稳定 softmax、梯度误差与有限差分"
+        },
+        {
+          "title": "建立可比较的测量",
+          "task": "固定输入与环境，预热并重复测量，报告容差"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "ml",
+      "title": "机器学习与优化基础",
+      "stage": 3,
+      "prerequisites": [
+        "programming",
+        "linear",
+        "calculus",
+        "probability"
+      ],
+      "resources": [
+        "d2l"
+      ],
+      "category": "core",
+      "objective": "理解训练、损失、优化与泛化",
+      "guidance": "按“D2L 预备知识、线性模型和优化基础”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "训练并评估基线，解释数据泄漏和过拟合",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "D2L 预备知识、线性模型和优化基础",
+      "steps": [
+        {
+          "title": "建立数据与模型基线",
+          "task": "张量、线性回归与训练/验证划分"
+        },
+        {
+          "title": "理解训练与优化",
+          "task": "损失、梯度下降、小批量与优化器"
+        },
+        {
+          "title": "诊断过拟合与泄漏",
+          "task": "建立可复现基线，解释过拟合与数据泄漏"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "framework",
+      "title": "张量、自动微分与框架",
+      "stage": 3,
+      "prerequisites": [
+        "ml",
+        "numerics",
+        "os"
+      ],
+      "resources": [
+        "dlsys"
+      ],
+      "category": "core",
+      "objective": "实现并测试一个教学深度学习框架",
+      "guidance": "按“DLSys HW0–HW4；环境逐阶段核实”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "梯度与参考结果对比；算子、优化器测试与设计文档",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "DLSys HW0–HW4；环境逐阶段核实",
+      "steps": [
+        {
+          "title": "实现计算图与求导",
+          "task": "先做 HW0 自测，再实现计算图与自动微分"
+        },
+        {
+          "title": "组织训练组件",
+          "task": "实现模块、优化器和数据加载"
+        },
+        {
+          "title": "验证执行后端",
+          "task": "实现 NDArray 后端，与参考结果和数值容差比较"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "data",
+      "title": "数据管线与可复现训练",
+      "stage": 3,
+      "prerequisites": [
+        "ml",
+        "tools",
+        "network"
+      ],
+      "resources": [
+        "cs336",
+        "mlsys"
+      ],
+      "category": "core",
+      "objective": "追踪数据来源、处理吞吐与实验版本",
+      "guidance": "按“CS336 数据与评估主题 + MLSys 系统视角”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "提交数据来源清单、复现记录及加载瓶颈分析",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "CS336 数据与评估主题 + MLSys 系统视角",
+      "steps": [
+        {
+          "title": "确认数据出处与版本",
+          "task": "记录数据来源、使用许可与版本"
+        },
+        {
+          "title": "构建处理管线",
+          "task": "过滤、去重、划分和加载管线"
+        },
+        {
+          "title": "定位加载与复现问题",
+          "task": "比较加载瓶颈、随机种子和可复现训练结果"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "gpu",
+      "title": "GPU 内核与性能工程",
+      "stage": 4,
+      "prerequisites": [
+        "framework",
+        "architecture",
+        "numerics"
+      ],
+      "resources": [
+        "cuda",
+        "cs336"
+      ],
+      "category": "specialist",
+      "objective": "分析算力与带宽瓶颈，优化算子",
+      "guidance": "按“CUDA 执行/内存模型 + CS336 内核主题”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "正确性容差、参考实现、重复测量与性能分析报告",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "CUDA 执行/内存模型 + CS336 内核主题",
+      "steps": [
+        {
+          "title": "理解执行与访存",
+          "task": "线程执行、内存层次与访存模式"
+        },
+        {
+          "title": "先验证算子正确性",
+          "task": "先实现正确算子，再测算力与带宽瓶颈"
+        },
+        {
+          "title": "优化并解释取舍",
+          "task": "优化分块或融合，报告重复测量和精度差异"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "dist",
+      "title": "分布式与故障恢复",
+      "stage": 4,
+      "prerequisites": [
+        "os",
+        "network",
+        "algorithms"
+      ],
+      "resources": [
+        "distributed"
+      ],
+      "category": "specialist",
+      "objective": "理解复制、协调、故障和一致性",
+      "guidance": "按“6.5840 原实验，具体版本与环境待锁定”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "故障注入、恢复测试与一致性解释",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "6.5840 原实验，具体版本与环境待锁定",
+      "steps": [
+        {
+          "title": "准备 Go 与并发基础",
+          "task": "先补足原课所需 Go 与并发语法"
+        },
+        {
+          "title": "理解复制与一致性",
+          "task": "学习复制、协调、一致性和故障语义"
+        },
+        {
+          "title": "验证故障与恢复",
+          "task": "按原实验做故障注入，解释恢复正确性"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "training",
+      "title": "分布式训练系统",
+      "stage": 4,
+      "prerequisites": [
+        "framework",
+        "data",
+        "gpu",
+        "dist"
+      ],
+      "resources": [
+        "torch",
+        "cs336"
+      ],
+      "category": "specialist",
+      "objective": "比较数据、张量和流水线并行",
+      "guidance": "按“PyTorch 通信 API + CS336 并行主题”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "扩展效率、通信剖析、断点恢复和训练结果一致性",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "PyTorch 通信 API + CS336 并行主题",
+      "steps": [
+        {
+          "title": "核算单机资源",
+          "task": "建立单机基线并核算参数、优化器和激活内存"
+        },
+        {
+          "title": "比较并行策略",
+          "task": "比较数据、张量与流水线并行"
+        },
+        {
+          "title": "测量扩展与恢复",
+          "task": "测通信、扩展效率和断点恢复，解释训练等价性"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "inference",
+      "title": "推理服务与性能",
+      "stage": 4,
+      "prerequisites": [
+        "framework",
+        "gpu",
+        "network",
+        "data"
+      ],
+      "resources": [
+        "vllm",
+        "cs336"
+      ],
+      "category": "specialist",
+      "objective": "理解批处理、缓存、延迟与吞吐权衡",
+      "guidance": "按“vLLM 官方部署/性能文档 + CS336 推理主题”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "报告 TTFT、逐 token 延迟、吞吐、显存与结果正确性",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "vLLM 官方部署/性能文档 + CS336 推理主题",
+      "steps": [
+        {
+          "title": "建立合规可复现基线",
+          "task": "固定模型许可、权重版本与单请求基线"
+        },
+        {
+          "title": "比较缓存与调度",
+          "task": "比较批处理、KV cache 和调度策略"
+        },
+        {
+          "title": "同时评价质量和性能",
+          "task": "同时报告输出正确性、TTFT、吞吐和显存"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "operations",
+      "title": "可靠性、安全与可观测性",
+      "stage": 4,
+      "prerequisites": [
+        "os",
+        "network",
+        "tools"
+      ],
+      "resources": [
+        "sre",
+        "security",
+        "mlsys"
+      ],
+      "category": "core",
+      "objective": "定位系统故障、限制权限并准备回滚",
+      "guidance": "按“Google SRE 目标/监控/应急主题 + Kubernetes 安全”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "故障定位、权限说明、恢复演练与成本记录",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "Google SRE 目标/监控/应急主题 + Kubernetes 安全",
+      "steps": [
+        {
+          "title": "明确目标与诊断路径",
+          "task": "明确服务目标，设计日志、指标和诊断路径"
+        },
+        {
+          "title": "控制权限与过载",
+          "task": "最小权限、资源隔离与过载保护"
+        },
+        {
+          "title": "演练故障与回滚",
+          "task": "进行一次可恢复故障演练，记录成本和回滚步骤"
+        }
+      ],
+      "estimatedHours": null
+    },
+    {
+      "id": "compiler",
+      "title": "编译器与算子图优化",
+      "stage": 4,
+      "prerequisites": [
+        "architecture",
+        "algorithms",
+        "framework"
+      ],
+      "resources": [
+        "mlir",
+        "dlsys"
+      ],
+      "category": "optional",
+      "objective": "理解图转换、融合和编译约束",
+      "guidance": "按“MLIR Toy Tutorial；进阶分支”学习，逐步完成下列任务。已有基础可用相应作品与测试证明跳过。",
+      "evidence": "语义等价测试、编译时间与性能权衡报告",
+      "status": "已建立选读与成果路径；教学衔接仍需学习者试用",
+      "scope": "MLIR Toy Tutorial；进阶分支",
+      "steps": [
+        {
+          "title": "建立编译器先修",
+          "task": "补齐 C++、编译流程、IR 和语义基础"
+        },
+        {
+          "title": "实现原项目转换流程",
+          "task": "沿 Toy Tutorial 构建转换流程"
+        },
+        {
+          "title": "验证优化与语义",
+          "task": "对优化前后做语义一致性、编译成本与性能比较"
+        }
+      ],
+      "estimatedHours": null
+    }
+  ],
+  "labs": [
+    {
+      "id": "indoor",
+      "title": "入门验收 · Indoor Voice",
+      "stage": 0,
+      "nodes": [
+        "python"
+      ],
+      "source": "cs50",
+      "url": "https://cs50.harvard.edu/python/2022/psets/0/indoor/",
+      "hardware": "普通 CPU；本地检查需要 Python 3.10+ 和 Node 22+",
+      "status": "本地补充检查可用；不是阶段综合项目",
+      "goal": "依据原题要求独立实现字符串小写转换，学会运行程序、测试和解释结果。",
+      "rubric": [
+        "遵照原题自行编写 indoor.py，保留原作者与题目链接",
+        "覆盖混合大小写、数字与标点、中文、空输入",
+        "用本地检查器检测输出；阅读失败反馈后修复",
+        "解释输入、处理、输出与测试局限；保留运行记录"
+      ],
+      "command": "node scripts/grade.mjs ./indoor.py python",
+      "limitation": "补充检查不是原课程官方评分，不证明整个编程阶段已掌握。运行学习者代码只在主动执行 CLI 后发生；超时不等于安全沙箱。",
+      "integration": "checked",
+      "guide": "./docs/getting-started.md"
+    },
+    {
+      "id": "python-project",
+      "title": "程序设计 · CS50 Python Final Project",
+      "stage": 1,
+      "nodes": [
+        "programming",
+        "tools"
+      ],
+      "source": "cs50",
+      "url": "https://cs50.harvard.edu/python/project/",
+      "hardware": "CPU / Python；依项目需求",
+      "status": "精选候选；完整本地验收待集成",
+      "goal": "完成有实际用途的独立程序，呈现设计、测试与说明。",
+      "rubric": [
+        "依据原课项目要求自行设计实现",
+        "提交 README 与依赖说明",
+        "正确性、边界情况与失败处理测试",
+        "解释设计选择，不能用复制代码代替独立实现"
+      ],
+      "limitation": "原课程账号、提交与评分服务不是本平台能力；许可证与依赖需要在引入具体代码时核实。",
+      "integration": "candidate"
+    },
+    {
+      "id": "ostep-project",
+      "title": "计算系统 · OSTEP Projects",
+      "stage": 2,
+      "nodes": [
+        "os",
+        "tools"
+      ],
+      "source": "ostep",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "hardware": "CPU / C 工具链；原项目环境待验证",
+      "status": "作者提供项目入口；未完成项目级选型",
+      "goal": "从原作者的项目中评估适合本路线的并发、虚拟化或持久化实验。",
+      "rubric": [
+        "先锁定项目与 commit，再确认许可",
+        "记录运行条件、正确性与竞态测试",
+        "测量性能并复现故障",
+        "提交原理与设计解释"
+      ],
+      "limitation": "尚未选定可独立运行的具体项目，不显示为已集成实验。",
+      "integration": "candidate"
+    },
+    {
+      "id": "needle",
+      "title": "学习框架 · Needle HW0–HW4",
+      "stage": 3,
+      "nodes": [
+        "framework"
+      ],
+      "source": "dlsys",
+      "url": "https://dlsyscourse.org/",
+      "hardware": "Python/C++；部分阶段需要兼容 CUDA GPU",
+      "status": "课程描述已核对；本地复现待完成",
+      "goal": "沿原课作业实现自动微分、模块与 NDArray 后端。",
+      "rubric": [
+        "遵从原课程代码及作业许可",
+        "梯度和算子正确性测试",
+        "CPU/GPU 对照与数值误差说明",
+        "性能报告与框架设计文档"
+      ],
+      "limitation": "课程 mugrade 服务不保证校外可用；尚未提供已验证的环境锁文件。",
+      "integration": "candidate"
+    },
+    {
+      "id": "systems",
+      "title": "语言模型系统 · CS336 系统作业",
+      "stage": 4,
+      "nodes": [
+        "gpu",
+        "training"
+      ],
+      "source": "cs336",
+      "url": "https://cs336.stanford.edu/",
+      "hardware": "按原作业确认 GPU 显存与算力预算",
+      "status": "课程日程已核对；实验环境未复现",
+      "goal": "从原课内核和并行主题入手，训练系统优化与解释能力。",
+      "rubric": [
+        "固定原作业版本、硬件与依赖",
+        "记录参考正确性、容差与基线",
+        "重复测量并分析瓶颈",
+        "解释优化原因与失败边界"
+      ],
+      "limitation": "多卡与 GPU 检查未执行；不能以提交记录代替实际结果。",
+      "integration": "candidate"
+    },
+    {
+      "id": "raft",
+      "title": "分布式系统 · 6.5840 原实验",
+      "stage": 4,
+      "nodes": [
+        "dist"
+      ],
+      "source": "distributed",
+      "url": "https://pdos.csail.mit.edu/6.5840/",
+      "hardware": "CPU / Go；原实验环境待验证",
+      "status": "精选候选；Go 前置与本地验收待集成",
+      "goal": "通过原课程实验理解容错语义与故障恢复。",
+      "rubric": [
+        "核实原实验版本与许可证",
+        "先验证 Go 与并发先修",
+        "按原测试进行故障注入",
+        "提交正确性、恢复行为与设计解释"
+      ],
+      "limitation": "不重新生成一套替代原实验；独立复现后再标记已集成。",
+      "integration": "candidate"
+    },
+    {
+      "id": "object-model",
+      "title": "阶段综合实践 · 对象运行时",
+      "stage": 2,
+      "nodes": [
+        "programming",
+        "algorithms",
+        "tools"
+      ],
+      "source": "object-model",
+      "url": "https://aosabook.org/en/500L/a-simple-object-model.html",
+      "hardware": "CPU / Python 3.10+，无第三方依赖；已在 Windows / Python 3.12.14 复现",
+      "status": "固定版本，28 项原测试通过；含独立提交与性能测量流程",
+      "integration": "reproduced",
+      "goal": "依据原作者四阶段项目实现对象查找、方法绑定、属性定制和共享布局。",
+      "rubric": [
+        "先提交设计与独立实现，不以复制参考实现为完成",
+        "逐阶段通过原测试，并添加有解释的边界案例",
+        "运行相同工作负载，比较内存和七次计时",
+        "说明原理、性能权衡与教学模型局限"
+      ],
+      "command": "python labs/object-model/run.py --benchmark",
+      "guide": "./docs/object-model-lab.md",
+      "limitation": "参考复现不是学习者能力认证；Python 模型性能不能外推到工业虚拟机；无安全沙箱。",
+      "validation": {
+        "mode": "reference",
+        "commit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "createdAt": "2026-10-08T14:48:28Z",
+        "tests": 28,
+        "passed": true,
+        "benchmark": [
+          {
+            "stage": "03-customizable",
+            "objects": 10000,
+            "retained_bytes": 3345784,
+            "peak_bytes": 3345880,
+            "read_ns_samples": [
+              1397800,
+              1418500,
+              1510600,
+              1489300,
+              1517700,
+              1472300,
+              1460300
+            ],
+            "read_ns_median": 1472300,
+            "checksum": 100000000
+          },
+          {
+            "stage": "04-maps",
+            "objects": 10000,
+            "retained_bytes": 2549272,
+            "peak_bytes": 2549368,
+            "read_ns_samples": [
+              1918000,
+              1879600,
+              1976400,
+              1962100,
+              1945000,
+              1954200,
+              1991600
+            ],
+            "read_ns_median": 1954200,
+            "checksum": 100000000
+          }
+        ]
+      }
+    }
+  ],
+  "revision": "2026-10-08-v02"
+}

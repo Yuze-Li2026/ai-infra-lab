@@ -1,0 +1,31 @@
+# 声明式扩展规范 v1
+
+数据源：`site/catalog.json`。新增内容先做研究，再编辑数据，执行 `npm run check`。`schemas/catalog.schema.json` 提供编辑器字段校验，Node 校验器另检查引用和知识依赖无环；VS Code 已配置关联。
+
+## 资源 Source
+
+必须记录：唯一 `id`、`title`、`author`、`url`、`version`、`language`、`license`、`licenseUrl`、`prerequisites`、`coverage`、`reason`、`limitations`、`verification`、`reviewedAt`、`reviewLevel`、`reuse`、`evaluation`、`reviewEvidence`。最后一项记录原始证据的 `url / checkedAt / finding`，不能只写一个分数。
+
+`evaluation` 含 `authority / accuracy / depth / engineeringValue / coverage / teachingQuality / difficulty / languageFriendliness / accessibility / maintenance / licensing / stability`。写依据和局限，不填无证据的“世界顶级”。`version` 不得只写 latest 便声称已固定；滚动资源在代码集成前改为 release 或 commit。
+
+许可证未知时注明待核实、仅链接。不下载和镜像课程材料；代码、文字、视频、插图、数据、模型分别核实许可。社区译文、官方译文和机器译文必须区分；未经审校的机器译文明确标示。
+
+## 知识节点 Node
+
+字段：`id / title / stage / prerequisites / resources / category / objective / guidance / evidence / status / scope / steps`。`steps` 至少两步，每步包含 `title / task`；`scope` 说明选读范围和边界。
+
+`category` 为 `core` 核心必修、`specialist` 方向必修或 `optional` 可选深入。重要补充通常作为节点辅助资源记录；与目标无关的资源不强行加入依赖图。若补充项成为独立能力，应在审计中解释新增节点的理由。
+
+`prerequisites` 是节点 ID 数组，必须无环；`resources` 第一个为暂定主资源，后续补充要有理由。`status` 诚实说明衔接及验证程度。`evidence` 必须说明可观察成果和判断条件，不允许只写“看完视频”。
+
+## 实验 Lab
+
+字段：`id / title / stage / nodes / source / url / hardware / status / goal / rubric / limitation / integration`；可选 `command / guide / validation`。`integration` 使用 `candidate / checked / reproduced`。`guide` 必须是站内相对地址；`validation` 保留实际运行环境、固定提交、测试数量与原始测量摘要。
+
+集成级别分为候选、可复现、具备本地验收、完成跨平台验证。不得省略校外访问条件、CPU/GPU 要求或课程评分服务限制。进入“可复现”之前需补充版本锁定、依赖、操作系统、正确性测试、性能测量协议、恢复方式和具体许可记录；初版候选并不满足这些门槛。
+
+外部代码不在浏览器里自动执行。将来运行器应隔离权限和依赖，不使用本页超时检查当作安全沙箱。引入容器也需说明挂载、网络、资源限制和退出恢复行为。
+
+## 提交审查
+
+修改者提供能力需求证据、原始来源、与原资源的对比、许可状态、先修变更及实验验证记录。维护者先审范围与科学准确性，再验数据与平台行为。未经批准，不公开发布新仓库和用户的个人成果。

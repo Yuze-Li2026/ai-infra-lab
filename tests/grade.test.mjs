@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtemp,writeFile,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {spawnSync} from 'node:child_process';
+import {grade} from '../scripts/grade.mjs';
+const python=process.env.LAB_TEST_PYTHON||'python';
+const available=spawnSync(python,['--version'],{windowsHide:true}).status===0;
+test('checker distinguishes correct, incorrect and hanging submissions',{skip:!available},async()=>{const dir=await mkdtemp(join(tmpdir(),'infra-grade-'));try{const f=join(dir,'submission.py');await writeFile(f,'print(input().lower())\n');assert.equal((await grade(f,python)).passed,true);await writeFile(f,'print(input().upper())\n');assert.equal((await grade(f,python)).passed,false);await writeFile(f,'while True: pass\n');const r=await grade(f,python,200);assert.equal(r.passed,false);assert.equal(r.results[0].error,'timeout');}finally{await rm(dir,{recursive:true,force:true});}});
