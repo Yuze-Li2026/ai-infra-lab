@@ -9,7 +9,7 @@ const server=createServer(async(req,res)=>{
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end();}
   const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
   if(pathname.includes('\0')||pathname.includes('\\'))throw new Error('Bad path');
-  const doc=pathname.startsWith('/docs/')||['/README.md','/LICENSE','/CREDITS.md','/CONTRIBUTING.md'].includes(pathname);
+  const doc=pathname.startsWith('/docs/')||['/README.md','/LICENSE','/CREDITS.md','/CONTRIBUTING.md','/SECURITY.md'].includes(pathname);
   const root=doc?base:site;
   const file=await realpath(resolve(root,'.'+(pathname==='/'?'/index.html':pathname)));
   if(!file.startsWith(root+sep)||doc&&pathname.startsWith('/docs/')&&!file.startsWith(resolve(base,'docs')+sep))throw new Error('Forbidden');

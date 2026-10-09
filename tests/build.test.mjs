@@ -6,7 +6,7 @@ import {build} from '../scripts/build.mjs';
 import {verifyDist} from '../scripts/verify-dist.mjs';
 test('isolated build drops stale public files, preserves prior output, and verifies hashes',async()=>{
  await mkdir('artifacts',{recursive:true});const root=await mkdtemp(resolve('artifacts/build-test-'));
- for(const path of ['site','docs','README.md','CREDITS.md','CONTRIBUTING.md','LICENSE'])await cp(path,join(root,path),{recursive:true});
+ for(const path of ['site','docs','README.md','CREDITS.md','CONTRIBUTING.md','LICENSE','SECURITY.md'])await cp(path,join(root,path),{recursive:true});
  await mkdir(join(root,'dist'));await writeFile(join(root,'dist','stale-private.txt'),'must not be published');
  const first=await build(root);await assert.rejects(access(join(root,'dist/stale-private.txt')));
  assert.equal(await readFile(join(first.previousOutput,'stale-private.txt'),'utf8'),'must not be published');

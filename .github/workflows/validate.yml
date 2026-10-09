@@ -17,7 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install -r labs/requirements-cpu.txt
+      - run: python -m pip install -r labs/requirements-ci.txt
+      - run: python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.10.0+cpu
       - run: npm run check
       - run: python labs/object-model/run.py --benchmark
       - run: python labs/dbdb/run.py

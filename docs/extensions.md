@@ -29,3 +29,9 @@
 ## 提交审查
 
 修改者提供能力需求证据、原始来源、与原资源的对比、许可状态、先修变更及实验验证记录。维护者先审范围与科学准确性，再验数据与平台行为。未经批准，不公开发布新仓库和用户的个人成果。
+
+## 报告、里程碑与文档
+
+可导入实验设置固定 reportCommit；新增实验类型同时维护 site/reports.js 与对应测试。原始报告含 schemaVersion、lab、mode、commit、createdAt、passed、results、python、platform，results 明确区分原断言与补充检查。mode 只能为 reference 或 submission，参考通过不等于个人作品。页面只保存摘要、SHA-256 与导入时间，不存任意 HTML 或执行代码。
+
+milestones 的 stage、nodes、labs、criteria 必须与目录引用一致；阶段知识说明与当前版本独立通过报告齐备时只称材料齐备。新增指南加入 site/documents.js 的允许列表和 docs/index.md，运行 npm run check-docs。新增根文档同时维护构建白名单与本地服务器白名单，避免本机能读但发布缺失。

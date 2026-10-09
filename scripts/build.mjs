@@ -52,7 +52,7 @@ export async function build(project=process.cwd()){
   if(!file.endsWith('.md'))continue;
   await mkdir(dirname(join(stage,'docs',file)),{recursive:true});await copyText(join(docs,file),join(stage,'docs',file));
  }
- for(const file of ['README.md','CREDITS.md','LICENSE','CONTRIBUTING.md']){
+ for(const file of ['README.md','CREDITS.md','LICENSE','CONTRIBUTING.md','SECURITY.md']){
   if((await lstat(join(root,file))).isSymbolicLink())throw new Error(`Unsafe document: ${file}`);
   await copyText(join(root,file),join(stage,file));
  }

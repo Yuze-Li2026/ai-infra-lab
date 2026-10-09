@@ -13,7 +13,8 @@
     "validate": "node scripts/validate.mjs",
     "check-links": "node scripts/check-links.mjs",
     "verify-dist": "node scripts/verify-dist.mjs",
-    "check": "npm run validate && npm test && npm run build && npm run verify-dist"
+    "check": "npm run validate && npm run check-docs && npm test && npm run build && npm run verify-dist",
+    "check-docs": "node scripts/check-docs.mjs"
   },
   "devDependencies": {
     "dompurify": "3.4.16",

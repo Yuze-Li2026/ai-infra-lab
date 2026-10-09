@@ -18,7 +18,7 @@
 在项目根目录执行：
 
 ```sh
-python labs/object-model/run.py --benchmark
+node scripts/lab.mjs object-model --benchmark
 ```
 
 结果保存 `artifacts/object-model-report.json`，包含固定版本、文件校验、平台、Python、各阶段原测试和性能数据。`mode: reference` 仅证明参考实现能运行，不代表你完成实验。
@@ -26,7 +26,7 @@ python labs/object-model/run.py --benchmark
 ## 验收自己的实现
 
 ```sh
-python labs/object-model/run.py --stage 01-smalltalk-like --submission ./my-object-model
+node scripts/lab.mjs object-model --stage 01-smalltalk-like --submission ./my-object-model
 ```
 
 目录必须包含自行实现的 `objmodel.py`。后续阶段名依次是 `02-attr-based`、`03-customizable`、`04-maps`。每阶段需要完整实现该阶段的公共接口。提交模式标为 `submission`，不能与参考 benchmark 混在一起。
@@ -42,3 +42,7 @@ python labs/object-model/run.py --stage 01-smalltalk-like --submission ./my-obje
 - 独立性：保存自己的提交历史，能现场修改需求并解释实现。跑过参考代码不能代替这些成果。
 
 本项目足以验证程序抽象和运行时入门能力，不能独自证明整个 AI Infra 阶段或工业编译器能力。
+
+## 报告与阶段材料
+
+运行后在实验台导入对应 JSON；参考报告不会计入个人作品。所选阶段测试结果必须与报告中的模式、版本一致，平台摘要不代替四阶段设计、原测试、额外边界和测量材料。改变阶段时请保留此前完整报告；阶段复核页展示最近导入的摘要，评审仍需检查全部阶段作品。

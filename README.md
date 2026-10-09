@@ -43,6 +43,8 @@ npm run check
 
 ## 文档入口
 
+[完整文档中心](docs/index.md)按学习者、实验者和维护者分类；[常见故障](docs/faq.md)、[维护者教程](docs/maintainer-tutorial.md)与[安全政策](SECURITY.md)均提供具体操作和边界。
+
 - [零基础使用及入门验收](docs/getting-started.md)
 - [研究、能力模型、覆盖缺口](docs/research.md)
 - [产品架构与开源工具评估](docs/architecture.md)
