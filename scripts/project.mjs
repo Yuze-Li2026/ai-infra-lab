@@ -7,6 +7,6 @@ const args=process.argv.slice(2);
 for(let i=0;i<args.length;i++)if(['--directory','--archive','--python','--output'].includes(args[i])&&args[i+1])args[++i]=resolve(args[i]);
 const local=resolve(root,'.venv-labs',process.platform==='win32'?'Scripts/python.exe':'bin/python');
 const python=process.env.LAB_PYTHON||(existsSync(local)?local:process.platform==='win32'?'python':'python3');
-const child=spawn(python,[resolve(root,'scripts/project.py'),...args],{stdio:'inherit',windowsHide:true,cwd:root});
+const child=spawn(python,[resolve(root,'scripts/project.py'),...args],{stdio:'inherit',windowsHide:true,cwd:root,env:{...process.env,PYTHONUTF8:'1',PYTHONIOENCODING:'utf-8'}});
 child.on('error',error=>{console.error('无法启动课程工具：'+error.message);process.exitCode=2;});
 child.on('exit',code=>{process.exitCode=code??1;});

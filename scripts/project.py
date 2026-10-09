@@ -16,10 +16,15 @@ import stat
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
 import zipfile
 import xml.etree.ElementTree as ET
 from uuid import uuid4
+
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, 'reconfigure'):
+        stream.reconfigure(encoding='utf-8')
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from mapreduce_check import check_mapreduce
@@ -102,7 +107,17 @@ def prepare(profile, folder, args):
             unpack(data, stage.resolve())
         lock = source_lock(profile, stage)
         (stage/'.project-source.json').write_text(json.dumps(lock, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-        stage.rename(folder)
+        for attempt in range(6):
+            if folder.exists():
+                raise ValueError('工作目录已存在，拒绝覆盖作品。')
+            try:
+                stage.rename(folder)
+                break
+            except PermissionError:
+                if os.name != 'nt' or attempt == 5 or folder.exists():
+                    raise
+                # A Windows scanner can briefly hold newly written course files.
+                time.sleep(0.025 * 2**attempt)
     print(json.dumps({'prepared':True,'directory':str(folder),'commit':profile['commit'],
                       'next':'阅读专用指南，创建该课程自己的环境，再独立实现并运行 check。'},ensure_ascii=False))
 
@@ -126,7 +141,8 @@ def course_check(key, profile, folder, args):
                 if blob!=item['blob']: raise ValueError('原 API/要求已变化：'+item['path'])
         local = folder/'.venv'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
         python = args.python or (str(local) if local.is_file() else None)
-        environment = {**os.environ,'PYTHONOPTIMIZE':'','PYTHONDONTWRITEBYTECODE':'1'}
+        environment = {**os.environ,'PYTHONOPTIMIZE':'','PYTHONDONTWRITEBYTECODE':'1',
+                       'PYTHONUTF8':'1','PYTHONIOENCODING':'utf-8'}
         environment.pop('PYTEST_ADDOPTS',None)
         if profile['kind'] == 'self-designed':
             module = ast.parse((folder/'project.py').read_text(encoding='utf-8-sig'))

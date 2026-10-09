@@ -17,11 +17,13 @@ test('every original-course entry has a working pinned preparation plan',()=>{
   if(data.kind==='pytest'||data.kind==='uv'){assert.match(data.sha256,/^[a-f0-9]{64}$/);assert.ok(data.bytes<32*1024*1024);}
  }
  assert.notEqual(run(['needle','plan','--part','invalid']).status,0);
+ const legacy=spawnSync(python,[resolve('scripts/project.py'),'python-project','plan'],{encoding:'utf8',windowsHide:true,env:{...process.env,PYTHONIOENCODING:'cp1252',PYTHONUTF8:'0'}});
+ assert.equal(legacy.status,0,legacy.stderr);assert.match(JSON.parse(legacy.stdout).limits,/不安装/);
 });
 
 test('course preparation preserves an existing workspace and rejects corrupted source before delivery',async()=>{
  const dir=await temporary(),folder=join(dir,'my-project');
- assert.equal(run(['python-project','prepare','--directory',folder]).status,0);
+ const prepared=run(['python-project','prepare','--directory',folder]);assert.equal(prepared.status,0,prepared.stderr);
  const original=await readFile(join(folder,'project.py'),'utf8');
  assert.equal(run(['python-project','prepare','--directory',folder]).status,1);
  assert.equal(await readFile(join(folder,'project.py'),'utf8'),original);
@@ -37,7 +39,7 @@ test('course checks execute the learner tests and reject a changed implementatio
  const candidates=[probe.status===0?probe.stdout.trim():python,resolve('workspaces/needle-hw0/.venv',process.platform==='win32'?'Scripts/python.exe':'bin/python')];
  const selected=candidates.find(p=>spawnSync(p,['-c','import pytest'],{windowsHide:true}).status===0);
  assert.ok(selected,'This verification needs pytest: install labs/requirements-ci.txt in the test environment.');
- const dir=await temporary(),folder=join(dir,'project');assert.equal(run(['python-project','prepare','--directory',folder]).status,0);
+ const dir=await temporary(),folder=join(dir,'project');const prepared=run(['python-project','prepare','--directory',folder]);assert.equal(prepared.status,0,prepared.stderr);
  const code='def main():\n    pass\ndef add(x,y):\n    return x+y\ndef scale(x):\n    return x*2\ndef parse(x):\n    return int(x)\n';
  await writeFile(join(folder,'project.py'),code);
  await writeFile(join(folder,'test_project.py'),'from project import add, scale, parse\ndef test_add():\n    assert add(7,-3)==4\ndef test_scale():\n    assert scale(-5)==-10\ndef test_parse():\n    assert parse("42")==42\n');
