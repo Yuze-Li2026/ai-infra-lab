@@ -247,6 +247,14 @@
 
 ## AI 接手维护
 
+### 运行器的后代进程
+
+复查 `scripts/processes.py` 发现，Windows 父进程先退出时，按父 PID 调用 `taskkill` 无法可靠定位留下的后代；随后无上限的 `communicate()` 可能一直等待管道。现使用 `scripts/windows_job.py` 在命令恢复执行前建立 Job Object 归属，`scripts/windows_process.py` 为 Node 入口提供相同控制，取消按 PID 追溯的清理方式。POSIX 继续使用独立进程组，Python 清理另设 5 秒上限。
+
+`tests/process-tree-probe.py` 与 Node 进程回归真正启动父进程和持续写文件的后代：父进程退出后仍须按时返回、停止写入，同时让无关进程正常完成。Windows 另注入归属建立失败，确认暂停中的作品没有执行；此项是故障注入，不冒充实际操作系统拒绝。保留原有输入、中文分块输出、错误退出和课程原测试断言。
+
+### 接手入口
+
 新增 `AGENTS.md`、`docs/ai-maintenance.md` 与 PR 模板，核对学习者/维护者分工、资源标准、已有授权、数据保护、同提交验证和交接要求。维护命令 `scripts/maintenance-status.mjs` 只读本地状态，不获取凭据、安装依赖或访问网络；从其他目录调用也定位本站源码。
 
 `scripts/verification-state.mjs` 核对明确的源码范围、稳定排序、路径与内容哈希、忽略产物以及拒绝符号链接。测试与浏览器汇总记录运行前后指纹，环境诊断失败也保存失败报告，防止旧成功结果留下误导。`tests/verification-state.test.mjs` 实际验证过期、运行中变化、缺失、损坏和未绑定报告，保留损坏原文，并用真实失败的解释器探测替换旧成功记录。相关维护说明同时接入文档格式和链接检查；不会进入学习页面的操作流程。

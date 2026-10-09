@@ -7,6 +7,7 @@ on:
       - .github/workflows/cs336-cpu.yml
       - scripts/check-cs336-environment.py
       - scripts/project.py
+      - scripts/processes.py
       - labs/projects.json
 permissions:
   contents: read

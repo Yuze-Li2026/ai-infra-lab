@@ -9,5 +9,10 @@ if(process.argv.includes('--fix')){
   results=await lint({files,config});
 }
 const failures=Object.values(results).reduce((n,errors)=>n+errors.length,0);
-if(failures){console.error(results.toString());process.exitCode=1;}
+if(failures){
+  for(const [path,errors]of Object.entries(results))for(const error of errors){
+    console.error(`${path}:${error.lineNumber} ${error.ruleNames[0]} ${error.errorDetail||error.ruleDescription}`);
+  }
+  process.exitCode=1;
+}
 else console.log(`Markdownlint：${files.length} 份文档通过。`);

@@ -43,7 +43,7 @@ test('maintenance status locates its own repository and rejects ignored CLI argu
 test('a failed environment probe replaces an earlier success with a failed report',async()=>{
   await mkdir('artifacts',{recursive:true});const folder=await mkdtemp(resolve('artifacts/verification-probe-'));
   await mkdir(join(folder,'scripts'));await mkdir(join(folder,'artifacts'));
-  for(const name of ['test.mjs','process.mjs','verification-state.mjs'])await copyFile(resolve('scripts',name),join(folder,'scripts',name));
+  for(const name of ['test.mjs','process.mjs','processes.py','windows_job.py','windows_process.py','verification-state.mjs'])await copyFile(resolve('scripts',name),join(folder,'scripts',name));
   const report=join(folder,'artifacts/test-results.json');await writeFile(report,JSON.stringify({passed:true}));
   const result=spawnSync(process.execPath,[join(folder,'scripts/test.mjs')],{cwd:folder,encoding:'utf8',windowsHide:true,timeout:10000,
     env:{...process.env,LAB_TEST_PYTHON:join(folder,'missing-python-executable')}});

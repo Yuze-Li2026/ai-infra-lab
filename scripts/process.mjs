@@ -1,15 +1,18 @@
 import {spawn} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
 
-// Own a POSIX process group or stop the Windows tree while its parent is alive.
+const windowsSupervisor=fileURLToPath(new URL('./windows_process.py',import.meta.url));
+const localPython=fileURLToPath(new URL('../.venv-labs/Scripts/python.exe',import.meta.url));
+
+// Own a POSIX process group or a Windows Job Object via the Python supervisor.
 // This limits accidental runaway work; it is not a security sandbox.
 async function stopTree(child){
   if(!child.pid)return;
   if(process.platform==='win32'){
-    await new Promise(resolve=>{
-      const killer=spawn('taskkill',['/PID',String(child.pid),'/T','/F'],{windowsHide:true,stdio:'ignore'});
-      const timer=setTimeout(()=>{killer.kill();resolve();},5000);
-      const done=()=>{clearTimeout(timer);resolve();};killer.once('error',done);killer.once('close',done);
-    });
+    // Terminating the owner closes its non-inheritable job handle; Windows stops
+    // its descendants even when their original parent has already exited.
+    if(child.exitCode===null)child.kill('SIGKILL');
   }else{
     try{process.kill(-child.pid,'SIGKILL');}catch(error){if(error.code!=='ESRCH')throw error;}
   }
@@ -18,13 +21,20 @@ async function stopTree(child){
 
 export function runProcess(command,args,{cwd,env=process.env,input,timeout=600000,maxBytes=65536,inherit=false,signal}={}){
   return new Promise(resolve=>{
-    const child=spawn(command,args,{cwd,env,windowsHide:true,detached:process.platform!=='win32',stdio:inherit?'inherit':['pipe','pipe','pipe']});
+    const windows=process.platform==='win32';
+    const executable=windows?(env.LAB_TEST_PYTHON||env.LAB_PYTHON||(existsSync(localPython)?localPython:'python')):command;
+    const parameters=windows?['-B',windowsSupervisor,command,...args]:args;
+    const child=spawn(executable,parameters,{cwd,env,windowsHide:true,detached:!windows,stdio:inherit?'inherit':['pipe','pipe','pipe']});
     const chunks={stdout:[],stderr:[]},sizes={stdout:0,stderr:0};
     let reason,error,stopping,finished=false;
     const finish=async code=>{
       if(finished)return;finished=true;clearTimeout(timer);signal?.removeEventListener('abort',cancel);
       if(stopping)await stopping;
-      resolve({code,reason,error,stdout:Buffer.concat(chunks.stdout).toString('utf8'),stderr:Buffer.concat(chunks.stderr).toString('utf8')});
+      const stderr=Buffer.concat(chunks.stderr).toString('utf8');
+      if(windows&&code===126&&stderr.startsWith('AI_INFRA_PROCESS_START_ERROR:')){
+        try{error=JSON.parse(stderr.slice('AI_INFRA_PROCESS_START_ERROR:'.length));}catch{error=stderr;}
+      }
+      resolve({code,reason,error,stdout:Buffer.concat(chunks.stdout).toString('utf8'),stderr});
     };
     const stop=why=>{
       if(stopping||finished)return;
