@@ -60,6 +60,8 @@ node scripts/lab.mjs indoor ./indoor.py
 
 ## 6. 准备独立实验环境
 
+第一次遇到终端、虚拟环境或云服务器时，先读[按实验准备环境](environment-preparation.md)。它逐项对应本站实验；只准备当前任务需要的工具，租用云服务器不是入门条件。
+
 在线浏览不需要 Node 或 Python；本地启动工作台需要 Node 22+。Indoor Voice 和对象模型只需要 Node 及 Python 3.10+，没有第三方 Python 依赖。做到 DBDB、共识等实验时，再安装下面的小型依赖。PyTorch 和 GPU 环境在对应实验中单独准备。
 
 CPU 实验建议使用 Python 3.12；不要使用系统里旧的 Python 3.6。先用 `python --version` 或 Windows `py -3.12 --version` 核对。

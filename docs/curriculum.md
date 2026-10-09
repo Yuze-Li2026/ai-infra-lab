@@ -8,6 +8,8 @@
 
 专业分支按实际目标选择；高阶 GPU、多卡、推理与编译器不是零基础第一步。完整原课实验条件见[高级原课实验](advanced-labs.md)。
 
+本页说明模块目标；[逐项知识与原始资料](knowledge-index.md)进一步列出 198 项具体选读、章节定位、复核任务与实践环境。两者共同使用，不能只读一个资源首页就算覆盖整个模块。
+
 ## 起点 · 电脑与第一行代码
 
 从文件、数字和函数开始
@@ -394,7 +396,7 @@ GPU、分布式、推理与可靠性
 
 精读范围：进程、权限、信号、文件描述符、namespace、cgroup、容器镜像。
 
-主资源：[Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/)。 补充：[Kubernetes 官方概念](https://kubernetes.io/docs/concepts/overview/)。
+主资源：[Docker 入门与容器基础](https://docs.docker.com/get-started/)。补充：[Linux cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html)、[OSTEP](https://pages.cs.wisc.edu/~remzi/OSTEP/)与 [Kubernetes 官方中文概念](https://kubernetes.io/zh-cn/docs/concepts/overview/)。
 
 - 理解机制与边界：进程、权限、信号、文件描述符、namespace、cgroup、容器镜像；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：在已有隔离 Linux 环境检查进程、权限与 CPU/内存限额；先读官方容器概念
@@ -604,10 +606,10 @@ GPU、分布式、推理与可靠性
 
 精读范围：embedding、ANN、召回/延迟、混合检索、索引更新、元数据权限、RAG 缓存与评估。
 
-主资源：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[vLLM](https://docs.vllm.ai/en/latest/)。
+主资源：[Faiss](https://faiss.ai/)。补充：[RAG 原始论文](https://arxiv.org/abs/2005.11401)、[MLSysBook](https://mlsysbook.ai/)与 [vLLM](https://docs.vllm.ai/en/latest/)。
 
 - 理解机制与边界：embedding、ANN、召回/延迟、混合检索、索引更新、元数据权限、RAG 缓存与评估；先用主资源查明定义、假设与失败条件。
-- 设计与独立实践：精读 MLSysBook Data Storage 的 Retrieval Infrastructure；用许可明确的小数据建立精确检索 oracle
+- 设计与独立实践：先按 Faiss 建立精确检索基线，再对照原始 RAG 论文拆分检索与生成的评价；数据须许可明确
 - 测试、优化与解释：比较近似召回、索引内存、延迟和更新一致性；检查检索权限与证据来源。检索/生成分项基线、负面案例与版本图；不把通用聊天 demo 当完整 RAG 验收
 
 成果标准：检索/生成分项基线、负面案例与版本图；不把通用聊天 demo 当完整 RAG 验收。
@@ -618,7 +620,7 @@ GPU、分布式、推理与可靠性
 
 精读范围：模型导出、算子兼容、设备 runtime、实时预算、热/功率、离线与更新。
 
-主资源：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[torch.compile 官方教程](https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)。
+主资源：[ExecuTorch 部署指南](https://docs.pytorch.org/executorch/stable/index.html)。补充：[MLSysBook](https://mlsysbook.ai/)与 [torch.compile 官方教程](https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)。
 
 - 理解机制与边界：模型导出、算子兼容、设备 runtime、实时预算、热/功率、离线与更新；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：按 MLSysBook Edge Intelligence 选已有设备；先核对导出与运行时算子支持

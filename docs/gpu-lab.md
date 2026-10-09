@@ -4,6 +4,8 @@
 
 ## 环境与实际结果
 
+首次使用 GPU 先看[显卡、驱动与课程环境的区别](environment-preparation.md#gpu)。没有兼容设备时可以先完成 CPU 任务，或按[个人云端实验室](private-cloud.md)的条件自行选择实例；普通包年 CPU 主机不能执行 CUDA 检查。
+
 本机 NVIDIA GeForce RTX 5060 Laptop GPU，约 8 GB 显存，驱动 596.08，Python 3.12.14，PyTorch 2.10.0+cu128，CUDA runtime 12.8。使用已授权的 `.venv-labs`；没有修改驱动，没有购买云算力或下载模型权重。
 
 ```sh

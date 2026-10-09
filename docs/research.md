@@ -90,6 +90,14 @@
 
 维护者每季度开展一次能力覆盖审计，每月按需检查链接；新技术或错误证据出现时立即复核受影响依赖。审查记录必须包括日期、证据、改变或保留的判断、许可及兼容性影响、验收方式和负责人。自动链接健康不能替代教学和科学准确性审查。不自动创建定时任务；具体维护排期由维护者决定。
 
+## 逐项知识的来源复核
+
+2026-10-09 将模块下的具体机制与原始资料逐项对应。新增来源解决的是原有主课的边界：Faiss 与 RAG 原论文补检索；Arrow、Kafka、Spark 和 Feast 补数据/特征；Megatron Core、TorchRec、JAX 与分布式检查点文档补并行和状态；Kueue、Slurm、OpenTelemetry、Prometheus 与 DCGM 补调度和运行；ExecuTorch、ONNX Runtime、OpenXLA、ROCm、Nsight Systems、TRL 与 SGLang 补设备、编译、性能、后训练和服务。
+
+选择依据是维护主体、官方章节及具体机制的可追溯性，保留在目录的 `reviewEvidence` 与 12 项定性评估中。没有将这些工具统一评为同类最优，也没有用滚动文档代替固定依赖。每个知识条目写明章节、复核任务及实践条件；高阶补充放在基础机制之后，入口失配的 Ray Data、DDP 与激活重计算已改为具体官方页面。
+
+主线仍由原课和教材承担，工具文档用于具体工程机制。198 项任务是此次覆盖审查的可追溯结果，不是领域已经穷尽的证明；实验要求由本站组织，不冒充原作者评分。正文与插图未复制进网站，外部许可保留，见[逐项清单](knowledge-index.md)和[覆盖矩阵](coverage.md)。
+
 ## GitHub 只读检查
 
 [账号公开主页](https://github.com/Yuze-Li2026) 初次研究时显示 3 个仓库，原公开项目包括 `fft-notes`、`linear-algebra-map`、`stat-learning-numpy`。2026-10-09 所有者批准公开发布；经认证核对目标仓库不存在后创建 [ai-infra-lab](https://github.com/Yuze-Li2026/ai-infra-lab)，完整历史哈希核对一致。没有修改其他仓库；不声称公开主页能证明私有项目的情况。

@@ -14,7 +14,11 @@
 
 ## 知识节点 Node
 
-字段：`id / title / stage / prerequisites / resources / category / objective / guidance / evidence / status / scope / steps`。`steps` 至少两步，每步包含 `title / task`；`scope` 说明选读范围和边界。
+字段：`id / title / stage / prerequisites / resources / category / objective / guidance / evidence / status / scope / steps / topics`。`steps` 至少两步，每步包含 `title / task`；`scope` 说明选读范围和边界。
+
+`topics` 逐项记录知识与依据，不得为空。每项包含 `id / title / source / url / section / outcome / environment`：ID 以所属节点 ID 加连字符开头且全局唯一；`source` 引用已有来源，`url` 为无凭据 HTTPS 原文入口；`section` 指定选章，`outcome` 给出复核任务。`environment` 为 `reading / cpu / linux / gpu / multi-gpu / cluster / device` 之一，说明实践条件，不表示该环境已验收。优先链接具体章节；官方入口不稳定时保留原文入口与可查找的章节名称。
+
+修改后运行 `node scripts/knowledge-index.mjs` 生成 `docs/knowledge-index.md` 并审阅。`npm run check-coverage` 检查它与目录一致；不得用生成文档替代原始来源审查。
 
 `category` 为 `core` 核心必修、`specialist` 方向必修或 `optional` 可选深入。重要补充通常作为节点辅助资源记录；与目标无关的资源不强行加入依赖图。若补充项成为独立能力，应在审计中解释新增节点的理由。
 

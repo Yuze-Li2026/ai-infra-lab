@@ -240,7 +240,8 @@
         "evidence",
         "status",
         "scope",
-        "steps"
+        "steps",
+        "topics"
       ],
       "properties": {
         "id": {
@@ -269,6 +270,23 @@
             "specialist",
             "optional"
           ]
+        },
+        "topics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "source", "url", "section", "outcome", "environment"],
+            "properties": {
+              "id": {"$ref": "#/$defs/id"},
+              "title": {"$ref": "#/$defs/text"},
+              "source": {"$ref": "#/$defs/id"},
+              "url": {"$ref": "#/$defs/https"},
+              "section": {"$ref": "#/$defs/text"},
+              "outcome": {"$ref": "#/$defs/text"},
+              "environment": {"enum": ["reading", "cpu", "linux", "gpu", "multi-gpu", "cluster", "device"]}
+            }
+          }
         },
         "steps": {
           "type": "array",

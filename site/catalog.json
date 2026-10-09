@@ -1684,12 +1684,977 @@
         "licensing": "只链接；免费阅读不意味着可以转载",
         "stability": "原项目维护，运行时另锁版本、依赖及提交"
       }
+    },
+    {
+      "id": "faiss",
+      "title": "Faiss 相似度搜索",
+      "author": "Meta FAIR / Faiss 维护者",
+      "url": "https://faiss.ai/",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://faiss.ai/",
+      "prerequisites": "需要线性代数与 Python",
+      "coverage": "向量距离、Flat/IVF/HNSW/PQ、召回与内存权衡",
+      "reason": "用真实索引与原始论文连接算法、测量和检索系统，比综合教材入口更适合检索节点",
+      "limitations": "需要线性代数与 Python；不是完整 RAG 应用课，GPU 版本另验",
+      "verification": "首页给出索引能力及研究来源；另核对作者 Wiki 的索引选择指南",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Meta FAIR / Faiss 维护者维护的一手入口",
+        "accuracy": "首页给出索引能力及研究来源；另核对作者 Wiki 的索引选择指南",
+        "depth": "向量距离、Flat/IVF/HNSW/PQ、召回与内存权衡",
+        "engineeringValue": "用真实索引与原始论文连接算法、测量和检索系统，比综合教材入口更适合检索节点",
+        "coverage": "向量距离、Flat/IVF/HNSW/PQ、召回与内存权衡",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "需要线性代数与 Python",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://faiss.ai/",
+          "checkedAt": "2026-10-09",
+          "finding": "首页给出索引能力及研究来源；另核对作者 Wiki 的索引选择指南"
+        }
+      ]
+    },
+    {
+      "id": "arrow",
+      "title": "Apache Arrow 数据集指南",
+      "author": "Apache Arrow 项目",
+      "url": "https://arrow.apache.org/docs/python/dataset.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://arrow.apache.org/docs/python/dataset.html",
+      "prerequisites": "API 参考需要数据工程基础",
+      "coverage": "列式内存、Parquet、分区、扫描与过滤下推",
+      "reason": "用实际数据接口补齐存储与训练数据管线之间的空档",
+      "limitations": "API 参考需要数据工程基础；对象存储成本与权限须另配",
+      "verification": "已核对 Tabular Datasets 的分区、过滤与大于内存的数据读取范围",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Apache Arrow 项目维护的一手入口",
+        "accuracy": "已核对 Tabular Datasets 的分区、过滤与大于内存的数据读取范围",
+        "depth": "列式内存、Parquet、分区、扫描与过滤下推",
+        "engineeringValue": "用实际数据接口补齐存储与训练数据管线之间的空档",
+        "coverage": "列式内存、Parquet、分区、扫描与过滤下推",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "API 参考需要数据工程基础",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://arrow.apache.org/docs/python/dataset.html",
+          "checkedAt": "2026-10-09",
+          "finding": "已核对 Tabular Datasets 的分区、过滤与大于内存的数据读取范围"
+        }
+      ]
+    },
+    {
+      "id": "cgroups",
+      "title": "Linux cgroup v2",
+      "author": "Linux 内核维护者 / Tejun Heo",
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "prerequisites": "需要 Linux 管理权限",
+      "coverage": "进程层级、CPU/内存/I/O 控制、委派与资源统计",
+      "reason": "直接依据内核接口解释容器资源限制，避免把 Kubernetes 配置当内核原理",
+      "limitations": "需要 Linux 管理权限；租用容器未必获准创建控制组",
+      "verification": "原文明确是 cgroup v2 设计与用户接口规范，覆盖核心和各资源控制器",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Linux 内核维护者 / Tejun Heo维护的一手入口",
+        "accuracy": "原文明确是 cgroup v2 设计与用户接口规范，覆盖核心和各资源控制器",
+        "depth": "进程层级、CPU/内存/I/O 控制、委派与资源统计",
+        "engineeringValue": "直接依据内核接口解释容器资源限制，避免把 Kubernetes 配置当内核原理",
+        "coverage": "进程层级、CPU/内存/I/O 控制、委派与资源统计",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "需要 Linux 管理权限",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+          "checkedAt": "2026-10-09",
+          "finding": "原文明确是 cgroup v2 设计与用户接口规范，覆盖核心和各资源控制器"
+        }
+      ]
+    },
+    {
+      "id": "docker",
+      "title": "Docker 入门与容器基础",
+      "author": "Docker 文档维护者",
+      "url": "https://docs.docker.com/get-started/",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.docker.com/get-started/",
+      "prerequisites": "Docker Desktop 许可与服务端安装条件须分别核对",
+      "coverage": "镜像、容器、卷、网络与构建",
+      "reason": "官方循序教程承担实践入门，再用内核文档解释隔离边界",
+      "limitations": "Docker Desktop 许可与服务端安装条件须分别核对；不能在所有 GPU 租用容器里嵌套运行",
+      "verification": "入门入口区分介绍、工作坊与概念，连接具体工具操作",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Docker 文档维护者维护的一手入口",
+        "accuracy": "入门入口区分介绍、工作坊与概念，连接具体工具操作",
+        "depth": "镜像、容器、卷、网络与构建",
+        "engineeringValue": "官方循序教程承担实践入门，再用内核文档解释隔离边界",
+        "coverage": "镜像、容器、卷、网络与构建",
+        "teachingQuality": "官方步骤教程；学习效果仍需初学者试用",
+        "difficulty": "Docker Desktop 许可与服务端安装条件须分别核对",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.docker.com/get-started/",
+          "checkedAt": "2026-10-09",
+          "finding": "入门入口区分介绍、工作坊与概念，连接具体工具操作"
+        }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "title": "PyTorch Distributed Checkpoint",
+      "author": "PyTorch 维护者",
+      "url": "https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html",
+      "version": "PyTorch 2.10 固定文档",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html",
+      "prerequisites": "固定 PyTorch 2.10 文档",
+      "coverage": "分片检查点、异步保存、状态字典与恢复",
+      "reason": "把训练容错落实到实际保存与加载接口，补齐只读分布式总目录的不足",
+      "limitations": "固定 PyTorch 2.10 文档；不同版本检查点兼容和恢复拓扑需实测",
+      "verification": "核对分布式检查点 API；原文给出保存/加载与跨版本兼容边界",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "PyTorch 维护者维护的一手入口",
+        "accuracy": "核对分布式检查点 API；原文给出保存/加载与跨版本兼容边界",
+        "depth": "分片检查点、异步保存、状态字典与恢复",
+        "engineeringValue": "把训练容错落实到实际保存与加载接口，补齐只读分布式总目录的不足",
+        "coverage": "分片检查点、异步保存、状态字典与恢复",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "固定 PyTorch 2.10 文档",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html",
+          "checkedAt": "2026-10-09",
+          "finding": "核对分布式检查点 API；原文给出保存/加载与跨版本兼容边界"
+        }
+      ]
+    },
+    {
+      "id": "megatron",
+      "title": "Megatron Core 用户指南",
+      "author": "NVIDIA / Megatron Core 维护者",
+      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+      "prerequisites": "多卡和特定 CUDA/PyTorch 组合",
+      "coverage": "张量、流水线、上下文、专家并行与组合",
+      "reason": "以成熟训练实现补充 CS336 的课程视角，用于定位通信与显存取舍",
+      "limitations": "多卡和特定 CUDA/PyTorch 组合；文档可读不代表本站运行通过",
+      "verification": "已访问用户指南；并行组件用于专业方向选读，不替代基础推导",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "NVIDIA / Megatron Core 维护者维护的一手入口",
+        "accuracy": "已访问用户指南；并行组件用于专业方向选读，不替代基础推导",
+        "depth": "张量、流水线、上下文、专家并行与组合",
+        "engineeringValue": "以成熟训练实现补充 CS336 的课程视角，用于定位通信与显存取舍",
+        "coverage": "张量、流水线、上下文、专家并行与组合",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "多卡和特定 CUDA/PyTorch 组合",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+          "checkedAt": "2026-10-09",
+          "finding": "已访问用户指南；并行组件用于专业方向选读，不替代基础推导"
+        }
+      ]
+    },
+    {
+      "id": "kueue",
+      "title": "Kueue 概念与批任务准入",
+      "author": "Kubernetes SIG Scheduling / Kueue",
+      "url": "https://kueue.sigs.k8s.io/docs/concepts/",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://kueue.sigs.k8s.io/docs/concepts/",
+      "prerequisites": "需要可管理 Kubernetes 集群",
+      "coverage": "Workload、ClusterQueue、LocalQueue、配额与准入",
+      "reason": "补齐 Pod 调度之外的训练队列和配额管理",
+      "limitations": "需要可管理 Kubernetes 集群；与普通容器租赁不是同一权限条件",
+      "verification": "官方概念目录包含工作负载、队列、资源风味和准入检查",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Kubernetes SIG Scheduling / Kueue维护的一手入口",
+        "accuracy": "官方概念目录包含工作负载、队列、资源风味和准入检查",
+        "depth": "Workload、ClusterQueue、LocalQueue、配额与准入",
+        "engineeringValue": "补齐 Pod 调度之外的训练队列和配额管理",
+        "coverage": "Workload、ClusterQueue、LocalQueue、配额与准入",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "需要可管理 Kubernetes 集群",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://kueue.sigs.k8s.io/docs/concepts/",
+          "checkedAt": "2026-10-09",
+          "finding": "官方概念目录包含工作负载、队列、资源风味和准入检查"
+        }
+      ]
+    },
+    {
+      "id": "slurm",
+      "title": "Slurm 集群调度",
+      "author": "SchedMD / Slurm 维护者",
+      "url": "https://slurm.schedmd.com/overview.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://slurm.schedmd.com/overview.html",
+      "prerequisites": "部署控制器需要 Linux 管理权限",
+      "coverage": "作业、分区、资源分配、GPU GRES、记账与抢占",
+      "reason": "补充 HPC 训练集群的实际调度体系，避免平台学习只覆盖 Kubernetes",
+      "limitations": "部署控制器需要 Linux 管理权限；单个租用容器不能证明多节点调度",
+      "verification": "概览说明控制器、计算节点、队列、作业步骤与资源记账组件",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "SchedMD / Slurm 维护者维护的一手入口",
+        "accuracy": "概览说明控制器、计算节点、队列、作业步骤与资源记账组件",
+        "depth": "作业、分区、资源分配、GPU GRES、记账与抢占",
+        "engineeringValue": "补充 HPC 训练集群的实际调度体系，避免平台学习只覆盖 Kubernetes",
+        "coverage": "作业、分区、资源分配、GPU GRES、记账与抢占",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "部署控制器需要 Linux 管理权限",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://slurm.schedmd.com/overview.html",
+          "checkedAt": "2026-10-09",
+          "finding": "概览说明控制器、计算节点、队列、作业步骤与资源记账组件"
+        }
+      ]
+    },
+    {
+      "id": "otel",
+      "title": "OpenTelemetry Python",
+      "author": "OpenTelemetry 项目",
+      "url": "https://opentelemetry.io/docs/languages/python/",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://opentelemetry.io/docs/languages/python/",
+      "prerequisites": "SDK 各信号稳定性不同",
+      "coverage": "指标、追踪、日志关联和 SDK 埋点",
+      "reason": "让端到端延迟定位有可复用实现，补充 SRE 的方法论",
+      "limitations": "SDK 各信号稳定性不同；收集器、后端和敏感信息过滤需另验",
+      "verification": "Python 官方指南提供信号支持状态、入门和 instrumentation 入口",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "OpenTelemetry 项目维护的一手入口",
+        "accuracy": "Python 官方指南提供信号支持状态、入门和 instrumentation 入口",
+        "depth": "指标、追踪、日志关联和 SDK 埋点",
+        "engineeringValue": "让端到端延迟定位有可复用实现，补充 SRE 的方法论",
+        "coverage": "指标、追踪、日志关联和 SDK 埋点",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "SDK 各信号稳定性不同",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://opentelemetry.io/docs/languages/python/",
+          "checkedAt": "2026-10-09",
+          "finding": "Python 官方指南提供信号支持状态、入门和 instrumentation 入口"
+        }
+      ]
+    },
+    {
+      "id": "prometheus",
+      "title": "Prometheus 监控基础",
+      "author": "Prometheus 项目",
+      "url": "https://prometheus.io/docs/introduction/overview/",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://prometheus.io/docs/introduction/overview/",
+      "prerequisites": "不是日志存储",
+      "coverage": "时间序列、标签、抓取、PromQL 和告警",
+      "reason": "用可执行监控模型承接 SLO，解释基数和告警成本",
+      "limitations": "不是日志存储；高基数标签和多租户权限需要独立设计",
+      "verification": "概览说明数据模型、查询、抓取与 Alertmanager 架构",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Prometheus 项目维护的一手入口",
+        "accuracy": "概览说明数据模型、查询、抓取与 Alertmanager 架构",
+        "depth": "时间序列、标签、抓取、PromQL 和告警",
+        "engineeringValue": "用可执行监控模型承接 SLO，解释基数和告警成本",
+        "coverage": "时间序列、标签、抓取、PromQL 和告警",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "不是日志存储",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://prometheus.io/docs/introduction/overview/",
+          "checkedAt": "2026-10-09",
+          "finding": "概览说明数据模型、查询、抓取与 Alertmanager 架构"
+        }
+      ]
+    },
+    {
+      "id": "executorch",
+      "title": "ExecuTorch 部署指南",
+      "author": "PyTorch / ExecuTorch 维护者",
+      "url": "https://docs.pytorch.org/executorch/stable/index.html",
+      "version": "1.5 stable，2026-10-09 页面审查",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.pytorch.org/executorch/stable/index.html",
+      "prerequisites": "需要目标设备和受支持后端",
+      "coverage": "模型导出、边缘运行时、委托后端与设备部署",
+      "reason": "将边缘部署从综合教材中的概念扩展为真实工具链",
+      "limitations": "需要目标设备和受支持后端；桌面执行不能代替手机/NPU 验收",
+      "verification": "官方目录连接导出、后端与设备实践；当前页面标注 1.5",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "PyTorch / ExecuTorch 维护者维护的一手入口",
+        "accuracy": "官方目录连接导出、后端与设备实践；当前页面标注 1.5",
+        "depth": "模型导出、边缘运行时、委托后端与设备部署",
+        "engineeringValue": "将边缘部署从综合教材中的概念扩展为真实工具链",
+        "coverage": "模型导出、边缘运行时、委托后端与设备部署",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "需要目标设备和受支持后端",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.pytorch.org/executorch/stable/index.html",
+          "checkedAt": "2026-10-09",
+          "finding": "官方目录连接导出、后端与设备实践；当前页面标注 1.5"
+        }
+      ]
+    },
+    {
+      "id": "onnx-quant",
+      "title": "ONNX Runtime 模型量化",
+      "author": "Microsoft / ONNX Runtime 维护者",
+      "url": "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html",
+      "prerequisites": "算子、硬件与 execution provider 支持不同",
+      "coverage": "静态/动态量化、校准、QDQ 与精度排错",
+      "reason": "以可检查的量化流程连接数值误差和部署性能",
+      "limitations": "算子、硬件与 execution provider 支持不同；量化并非必然加速",
+      "verification": "已跟随官方重定向核对量化页面，包含类型、精度与性能边界",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Microsoft / ONNX Runtime 维护者维护的一手入口",
+        "accuracy": "已跟随官方重定向核对量化页面，包含类型、精度与性能边界",
+        "depth": "静态/动态量化、校准、QDQ 与精度排错",
+        "engineeringValue": "以可检查的量化流程连接数值误差和部署性能",
+        "coverage": "静态/动态量化、校准、QDQ 与精度排错",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "算子、硬件与 execution provider 支持不同",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html",
+          "checkedAt": "2026-10-09",
+          "finding": "已跟随官方重定向核对量化页面，包含类型、精度与性能边界"
+        }
+      ]
+    },
+    {
+      "id": "openxla",
+      "title": "OpenXLA / XLA 编译器",
+      "author": "OpenXLA 项目",
+      "url": "https://openxla.org/xla",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://openxla.org/xla",
+      "prerequisites": "需要图语义与编译基础",
+      "coverage": "图编译、HLO、融合、布局与后端",
+      "reason": "补充 MLIR Toy 教学项目之外的实际机器学习编译器",
+      "limitations": "需要图语义与编译基础；不同前端与设备后端单独验收",
+      "verification": "官方介绍连接编译流水线、模型前端与加速器后端",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "OpenXLA 项目维护的一手入口",
+        "accuracy": "官方介绍连接编译流水线、模型前端与加速器后端",
+        "depth": "图编译、HLO、融合、布局与后端",
+        "engineeringValue": "补充 MLIR Toy 教学项目之外的实际机器学习编译器",
+        "coverage": "图编译、HLO、融合、布局与后端",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "需要图语义与编译基础",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://openxla.org/xla",
+          "checkedAt": "2026-10-09",
+          "finding": "官方介绍连接编译流水线、模型前端与加速器后端"
+        }
+      ]
+    },
+    {
+      "id": "trl",
+      "title": "TRL 后训练指南",
+      "author": "Hugging Face / TRL 维护者",
+      "url": "https://huggingface.co/docs/trl/index",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://huggingface.co/docs/trl/index",
+      "prerequisites": "算法 API 更新快",
+      "coverage": "SFT、DPO、奖励建模、GRPO 与在线采样",
+      "reason": "用实际 trainer 文档承接 CS336 后训练讲义，核对 rollout 的数据与系统接口",
+      "limitations": "算法 API 更新快；模型/数据许可和并行训练硬件分别审核",
+      "verification": "官方首页连接各后训练方法和 trainer；只选当前任务需要的部分",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "Hugging Face / TRL 维护者维护的一手入口",
+        "accuracy": "官方首页连接各后训练方法和 trainer；只选当前任务需要的部分",
+        "depth": "SFT、DPO、奖励建模、GRPO 与在线采样",
+        "engineeringValue": "用实际 trainer 文档承接 CS336 后训练讲义，核对 rollout 的数据与系统接口",
+        "coverage": "SFT、DPO、奖励建模、GRPO 与在线采样",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "算法 API 更新快",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://huggingface.co/docs/trl/index",
+          "checkedAt": "2026-10-09",
+          "finding": "官方首页连接各后训练方法和 trainer；只选当前任务需要的部分"
+        }
+      ]
+    },
+    {
+      "id": "nsight",
+      "title": "Nsight Systems 用户指南",
+      "author": "NVIDIA",
+      "url": "https://docs.nvidia.com/nsight-systems/UserGuide/index.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.nvidia.com/nsight-systems/UserGuide/index.html",
+      "prerequisites": "采样权限和平台支持不同",
+      "coverage": "CPU/GPU 时间线、NVTX、CUDA 追踪和系统级瓶颈",
+      "reason": "补充框架 profiler 看不到的主机、驱动与通信等待",
+      "limitations": "采样权限和平台支持不同；需要核对租用实例可用特性",
+      "verification": "原厂用户指南提供系统追踪、报告和采样条件",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "NVIDIA维护的一手入口",
+        "accuracy": "原厂用户指南提供系统追踪、报告和采样条件",
+        "depth": "CPU/GPU 时间线、NVTX、CUDA 追踪和系统级瓶颈",
+        "engineeringValue": "补充框架 profiler 看不到的主机、驱动与通信等待",
+        "coverage": "CPU/GPU 时间线、NVTX、CUDA 追踪和系统级瓶颈",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "采样权限和平台支持不同",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.nvidia.com/nsight-systems/UserGuide/index.html",
+          "checkedAt": "2026-10-09",
+          "finding": "原厂用户指南提供系统追踪、报告和采样条件"
+        }
+      ]
+    },
+    {
+      "id": "dcgm",
+      "title": "NVIDIA DCGM 功能指南",
+      "author": "NVIDIA",
+      "url": "https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html",
+      "prerequisites": "GeForce 与数据中心卡支持的诊断范围不同",
+      "coverage": "GPU 指标、拓扑、健康、作业统计与诊断",
+      "reason": "将设备运维与容量/功耗测量落到真实接口",
+      "limitations": "GeForce 与数据中心卡支持的诊断范围不同；DCGM 自身不提供 OS 资源隔离",
+      "verification": "官方表区分各 GPU 类型的支持；说明监控与操作系统隔离的边界",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "NVIDIA维护的一手入口",
+        "accuracy": "官方表区分各 GPU 类型的支持；说明监控与操作系统隔离的边界",
+        "depth": "GPU 指标、拓扑、健康、作业统计与诊断",
+        "engineeringValue": "将设备运维与容量/功耗测量落到真实接口",
+        "coverage": "GPU 指标、拓扑、健康、作业统计与诊断",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "GeForce 与数据中心卡支持的诊断范围不同",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html",
+          "checkedAt": "2026-10-09",
+          "finding": "官方表区分各 GPU 类型的支持；说明监控与操作系统隔离的边界"
+        }
+      ]
+    },
+    {
+      "id": "sglang",
+      "title": "SGLang 推理文档",
+      "author": "LMSYS / SGLang 维护者",
+      "url": "https://docs.sglang.io/",
+      "version": "在线官方文档；2026-10-09 核对，实验须另锁版本",
+      "language": "en",
+      "license": "仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权",
+      "licenseUrl": "https://docs.sglang.io/",
+      "prerequisites": "不根据宣传吞吐量判断优劣",
+      "coverage": "前缀缓存、并行推理、多模态与运行后端",
+      "reason": "与 vLLM 对照同一工作负载下的服务取舍，避免只学习单一框架接口",
+      "limitations": "不根据宣传吞吐量判断优劣；基准须相同模型、请求和质量要求",
+      "verification": "官方入口从 docs.sglang.ai 重定向到 docs.sglang.io；提供安装、快速开始和硬件支持入口",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始文档与选读范围审查；未完成此工具全部工程复现",
+      "reuse": "仅链接、章节定位与本站原创练习要求；不镜像正文",
+      "evaluation": {
+        "authority": "LMSYS / SGLang 维护者维护的一手入口",
+        "accuracy": "官方入口从 docs.sglang.ai 重定向到 docs.sglang.io；提供安装、快速开始和硬件支持入口",
+        "depth": "前缀缓存、并行推理、多模态与运行后端",
+        "engineeringValue": "与 vLLM 对照同一工作负载下的服务取舍，避免只学习单一框架接口",
+        "coverage": "前缀缓存、并行推理、多模态与运行后端",
+        "teachingQuality": "工程文档用于选章与查阅，配合本站先修和原课程，不当作零基础教材",
+        "difficulty": "不根据宣传吞吐量判断优劣",
+        "languageFriendliness": "英文原文；本站中文选读与成果说明，浏览器翻译可辅助",
+        "accessibility": "本轮公开页面可读取，不要求注册阅读；运行条件另列",
+        "maintenance": "2026-10-09 核对；在线页面会更新",
+        "licensing": "本站仅链接；正文再分发与各依赖许可需另审",
+        "stability": "保留原始入口和章节名称；执行时记录确切软件版本"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.sglang.io/",
+          "checkedAt": "2026-10-09",
+          "finding": "官方入口从 docs.sglang.ai 重定向到 docs.sglang.io；提供安装、快速开始和硬件支持入口"
+        }
+      ]
+    },
+    {
+      "id": "feast",
+      "title": "Feast 特征平台",
+      "author": "Feast 项目",
+      "url": "https://docs.feast.dev/",
+      "version": "2026-10-09 官方页面审查；运行时另锁版本",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://docs.feast.dev/",
+      "prerequisites": "结构化特征与数据工程基础",
+      "coverage": "历史特征、在线存储、时间点正确性与训练服务一致性",
+      "reason": "补齐实时推荐与传统机器学习的数据基础设施",
+      "limitations": "不是通用 ETL、工作流编排或完整数据血缘系统",
+      "verification": "官方入口明确 offline/online store、point-in-time join 和功能边界",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "Feast 项目的一手资料",
+        "accuracy": "官方入口明确 offline/online store、point-in-time join 和功能边界",
+        "depth": "历史特征、在线存储、时间点正确性与训练服务一致性",
+        "engineeringValue": "补齐实时推荐与传统机器学习的数据基础设施",
+        "coverage": "历史特征、在线存储、时间点正确性与训练服务一致性",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "结构化特征与数据工程基础",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "2026-10-09 核对，线上版本持续变化",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "不是通用 ETL、工作流编排或完整数据血缘系统"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.feast.dev/",
+          "checkedAt": "2026-10-09",
+          "finding": "官方入口明确 offline/online store、point-in-time join 和功能边界"
+        }
+      ]
+    },
+    {
+      "id": "torchrec",
+      "title": "TorchRec 推荐系统基础设施",
+      "author": "Meta PyTorch / TorchRec 维护者",
+      "url": "https://github.com/meta-pytorch/torchrec",
+      "version": "2026-10-09 官方页面审查；运行时另锁版本",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://github.com/meta-pytorch/torchrec",
+      "prerequisites": "PyTorch、Embedding 与分布式训练",
+      "coverage": "稀疏 Embedding、分片计划、通信与流水线",
+      "reason": "补齐非大语言模型的稀疏训练和推荐工作负载",
+      "limitations": "nightly 安装示例不能直接当固定课程环境；CPU/GPU 支持另验",
+      "verification": "原仓库说明大 Embedding 表、多种分片和 DLRM 示例；旧组织地址已重定向",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "Meta PyTorch / TorchRec 维护者的一手资料",
+        "accuracy": "原仓库说明大 Embedding 表、多种分片和 DLRM 示例；旧组织地址已重定向",
+        "depth": "稀疏 Embedding、分片计划、通信与流水线",
+        "engineeringValue": "补齐非大语言模型的稀疏训练和推荐工作负载",
+        "coverage": "稀疏 Embedding、分片计划、通信与流水线",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "PyTorch、Embedding 与分布式训练",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "2026-10-09 核对，线上版本持续变化",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "nightly 安装示例不能直接当固定课程环境；CPU/GPU 支持另验"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://github.com/meta-pytorch/torchrec",
+          "checkedAt": "2026-10-09",
+          "finding": "原仓库说明大 Embedding 表、多种分片和 DLRM 示例；旧组织地址已重定向"
+        }
+      ]
+    },
+    {
+      "id": "kafka",
+      "title": "Apache Kafka 设计",
+      "author": "Apache Kafka 项目",
+      "url": "https://kafka.apache.org/43/design/",
+      "version": "2026-10-09 官方页面审查；运行时另锁版本",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://kafka.apache.org/43/design/",
+      "prerequisites": "网络、分布式系统与数据管线",
+      "coverage": "日志、分区、消费者、复制与消息交付语义",
+      "reason": "补齐流式数据重放、重复处理与训练数据新鲜度",
+      "limitations": "4.3 文档；端到端精确一次还依赖处理与下游写入",
+      "verification": "官方设计页覆盖日志、分区、复制和交付保证",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "Apache Kafka 项目的一手资料",
+        "accuracy": "官方设计页覆盖日志、分区、复制和交付保证",
+        "depth": "日志、分区、消费者、复制与消息交付语义",
+        "engineeringValue": "补齐流式数据重放、重复处理与训练数据新鲜度",
+        "coverage": "日志、分区、消费者、复制与消息交付语义",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "网络、分布式系统与数据管线",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "2026-10-09 核对，线上版本持续变化",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "4.3 文档；端到端精确一次还依赖处理与下游写入"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://kafka.apache.org/43/design/",
+          "checkedAt": "2026-10-09",
+          "finding": "官方设计页覆盖日志、分区、复制和交付保证"
+        }
+      ]
+    },
+    {
+      "id": "spark",
+      "title": "Spark Structured Streaming",
+      "author": "Apache Spark 项目",
+      "url": "https://spark.apache.org/docs/latest/streaming/index.html",
+      "version": "2026-10-09 官方页面审查；运行时另锁版本",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://spark.apache.org/docs/latest/streaming/index.html",
+      "prerequisites": "SQL、数据处理与分布式基础",
+      "coverage": "事件时间、窗口、水位线、状态与流式恢复",
+      "reason": "连接批数据和实时特征，补齐迟到事件与状态管理",
+      "limitations": "页面标注 4.2.0；运行需独立 Java/Spark 环境",
+      "verification": "官方编程指南入口提供流式处理与相关配置章节",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "Apache Spark 项目的一手资料",
+        "accuracy": "官方编程指南入口提供流式处理与相关配置章节",
+        "depth": "事件时间、窗口、水位线、状态与流式恢复",
+        "engineeringValue": "连接批数据和实时特征，补齐迟到事件与状态管理",
+        "coverage": "事件时间、窗口、水位线、状态与流式恢复",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "SQL、数据处理与分布式基础",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "2026-10-09 核对，线上版本持续变化",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "页面标注 4.2.0；运行需独立 Java/Spark 环境"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://spark.apache.org/docs/latest/streaming/index.html",
+          "checkedAt": "2026-10-09",
+          "finding": "官方编程指南入口提供流式处理与相关配置章节"
+        }
+      ]
+    },
+    {
+      "id": "jax",
+      "title": "JAX 分片与并行",
+      "author": "JAX 维护者",
+      "url": "https://docs.jax.dev/en/latest/201/sharding.html",
+      "version": "2026-10-09 官方页面审查；运行时另锁版本",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://docs.jax.dev/en/latest/201/sharding.html",
+      "prerequisites": "自动微分、数组和分布式训练",
+      "coverage": "设备 mesh、全局数组、分片与自动并行",
+      "reason": "用另一成熟系统交叉核对并行语义，避免只学 PyTorch 接口",
+      "limitations": "GPU/TPU 后端和具体版本需分别验证",
+      "verification": "从官方目录定位到当前 201/sharding 页面，旧 notebook 路径已迁移",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "JAX 维护者的一手资料",
+        "accuracy": "从官方目录定位到当前 201/sharding 页面，旧 notebook 路径已迁移",
+        "depth": "设备 mesh、全局数组、分片与自动并行",
+        "engineeringValue": "用另一成熟系统交叉核对并行语义，避免只学 PyTorch 接口",
+        "coverage": "设备 mesh、全局数组、分片与自动并行",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "自动微分、数组和分布式训练",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "2026-10-09 核对，线上版本持续变化",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "GPU/TPU 后端和具体版本需分别验证"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://docs.jax.dev/en/latest/201/sharding.html",
+          "checkedAt": "2026-10-09",
+          "finding": "从官方目录定位到当前 201/sharding 页面，旧 notebook 路径已迁移"
+        }
+      ]
+    },
+    {
+      "id": "rocm",
+      "title": "AMD ROCm 文档",
+      "author": "AMD",
+      "url": "https://rocm.docs.amd.com/en/latest/",
+      "version": "2026-10-09 官方页面审查；运行时另锁版本",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://rocm.docs.amd.com/en/latest/",
+      "prerequisites": "GPU 执行、数值与 Linux",
+      "coverage": "HIP、计算库、框架适配、兼容矩阵与剖析",
+      "reason": "把 GPU 学习扩展到非 CUDA 生态并明确移植边界",
+      "limitations": "页面标注 10.1.0；必须有受支持 AMD 设备，NVIDIA 实验不能替代",
+      "verification": "官方目录提供 ROCm 生态及安装兼容入口",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "AMD的一手资料",
+        "accuracy": "官方目录提供 ROCm 生态及安装兼容入口",
+        "depth": "HIP、计算库、框架适配、兼容矩阵与剖析",
+        "engineeringValue": "把 GPU 学习扩展到非 CUDA 生态并明确移植边界",
+        "coverage": "HIP、计算库、框架适配、兼容矩阵与剖析",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "GPU 执行、数值与 Linux",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "2026-10-09 核对，线上版本持续变化",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "页面标注 10.1.0；必须有受支持 AMD 设备，NVIDIA 实验不能替代"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://rocm.docs.amd.com/en/latest/",
+          "checkedAt": "2026-10-09",
+          "finding": "官方目录提供 ROCm 生态及安装兼容入口"
+        }
+      ]
+    },
+    {
+      "id": "rag-paper",
+      "title": "Retrieval-Augmented Generation 原始论文",
+      "author": "Patrick Lewis 等",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "version": "arXiv:2005.11401，2020；2026-10-09 核对",
+      "language": "en",
+      "license": "仅链接；全文再分发按原站条款另审",
+      "licenseUrl": "https://arxiv.org/abs/2005.11401",
+      "prerequisites": "概率、语言模型与向量检索",
+      "coverage": "参数化与非参数化记忆、检索器与生成器、任务评估",
+      "reason": "用原始论文解释 RAG 的建模依据，与 Faiss 工程文档分工",
+      "limitations": "2020 原始研究；不覆盖今日生产 RAG 的全部流程",
+      "verification": "核对原始论文摘要与作者信息，补齐检索到生成的理论出处",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "原始资料与选读范围审查，未完成全部运行验证",
+      "reuse": "原始链接与本站中文阅读指引，不复制正文",
+      "evaluation": {
+        "authority": "Patrick Lewis 等的一手资料",
+        "accuracy": "核对原始论文摘要与作者信息，补齐检索到生成的理论出处",
+        "depth": "参数化与非参数化记忆、检索器与生成器、任务评估",
+        "engineeringValue": "用原始论文解释 RAG 的建模依据，与 Faiss 工程文档分工",
+        "coverage": "参数化与非参数化记忆、检索器与生成器、任务评估",
+        "teachingQuality": "结合原课程先修后选读，实际教学效果待试用",
+        "difficulty": "概率、语言模型与向量检索",
+        "languageFriendliness": "英文原文配本站中文任务；不冒称官方译文",
+        "accessibility": "公开页面已读取，实验需另准备运行环境",
+        "maintenance": "固定研究论文；与当前工程文档配合",
+        "licensing": "仅链接；代码和正文许可分别核对",
+        "stability": "2020 原始研究；不覆盖今日生产 RAG 的全部流程"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://arxiv.org/abs/2005.11401",
+          "checkedAt": "2026-10-09",
+          "finding": "核对原始论文摘要与作者信息，补齐检索到生成的理论出处"
+        }
+      ]
     }
   ],
   "nodes": [
     {
       "id": "computer",
       "title": "认识文件与运行程序",
+      "topics": [
+        {
+          "id": "computer-files",
+          "title": "文件、目录与路径",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：Visual Studio Code 与运行 hello.py",
+          "outcome": "创建独立学习目录，分别说明相对路径、绝对路径和当前目录",
+          "environment": "cpu"
+        },
+        {
+          "id": "computer-execution",
+          "title": "编辑、保存与执行",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：Creating Code 与 Running Code",
+          "outcome": "修改输出后重新执行，证明保存的文件和执行的文件相同",
+          "environment": "cpu"
+        },
+        {
+          "id": "computer-io",
+          "title": "输入、输出与终端",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：Functions、Arguments、Return Values",
+          "outcome": "记录一段输入输出，区分命令与程序提示",
+          "environment": "cpu"
+        }
+      ],
       "stage": 0,
       "prerequisites": [],
       "resources": [
@@ -1720,6 +2685,35 @@
     {
       "id": "arithmetic",
       "title": "数字、比例与算术",
+      "topics": [
+        {
+          "id": "arithmetic-units",
+          "title": "数值、单位与数量级",
+          "source": "openstax",
+          "url": "https://openstax.org/books/prealgebra-2e/pages/1-introduction",
+          "section": "Whole Numbers；Decimals",
+          "outcome": "换算字节与 GiB，按数据量和耗时计算吞吐量",
+          "environment": "reading"
+        },
+        {
+          "id": "arithmetic-fractions",
+          "title": "分数、比例与百分比",
+          "source": "openstax",
+          "url": "https://openstax.org/books/prealgebra-2e/pages/1-introduction",
+          "section": "Fractions；Percents",
+          "outcome": "核对加速比与耗时减少百分比，指出二者的区别",
+          "environment": "reading"
+        },
+        {
+          "id": "arithmetic-signed",
+          "title": "负数、指数与运算顺序",
+          "source": "openstax",
+          "url": "https://openstax.org/books/prealgebra-2e/pages/1-introduction",
+          "section": "Integers；Properties of Real Numbers",
+          "outcome": "带单位算一组嵌套表达式并逐步验算",
+          "environment": "reading"
+        }
+      ],
       "stage": 0,
       "prerequisites": [],
       "resources": [
@@ -1750,6 +2744,44 @@
     {
       "id": "python",
       "title": "第一段 Python 程序",
+      "topics": [
+        {
+          "id": "python-values",
+          "title": "变量、类型与转换",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：Variables、str、int、float",
+          "outcome": "比较文本数字与数值运算，解释一次类型错误",
+          "environment": "cpu"
+        },
+        {
+          "id": "python-strings",
+          "title": "字符串与原课练习",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：String Methods；Problem Set 0",
+          "outcome": "独立完成 Indoor Voice，补充空输入和非英文字母案例",
+          "environment": "cpu"
+        },
+        {
+          "id": "python-functions",
+          "title": "函数、参数与返回值",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：Defining Functions",
+          "outcome": "把重复处理提取成函数，说明输出与返回值的差别",
+          "environment": "cpu"
+        },
+        {
+          "id": "python-debug",
+          "title": "语法错误与定位",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 0：Bugs",
+          "outcome": "保留一次语法错误及修正前后的实际输出",
+          "environment": "cpu"
+        }
+      ],
       "stage": 0,
       "prerequisites": [
         "computer"
@@ -1782,6 +2814,44 @@
     {
       "id": "tools",
       "title": "终端、Git 与可复现环境",
+      "topics": [
+        {
+          "id": "tools-shell",
+          "title": "Shell、管道与退出码",
+          "source": "missing-cn",
+          "url": "https://missing-semester-cn.github.io/",
+          "section": "Shell；命令行环境",
+          "outcome": "把输入经管道处理到文件，区分标准输出和错误输出",
+          "environment": "linux"
+        },
+        {
+          "id": "tools-git",
+          "title": "Git、分支与恢复",
+          "source": "missing-cn",
+          "url": "https://missing-semester-cn.github.io/",
+          "section": "版本控制 Git",
+          "outcome": "在独立练习仓库制造错误修改并恢复，保留提交图",
+          "environment": "cpu"
+        },
+        {
+          "id": "tools-debuggers",
+          "title": "调试器与性能工具",
+          "source": "missing",
+          "url": "https://missing.csail.mit.edu/",
+          "section": "Debugging and Profiling",
+          "outcome": "用断点解释状态变化，避免只靠添加打印定位",
+          "environment": "cpu"
+        },
+        {
+          "id": "tools-environments",
+          "title": "依赖、虚拟环境与构建",
+          "source": "missing",
+          "url": "https://missing.csail.mit.edu/",
+          "section": "Metaprogramming；Development Environment",
+          "outcome": "从版本清单重建环境，记录解释器和依赖来源",
+          "environment": "cpu"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "computer",
@@ -1816,6 +2886,44 @@
     {
       "id": "algebra",
       "title": "代数、函数与指数",
+      "topics": [
+        {
+          "id": "algebra-equations",
+          "title": "等式、约束与不等式",
+          "source": "algebra-text",
+          "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+          "section": "Prerequisites；Equations and Inequalities",
+          "outcome": "解容量约束并指出变量的单位和可行范围",
+          "environment": "reading"
+        },
+        {
+          "id": "algebra-functions",
+          "title": "函数、图像与复合",
+          "source": "algebra-text",
+          "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+          "section": "Functions",
+          "outcome": "用图像解释复合函数及反函数的定义域",
+          "environment": "reading"
+        },
+        {
+          "id": "algebra-exponential",
+          "title": "指数与对数",
+          "source": "algebra-text",
+          "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+          "section": "Exponential and Logarithmic Functions",
+          "outcome": "把指数关系转换为对数关系并检查增长数量级",
+          "environment": "reading"
+        },
+        {
+          "id": "algebra-trigonometry",
+          "title": "三角函数与周期",
+          "source": "algebra-text",
+          "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites",
+          "section": "Trigonometric Functions",
+          "outcome": "解释周期、幅度和相位，为位置编码阅读做准备",
+          "environment": "reading"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "arithmetic"
@@ -1849,6 +2957,53 @@
     {
       "id": "programming",
       "title": "抽象、递归与测试",
+      "topics": [
+        {
+          "id": "programming-control",
+          "title": "条件、循环与异常",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Weeks 1–3：Conditionals、Loops、Exceptions",
+          "outcome": "用边界测试覆盖分支、循环终止和错误输入",
+          "environment": "cpu"
+        },
+        {
+          "id": "programming-abstraction",
+          "title": "高阶函数、递归与数据抽象",
+          "source": "composing",
+          "url": "https://composingprograms.com/3ed/",
+          "section": "Building Abstractions with Functions / Data",
+          "outcome": "实现递归结构并说明终止条件和抽象边界",
+          "environment": "cpu"
+        },
+        {
+          "id": "programming-objects",
+          "title": "对象、接口与派发",
+          "source": "object-model",
+          "url": "https://aosabook.org/en/500L/a-simple-object-model.html",
+          "section": "Classes、Instance Attributes、Method Calls",
+          "outcome": "用对象模型原测试验证实现，再解释方法解析顺序",
+          "environment": "cpu"
+        },
+        {
+          "id": "programming-files",
+          "title": "文件、序列化与资源关闭",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 6：File I/O",
+          "outcome": "处理 UTF-8、缺失文件和异常退出，验证资源关闭",
+          "environment": "cpu"
+        },
+        {
+          "id": "programming-testing",
+          "title": "单元测试与综合程序",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Week 5：Unit Tests；Final Project",
+          "outcome": "完成独立项目，保留失败测试及修改理由",
+          "environment": "cpu"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "python"
@@ -1883,6 +3038,44 @@
     {
       "id": "discrete",
       "title": "证明与离散结构",
+      "topics": [
+        {
+          "id": "discrete-logic",
+          "title": "逻辑、集合与关系",
+          "source": "discrete",
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+          "section": "Propositions；Sets；Relations",
+          "outcome": "为一个接口写前置条件、后置条件和反例",
+          "environment": "reading"
+        },
+        {
+          "id": "discrete-induction",
+          "title": "归纳、递归与不变量",
+          "source": "discrete",
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+          "section": "Induction；State Machines",
+          "outcome": "证明循环不变量并说明它如何支持正确性",
+          "environment": "reading"
+        },
+        {
+          "id": "discrete-graphs",
+          "title": "有向图与偏序",
+          "source": "discrete",
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+          "section": "Directed Graphs；Partial Orders",
+          "outcome": "为先修图实现拓扑排序，给出有环失败案例",
+          "environment": "cpu"
+        },
+        {
+          "id": "discrete-counting",
+          "title": "计数与组合",
+          "source": "discrete",
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+          "section": "Counting；Generating Functions 选读",
+          "outcome": "计算小规模状态空间并解释穷举测试的边界",
+          "environment": "reading"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "algebra",
@@ -1916,6 +3109,44 @@
     {
       "id": "linear",
       "title": "向量、矩阵与线性代数",
+      "topics": [
+        {
+          "id": "linear-spaces",
+          "title": "矩阵运算与向量空间",
+          "source": "linear",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+          "section": "Elimination；Vector Spaces；Nullspace",
+          "outcome": "推导矩阵形状、秩和解空间",
+          "environment": "reading"
+        },
+        {
+          "id": "linear-least-squares",
+          "title": "正交投影与最小二乘",
+          "source": "linear",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+          "section": "Orthogonality；Projections；Least Squares",
+          "outcome": "手算小型最小二乘，并用程序核对残差",
+          "environment": "cpu"
+        },
+        {
+          "id": "linear-eigen",
+          "title": "特征值与正定性",
+          "source": "linear",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+          "section": "Eigenvalues；Symmetric Matrices；Positive Definiteness",
+          "outcome": "解释二次型、稳定性和正定条件",
+          "environment": "reading"
+        },
+        {
+          "id": "linear-svd",
+          "title": "SVD 与低秩近似",
+          "source": "linear",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+          "section": "Singular Value Decomposition",
+          "outcome": "比较不同秩的重构误差与存储开销",
+          "environment": "cpu"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "algebra"
@@ -1948,6 +3179,44 @@
     {
       "id": "calculus",
       "title": "导数与梯度",
+      "topics": [
+        {
+          "id": "calculus-derivative",
+          "title": "极限、导数与链式法则",
+          "source": "calculus",
+          "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+          "section": "Differentiation；Chain Rule",
+          "outcome": "逐步推导复合函数导数并检查数值近似",
+          "environment": "reading"
+        },
+        {
+          "id": "calculus-partial",
+          "title": "偏导、梯度与方向导数",
+          "source": "multivariable",
+          "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+          "section": "Partial Derivatives；Gradient",
+          "outcome": "用形状检查区分标量梯度和向量导数",
+          "environment": "reading"
+        },
+        {
+          "id": "calculus-jacobian",
+          "title": "Jacobian 与多变量链式法则",
+          "source": "multivariable",
+          "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+          "section": "Chain Rule；Differentials",
+          "outcome": "推导一个双输入计算图的向量—Jacobian 积",
+          "environment": "reading"
+        },
+        {
+          "id": "calculus-optimization",
+          "title": "极值、约束与曲率",
+          "source": "multivariable",
+          "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+          "section": "Maxima and Minima；Lagrange Multipliers",
+          "outcome": "分析驻点并说明约束优化与无约束问题的差别",
+          "environment": "reading"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "algebra",
@@ -1982,6 +3251,53 @@
     {
       "id": "probability",
       "title": "概率与统计推理",
+      "topics": [
+        {
+          "id": "probability-random",
+          "title": "条件概率与 Bayes",
+          "source": "stat110",
+          "url": "https://stat110.hsites.harvard.edu/",
+          "section": "Conditional Probability；Bayes' Rule",
+          "outcome": "用条件概率解释一个带基率的分类结果",
+          "environment": "reading"
+        },
+        {
+          "id": "probability-moments",
+          "title": "随机变量、期望与方差",
+          "source": "stat110",
+          "url": "https://stat110.hsites.harvard.edu/",
+          "section": "Random Variables；Expectation；Variance",
+          "outcome": "推导并用模拟核对均值与方差",
+          "environment": "cpu"
+        },
+        {
+          "id": "probability-limits",
+          "title": "大数定律与中心极限定理",
+          "source": "stat110",
+          "url": "https://stat110.hsites.harvard.edu/",
+          "section": "Law of Large Numbers；Central Limit Theorem",
+          "outcome": "说明样本数量对估计波动的影响和适用条件",
+          "environment": "cpu"
+        },
+        {
+          "id": "probability-inference",
+          "title": "置信区间与假设检验",
+          "source": "openintro",
+          "url": "https://www.openintro.org/book/os/",
+          "section": "Foundations for Inference；Inference for Numerical Data",
+          "outcome": "报告重复测量的区间，避免把一次耗时差当结论",
+          "environment": "cpu"
+        },
+        {
+          "id": "probability-experiments",
+          "title": "随机化与混杂因素",
+          "source": "openintro",
+          "url": "https://www.openintro.org/book/os/",
+          "section": "Introduction to Data；Experiments",
+          "outcome": "为性能比较设计受控实验并标出潜在混杂",
+          "environment": "reading"
+        }
+      ],
       "stage": 1,
       "prerequisites": [
         "algebra",
@@ -2018,6 +3334,44 @@
     {
       "id": "engineering",
       "title": "软件工程与可测试交付",
+      "topics": [
+        {
+          "id": "engineering-interfaces",
+          "title": "接口契约与模块边界",
+          "source": "composing",
+          "url": "https://composingprograms.com/3ed/",
+          "section": "Building Abstractions with Data",
+          "outcome": "明确输入、返回值、错误与兼容性，独立测试模块",
+          "environment": "cpu"
+        },
+        {
+          "id": "engineering-tests",
+          "title": "回归、边界与故障测试",
+          "source": "cs50",
+          "url": "https://cs50.harvard.edu/python/",
+          "section": "Unit Tests；Final Project",
+          "outcome": "加入能击穿错误实现的测试，不只复刻代码路径",
+          "environment": "cpu"
+        },
+        {
+          "id": "engineering-delivery",
+          "title": "CI、构建与可复现交付",
+          "source": "missing",
+          "url": "https://missing.csail.mit.edu/",
+          "section": "Metaprogramming；Version Control",
+          "outcome": "在新目录重建项目并核对版本与构建产物",
+          "environment": "cpu"
+        },
+        {
+          "id": "engineering-review",
+          "title": "代码审阅与维护文档",
+          "source": "missing",
+          "url": "https://missing.csail.mit.edu/",
+          "section": "Version Control；Debugging",
+          "outcome": "给一次修改写问题、证据、验证及回滚记录",
+          "environment": "reading"
+        }
+      ],
       "stage": 1,
       "category": "core",
       "prerequisites": [
@@ -2051,6 +3405,44 @@
     {
       "id": "algorithms",
       "title": "数据结构与复杂度",
+      "topics": [
+        {
+          "id": "algorithms-asymptotics",
+          "title": "复杂度与摊还分析",
+          "source": "algorithms-mit",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+          "section": "Algorithmic Thinking；Document Distance；Hashing",
+          "outcome": "比较理论复杂度与不同规模的实际测量",
+          "environment": "cpu"
+        },
+        {
+          "id": "algorithms-structures",
+          "title": "哈希、堆、树与排序",
+          "source": "algorithms-mit",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+          "section": "Sorting；Heaps；Binary Search Trees；Hashing",
+          "outcome": "实现并测试边界输入，解释空间与查询代价",
+          "environment": "cpu"
+        },
+        {
+          "id": "algorithms-graphs",
+          "title": "图搜索与最短路径",
+          "source": "algorithms-mit",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+          "section": "BFS；DFS；Shortest Paths",
+          "outcome": "给出可达性、环检测和负权条件下的区别",
+          "environment": "cpu"
+        },
+        {
+          "id": "algorithms-dynamic",
+          "title": "动态规划与状态设计",
+          "source": "algorithms-mit",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+          "section": "Dynamic Programming",
+          "outcome": "写明状态、转移、初始化和复杂度",
+          "environment": "cpu"
+        }
+      ],
       "stage": 2,
       "prerequisites": [
         "programming",
@@ -2086,6 +3478,53 @@
     {
       "id": "architecture",
       "title": "C/C++、内存与计算机组织",
+      "topics": [
+        {
+          "id": "architecture-c-memory",
+          "title": "C 指针、生命周期与布局",
+          "source": "beej-c",
+          "url": "https://beej.us/guide/bgc/html/split/",
+          "section": "Pointers；Arrays；Structs；Manual Memory Allocation",
+          "outcome": "画出栈/堆对象与指针关系，检查越界和释放错误",
+          "environment": "cpu"
+        },
+        {
+          "id": "architecture-cpp",
+          "title": "C++ RAII、所有权与模板",
+          "source": "cs106l",
+          "url": "https://web.stanford.edu/class/cs106l/",
+          "section": "References；Classes；RAII；Move Semantics",
+          "outcome": "用 RAII 管理资源并解释移动与复制成本",
+          "environment": "cpu"
+        },
+        {
+          "id": "architecture-isa",
+          "title": "指令、流水线与 SIMD",
+          "source": "cs61c",
+          "url": "https://cs61c.org/fa26/",
+          "section": "RISC-V；Pipelining；Data-Level Parallelism",
+          "outcome": "把小段代码对应到指令，区分延迟和吞吐",
+          "environment": "cpu"
+        },
+        {
+          "id": "architecture-cache",
+          "title": "缓存、局部性与带宽",
+          "source": "cs61c",
+          "url": "https://cs61c.org/fa26/",
+          "section": "Caches；Memory Hierarchy",
+          "outcome": "比较顺序与跨步访问，解释缓存未命中",
+          "environment": "cpu"
+        },
+        {
+          "id": "architecture-parallel",
+          "title": "多核、原子操作与共享内存",
+          "source": "cs61c",
+          "url": "https://cs61c.org/fa26/",
+          "section": "Thread-Level Parallelism；OpenMP",
+          "outcome": "构造竞争并修复，说明伪共享的测量条件",
+          "environment": "cpu"
+        }
+      ],
       "stage": 2,
       "prerequisites": [
         "programming",
@@ -2122,6 +3561,44 @@
     {
       "id": "os",
       "title": "操作系统与并发",
+      "topics": [
+        {
+          "id": "os-processes",
+          "title": "进程、线程与调度",
+          "source": "ostep",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "section": "Processes；Process API；CPU Scheduling",
+          "outcome": "对比进程与线程状态、上下文切换和调度策略",
+          "environment": "linux"
+        },
+        {
+          "id": "os-vm",
+          "title": "地址空间、分页与虚拟内存",
+          "source": "ostep",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "section": "Address Spaces；Paging；TLBs；Swapping",
+          "outcome": "解释缺页和工作集变化，记录实际内存观测",
+          "environment": "linux"
+        },
+        {
+          "id": "os-concurrency",
+          "title": "锁、条件变量与并发错误",
+          "source": "ostep",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "section": "Locks；Condition Variables；Concurrency Bugs",
+          "outcome": "写有界生产消费程序并测试死锁/丢唤醒",
+          "environment": "linux"
+        },
+        {
+          "id": "os-durability",
+          "title": "文件系统、日志与崩溃一致性",
+          "source": "ostep",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "section": "Files and Directories；File System Implementation；Crash Consistency",
+          "outcome": "断点恢复后核对持久状态，不把 flush 等同于落盘",
+          "environment": "linux"
+        }
+      ],
       "stage": 2,
       "prerequisites": [
         "architecture",
@@ -2155,6 +3632,44 @@
     {
       "id": "network",
       "title": "网络与存储 I/O",
+      "topics": [
+        {
+          "id": "network-stack",
+          "title": "以太网、IP、路由与 NAT",
+          "source": "cs144",
+          "url": "https://cs144.github.io/",
+          "section": "Internet and IP；Routing",
+          "outcome": "画出一次远程访问的路径及各层地址变化",
+          "environment": "linux"
+        },
+        {
+          "id": "network-tcp",
+          "title": "TCP、流控与拥塞",
+          "source": "cs144",
+          "url": "https://cs144.github.io/",
+          "section": "TCP；Congestion Control；Checkpoints",
+          "outcome": "解释重传、窗口、RTT 与带宽时延积",
+          "environment": "linux"
+        },
+        {
+          "id": "network-services",
+          "title": "DNS、HTTP、TLS 与连接复用",
+          "source": "cs144",
+          "url": "https://cs144.github.io/",
+          "section": "Applications；Security",
+          "outcome": "分离解析、建连、握手和请求耗时，说明 TLS 身份验证",
+          "environment": "linux"
+        },
+        {
+          "id": "network-io",
+          "title": "套接字、异步 I/O 与背压",
+          "source": "cs144",
+          "url": "https://cs144.github.io/",
+          "section": "Byte Stream；Reassembler；Network Interface",
+          "outcome": "在慢消费者下验证内存上限和连接关闭",
+          "environment": "linux"
+        }
+      ],
       "stage": 2,
       "prerequisites": [
         "os"
@@ -2187,6 +3702,44 @@
     {
       "id": "storage",
       "title": "数据库、索引与存储系统",
+      "topics": [
+        {
+          "id": "storage-indexes",
+          "title": "索引、树与读写放大",
+          "source": "dbdb",
+          "url": "https://aosabook.org/en/500L/dbdb-dog-bed-database.html",
+          "section": "Design；Binary Tree；Physical Layer",
+          "outcome": "实现查询与持久化，测量树形与访问模式影响",
+          "environment": "cpu"
+        },
+        {
+          "id": "storage-consistency",
+          "title": "事务、日志与恢复",
+          "source": "ostep",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "section": "Crash Consistency；Distributed Systems",
+          "outcome": "用崩溃案例解释原子性、持久性和重放",
+          "environment": "linux"
+        },
+        {
+          "id": "storage-formats",
+          "title": "Arrow、Parquet 与分区",
+          "source": "arrow",
+          "url": "https://arrow.apache.org/docs/python/dataset.html",
+          "section": "Tabular Datasets：Reading、Filtering、Partitioning",
+          "outcome": "比较列裁剪、分区过滤和全量扫描的数据量",
+          "environment": "cpu"
+        },
+        {
+          "id": "storage-tiers",
+          "title": "对象存储、缓存与数据局部性",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Data Storage",
+          "outcome": "设计分层数据路径，分析小文件、元数据和检查点写入竞争",
+          "environment": "cluster"
+        }
+      ],
       "stage": 2,
       "category": "core",
       "prerequisites": [
@@ -2220,6 +3773,44 @@
     {
       "id": "linux",
       "title": "Linux 与资源隔离",
+      "topics": [
+        {
+          "id": "linux-users",
+          "title": "用户、权限、进程与服务",
+          "source": "missing-cn",
+          "url": "https://missing-semester-cn.github.io/",
+          "section": "Shell；命令行环境",
+          "outcome": "区分用户权限和进程归属，记录服务启动及退出码",
+          "environment": "linux"
+        },
+        {
+          "id": "linux-limits",
+          "title": "cgroup v2 与资源控制",
+          "source": "cgroups",
+          "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+          "section": "Core Interface；CPU；Memory；IO",
+          "outcome": "在获准环境验证内存限制与 OOM 行为，保留资源统计",
+          "environment": "linux"
+        },
+        {
+          "id": "linux-containers",
+          "title": "镜像、容器、卷与网络",
+          "source": "docker",
+          "url": "https://docs.docker.com/get-started/",
+          "section": "Workshop；Concepts",
+          "outcome": "构建固定依赖镜像，验证数据卷重建与网络隔离",
+          "environment": "linux"
+        },
+        {
+          "id": "linux-boundary",
+          "title": "namespace、权限与隔离边界",
+          "source": "security",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
+          "section": "安全检查清单；Pod 安全标准",
+          "outcome": "说明容器共享内核、capabilities 与最小权限的关系",
+          "environment": "linux"
+        }
+      ],
       "stage": 2,
       "category": "core",
       "prerequisites": [
@@ -2227,6 +3818,8 @@
         "tools"
       ],
       "resources": [
+        "docker",
+        "cgroups",
         "ostep",
         "kubernetes"
       ],
@@ -2253,6 +3846,44 @@
     {
       "id": "numerics",
       "title": "数值稳定性与性能测量",
+      "topics": [
+        {
+          "id": "numerics-float",
+          "title": "浮点误差与舍入",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "预备知识；数值稳定性与模型初始化",
+          "outcome": "比较不同求和顺序与 dtype 的误差",
+          "environment": "cpu"
+        },
+        {
+          "id": "numerics-stable",
+          "title": "稳定算子与条件数",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "数值稳定性；Softmax 回归",
+          "outcome": "实现稳定 softmax/log-sum-exp 并测试极端输入",
+          "environment": "cpu"
+        },
+        {
+          "id": "numerics-gradcheck",
+          "title": "有限差分与梯度检查",
+          "source": "dlsys",
+          "url": "https://dlsyscourse.org/",
+          "section": "Automatic Differentiation；HW1",
+          "outcome": "选择差分步长，比较解析梯度与数值梯度",
+          "environment": "cpu"
+        },
+        {
+          "id": "numerics-measure",
+          "title": "预热、同步与统计测量",
+          "source": "profiler",
+          "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+          "section": "PyTorch Profiler：schedule 与 trace",
+          "outcome": "分开编译、预热、稳态与数据搬运耗时",
+          "environment": "gpu"
+        }
+      ],
       "stage": 3,
       "prerequisites": [
         "linear",
@@ -2290,6 +3921,44 @@
     {
       "id": "ml",
       "title": "机器学习与优化基础",
+      "topics": [
+        {
+          "id": "ml-objectives",
+          "title": "损失、泛化与数据划分",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "线性神经网络；模型选择、欠拟合和过拟合",
+          "outcome": "固定划分，报告训练与验证误差并排查泄漏",
+          "environment": "cpu"
+        },
+        {
+          "id": "ml-optimization",
+          "title": "SGD、动量、Adam 与学习率",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "优化算法",
+          "outcome": "比较优化器状态、收敛和相同预算下的结果",
+          "environment": "cpu"
+        },
+        {
+          "id": "ml-regularization",
+          "title": "正则化与初始化",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "权重衰减；暂退法；模型初始化",
+          "outcome": "做单因素对照并解释训练/验证差异",
+          "environment": "cpu"
+        },
+        {
+          "id": "ml-training-loop",
+          "title": "训练循环与复现",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "深度学习计算；训练",
+          "outcome": "保存数据版本、随机状态和优化器，复现下一步更新",
+          "environment": "cpu"
+        }
+      ],
       "stage": 3,
       "prerequisites": [
         "programming",
@@ -2325,6 +3994,44 @@
     {
       "id": "framework",
       "title": "张量、自动微分与框架",
+      "topics": [
+        {
+          "id": "framework-tensors",
+          "title": "张量、stride、广播与视图",
+          "source": "dlsys",
+          "url": "https://dlsyscourse.org/",
+          "section": "NDArray；HW3 选读",
+          "outcome": "核对形状、存储别名和非连续输入的行为",
+          "environment": "cpu"
+        },
+        {
+          "id": "framework-autograd",
+          "title": "计算图、VJP 与自动微分",
+          "source": "dlsys",
+          "url": "https://dlsyscourse.org/",
+          "section": "Automatic Differentiation；HW1",
+          "outcome": "实现算子反向传播并通过独立数值检查",
+          "environment": "cpu"
+        },
+        {
+          "id": "framework-runtime",
+          "title": "算子派发、设备与内存管理",
+          "source": "dlsys",
+          "url": "https://dlsyscourse.org/",
+          "section": "Hardware Acceleration；HW3/HW4",
+          "outcome": "解释分配、设备迁移、同步和后端边界",
+          "environment": "gpu"
+        },
+        {
+          "id": "framework-state",
+          "title": "模块、优化器与状态序列化",
+          "source": "dlsys",
+          "url": "https://dlsyscourse.org/",
+          "section": "Neural Network Modules；HW2",
+          "outcome": "验证参数更新、模式切换、保存与恢复",
+          "environment": "cpu"
+        }
+      ],
       "stage": 3,
       "prerequisites": [
         "ml",
@@ -2360,6 +4067,71 @@
     {
       "id": "data",
       "title": "数据管线与可复现训练",
+      "topics": [
+        {
+          "id": "data-lineage",
+          "title": "数据来源、许可与划分",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Lecture 13：Data sources and datasets",
+          "outcome": "为训练输入写来源、许可、版本和污染检查记录",
+          "environment": "cpu"
+        },
+        {
+          "id": "data-curation",
+          "title": "去重、质量过滤与混合",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Lecture 14：Filtering, deduplication, mixing",
+          "outcome": "量化过滤损失、重复率与分布变化，检查偏差",
+          "environment": "cpu"
+        },
+        {
+          "id": "data-loading",
+          "title": "分片、预取与数据加载",
+          "source": "arrow",
+          "url": "https://arrow.apache.org/docs/python/dataset.html",
+          "section": "Tabular Datasets：Scanning and Filtering",
+          "outcome": "测量读取、解码、组批与 GPU 等待的占比",
+          "environment": "gpu"
+        },
+        {
+          "id": "data-distributed",
+          "title": "分布式预处理与背压",
+          "source": "ray",
+          "url": "https://docs.ray.io/en/latest/data/data.html",
+          "section": "Ray Data：Data Processing",
+          "outcome": "限制在途数据，测试任务重试和重复处理语义",
+          "environment": "cluster"
+        },
+        {
+          "id": "data-streaming",
+          "title": "日志流、分区与重放",
+          "source": "kafka",
+          "url": "https://kafka.apache.org/43/design/",
+          "section": "Design：Persistence；Replication；Delivery Guarantees",
+          "outcome": "在重复投递和消费者恢复后核对数据集合与顺序",
+          "environment": "cluster"
+        },
+        {
+          "id": "data-event-time",
+          "title": "事件时间、水位线与迟到数据",
+          "source": "spark",
+          "url": "https://spark.apache.org/docs/latest/streaming/index.html",
+          "section": "Structured Streaming：Event-time；Watermarking；State",
+          "outcome": "构造迟到事件，解释窗口输出与状态清理",
+          "environment": "cluster"
+        },
+        {
+          "id": "data-features",
+          "title": "特征存储与时间点正确性",
+          "source": "feast",
+          "url": "https://docs.feast.dev/",
+          "section": "Concepts：Point-in-time Joins；Online/Offline Store",
+          "outcome": "避免未来特征泄漏并比较训练与服务特征",
+          "environment": "cpu"
+        }
+      ],
       "stage": 3,
       "prerequisites": [
         "ml",
@@ -2395,6 +4167,53 @@
     {
       "id": "models",
       "title": "模型结构与计算工作负载",
+      "topics": [
+        {
+          "id": "models-operators",
+          "title": "线性层、卷积与循环网络",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "卷积神经网络；循环神经网络",
+          "outcome": "计算参数量、FLOPs、激活大小并对照 profiler",
+          "environment": "cpu"
+        },
+        {
+          "id": "models-attention",
+          "title": "Attention、Transformer 与 KV",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "注意力机制与 Transformer",
+          "outcome": "推导注意力形状与序列长度引起的资源增长",
+          "environment": "cpu"
+        },
+        {
+          "id": "models-tokenizer",
+          "title": "BPE、词表与 tokenizer",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Tokenization；Assignment 1",
+          "outcome": "核对编码/解码与边界输入，保存 tokenizer 版本",
+          "environment": "cpu"
+        },
+        {
+          "id": "models-moe",
+          "title": "MoE、路由与负载不均",
+          "source": "megatron",
+          "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+          "section": "User Guide：MoE",
+          "outcome": "分析专家容量、All-to-All 与负载偏斜",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "models-recsys",
+          "title": "推荐模型与稀疏 Embedding",
+          "source": "torchrec",
+          "url": "https://github.com/meta-pytorch/torchrec",
+          "section": "Introduction；DLRM Examples；Embedding Modules",
+          "outcome": "计算 Embedding 表规模与访问成本，区分稀疏与稠密负载",
+          "environment": "gpu"
+        }
+      ],
       "stage": 3,
       "category": "core",
       "prerequisites": [
@@ -2428,6 +4247,44 @@
     {
       "id": "evaluation",
       "title": "评估、实验设计与鲁棒性",
+      "topics": [
+        {
+          "id": "evaluation-quality",
+          "title": "任务指标、基线与污染",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Lecture 12：Evaluation",
+          "outcome": "冻结数据与基线，区分离线分数和实际服务质量",
+          "environment": "cpu"
+        },
+        {
+          "id": "evaluation-statistics",
+          "title": "重复实验、区间与显著性",
+          "source": "openintro",
+          "url": "https://www.openintro.org/book/os/",
+          "section": "Statistical Inference",
+          "outcome": "给出样本量和区间，防止挑选最好一次结果",
+          "environment": "cpu"
+        },
+        {
+          "id": "evaluation-robustness",
+          "title": "分布偏移、长尾与对抗输入",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Robust AI",
+          "outcome": "构造分布变化和长尾样本，定位指标退化",
+          "environment": "cpu"
+        },
+        {
+          "id": "evaluation-systems",
+          "title": "负载模型、尾延迟与可比性",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Monitoring Distributed Systems；Addressing Cascading Failures",
+          "outcome": "固定输入长度和并发，报告吞吐、p95/p99 与失败率",
+          "environment": "gpu"
+        }
+      ],
       "stage": 3,
       "category": "core",
       "prerequisites": [
@@ -2463,6 +4320,44 @@
     {
       "id": "experiments",
       "title": "实验追踪与模型产物",
+      "topics": [
+        {
+          "id": "experiments-tracking",
+          "title": "参数、指标与实验追踪",
+          "source": "mlflow",
+          "url": "https://mlflow.org/docs/latest/ml/",
+          "section": "MLflow Tracking",
+          "outcome": "保留一次可重跑实验的参数、指标和版本",
+          "environment": "cpu"
+        },
+        {
+          "id": "experiments-artifacts",
+          "title": "模型、数据与环境产物",
+          "source": "mlflow",
+          "url": "https://mlflow.org/docs/latest/ml/",
+          "section": "Models；Tracking Artifacts",
+          "outcome": "核对模型签名、依赖和产物哈希",
+          "environment": "cpu"
+        },
+        {
+          "id": "experiments-registry",
+          "title": "注册表、版本与推广",
+          "source": "mlflow",
+          "url": "https://mlflow.org/docs/latest/ml/",
+          "section": "Model Registry",
+          "outcome": "验证候选到发布的引用变化及回退",
+          "environment": "cpu"
+        },
+        {
+          "id": "experiments-replay",
+          "title": "随机性与完整恢复",
+          "source": "checkpoint",
+          "url": "https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html",
+          "section": "Stateful；State Dict；save/load",
+          "outcome": "在恢复后比较下一批输入和参数更新，而不只加载成功",
+          "environment": "multi-gpu"
+        }
+      ],
       "stage": 3,
       "category": "core",
       "prerequisites": [
@@ -2496,6 +4391,53 @@
     {
       "id": "gpu",
       "title": "GPU 内核与性能工程",
+      "topics": [
+        {
+          "id": "gpu-execution",
+          "title": "线程块、warp 与同步",
+          "source": "cuda",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+          "section": "Programming Model；Execution Model",
+          "outcome": "解释索引与屏障范围，测试非整块大小输入",
+          "environment": "gpu"
+        },
+        {
+          "id": "gpu-memory",
+          "title": "合并访问、共享内存与 bank",
+          "source": "cuda",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+          "section": "Memory Hierarchy；Memory Access",
+          "outcome": "比较访存模式，核对边界与数据竞争",
+          "environment": "gpu"
+        },
+        {
+          "id": "gpu-kernels",
+          "title": "归约、GEMM 与分块",
+          "source": "triton",
+          "url": "https://triton-lang.org/main/getting-started/tutorials/index.html",
+          "section": "Vector Addition；Fused Softmax；Matrix Multiplication",
+          "outcome": "验证不同形状和 dtype，再测量分块取舍",
+          "environment": "gpu"
+        },
+        {
+          "id": "gpu-overlap",
+          "title": "Stream、事件与异步拷贝",
+          "source": "cuda",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+          "section": "Asynchronous Execution；Streams and Events",
+          "outcome": "用事件验证依赖，分析计算与传输重叠",
+          "environment": "gpu"
+        },
+        {
+          "id": "gpu-attention",
+          "title": "融合 Attention 与内存流量",
+          "source": "triton",
+          "url": "https://triton-lang.org/main/getting-started/tutorials/index.html",
+          "section": "Fused Attention tutorial",
+          "outcome": "对照输出和梯度，说明减少的中间张量读写",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "prerequisites": [
         "framework",
@@ -2532,6 +4474,44 @@
     {
       "id": "dist",
       "title": "分布式与故障恢复",
+      "topics": [
+        {
+          "id": "dist-failure",
+          "title": "故障模型、重试与幂等",
+          "source": "distributed",
+          "url": "https://pdos.csail.mit.edu/6.5840/",
+          "section": "RPC；Fault Tolerance",
+          "outcome": "区分超时与失败，测试重复请求和部分完成",
+          "environment": "linux"
+        },
+        {
+          "id": "dist-consensus",
+          "title": "复制日志、Raft 与选举",
+          "source": "distributed",
+          "url": "https://pdos.csail.mit.edu/6.5840/",
+          "section": "Raft；Lab raft1",
+          "outcome": "执行原测试，解释安全性、活性与网络分区",
+          "environment": "linux"
+        },
+        {
+          "id": "dist-consistency",
+          "title": "一致性、事务与分片",
+          "source": "distributed",
+          "url": "https://pdos.csail.mit.edu/6.5840/",
+          "section": "Linearizability；Transactions；Sharded Systems",
+          "outcome": "给出历史记录并判断允许的读取结果",
+          "environment": "cluster"
+        },
+        {
+          "id": "dist-recovery",
+          "title": "快照、恢复与成员变化",
+          "source": "distributed",
+          "url": "https://pdos.csail.mit.edu/6.5840/",
+          "section": "Persistence；Snapshots；Configuration Changes",
+          "outcome": "故障恢复后核对状态和已确认操作",
+          "environment": "cluster"
+        }
+      ],
       "stage": 4,
       "prerequisites": [
         "os",
@@ -2567,6 +4547,71 @@
     {
       "id": "training",
       "title": "分布式训练系统",
+      "topics": [
+        {
+          "id": "training-ddp",
+          "title": "数据并行与梯度同步",
+          "source": "torch",
+          "url": "https://docs.pytorch.org/docs/2.10/generated/torch.nn.parallel.DistributedDataParallel.html",
+          "section": "DistributedDataParallel",
+          "outcome": "与单进程基线核对梯度、有效 batch 和训练轨迹",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "training-tensor",
+          "title": "张量并行与通信",
+          "source": "megatron",
+          "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+          "section": "User Guide：Tensor Parallelism",
+          "outcome": "逐层分析切分、通信量和算子形状",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "training-pipeline",
+          "title": "流水线并行与调度",
+          "source": "megatron",
+          "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+          "section": "User Guide：Pipeline Parallelism",
+          "outcome": "画 microbatch 调度，计算气泡与激活保存成本",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "training-hybrid",
+          "title": "上下文、专家与混合并行",
+          "source": "megatron",
+          "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html",
+          "section": "User Guide：Context Parallelism；MoE",
+          "outcome": "解释并行组的交叠及不同拓扑下的瓶颈",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "training-faults",
+          "title": "弹性启动与分布式恢复",
+          "source": "checkpoint",
+          "url": "https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html",
+          "section": "Distributed save/load；State Dict",
+          "outcome": "中断一个 worker，核对恢复后优化器和采样状态",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "training-embedding-shards",
+          "title": "Embedding 分片与流水线",
+          "source": "torchrec",
+          "url": "https://github.com/meta-pytorch/torchrec",
+          "section": "Features：Sharders；Planner；Pipelined Training",
+          "outcome": "比较按表、按行、按列分片的通信和容量",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "training-jax-shards",
+          "title": "JAX 全局数组与设备 mesh",
+          "source": "jax",
+          "url": "https://docs.jax.dev/en/latest/201/sharding.html",
+          "section": "Distributed Arrays；Sharding；Mesh",
+          "outcome": "在相同数学操作下比较分片、通信和设备放置",
+          "environment": "multi-gpu"
+        }
+      ],
       "stage": 4,
       "prerequisites": [
         "framework",
@@ -2604,6 +4649,53 @@
     {
       "id": "inference",
       "title": "推理服务与性能",
+      "topics": [
+        {
+          "id": "inference-kv",
+          "title": "Prefill、Decode 与 KV cache",
+          "source": "vllm",
+          "url": "https://docs.vllm.ai/en/latest/",
+          "section": "Design：Paged Attention；Automatic Prefix Caching",
+          "outcome": "按序列长度计算 KV 开销，区分首 token 与逐 token 延迟",
+          "environment": "gpu"
+        },
+        {
+          "id": "inference-batching",
+          "title": "连续批处理与请求调度",
+          "source": "vllm",
+          "url": "https://docs.vllm.ai/en/latest/",
+          "section": "Serving；Engine Arguments；Metrics",
+          "outcome": "在不同到达率下测量排队、吞吐与尾延迟",
+          "environment": "gpu"
+        },
+        {
+          "id": "inference-decoding",
+          "title": "推测解码与正确性",
+          "source": "vllm",
+          "url": "https://docs.vllm.ai/en/latest/",
+          "section": "Features：Speculative Decoding",
+          "outcome": "比较接受率、质量约束和额外计算成本",
+          "environment": "gpu"
+        },
+        {
+          "id": "inference-disaggregation",
+          "title": "Prefill/Decode 分离与多卡服务",
+          "source": "vllm",
+          "url": "https://docs.vllm.ai/en/latest/",
+          "section": "Disaggregated Prefilling；Distributed Serving",
+          "outcome": "测量 KV 传输与排队代价，保留同模型基线",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "inference-comparison",
+          "title": "前缀复用与框架对照",
+          "source": "sglang",
+          "url": "https://docs.sglang.io/",
+          "section": "Quickstart；RadixAttention；Prefix Caching",
+          "outcome": "用同一输入、模型、质量阈值对照服务框架",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "prerequisites": [
         "framework",
@@ -2641,6 +4733,53 @@
     {
       "id": "operations",
       "title": "可靠性、安全与可观测性",
+      "topics": [
+        {
+          "id": "operations-slo",
+          "title": "SLI、SLO 与错误预算",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Service Level Objectives；Embracing Risk",
+          "outcome": "为服务定义可观测成功条件和告警窗口",
+          "environment": "reading"
+        },
+        {
+          "id": "operations-metrics",
+          "title": "指标、标签与告警",
+          "source": "prometheus",
+          "url": "https://prometheus.io/docs/introduction/overview/",
+          "section": "Overview；Metric Types；Alerting",
+          "outcome": "区分 counter/gauge/histogram，控制标签基数",
+          "environment": "linux"
+        },
+        {
+          "id": "operations-tracing",
+          "title": "追踪、日志与上下文传播",
+          "source": "otel",
+          "url": "https://opentelemetry.io/docs/languages/python/",
+          "section": "Python：Instrumentation；Traces；Metrics",
+          "outcome": "从请求追踪到下游耗时，验证敏感字段不入日志",
+          "environment": "linux"
+        },
+        {
+          "id": "operations-incidents",
+          "title": "故障、回滚与事后分析",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Emergency Response；Postmortem Culture",
+          "outcome": "注入可恢复故障并记录发现、止损和恢复时间",
+          "environment": "cluster"
+        },
+        {
+          "id": "operations-gpu-health",
+          "title": "GPU 健康与设备观测",
+          "source": "dcgm",
+          "url": "https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html",
+          "section": "Health Monitoring；Job Statistics；Profiling",
+          "outcome": "按设备支持范围采集指标，区分应用慢与硬件异常",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "prerequisites": [
         "os",
@@ -2677,6 +4816,44 @@
     {
       "id": "compiler",
       "title": "编译器与算子图优化",
+      "topics": [
+        {
+          "id": "compiler-ir",
+          "title": "IR、类型与语义",
+          "source": "mlir",
+          "url": "https://mlir.llvm.org/docs/Tutorials/Toy/",
+          "section": "Toy Chapters 1–3",
+          "outcome": "为小语言建立 IR，给出转换前后的语义测试",
+          "environment": "linux"
+        },
+        {
+          "id": "compiler-passes",
+          "title": "Pass、融合与 Lowering",
+          "source": "mlir",
+          "url": "https://mlir.llvm.org/docs/Tutorials/Toy/",
+          "section": "Toy Chapters 4–6",
+          "outcome": "逐层验证优化和降低后的结果，不只编译成功",
+          "environment": "linux"
+        },
+        {
+          "id": "compiler-capture",
+          "title": "图捕获、Graph Break 与动态形状",
+          "source": "torch-compile",
+          "url": "https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html",
+          "section": "torch.compile tutorial；Graph Breaks",
+          "outcome": "定位重编译和图断点，区分首次编译与稳态速度",
+          "environment": "gpu"
+        },
+        {
+          "id": "compiler-layout",
+          "title": "HLO、布局与设备代码生成",
+          "source": "openxla",
+          "url": "https://openxla.org/xla",
+          "section": "XLA Architecture；HLO；GPU Architecture",
+          "outcome": "跟踪布局与融合的变化，检查输出和后端约束",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "prerequisites": [
         "architecture",
@@ -2713,6 +4890,53 @@
     {
       "id": "accelerators",
       "title": "加速器与数据中心架构",
+      "topics": [
+        {
+          "id": "accelerators-roofline",
+          "title": "算力、带宽与 Roofline",
+          "source": "cuda",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+          "section": "Performance Guidelines",
+          "outcome": "计算算术强度并与实际瓶颈对照",
+          "environment": "gpu"
+        },
+        {
+          "id": "accelerators-topology",
+          "title": "CPU NUMA、PCIe 与 NVLink",
+          "source": "nccl",
+          "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+          "section": "Troubleshooting：GPU-to-GPU；Topology",
+          "outcome": "画设备拓扑，分别测量点对点和主机传输",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "accelerators-datacenter",
+          "title": "电力、冷却与故障域",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Compute Infrastructure",
+          "outcome": "估算机架容量，区分设备故障与故障域设计",
+          "environment": "reading"
+        },
+        {
+          "id": "accelerators-heterogeneous",
+          "title": "GPU、TPU、NPU 与后端约束",
+          "source": "executorch",
+          "url": "https://docs.pytorch.org/executorch/stable/index.html",
+          "section": "Backends；Hardware Support",
+          "outcome": "为目标后端核对算子、dtype、内存和工具链支持",
+          "environment": "device"
+        },
+        {
+          "id": "accelerators-rocm",
+          "title": "ROCm、HIP 与跨厂商移植",
+          "source": "rocm",
+          "url": "https://rocm.docs.amd.com/en/latest/",
+          "section": "Compatibility Matrix；HIP；Frameworks",
+          "outcome": "先核对设备支持，再对照正确性与性能，不假设 CUDA 二进制可直接运行",
+          "environment": "device"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2747,6 +4971,44 @@
     {
       "id": "profiling",
       "title": "性能剖析与端到端基准",
+      "topics": [
+        {
+          "id": "profiling-protocol",
+          "title": "基准协议与测量误差",
+          "source": "profiler",
+          "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+          "section": "Profiler recipe：schedule；record_shapes",
+          "outcome": "固定输入与同步点，记录预热和重复次数",
+          "environment": "gpu"
+        },
+        {
+          "id": "profiling-timeline",
+          "title": "CPU/GPU 时间线与 NVTX",
+          "source": "nsight",
+          "url": "https://docs.nvidia.com/nsight-systems/UserGuide/index.html",
+          "section": "Profiling；CUDA Trace；NVTX",
+          "outcome": "关联主机发射、设备执行与通信等待",
+          "environment": "gpu"
+        },
+        {
+          "id": "profiling-operator",
+          "title": "算子、内存和带宽瓶颈",
+          "source": "profiler",
+          "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+          "section": "Memory Profiling；Trace Analysis",
+          "outcome": "排序热点后改变一个因素，验证端到端收益",
+          "environment": "gpu"
+        },
+        {
+          "id": "profiling-throughput",
+          "title": "端到端效率与回归",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Capacity Planning；Monitoring",
+          "outcome": "同时报告质量、成本与尾延迟，避免局部加速掩盖整体退化",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2781,6 +5043,53 @@
     {
       "id": "collectives",
       "title": "集体通信与高速网络",
+      "topics": [
+        {
+          "id": "collectives-primitives",
+          "title": "AllReduce、AllGather、ReduceScatter",
+          "source": "nccl",
+          "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+          "section": "Usage：Collective Operations",
+          "outcome": "手算小数据的输出并在多卡核对",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "collectives-algorithms",
+          "title": "Ring、Tree 与通信成本",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Collective Communication",
+          "outcome": "按消息量、带宽和延迟比较通信算法",
+          "environment": "reading"
+        },
+        {
+          "id": "collectives-fabric",
+          "title": "InfiniBand、RoCE 与 GPUDirect RDMA",
+          "source": "nccl",
+          "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+          "section": "Troubleshooting：Networking；GPU-to-NIC",
+          "outcome": "核对网卡、驱动、拓扑和链路测试后再调参数",
+          "environment": "cluster"
+        },
+        {
+          "id": "collectives-overlap",
+          "title": "计算通信重叠与梯度分桶",
+          "source": "torch",
+          "url": "https://docs.pytorch.org/docs/2.10/distributed.html",
+          "section": "DistributedDataParallel；Communication Hooks",
+          "outcome": "对比不同 bucket 的通信等待与端到端时间",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "collectives-diagnosis",
+          "title": "挂起、超时和通信诊断",
+          "source": "nccl",
+          "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+          "section": "Troubleshooting：RAS；Logging；Diagnostics",
+          "outcome": "模拟 worker 退出并保存有界超时和诊断证据",
+          "environment": "multi-gpu"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2816,6 +5125,44 @@
     {
       "id": "memory",
       "title": "训练显存与并行内存优化",
+      "topics": [
+        {
+          "id": "memory-budget",
+          "title": "参数、梯度、状态与激活预算",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Resource Accounting；Systems",
+          "outcome": "按 dtype 和并行策略列显存预算并实测峰值",
+          "environment": "gpu"
+        },
+        {
+          "id": "memory-sharding",
+          "title": "ZeRO/FSDP 状态分片",
+          "source": "fsdp",
+          "url": "https://docs.pytorch.org/docs/2.10/fsdp.html",
+          "section": "FullyShardedDataParallel；ShardingStrategy",
+          "outcome": "核对峰值、通信与恢复文件，说明分片节省来自哪里",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "memory-recompute",
+          "title": "激活重计算与 Offload",
+          "source": "torch",
+          "url": "https://docs.pytorch.org/docs/2.10/checkpoint.html",
+          "section": "torch.utils.checkpoint；Offload 另参照本节 FSDP 的 CPUOffload",
+          "outcome": "测量重计算或搬运带来的耗时与显存变化",
+          "environment": "gpu"
+        },
+        {
+          "id": "memory-checkpoint",
+          "title": "分片检查点与恢复拓扑",
+          "source": "checkpoint",
+          "url": "https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html",
+          "section": "State Dict；StorageWriter；StorageReader",
+          "outcome": "保存后在支持的拓扑重载并核对下一步训练",
+          "environment": "multi-gpu"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2851,6 +5198,44 @@
     {
       "id": "scaling",
       "title": "规模规律与训练预算",
+      "topics": [
+        {
+          "id": "scaling-laws",
+          "title": "Scaling laws 与拟合",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Scaling Laws；Assignment 3",
+          "outcome": "保留不同规模实验，报告拟合误差与外推边界",
+          "environment": "gpu"
+        },
+        {
+          "id": "scaling-compute",
+          "title": "Token、参数量与计算预算",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Resource Accounting；Scaling Laws",
+          "outcome": "在相同计算预算下比较模型和数据分配",
+          "environment": "reading"
+        },
+        {
+          "id": "scaling-quality",
+          "title": "数据质量与有效训练量",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Data；Evaluation",
+          "outcome": "用可重复样本比较数据清洗前后的质量收益",
+          "environment": "gpu"
+        },
+        {
+          "id": "scaling-cost",
+          "title": "吞吐、利用率与经济成本",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Performance Engineering；Sustainable AI",
+          "outcome": "把失败重试、存储和空闲计费计入有效训练成本",
+          "environment": "reading"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2885,6 +5270,53 @@
     {
       "id": "posttraining",
       "title": "后训练与 rollout 基础设施",
+      "topics": [
+        {
+          "id": "posttraining-sft",
+          "title": "SFT 与序列打包",
+          "source": "trl",
+          "url": "https://huggingface.co/docs/trl/index",
+          "section": "SFT Trainer",
+          "outcome": "验证 masking、padding、样本边界与 loss 计算",
+          "environment": "gpu"
+        },
+        {
+          "id": "posttraining-preference",
+          "title": "偏好数据、奖励模型与 DPO",
+          "source": "trl",
+          "url": "https://huggingface.co/docs/trl/index",
+          "section": "Reward Trainer；DPO Trainer",
+          "outcome": "检查偏好对、参考模型和训练指标是否一致",
+          "environment": "gpu"
+        },
+        {
+          "id": "posttraining-rollout",
+          "title": "PPO/GRPO 与 rollout 管线",
+          "source": "trl",
+          "url": "https://huggingface.co/docs/trl/index",
+          "section": "GRPO Trainer；PPO Trainer",
+          "outcome": "记录采样、奖励、更新的吞吐和数据版本",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "posttraining-rlvr",
+          "title": "RLVR、验证器与奖励失真",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Lecture 16：RLVR",
+          "outcome": "构造验证器反例，解释奖励增长与任务改善的区别",
+          "environment": "gpu"
+        },
+        {
+          "id": "posttraining-sync",
+          "title": "在线采样、权重同步与复现",
+          "source": "trl",
+          "url": "https://huggingface.co/docs/trl/index",
+          "section": "vLLM Integration；Distributed Training",
+          "outcome": "核对采样使用的模型版本和更新顺序，测试中断恢复",
+          "environment": "multi-gpu"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2919,6 +5351,44 @@
     {
       "id": "precision",
       "title": "低精度、量化与模型压缩",
+      "topics": [
+        {
+          "id": "precision-formats",
+          "title": "FP32、FP16、BF16 与 FP8",
+          "source": "cuda",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/",
+          "section": "Floating-Point；Tensor Cores",
+          "outcome": "比较范围、精度和硬件支持，不仅比较字节数",
+          "environment": "gpu"
+        },
+        {
+          "id": "precision-mixed",
+          "title": "混合精度、缩放与溢出",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "数值稳定性；计算性能",
+          "outcome": "用极端输入复核梯度与 loss，记录数值异常",
+          "environment": "gpu"
+        },
+        {
+          "id": "precision-quantization",
+          "title": "PTQ、QAT、校准与 QDQ",
+          "source": "onnx-quant",
+          "url": "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html",
+          "section": "Quantization Overview；Static/Dynamic；Quantization Debugging",
+          "outcome": "选择代表性校准集，比较精度、延迟和模型大小",
+          "environment": "cpu"
+        },
+        {
+          "id": "precision-compression",
+          "title": "剪枝、蒸馏与结构化稀疏",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume I：Model Compression",
+          "outcome": "明确压缩策略、质量阈值和实际硬件加速条件",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2953,6 +5423,53 @@
     {
       "id": "orchestration",
       "title": "集群调度与资源管理",
+      "topics": [
+        {
+          "id": "orchestration-resources",
+          "title": "Pod、GPU 资源与设备插件",
+          "source": "kubernetes",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/overview/",
+          "section": "工作负载；调度 GPU；资源管理",
+          "outcome": "验证请求、限制和调度失败，不把容器启动当 GPU 可用",
+          "environment": "cluster"
+        },
+        {
+          "id": "orchestration-queues",
+          "title": "队列、配额、公平与准入",
+          "source": "kueue",
+          "url": "https://kueue.sigs.k8s.io/docs/concepts/",
+          "section": "Workload；ClusterQueue；LocalQueue；Cohort",
+          "outcome": "提交竞争作业，核对配额借用和准入行为",
+          "environment": "cluster"
+        },
+        {
+          "id": "orchestration-hpc",
+          "title": "Slurm 作业、GRES 与记账",
+          "source": "slurm",
+          "url": "https://slurm.schedmd.com/overview.html",
+          "section": "Overview；Generic Resources；Accounting",
+          "outcome": "提交、取消、查看资源与历史账单，解释作业状态",
+          "environment": "cluster"
+        },
+        {
+          "id": "orchestration-actors",
+          "title": "Ray 任务、Actor 与弹性",
+          "source": "ray",
+          "url": "https://docs.ray.io/en/latest/cluster/key-concepts.html",
+          "section": "Cluster Key Concepts；Fault Tolerance；Autoscaling",
+          "outcome": "验证失败任务重试和资源约束，不遗留孤儿进程",
+          "environment": "cluster"
+        },
+        {
+          "id": "orchestration-placement",
+          "title": "拓扑、抢占与多租户隔离",
+          "source": "kubernetes",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/overview/",
+          "section": "调度、抢占和驱逐；安全",
+          "outcome": "检查拓扑约束、驱逐恢复和租户访问边界",
+          "environment": "cluster"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -2988,6 +5505,53 @@
     {
       "id": "lifecycle",
       "title": "模型部署与生命周期",
+      "topics": [
+        {
+          "id": "lifecycle-packaging",
+          "title": "模型签名、依赖与版本",
+          "source": "mlflow",
+          "url": "https://mlflow.org/docs/latest/ml/",
+          "section": "MLflow Models；Model Registry",
+          "outcome": "用固定版本加载产物并验证输入 schema",
+          "environment": "cpu"
+        },
+        {
+          "id": "lifecycle-deployment",
+          "title": "灰度、影子与回滚",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Release Engineering",
+          "outcome": "定义发布门槛并演练退回已知版本",
+          "environment": "cluster"
+        },
+        {
+          "id": "lifecycle-drift",
+          "title": "在线质量、漂移与反馈",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：ML Operations at Scale",
+          "outcome": "区分输入漂移、标签延迟和服务故障",
+          "environment": "cluster"
+        },
+        {
+          "id": "lifecycle-retirement",
+          "title": "更新、退役与数据保留",
+          "source": "mlflow",
+          "url": "https://mlflow.org/docs/latest/ml/",
+          "section": "Model Registry；Model Lifecycle",
+          "outcome": "记录旧模型依赖、回溯需求与删除条件",
+          "environment": "cpu"
+        },
+        {
+          "id": "lifecycle-feature-consistency",
+          "title": "训练与在线特征的一致性",
+          "source": "feast",
+          "url": "https://docs.feast.dev/",
+          "section": "Architecture；Feature Retrieval",
+          "outcome": "验证同一实体和时间点的特征定义与回填语义",
+          "environment": "cpu"
+        }
+      ],
       "stage": 4,
       "category": "core",
       "prerequisites": [
@@ -3023,6 +5587,53 @@
     {
       "id": "privacy",
       "title": "安全、隐私与治理",
+      "topics": [
+        {
+          "id": "privacy-identity",
+          "title": "身份、权限与密钥",
+          "source": "security",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
+          "section": "认证；鉴权；RBAC；Secret",
+          "outcome": "检查未登录、错误凭据和撤销后的访问均被拒绝",
+          "environment": "linux"
+        },
+        {
+          "id": "privacy-isolation",
+          "title": "租户、网络与工作负载边界",
+          "source": "security",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
+          "section": "Pod 安全；网络策略；多租户",
+          "outcome": "验证跨租户访问被阻止，说明容器不是恶意代码万能沙箱",
+          "environment": "cluster"
+        },
+        {
+          "id": "privacy-supply-chain",
+          "title": "依赖、镜像与供应链",
+          "source": "security",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
+          "section": "应用安全；安全检查清单",
+          "outcome": "固定依赖及镜像来源，核对扫描与更新流程",
+          "environment": "linux"
+        },
+        {
+          "id": "privacy-data",
+          "title": "数据许可、PII 与审计",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Security & Privacy；Responsible AI",
+          "outcome": "为输入、日志、检查点建立访问和保留规则",
+          "environment": "reading"
+        },
+        {
+          "id": "privacy-attacks",
+          "title": "数据投毒、模型输出与滥用",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Robust AI；Security & Privacy",
+          "outcome": "分析威胁路径并用受控输入验证防护",
+          "environment": "cpu"
+        }
+      ],
       "stage": 4,
       "category": "core",
       "prerequisites": [
@@ -3057,6 +5668,44 @@
     {
       "id": "sustainability",
       "title": "容量、成本与能源效率",
+      "topics": [
+        {
+          "id": "sustainability-capacity",
+          "title": "容量、排队与利用率",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Software Engineering in SRE；Capacity Planning",
+          "outcome": "按到达率、耗时与失败预留估算容量",
+          "environment": "reading"
+        },
+        {
+          "id": "sustainability-tco",
+          "title": "总成本与租赁选择",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Sustainable AI",
+          "outcome": "比较按时与包月，计入闲置、磁盘、流量和恢复成本",
+          "environment": "reading"
+        },
+        {
+          "id": "sustainability-energy",
+          "title": "功率、能量与有效工作",
+          "source": "dcgm",
+          "url": "https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html",
+          "section": "Job Statistics；Field Metrics",
+          "outcome": "区分瞬时功率和累计能量，说明设备计量缺口",
+          "environment": "gpu"
+        },
+        {
+          "id": "sustainability-tradeoffs",
+          "title": "碳、质量与服务目标",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume II：Sustainable AI；Responsible AI",
+          "outcome": "给出可解释的质量、成本和能耗约束，标注估算假设",
+          "environment": "reading"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -3090,6 +5739,53 @@
     {
       "id": "retrieval",
       "title": "检索、向量索引与 RAG 系统",
+      "topics": [
+        {
+          "id": "retrieval-distance",
+          "title": "Embedding、距离与精确检索",
+          "source": "faiss",
+          "url": "https://faiss.ai/",
+          "section": "What Is Similarity Search；Flat Indexes",
+          "outcome": "比较 L2 与内积、归一化影响，建立精确检索基线",
+          "environment": "cpu"
+        },
+        {
+          "id": "retrieval-ann",
+          "title": "IVF、HNSW、PQ 与 ANN",
+          "source": "faiss",
+          "url": "https://faiss.ai/",
+          "section": "Research Foundations；Guidelines to Choose an Index",
+          "outcome": "绘制召回、延迟和内存权衡，避免只报 QPS",
+          "environment": "cpu"
+        },
+        {
+          "id": "retrieval-updates",
+          "title": "索引构建、更新与元数据",
+          "source": "faiss",
+          "url": "https://faiss.ai/",
+          "section": "Index IO；Index Factory；ID Mapping",
+          "outcome": "验证版本更新后 ID 与原文一致，测试重复与删除",
+          "environment": "cpu"
+        },
+        {
+          "id": "retrieval-rag",
+          "title": "切分、召回、重排与生成",
+          "source": "rag-paper",
+          "url": "https://arxiv.org/abs/2005.11401",
+          "section": "原始 RAG 论文：检索—生成模型与实验；切分和重排作为后续工程复核",
+          "outcome": "分开评估检索召回、证据相关性和回答质量",
+          "environment": "gpu"
+        },
+        {
+          "id": "retrieval-permissions",
+          "title": "权限过滤与检索泄漏",
+          "source": "security",
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
+          "section": "认证与鉴权；多租户。将访问控制原则迁移到检索，原文不提供 RAG 文档过滤实现",
+          "outcome": "在检索前后验证文档权限，不把提示词当访问控制",
+          "environment": "cpu"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [
@@ -3098,6 +5794,8 @@
         "inference"
       ],
       "resources": [
+        "faiss",
+        "rag-paper",
         "mlsys",
         "vllm"
       ],
@@ -3113,7 +5811,7 @@
         },
         {
           "title": "设计与独立实践",
-          "task": "精读 MLSysBook Data Storage 的 Retrieval Infrastructure；用许可明确的小数据建立精确检索 oracle"
+          "task": "精读 Faiss 的精确与近似索引、原始 RAG 论文的检索—生成结构；用许可明确的小数据建立精确检索 oracle"
         },
         {
           "title": "测试、优化与解释",
@@ -3124,6 +5822,44 @@
     {
       "id": "edge",
       "title": "边缘、移动与异构部署",
+      "topics": [
+        {
+          "id": "edge-export",
+          "title": "模型导出与算子兼容",
+          "source": "executorch",
+          "url": "https://docs.pytorch.org/executorch/stable/index.html",
+          "section": "Exporting Models；Supported Features",
+          "outcome": "核对导出前后数值和动态形状约束",
+          "environment": "cpu"
+        },
+        {
+          "id": "edge-backends",
+          "title": "委托后端与硬件划分",
+          "source": "executorch",
+          "url": "https://docs.pytorch.org/executorch/stable/index.html",
+          "section": "Backends；Backend Delegation",
+          "outcome": "记录哪些算子落在设备、哪些回退 CPU",
+          "environment": "device"
+        },
+        {
+          "id": "edge-memory",
+          "title": "设备内存、量化与布局",
+          "source": "executorch",
+          "url": "https://docs.pytorch.org/executorch/stable/index.html",
+          "section": "Memory Planning；Quantization",
+          "outcome": "量测峰值和启动耗时，核对量化质量",
+          "environment": "device"
+        },
+        {
+          "id": "edge-deployment",
+          "title": "设备封装、更新与功耗",
+          "source": "executorch",
+          "url": "https://docs.pytorch.org/executorch/stable/index.html",
+          "section": "Running on Device；Android/iOS Guides",
+          "outcome": "在实际设备记录冷启动、持续负载与回滚",
+          "environment": "device"
+        }
+      ],
       "stage": 4,
       "category": "optional",
       "prerequisites": [
@@ -3132,6 +5868,7 @@
         "accelerators"
       ],
       "resources": [
+        "executorch",
         "mlsys",
         "torch-compile"
       ],
@@ -3158,6 +5895,44 @@
     {
       "id": "multimodal",
       "title": "多模态与其他模型系统",
+      "topics": [
+        {
+          "id": "multimodal-input",
+          "title": "图像、音频与视频预处理",
+          "source": "d2l",
+          "url": "https://zh.d2l.ai/",
+          "section": "计算机视觉；数据预处理",
+          "outcome": "核对形状、采样率、归一化与批处理成本",
+          "environment": "cpu"
+        },
+        {
+          "id": "multimodal-architectures",
+          "title": "ViT、跨模态注意力与生成",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "2026 Lecture 17：Alignment and Multimodality",
+          "outcome": "分解编码器、投影和解码的计算与内存需求",
+          "environment": "gpu"
+        },
+        {
+          "id": "multimodal-serving",
+          "title": "多模态输入与服务调度",
+          "source": "sglang",
+          "url": "https://docs.sglang.io/",
+          "section": "Multimodal Models；Serving",
+          "outcome": "控制输入大小并测量编码和解码尾延迟",
+          "environment": "gpu"
+        },
+        {
+          "id": "multimodal-evaluation",
+          "title": "非文本质量与系统约束",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume I：Network Architectures；Benchmarking",
+          "outcome": "同时记录任务质量、时间分辨率、延迟与存储成本",
+          "environment": "gpu"
+        }
+      ],
       "stage": 4,
       "category": "optional",
       "prerequisites": [
@@ -3193,6 +5968,44 @@
     {
       "id": "system-design",
       "title": "端到端 AI 系统设计与复核",
+      "topics": [
+        {
+          "id": "system-design-requirements",
+          "title": "需求、约束与工作负载",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Service Level Objectives；Capacity Planning",
+          "outcome": "把用户目标写成容量、质量、延迟和预算约束",
+          "environment": "reading"
+        },
+        {
+          "id": "system-design-architecture",
+          "title": "数据—训练—服务链路",
+          "source": "mlsys",
+          "url": "https://mlsysbook.ai/",
+          "section": "Volume I：ML Workflow；Volume II：ML Operations at Scale",
+          "outcome": "画端到端数据和控制路径，说明责任和版本边界",
+          "environment": "reading"
+        },
+        {
+          "id": "system-design-tradeoffs",
+          "title": "瓶颈、扩展与故障域",
+          "source": "cs336",
+          "url": "https://cs336.stanford.edu/",
+          "section": "Systems；Parallelism；Inference",
+          "outcome": "根据测量选择方案，给出成本及失败条件",
+          "environment": "multi-gpu"
+        },
+        {
+          "id": "system-design-acceptance",
+          "title": "设计评审、恢复与交付",
+          "source": "sre",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "section": "Release Engineering；Disaster Recovery",
+          "outcome": "从空环境复现、注入故障、恢复并提交证据",
+          "environment": "cluster"
+        }
+      ],
       "stage": 4,
       "category": "specialist",
       "prerequisites": [

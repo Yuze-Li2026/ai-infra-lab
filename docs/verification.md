@@ -45,6 +45,28 @@
 
 [维护分支运行 37931510370](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37931510370)的 Linux 作业成功，Windows 在损坏进度的浏览器用例中未等到保存结果。该用例现先打开明确的任务，并等待损坏记录提示，再执行普通保存；原数据不得改写、恢复时保留损坏原文的断言继续保留。失败记录新增当前任务按钮、页面提示和截图，供后续定位；该次失败记录不能被本地通过替代，修正后仍须复跑跨系统 CI。
 
+## 私有实验入口与逐项资料
+
+2026-10-09，提交 `d52356375e91503a462b01268ef8cd08149170ee` 的 [Private laboratory access 37938683751](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37938683751)通过。Ubuntu 24.04 实际安装 JupyterLab 4.6.4、Jupyter Server 2.21.1，创建独立 OpenSSH 服务与临时密钥，执行真实 Python kernel，不使用模拟响应。
+
+实际检查包括：私有目录和凭据权限、重复初始化保护、符号链接拒绝、错误令牌与匿名执行拒绝、文件保存、Python 输出、cookie 登录与 XSRF、正确 SSH 公钥转发、错误公钥拒绝、仅回环监听、进程重启和令牌/cookie 同时撤销。测试密钥不上传，报告明确 `gpuVerified: false`。这证明通用入口可运行，不证明任何个人云实例已租用、供应商计费已关闭或 GPU 课程完成。
+
+早期失败保留在对应 Actions 运行与本地诊断中：修复 Jupyter 扩展初始化顺序、日志等级取值、项目 JavaScript 设置影响入口环境的问题，并将 SSH 测试使用的公钥放在私有目录，按 Ubuntu PAM 账户策略验证。密码认证和交互式密码仍然关闭，没有通过放宽主机验证绕过问题。
+
+同提交的 [Validate 37938683957](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37938683957)在 Windows 和 Ubuntu 成功。随后新增的逐项资料、准备教程和界面入口仍需以最终源码指纹对应的本地/CI 报告复核，不能沿用这个提交的结果。新内容包含 45 个模块的 198 项任务、65 项来源与零基础 CPU/Linux/GPU/集群准备说明；知识覆盖数量不构成实验运行证据。
+
+### CS336 A1 与文件恢复
+
+提交 `cfe8a8756f5fcde9c377a1b0d0c532354e7487c9` 的 [CS336 A1 37940554301](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37940554301)实际使用 Python 3.12.15、uv 0.11.20，按上游 `uv.lock` 安装 PyTorch 2.11.0+cu130 等依赖。runner 没有 GPU，实际执行的是 A1 的 CPU 原测试；安装 CUDA 运行库不等于有 GPU。
+
+固定原提交 `a158843b20107949f1a8d7df1b05cd33b9166712` 收集并执行 48 项：47 项起始代码失败，1 项为上游明确标注的 `test_encode_memory_usage` 预期失败。JUnit 将该 xfail 放在 skipped 中，环境检查单独核对其名称、类型和原始原因，不把它计为通过，也不接受其他跳过。`environmentVerified: true`、`assignmentPassed: false`、`gpuVerified: false` 保留在 `artifacts/cloud-evidence/cfe8a87/cs336-a1-cpu-evidence/`，没有填写 adapters 或改变原题。
+
+同提交 [Private laboratory access 37940554320](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37940554320)使用完整版本清单重新安装并通过前述检查，另外实际执行 SCP 下载与上传到新目录的恢复，核对作品内容、原目录未覆盖和凭据未混入备份。报告位于 `artifacts/cloud-evidence/cfe8a87/private-cloud-evidence/`。
+
+新增页面内容本地检查为 39 项自动测试通过、0 失败、0 跳过；六组浏览器脚本通过。资料列表的正文链接补充下划线后，无障碍检查通过。新教程的 13 个站内章节链接已按阅读器实际标题算法核对，桌面、手机及 200% 文字截图已查看。完整源码对应性仍以最终 `maintenance:status` 和同提交 CI 核对，不能只按这段计数验收。
+
+外部入口共检查 79 个，直接网络读取成功 74 个；Slurm、OpenXLA、TRL、Spark 和 CS50 Indoor Voice 的本机网络请求未确认，另通过网页读取工具打开原站复核，CS50 跳转到不含年份的同题地址。原始网络失败保留在 `artifacts/links.json`，未篡改为本机网络通过。
+
 ## 0.3.0 历史检查
 
 | 检查 | 实际结果 |

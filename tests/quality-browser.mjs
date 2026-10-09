@@ -1,15 +1,25 @@
 import {chromium} from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{channel:'chrome'})});
 const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'});
 const page=await context.newPage(),checks=[],violations=[],errors=[],screenshots=[];
 page.on('pageerror',error=>errors.push(error.message));page.on('dialog',dialog=>dialog.accept());
 const base=process.env.LAB_QA_URL||'http://127.0.0.1:4173';
+const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
 let failure;
 await mkdir('artifacts',{recursive:true});
 try{
+ let releaseCatalog;const delayedCatalog=new Promise(resolve=>{releaseCatalog=resolve;});
+ const loadingPage=await context.newPage();
+ await loadingPage.route('**/catalog.json',async route=>{await delayedCatalog;await route.continue();});
+ await loadingPage.goto(base,{waitUntil:'domcontentloaded'});
+ assert.equal(await loadingPage.locator('#import').isDisabled(),true);
+ assert.equal(await loadingPage.locator('#export').isDisabled(),true);
+ releaseCatalog();await loadingPage.getByRole('heading',{name:'把知识变成工程能力'}).waitFor();
+ assert.equal(await loadingPage.locator('#import').isEnabled(),true);
+ await loadingPage.close();checks.push('backup controls stay disabled until delayed catalog and stored records are ready');
  await page.goto(base+'/#learn');await page.locator('.start-guide').waitFor();
  assert.equal(await page.locator('.start-guide').getAttribute('open'),'');
  await page.getByRole('link',{name:/打开第一个任务/}).click();await page.locator('#node-detail').waitFor();
@@ -26,6 +36,42 @@ try{
  await page.locator('.start-guide summary').click();assert.equal(await page.getByRole('link',{name:/打开第一个任务/}).isVisible(),true);
  await page.evaluate(()=>localStorage.clear());await page.goto(base+'/#learn');await page.reload();
  checks.push('first-visit entry links reach real tasks and guides; saved learners see a collapsed, reopenable guide without changing progress');
+ for(const n of catalog.nodes){
+  await page.goto(base+'/#map/'+n.id);await page.locator('.topic-reading summary').click();
+  assert.equal(await page.locator('.topic-reading li').count(),n.topics.length,n.id);
+  for(const t of n.topics){
+   const item=page.locator(`[data-topic="${t.id}"]`);
+   assert.ok((await item.innerText()).includes(t.outcome),t.id);
+   assert.equal(await item.locator('a').first().getAttribute('href'),t.url,t.id);
+   assert.equal(await item.locator('.environment-help').count(),t.environment==='reading'?0:1,t.id);
+  }
+ }
+ for(const width of [320,390,768,1440]){
+  await page.setViewportSize({width,height:900});await page.goto(base+'/#map/training');
+  await page.locator('.topic-reading summary').click();
+  const expandedTopics=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
+  violations.push(...expandedTopics.violations.map(v=>({route:'map/training/topics',width,id:v.id,nodes:v.nodes})));
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  const path=`artifacts/ui-topics-${width}.png`;await page.locator('.topic-reading').screenshot({path});screenshots.push(path);
+  await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`topics 200% ${width}`);
+  await page.evaluate(()=>{document.documentElement.style.fontSize='';});
+  await page.getByRole('link',{name:'在知识清单中阅读本节',exact:true}).click();
+  await page.waitForFunction(()=>document.activeElement?.tagName==='H2');
+  assert.equal(await page.locator(':focus').innerText(),catalog.nodes.find(n=>n.id==='training').title);
+  for(const n of catalog.nodes)assert.equal(await page.getByRole('heading',{name:n.title,exact:true,level:2}).count(),1,n.id);
+ }
+ checks.push('all topic outcomes and primary links render; expanded readings pass four widths, 200% text, accessibility and chapter navigation');
+ await page.goto(base+'/#labs');await page.getByRole('link',{name:'配置个人云端实验室',exact:true}).click();
+ await page.locator('.document-body h1').waitFor();assert.equal(new URL(page.url()).hash,'#read/docs/private-cloud.md');
+ checks.push('private laboratory guide is reachable without exposing instance addresses or credentials');
+ await page.goto(base+'/#labs');assert.equal(await page.locator('.lab-card .environment-help').count(),catalog.labs.length);
+ for(const [environment,id,title]of [['cpu','computer','CPU'],['linux','linux','Linux'],['gpu','gpu','GPU'],['multi-gpu','training','多卡与集群'],['cluster','orchestration','多卡与集群'],['device','accelerators','目标设备']]){
+  await page.goto(base+'/#map/'+id);await page.locator('.topic-reading summary').click();
+  await page.locator(`[data-environment="${environment}"]`).first().click();
+  await page.waitForFunction(()=>document.activeElement?.tagName==='H2');assert.equal(await page.locator(':focus').innerText(),title);
+ }
+ checks.push('every lab has preparation help; six knowledge environment links reach the matching beginner chapter');
  for(const width of [1440,390]){
   await page.setViewportSize({width,height:900});
   for(const route of ['learn','map','resources','labs','about','map/computer','milestone/0','read/docs/writing-guide.md']){

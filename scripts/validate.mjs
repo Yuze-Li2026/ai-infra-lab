@@ -42,6 +42,18 @@ export function validateCatalog(c){
  }
  const unique=(list,name)=>{const ids=new Set();for(const x of list){if(typeof x.id!=='string'&&name!=='stages')throw new Error(`Invalid ${name} ID`);if(ids.has(x.id))throw new Error(`Duplicate ${name}: ${x.id}`);ids.add(x.id);}return ids;};
  const nodes=unique(c.nodes,'nodes'),sources=unique(c.sources,'sources'),stages=unique(c.stages,'stages');unique(c.labs,'labs');
+ const topics=new Set();
+ for(const n of c.nodes){
+  if(!Array.isArray(n.topics)||!n.topics.length)throw Error(`Missing knowledge topics: ${n.id}`);
+  for(const topic of n.topics){
+   requiredText(topic,['id','title','source','url','section','outcome','environment'],'knowledge topic');
+   if(!id(topic.id)||!topic.id.startsWith(n.id+'-')||topics.has(topic.id))throw Error(`Invalid or duplicate knowledge topic: ${topic.id}`);
+   topics.add(topic.id);
+   if(!sources.has(topic.source))throw Error(`Unknown topic source: ${topic.source}`);
+   https(topic.url);
+   if(!['reading','cpu','linux','gpu','multi-gpu','cluster','device'].includes(topic.environment))throw Error(`Invalid topic environment: ${topic.id}`);
+  }
+ }
  for(const s of c.sources){for(const f of ['title','author','url','version','language','license','licenseUrl','reviewedAt','reviewLevel','reuse','evaluation'])if(!s[f])throw new Error(`Missing source field ${s.id}.${f}`);for(const f of ['authority','accuracy','depth','engineeringValue','coverage','teachingQuality','difficulty','languageFriendliness','accessibility','maintenance','licensing','stability'])if(!s.evaluation[f])throw new Error(`Missing evaluation ${s.id}.${f}`);for(const f of ['url','licenseUrl'])if(new URL(s[f]).protocol!=='https:')throw new Error('Only HTTPS resources allowed');}
  for(const n of c.nodes){for(const f of ['title','objective','guidance','evidence','status'])if(typeof n[f]!=='string'||!n[f].trim())throw new Error(`Missing node field ${n.id}.${f}`);if(!stages.has(n.stage)||!['core','specialist','optional'].includes(n.category)||!Array.isArray(n.prerequisites)||!Array.isArray(n.resources)||!n.resources.length)throw new Error(`Invalid node ${n.id}`);for(const p of n.prerequisites)if(!nodes.has(p)||p===n.id)throw new Error(`Invalid dependency ${n.id}/${p}`);for(const r of n.resources)if(!sources.has(r))throw new Error(`Unknown resource ${r}`);}
  const visiting=new Set(),done=new Set();function walk(id){if(visiting.has(id))throw new Error(`Dependency cycle at ${id}`);if(done.has(id))return;visiting.add(id);c.nodes.find(n=>n.id===id).prerequisites.forEach(walk);visiting.delete(id);done.add(id);}c.nodes.forEach(n=>walk(n.id));
@@ -57,6 +69,6 @@ export function validateCatalog(c){
    for(const id of m.labs)if(!c.labs.some(l=>l.id===id&&l.stage===m.stage&&l.command&&l.requiredChecks?.length))throw Error('Invalid milestone lab or missing test scope');
   }
  }
- return {nodes:nodes.size,sources:sources.size,labs:c.labs.length};
+ return {nodes:nodes.size,sources:sources.size,labs:c.labs.length,topics:topics.size};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){console.log('Catalog validated:',validateCatalog(JSON.parse(readFileSync('site/catalog.json','utf8'))));}

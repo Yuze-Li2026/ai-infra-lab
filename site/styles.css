@@ -1234,3 +1234,14 @@ main,p,h1,h2,h3,a,button,dd {
 .document-outline button:hover {background:transparent;color:var(--green);text-decoration:underline;text-underline-offset:4px}
 @media(max-width:1100px){.document-layout{grid-template-columns:minmax(0,1fr);gap:20px}.document-outline{grid-row:1;position:static;border:1px solid var(--line);border-radius:11px;padding:15px 20px;background:white;max-height:none}.document-outline summary{padding:0}.document-outline[open] summary{padding-bottom:12px}.document-outline button{font-size:0.8125rem;min-height:36px}.document-body{max-width:none}}
 @media(max-width:600px){.document-body{padding:24px 20px}.document-body h1{font-size:1.5625rem}.document-body h2{font-size:1.25rem}.document-tools{gap:16px}.stat strong.status-word{font-size:1.0625rem}}
+/* Keep detailed reading scopes close to the task without crowding its entry. */
+.topic-reading { margin: 1.5rem 0; border-block: 1px solid var(--line, #dce3dc); padding: 1rem 0; }
+.topic-reading summary { cursor: pointer; font-weight: 650; line-height: 1.8; }
+.topic-reading summary span { display: block; font-size: .85em; font-weight: 400; color: #526259; padding-left: 1.15em; }
+.topic-reading ol { list-style: none; padding: 0; margin: .5rem 0 1rem; counter-reset: topic; }
+.topic-reading li { counter-increment: topic; padding: 1rem 0 1rem 2rem; position: relative; border-bottom: 1px solid #e6eae4; }
+.topic-reading li::before { content: counter(topic, decimal-leading-zero); position: absolute; left: 0; top: 1rem; font-size: .75rem; color: #587363; }
+.topic-reading li strong { font-size: .98rem; line-height: 1.6; }
+.topic-reading p { font-size: .9rem; line-height: 1.85; margin: .4rem 0; overflow-wrap: anywhere; }
+.topic-reading a,.environment-help { text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
+.topic-reading small { display: block; color: #526259; line-height: 1.8; }

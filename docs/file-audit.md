@@ -235,6 +235,16 @@
 
 手机文字放大复查发现固定五列导航会让标签重叠，虽然页面宽度检查仍然通过。导航现按文字宽度换行，顶部操作也允许分行；回归直接检查文字矩形是否超出按钮/链接，覆盖六条路由的四个屏宽，并实际点击放大后的手机导航。原课环境、跨系统 CI 与源码恢复的新结果已逐项核对后补入[验证记录](verification.md)，0.4.1 可用性审查保留为历史记录。
 
+## 逐项资料与私有实验入口
+
+新增 `topics` 数据与 JSON Schema，逐项核对原始来源、章节名称、环境标记和可观察产物；修正 Ray Data、PyTorch DDP 与激活重计算的直达入口，将推荐系统、流处理和异构补充放在模块基础条目之后。`scripts/knowledge-index.mjs` 生成知识清单，覆盖检查拒绝数据与文档不一致；`tests/knowledge.test.mjs` 检查缺项、错误来源和不安全链接。
+
+`scripts/private_lab.py` 核对目录/文件权限、符号链接、独占锁、随机凭据、回环监听、来源策略和 cookie 撤销；`tests/private-cloud-linux.py` 使用真实 Jupyter kernel 与 SSH 隧道。工作流在独立环境安装，不把密钥、服务日志或个人文件上传为产物。Linux 成功和失败修复记录见[验证记录](verification.md#私有实验入口与逐项资料)。
+
+`docs/environment-preparation.md` 按实验介绍准备条件，`docs/private-cloud.md` 分清本机、远程服务、密钥、课程依赖、费用和恢复；安装 Notebook 不等于全部课程就绪。`site/views.js` 将准备帮助接到每项实验和需要设备的知识点；阅读器允许列表、文档中心和入门教程同步接入。`tests/quality-browser.mjs` 检查知识项显示、原文入口、准备章节、桌面/手机、200% 文字和无障碍规则。
+
+较大目录使页面刷新后的异步加载窗口更明显：备份输入在目录尚未就绪时可能被忽略。`site/index.html` 默认禁用备份按钮和文件输入，`site/app.js` 在目录与记录初始化后启用；新增延迟目录响应的真实浏览器回归，恢复检查等待可操作状态。
+
 ## AI 接手维护
 
 新增 `AGENTS.md`、`docs/ai-maintenance.md` 与 PR 模板，核对学习者/维护者分工、资源标准、已有授权、数据保护、同提交验证和交接要求。维护命令 `scripts/maintenance-status.mjs` 只读本地状态，不获取凭据、安装依赖或访问网络；从其他目录调用也定位本站源码。

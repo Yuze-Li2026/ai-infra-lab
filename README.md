@@ -18,13 +18,15 @@ npm start
 
 ## 学习与实验
 
-- 45 个知识节点连接 41 项原始来源，包含先修、选章、操作任务和成果要求。范围依据见[覆盖矩阵](docs/coverage.md)与[学习路径依据](docs/path-evidence.md)。
+- 45 个学习模块细分为 198 项选读任务，连接 65 项原始来源。每项知识有原文、章节、复核要求和环境条件，见[逐项知识清单](docs/knowledge-index.md)、[覆盖矩阵](docs/coverage.md)与[学习路径依据](docs/path-evidence.md)。
 - 11 项实验入口提供专用指南。6 项本地实验支持运行与报告，另外 5 项连接原课源码准备和测试流程。
 - 本地实验包括 Indoor Voice、对象模型、DBDB、micrograd、共识模拟和单卡 GPU。报告区分参考复现与自己的实现，参考报告不计个人作品通过。
 - 原课工具支持 CS50 最终项目、OSTEP MapReduce、DLSys HW0–HW2、MIT Raft 和 CS336 A1/A2。环境、固定版本和命令见[原课工作流程](docs/project-workflows.md)。课程 TODO 由学习者完成。
 - 学习说明、草稿和报告摘要可以备份恢复。本人提交表示留下了成果记录，不构成独立能力认证。
 
 GPU 与系统实验需要相应的本地工具和硬件，网站不远程执行代码。完整原课、多卡、真实集群及生产服务仍须按各自条件验证；具体状态见[交付清单](docs/delivery-checklist.md)和[验证记录](docs/verification.md)。
+
+[按实验准备环境](docs/environment-preparation.md)解释每项实验需要的工具、执行位置、成功标志和常见错误。[个人云端实验室](docs/private-cloud.md)提供独立 JupyterLab 与 SSH 配置教程；开源代码不包含任何人的实例凭据。个人实例配置与 GPU 课程验收仍需实际设备；免费 CI 和私有交互环境分别记录。
 
 ## 维护与验证
 

@@ -1,6 +1,6 @@
 # AI Infra 能力覆盖与证据
 
-审查日期：2026-10-09。本版从 24 个粗粒度节点扩展为 45 个可追溯节点、41 个原始来源。完整性用“能力 → 先修 → 原始资料 → 独立作品 → 测试与解释”检查，不能由数量证明。本表是一份可以被修订的覆盖基线，不声称任何一次审查能永久穷尽 AI Infra。
+审查日期：2026-10-09。本版包含 45 个模块、198 项选读任务和 65 个原始来源。[逐项知识清单](knowledge-index.md)为每项记录原文、章节、复核产物和实践环境。完整性用“能力 → 先修 → 原始资料 → 独立作品 → 测试与解释”检查，不能由数量证明。本表是一份可以被修订的覆盖基线，不声称任何一次审查能永久穷尽 AI Infra。
 
 ## 复核依据
 
@@ -20,21 +20,21 @@
 | 抽象、语言、版本和工程交付 | `programming`、`tools`、`engineering` | Composing Programs、Missing Semester、CS50 | 模块接口、测试、Git 历史、依赖锁、空目录重建 |
 | 必要数学：函数、证明、线性代数、微积分、概率统计 | `algebra`、`discrete`、`linear`、`calculus`、`probability` | MIT OCW、Stat110、OpenIntro | 手算与证明、梯度复核、抽样和统计不确定性 |
 | 算法、系统语言与机器组织 | `algorithms`、`architecture` | MIT 6.006、Beej C、CS61C、CS106L | 复杂度、内存图、越界诊断、缓存成本 |
-| 进程、并发、虚拟内存与隔离 | `os`、`linux` | OSTEP、Kubernetes | 竞态与锁不变量、权限、OOM、资源释放 |
+| 进程、并发、虚拟内存与隔离 | `os`、`linux` | OSTEP、Docker、Linux cgroup v2、Kubernetes | 竞态与锁不变量、权限、OOM、资源释放 |
 | 网络、数据库与存储路径 | `network`、`storage` | CS144、DBDB、MLSysBook Data Storage | 可靠传输、索引/提交、读写预算、失败与恢复 |
 | 数值、优化与基本学习机制 | `numerics`、`ml` | D2L、DLSys、CS61C | 误差容差、损失与梯度、泛化与稳定性 |
 | 张量运行时和模型计算 | `framework`、`models` | DLSys、D2L、CS336 A1 | shape/广播/layout、自动微分、算子、模型与 tokenizer |
-| 数据与实验基础设施 | `data`、`experiments` | CS336 A4、MLflow、MLSysBook | 来源/许可、过滤去重、切分、加载、随机状态、模型产物与谱系 |
+| 数据与实验基础设施 | `data`、`experiments` | CS336 A4、Arrow、Kafka、Spark、Feast、MLflow | 来源/许可、去重、切分、批流读取、特征时间一致性、随机状态、模型产物与谱系 |
 | 评估、漂移与鲁棒性 | `evaluation` | CS336、OpenIntro、MLSysBook | 污染检查、置信区间、失败分组、质量门槛 |
 | 硬件与 GPU 编程 | `accelerators`、`gpu` | CUDA、Triton、CS336、MLSysBook | 执行/内存模型、硬件路径、内核正确性与预算 |
 | 性能工程与低精度 | `profiling`、`precision` | PyTorch Profiler、vLLM quantization、MLSysBook | 时间线、roofline、传输与同步、校准、质量/显存/端到端性能 |
 | 分布式正确性与通信 | `dist`、`collectives` | MIT 6.5840、AOSA、PyTorch、NCCL | 故障语义、多数派、collective 输出、拓扑与通信曲线 |
-| 训练并行与显存优化 | `training`、`memory` | PyTorch/FSDP、CS336 A2 | DP/TP/PP、分片、重计算、累积、offload、梯度与恢复等价 |
+| 训练并行与显存优化 | `training`、`memory` | PyTorch/FSDP、Megatron Core、TorchRec、JAX、CS336 A2 | DP/TP/PP/CP/EP、稀疏分片、重计算、累积、offload、梯度与恢复等价 |
 | 训练预算与后训练系统 | `scaling`、`posttraining` | CS336 A3/A5、MLSysBook | 规模曲线、不确定性、rollout/learner 数据版本、奖励与评估 |
-| 推理与检索基础设施 | `inference`、`retrieval` | vLLM、CS336、MLSysBook Data Storage | prefill/decode、KV cache、批处理、TTFT/TPOT、ANN 召回、更新与权限 |
-| 部署、集群与生产生命周期 | `orchestration`、`lifecycle` | Kubernetes、Ray、MLflow、SRE | 队列/拓扑/配额、模型契约、灰度、漂移、回滚与产物版本 |
-| 可靠性、安全、成本与责任 | `operations`、`privacy`、`sustainability` | SRE、Kubernetes Security、MLSysBook | SLI/SLO、告警/恢复、威胁/权限模型、隐私、有效成本与能耗边界 |
-| 编译器与其他设备/工作负载 | `compiler`、`edge`、`multimodal` | MLIR、torch.compile、D2L、CS336、MLSysBook | IR/lowering、动态形状、语义等价、设备兼容、视觉/音频/稀疏工作负载 |
+| 推理与检索基础设施 | `inference`、`retrieval` | vLLM、SGLang、Faiss、RAG 原论文、CS336 | prefill/decode、KV cache、批处理、TTFT/TPOT、ANN 召回、更新与权限 |
+| 部署、集群与生产生命周期 | `orchestration`、`lifecycle` | Kubernetes、Ray、Kueue、Slurm、Feast、MLflow、SRE | 队列/拓扑/配额、模型与特征契约、灰度、漂移、回滚与产物版本 |
+| 可靠性、安全、成本与责任 | `operations`、`privacy`、`sustainability` | SRE、OpenTelemetry、Prometheus、DCGM、Kubernetes Security、MLSysBook | SLI/SLO、告警/恢复、威胁/权限模型、隐私、有效成本与能耗边界 |
+| 编译器与其他设备/工作负载 | `compiler`、`edge`、`multimodal` | MLIR、OpenXLA、torch.compile、ExecuTorch、ONNX Runtime、D2L、CS336 | IR/lowering、动态形状、语义等价、设备兼容、视觉/音频/稀疏工作负载 |
 | 端到端设计与综合判断 | `system-design` | MLSysBook、SRE、CS336 | 需求、容量、拓扑、质量、安全、成本、故障演练和独立评审 |
 
 这张表覆盖训练、推理、平台、数据、编译器与设备等主要分支，而不是把“AI Infra”缩成 LLM 推理或一块 GPU。全栈深度不能由一个小项目证明；按[方向路线](learning-paths.md)选择深入任务。

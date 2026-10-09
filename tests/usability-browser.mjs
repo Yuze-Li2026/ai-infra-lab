@@ -12,7 +12,10 @@ try{
  await page.goto(base+'/#labs');await page.locator('.lab-card').first().waitFor();
  assert.equal(await page.locator('.lab-card').count(),11);
  assert.equal(await page.locator('.lab-card a[href="#read/docs/project-workflows.md"]').count(),5);
- for(const card of await page.locator('.lab-card').all())assert.equal(await card.locator('a[href^="#read/docs/"]').count(),1);
+ for(const card of await page.locator('.lab-card').all()){
+  assert.equal(await card.locator('.actions a[href^="#read/docs/"]').count(),1);
+  assert.equal(await card.locator('.environment-help[href^="#read/docs/environment-preparation.md#"]').count(),1);
+ }
  assert.equal(await page.getByText('原课准备流程',{exact:true}).count(),5);
  checks.push('all eleven lab entries have accessible guides; five original-course plans remain distinct from reproduced labs');
  await page.locator('a[href="#read/docs/project-workflows.md"]').first().click();await page.locator('.document-body h1').waitFor();

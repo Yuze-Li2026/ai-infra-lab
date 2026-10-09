@@ -10,6 +10,10 @@ const link = (url, text, className = '') => {
 const chip = (text, green = false) => `<span class="chip ${green ? 'green' : ''}">${escape(text)}</span>`;
 const intro = (eyebrow, title, text) => `<div class="intro"><span class="eyebrow">${eyebrow}</span><h1>${title}</h1><p>${text}</p></div>`;
 const categoryLabels = {core:'核心必修', specialist:'方向必修', optional:'可选深入'};
+const environmentLabels = {reading:'阅读与推导',cpu:'普通 CPU',linux:'Linux',gpu:'单卡 GPU','multi-gpu':'多卡 GPU',cluster:'集群 / 管理权限',device:'指定目标设备'};
+const environmentSections = {cpu:'cpu',linux:'linux',gpu:'gpu','multi-gpu':'多卡与集群',cluster:'多卡与集群',device:'目标设备'};
+const environmentHelp = environment => environment==='reading' ? environmentLabels.reading : `<a class="environment-help" data-environment="${environment}" href="#read/docs/environment-preparation.md#${encodeURIComponent(environmentSections[environment])}">${environmentLabels[environment]} · 如何准备</a>`;
+const labEnvironments = {indoor:'cpu','python-project':'cpu','ostep-project':'linux',needle:'linux',systems:'gpu',raft:'linux','object-model':'cpu',dbdb:'cpu',consensus:'cpu',micrograd:'cpu',gpu:'gpu'};
 const evaluationLabels = {authority:'权威性',accuracy:'准确性',depth:'理论深度',engineeringValue:'工程价值',coverage:'覆盖程度',teachingQuality:'教学质量',difficulty:'先修难度',languageFriendliness:'语言友好度',accessibility:'可访问性',maintenance:'维护状态',licensing:'许可证',stability:'长期稳定性'};
 
 export function createViews(state) {
@@ -34,6 +38,7 @@ export function createViews(state) {
       <div class="detail-columns"><div>
         <h3>学习步骤</h3><ol class="learning-steps">${n.steps.map((s,i)=>`<li><span class="step-number">0${i+1}</span><div><strong>${escape(s.title)}</strong><p>${escape(s.task)}</p></div></li>`).join('')}</ol>
         <h3>精选原始资源</h3><p class="fineprint">先完成主资源中的本次选章；遇到理解缺口，再查补充阅读。正文讲授以原作者材料为准，本站中文指南帮助选章和复核。</p><div class="reading-list">${n.resources.map((id,i)=>`<div><span class="section-label">${i===0?'主资源':'补充阅读'} · ${escape(source(id).readingLabel||(source(id).language==='zh'?'中文':'英文原文'))}</span>${link(source(id).url,source(id).title)}${source(id).originalUrl?link(source(id).originalUrl,'英文对照','original-edition'):''}<small>${escape(source(id).author)}</small></div>`).join('')}</div>
+        <details class="topic-reading"><summary>逐项选读 <span>${n.topics.length} 项知识与配套资料</span></summary><p class="fineprint">按下面的范围读原作，用复核任务检查理解。做到实践时再按条件准备环境。</p><ol>${n.topics.map(t=>`<li data-topic="${escape(t.id)}"><strong>${escape(t.title)}</strong><p>${link(t.url,source(t.source).title)} · ${escape(t.section)}</p><p class="topic-outcome">复核：${escape(t.outcome)}</p><small>实践条件 · ${environmentHelp(t.environment)}</small></li>`).join('')}</ol><a class="text-link" href="#read/docs/knowledge-index.md#${encodeURIComponent(headingSlugger()(n.title))}">在知识清单中阅读本节</a></details>
         ${related.length ? `<h3>相关实践</h3><ul class="related-labs">${related.map(l=>`<li>${link(l.guide||l.url,l.title)}<small>${escape(l.status)}</small></li>`).join('')}</ul>` : ''}
         <details class="review-note"><summary>学习范围与研究状态</summary><p>${escape(n.scope)}</p><p>${escape(n.status)}。已有基础可以用对应作品和测试证明跳过。</p></details>
       </div><div class="evidence-panel">
@@ -126,10 +131,11 @@ export function createViews(state) {
   function labs() {
     const list=catalog.labs.filter(l=>stageFilter==='all'||String(l.stage)===stageFilter).sort((a,b)=>Number(Boolean(b.command))-Number(Boolean(a.command))||a.stage-b.stage);
     return intro('THE ENGINEERING BENCH','用工程成果验证学习','从原作者的项目出发，经历设计、实现、测试、优化与解释。每个实验都标明运行条件和实际验证程度。')+`
+      <p class="fineprint">第一次配置工具，从${link('./docs/environment-preparation.md','按实验准备环境','text-link')}开始。需要远程机器时再${link('./docs/private-cloud.md','配置个人云端实验室','text-link')}。</p>
       <details class="start-guide practice-guide"><summary>第一次做实验 <span>准备 → 实现 → 检查 → 记录</span></summary><ol class="practice-steps"><li><strong>先读指南</strong><span>核对先修和运行条件，只安装当前实验需要的工具。</span></li><li><strong>独立实现</strong><span>准备自己的作品；参考命令用于复现，不能代替作业。</span></li><li><strong>运行检查</strong><span>在电脑终端执行指南中的作品检查命令，按错误信息修复。</span></li><li><strong>保存证据</strong><span>导入支持的 JSON 报告，记录原理、代码位置与测试结论。</span></li></ol><div class="document-links">${link('./docs/getting-started.md','源码下载、环境准备与报告导入')}${link('./docs/learning-paths.md','选择工程方向')}</div><p class="fineprint">本站目前不能直接执行代码。卡片会分别标明参考复现、作品检查和原课准备流程的验证状态。</p></details>
       <div class="filters"><select id="lab-stage" aria-label="实验阶段"><option value="all">全部阶段</option>${catalog.stages.map(s=>`<option value="${s.id}" ${stageFilter===String(s.id)?'selected':''}>${escape(s.title)}</option>`).join('')}</select></div>
       ${selected?details(node(selected)):''}<div class="grid lab-grid">${list.map(l=>`<article class="resource lab-card ${l.command?'lab-ready':''}"><div class="row"><span class="eyebrow">STAGE 0${l.stage}</span>${chip(l.integration==='reproduced'?'已复现':l.integration==='checked'?'本地检查可用':l.preparationCommand?'原课准备流程':'待集成',Boolean(l.command))}</div><h2>${escape(l.title)}</h2><p>${escape(l.goal)}</p><p class="meta">${escape(source(l.source).author)}</p><div class="lab-hardware"><span class="section-label">运行条件</span><p>${escape(l.hardware)}</p></div>
-        <div class="dependency">${l.nodes.map(id=>nodeButton(id,'quiet')).join('')}</div>
+        <p class="fineprint">${environmentHelp(labEnvironments[l.id]||'linux')}</p><div class="dependency">${l.nodes.map(id=>nodeButton(id,'quiet')).join('')}</div>
         ${l.command||l.preparationCommand?`<div class="command-block"><div class="command-tools"><span class="section-label">${l.command?(l.id==='indoor'?'作品检查 · 在项目目录的终端运行':'参考复现 · 在项目目录的终端运行'):'准备计划 · 在项目目录的终端运行'}</span><button type="button" class="copy-button" data-copy aria-label="复制命令">复制</button></div><code>${escape(l.command||l.preparationCommand)}</code></div>`:''}
         <div class="actions">${l.guide?link(l.guide,l.command?'阅读实验指南':'准备与测试步骤','button-link primary'):''}${link(l.url,'原作者项目')}</div>
         ${labResults(l)}${reportRecord(l)}<details class="resource-details"><summary>验收标准与集成状态</summary><p>${escape(l.status)}</p><ol class="rubric">${l.rubric.map(r=>`<li>${escape(r)}</li>`).join('')}</ol><p>${escape(l.limitation)}</p></details></article>`).join('')}</div>`;

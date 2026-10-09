@@ -8,6 +8,8 @@
 
 ## CS50 Python：自行设计最终项目
 
+不确定命令应该在哪台机器执行时，先看[实验与环境对应表](environment-preparation.md#按实验选择)。CPU 作业、Linux 工具链和 GPU 作业分别准备，不要求一开始租用所有设备。
+
 依据 [CS50 最终项目原题](https://cs50.harvard.edu/python/project/)，先明确一个真实需求，再自行设计功能、错误处理与用户流程。原题要求 `project.py` 的 `main`、至少三个额外顶层函数，以及 `test_project.py` 中对应的 `test_函数名` 测试；保留 README、依赖和自己的演示。本站结构检查只是补充检查，不能代替原题的视频、设计或官方提交。
 
 ```sh
@@ -83,6 +85,8 @@ node scripts/project.mjs raft check
 按原题独立完成 `src/raft1/raft.go`，在作品的 `src` 下先使用 `make RUN="-run 3A" raft1` 定位第一部分，然后 `make raft1` 跑完整目标；本站 `check` 调用同一完整目标，保存原日志并核对实际 Go 测试通过行及退出码。继续按原课完成 3B/3C/3D、上层 KV 和分片，重复故障场景与 `-race`；这些更深部分不会被本站一次 Raft 命令自动标记为掌握。AOSA 共识模拟器与此独立实验分别记录。
 
 ## CS336：依赖隔离与实际原测试
+
+固定 A1 的 Linux CPU 环境已实际按上游锁安装并执行原测试，环境就绪与作业完成分别记录，见[原课实测](verification.md#cs336-a1-与文件恢复)。A2 的 GPU/多卡条件仍需对应设备，不能沿用 A1 的 CPU 结果。
 
 依据 [Stanford CS336](https://cs336.stanford.edu/)、[A1 原仓库](https://github.com/stanford-cs336/assignment1-basics)与 [A2 原仓库](https://github.com/stanford-cs336/assignment2-systems)。本次分别固定 `a158843b…` 与 `ca8bc81a…`；完整 SHA、归档体积和指纹在 `plan` 中可核对。当前两个项目都要求 Python 3.12/3.13、PyTorch `~=2.11.0`，与本站 `.venv-labs` 的 2.10 GPU 检查不同，必须隔离。
 

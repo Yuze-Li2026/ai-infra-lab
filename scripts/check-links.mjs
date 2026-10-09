@@ -1,6 +1,6 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const c=JSON.parse(await readFile('site/catalog.json','utf8'));
-const urls=[...new Set([...c.sources.flatMap(s=>[s.url,s.licenseUrl,...(s.originalUrl?[s.originalUrl]:[])]),...c.labs.map(l=>l.url)])];
+const urls=[...new Set([...c.sources.flatMap(s=>[s.url,s.licenseUrl,...(s.originalUrl?[s.originalUrl]:[])]),...c.nodes.flatMap(n=>n.topics.map(t=>t.url)),...c.labs.map(l=>l.url)])];
 const results=[];
 const previous=process.argv.includes('--retry-failed')?JSON.parse(await readFile('artifacts/links.json','utf8')):null;
 // Sequential requests avoid overloading upstream teaching sites.

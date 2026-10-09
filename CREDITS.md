@@ -453,6 +453,270 @@
 - 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
 - 局限：将模型版本与可复现产物关联；服务尚未安装验证。版本与硬件兼容必须按具体实验复核。
 
+## Faiss 相似度搜索
+
+- 原作者：Meta FAIR / Faiss 维护者
+- 来源：[Faiss 相似度搜索](https://faiss.ai/)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://faiss.ai/)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：首页给出索引能力及研究来源；另核对作者 Wiki 的索引选择指南；2026-10-09
+- 局限：需要线性代数与 Python；不是完整 RAG 应用课，GPU 版本另验
+
+## Apache Arrow 数据集指南
+
+- 原作者：Apache Arrow 项目
+- 来源：[Apache Arrow 数据集指南](https://arrow.apache.org/docs/python/dataset.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://arrow.apache.org/docs/python/dataset.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：已核对 Tabular Datasets 的分区、过滤与大于内存的数据读取范围；2026-10-09
+- 局限：API 参考需要数据工程基础；对象存储成本与权限须另配
+
+## Linux cgroup v2
+
+- 原作者：Linux 内核维护者 / Tejun Heo
+- 来源：[Linux cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.kernel.org/admin-guide/cgroup-v2.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：原文明确是 cgroup v2 设计与用户接口规范，覆盖核心和各资源控制器；2026-10-09
+- 局限：需要 Linux 管理权限；租用容器未必获准创建控制组
+
+## Docker 入门与容器基础
+
+- 原作者：Docker 文档维护者
+- 来源：[Docker 入门与容器基础](https://docs.docker.com/get-started/)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.docker.com/get-started/)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：入门入口区分介绍、工作坊与概念，连接具体工具操作；2026-10-09
+- 局限：Docker Desktop 许可与服务端安装条件须分别核对；不能在所有 GPU 租用容器里嵌套运行
+
+## PyTorch Distributed Checkpoint
+
+- 原作者：PyTorch 维护者
+- 来源：[PyTorch Distributed Checkpoint](https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html)
+- 阅读版本：英文原文
+- 版本：PyTorch 2.10 固定文档
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：核对分布式检查点 API；原文给出保存/加载与跨版本兼容边界；2026-10-09
+- 局限：固定 PyTorch 2.10 文档；不同版本检查点兼容和恢复拓扑需实测
+
+## Megatron Core 用户指南
+
+- 原作者：NVIDIA / Megatron Core 维护者
+- 来源：[Megatron Core 用户指南](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：已访问用户指南；并行组件用于专业方向选读，不替代基础推导；2026-10-09
+- 局限：多卡和特定 CUDA/PyTorch 组合；文档可读不代表本站运行通过
+
+## Kueue 概念与批任务准入
+
+- 原作者：Kubernetes SIG Scheduling / Kueue
+- 来源：[Kueue 概念与批任务准入](https://kueue.sigs.k8s.io/docs/concepts/)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://kueue.sigs.k8s.io/docs/concepts/)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：官方概念目录包含工作负载、队列、资源风味和准入检查；2026-10-09
+- 局限：需要可管理 Kubernetes 集群；与普通容器租赁不是同一权限条件
+
+## Slurm 集群调度
+
+- 原作者：SchedMD / Slurm 维护者
+- 来源：[Slurm 集群调度](https://slurm.schedmd.com/overview.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://slurm.schedmd.com/overview.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：概览说明控制器、计算节点、队列、作业步骤与资源记账组件；2026-10-09
+- 局限：部署控制器需要 Linux 管理权限；单个租用容器不能证明多节点调度
+
+## OpenTelemetry Python
+
+- 原作者：OpenTelemetry 项目
+- 来源：[OpenTelemetry Python](https://opentelemetry.io/docs/languages/python/)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://opentelemetry.io/docs/languages/python/)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：Python 官方指南提供信号支持状态、入门和 instrumentation 入口；2026-10-09
+- 局限：SDK 各信号稳定性不同；收集器、后端和敏感信息过滤需另验
+
+## Prometheus 监控基础
+
+- 原作者：Prometheus 项目
+- 来源：[Prometheus 监控基础](https://prometheus.io/docs/introduction/overview/)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://prometheus.io/docs/introduction/overview/)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：概览说明数据模型、查询、抓取与 Alertmanager 架构；2026-10-09
+- 局限：不是日志存储；高基数标签和多租户权限需要独立设计
+
+## ExecuTorch 部署指南
+
+- 原作者：PyTorch / ExecuTorch 维护者
+- 来源：[ExecuTorch 部署指南](https://docs.pytorch.org/executorch/stable/index.html)
+- 阅读版本：英文原文
+- 版本：1.5 stable，2026-10-09 页面审查
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.pytorch.org/executorch/stable/index.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：官方目录连接导出、后端与设备实践；当前页面标注 1.5；2026-10-09
+- 局限：需要目标设备和受支持后端；桌面执行不能代替手机/NPU 验收
+
+## ONNX Runtime 模型量化
+
+- 原作者：Microsoft / ONNX Runtime 维护者
+- 来源：[ONNX Runtime 模型量化](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：已跟随官方重定向核对量化页面，包含类型、精度与性能边界；2026-10-09
+- 局限：算子、硬件与 execution provider 支持不同；量化并非必然加速
+
+## OpenXLA / XLA 编译器
+
+- 原作者：OpenXLA 项目
+- 来源：[OpenXLA / XLA 编译器](https://openxla.org/xla)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://openxla.org/xla)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：官方介绍连接编译流水线、模型前端与加速器后端；2026-10-09
+- 局限：需要图语义与编译基础；不同前端与设备后端单独验收
+
+## TRL 后训练指南
+
+- 原作者：Hugging Face / TRL 维护者
+- 来源：[TRL 后训练指南](https://huggingface.co/docs/trl/index)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://huggingface.co/docs/trl/index)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：官方首页连接各后训练方法和 trainer；只选当前任务需要的部分；2026-10-09
+- 局限：算法 API 更新快；模型/数据许可和并行训练硬件分别审核
+
+## Nsight Systems 用户指南
+
+- 原作者：NVIDIA
+- 来源：[Nsight Systems 用户指南](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.nvidia.com/nsight-systems/UserGuide/index.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：原厂用户指南提供系统追踪、报告和采样条件；2026-10-09
+- 局限：采样权限和平台支持不同；需要核对租用实例可用特性
+
+## NVIDIA DCGM 功能指南
+
+- 原作者：NVIDIA
+- 来源：[NVIDIA DCGM 功能指南](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：官方表区分各 GPU 类型的支持；说明监控与操作系统隔离的边界；2026-10-09
+- 局限：GeForce 与数据中心卡支持的诊断范围不同；DCGM 自身不提供 OS 资源隔离
+
+## SGLang 推理文档
+
+- 原作者：LMSYS / SGLang 维护者
+- 来源：[SGLang 推理文档](https://docs.sglang.io/)
+- 阅读版本：英文原文
+- 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
+- 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.sglang.io/)
+- 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
+- 验证：官方入口从 docs.sglang.ai 重定向到 docs.sglang.io；提供安装、快速开始和硬件支持入口；2026-10-09
+- 局限：不根据宣传吞吐量判断优劣；基准须相同模型、请求和质量要求
+
+## Feast 特征平台
+
+- 原作者：Feast 项目
+- 来源：[Feast 特征平台](https://docs.feast.dev/)
+- 阅读版本：英文原文
+- 版本：2026-10-09 官方页面审查；运行时另锁版本
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://docs.feast.dev/)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：官方入口明确 offline/online store、point-in-time join 和功能边界；2026-10-09
+- 局限：不是通用 ETL、工作流编排或完整数据血缘系统
+
+## TorchRec 推荐系统基础设施
+
+- 原作者：Meta PyTorch / TorchRec 维护者
+- 来源：[TorchRec 推荐系统基础设施](https://github.com/meta-pytorch/torchrec)
+- 阅读版本：英文原文
+- 版本：2026-10-09 官方页面审查；运行时另锁版本
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://github.com/meta-pytorch/torchrec)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：原仓库说明大 Embedding 表、多种分片和 DLRM 示例；旧组织地址已重定向；2026-10-09
+- 局限：nightly 安装示例不能直接当固定课程环境；CPU/GPU 支持另验
+
+## Apache Kafka 设计
+
+- 原作者：Apache Kafka 项目
+- 来源：[Apache Kafka 设计](https://kafka.apache.org/43/design/)
+- 阅读版本：英文原文
+- 版本：2026-10-09 官方页面审查；运行时另锁版本
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://kafka.apache.org/43/design/)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：官方设计页覆盖日志、分区、复制和交付保证；2026-10-09
+- 局限：4.3 文档；端到端精确一次还依赖处理与下游写入
+
+## Spark Structured Streaming
+
+- 原作者：Apache Spark 项目
+- 来源：[Spark Structured Streaming](https://spark.apache.org/docs/latest/streaming/index.html)
+- 阅读版本：英文原文
+- 版本：2026-10-09 官方页面审查；运行时另锁版本
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://spark.apache.org/docs/latest/streaming/index.html)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：官方编程指南入口提供流式处理与相关配置章节；2026-10-09
+- 局限：页面标注 4.2.0；运行需独立 Java/Spark 环境
+
+## JAX 分片与并行
+
+- 原作者：JAX 维护者
+- 来源：[JAX 分片与并行](https://docs.jax.dev/en/latest/201/sharding.html)
+- 阅读版本：英文原文
+- 版本：2026-10-09 官方页面审查；运行时另锁版本
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://docs.jax.dev/en/latest/201/sharding.html)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：从官方目录定位到当前 201/sharding 页面，旧 notebook 路径已迁移；2026-10-09
+- 局限：GPU/TPU 后端和具体版本需分别验证
+
+## AMD ROCm 文档
+
+- 原作者：AMD
+- 来源：[AMD ROCm 文档](https://rocm.docs.amd.com/en/latest/)
+- 阅读版本：英文原文
+- 版本：2026-10-09 官方页面审查；运行时另锁版本
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://rocm.docs.amd.com/en/latest/)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：官方目录提供 ROCm 生态及安装兼容入口；2026-10-09
+- 局限：页面标注 10.1.0；必须有受支持 AMD 设备，NVIDIA 实验不能替代
+
+## Retrieval-Augmented Generation 原始论文
+
+- 原作者：Patrick Lewis 等
+- 来源：[Retrieval-Augmented Generation 原始论文](https://arxiv.org/abs/2005.11401)
+- 阅读版本：英文原文
+- 版本：arXiv:2005.11401，2020；2026-10-09 核对
+- 许可：仅链接；全文再分发按原站条款另审；[核查入口](https://arxiv.org/abs/2005.11401)
+- 使用方式：原始链接与本站中文阅读指引，不复制正文
+- 验证：核对原始论文摘要与作者信息，补齐检索到生成的理论出处；2026-10-09
+- 局限：2020 原始研究；不覆盖今日生产 RAG 的全部流程
+
 ## 集成代码与工具
 
 Carl Friedrich Bolz 的 A Simple Object Model 代码与测试来自 aosabook/500lines，提交 fba689d101eb5600f5c8f4d7fd79912498e950e2。Copyright (c) Carl Friedrich Bolz。MIT 代码及 CC BY 3.0 文字的许可原文保留在 labs/object-model/upstream/LICENSE.md；未复制书籍正文。
