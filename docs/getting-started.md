@@ -4,6 +4,8 @@
 
 ## 1. 打开工作台
 
+如果从在线网站开始，先打开[公开源码仓库](https://github.com/Yuze-Li2026/ai-infra-lab)，点击绿色 Code → Download ZIP，把归档解压到自己选择的目录。解压后的目录应含 `start.cmd`、`package.json`、`site`、`labs` 和 `docs`。CLI 实验命令需要这份源码；不把命令输入在线网页。已有 Git 时也可以 `git clone https://github.com/Yuze-Li2026/ai-infra-lab.git`。这份源码不包含已安装的 Python 环境或大模型。
+
 Windows 双击项目中的 `start.cmd`，保持命令窗口打开，在浏览器输入 `http://127.0.0.1:4173`。如果提示找不到 Node，先从 [Node.js 官方网站](https://nodejs.org/) 安装 22 或更新版本，然后重新打开命令窗口。这个安装不需要 GPU 或驱动改动。
 
 “认识文件与运行程序”说明第一项任务。文件是保存的内容；编辑器用于写内容；终端用于运行命令。不要把 Python 程序粘贴进 PowerShell 当作命令执行。
@@ -14,7 +16,7 @@ Windows 双击项目中的 `start.cmd`，保持命令窗口打开，在浏览器
 
 阅读 [CS50 Indoor Voice 原题](https://cs50.harvard.edu/python/2022/psets/0/indoor/)。自行编写 `indoor.py`，按原题要求处理输入；不要先复制答案。文件可以放在本项目目录，文件扩展名应为 `.py`，不能是 `.py.txt`。
 
-本地检查需安装 [Python](https://www.python.org/downloads/) 3.10+。不需要安装第三方包。在终端运行 `python --version` 确认；如果命令不存在，检查安装路径或在检查命令末尾传入 Python 可执行文件的完整路径。
+本地检查需安装 [Python](https://www.python.org/downloads/) 3.10+。不需要安装第三方包。在终端运行 `python --version` 确认；如果命令不存在，检查安装路径，或设置 `LAB_PYTHON` 为 Python 可执行文件完整路径后再运行检查。Windows 示例：`$env:LAB_PYTHON='C:\Python312\python.exe'`，按实际安装位置修改。
 
 打开项目目录的终端，执行：
 

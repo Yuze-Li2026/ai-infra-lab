@@ -27,6 +27,12 @@ export function validateCatalog(c){
   requiredText(l,['title','goal','status','hardware','limitation'],'lab');strings(l.nodes,'lab nodes');strings(l.rubric,'lab rubric');https(l.url);
   if(!l.nodes.length||!['candidate','checked','reproduced'].includes(l.integration))throw new Error(`Invalid lab integration: ${l.id}`);
   if(l.command){requiredText(l,['guide'],'lab guide');if(!/^\.\/docs\/[a-z0-9-]+\.md$/.test(l.guide))throw new Error('Lab guide must be a local document');}
+  if(l.preparationCommand){requiredText(l,['guide'],'course workflow guide');if(!/^\.\/docs\/[a-z0-9-]+\.md$/.test(l.guide))throw Error('Course workflow needs a local guide');}
+  if(l.validation){
+   const v=l.validation;requiredText(v,['commit','createdAt','python','platform'],'reproduction record');
+   if(v.mode!=='reference'||v.passed!==true||!Number.isSafeInteger(v.tests)||v.tests<1||l.reportCommit&&v.commit!==l.reportCommit||Number.isNaN(Date.parse(v.createdAt)))throw Error('Invalid reproduction metadata or version mismatch');
+   if(v.results&&(!Array.isArray(v.results)||!v.results.length||v.results.some(r=>r.passed!==true||!Number.isSafeInteger(r.tests)||r.tests<1)||v.results.reduce((sum,r)=>sum+r.tests,0)!==v.tests))throw Error('Invalid reproduction test count');
+  }
   if(l.requiredChecks!==undefined){
    if(!Array.isArray(l.requiredChecks)||!l.requiredChecks.length||new Set(l.requiredChecks.map(r=>r.name)).size!==l.requiredChecks.length)throw Error('Invalid required test scope');
    for(const r of l.requiredChecks)if(typeof r.name!=='string'||!r.name.trim()||r.name.length>128||!Number.isSafeInteger(r.tests)||r.tests<1)throw Error('Invalid required test scope');

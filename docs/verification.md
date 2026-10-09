@@ -104,3 +104,12 @@ node tests/live-browser.mjs
 浏览器使用独立临时上下文；submission UI 夹具不代表真实学习者完成作品。桌面及移动截图已检查，新增入口沿用相同间距、颜色与文字层级。新增任务、实测通过和未执行高级工程分别记录。macOS、多卡、真实集群、全部原课作业、设备和长期教学成效仍未由本轮证明。
 
 发布只在同一提交的 Windows/Linux Validate 成功后触发 Pages。源码归档恢复、部署、线上清单与交互复验的最终具体提交和工作流 URL 记录于[0.4.0 发布附件](https://github.com/Yuze-Li2026/ai-infra-lab/releases/tag/v0.4.0)中的 verification JSON 与 SHA256SUMS；可据此核对源代码、静态网站和只含 main 的历史 bundle。恢复使用已准备的 Python 依赖，不声称是全新机器安装。
+
+
+## 0.4.1 按学习者实际使用复核
+
+具体缺口、执行和未验证条件见[可用性审查](usability-audit.md)及[原课操作流程](project-workflows.md)。本地自动测试 30/30，0 跳过；浏览器 44+5 组；真实 CUDA 7 案例，正确路由与五种错误实现的验收行为符合预期。33 份 Markdown 加本站许可均接入阅读，48 内容文件逐项构建校验。
+
+源码准备八份均成功。DLSys 原测试实际执行 6/29/93 项，起始代码失败 6/29/91 项，无跳过；这验证执行器反馈真实错误，不表示作业已实现。MIT/CS336 的完整环境及更深工程仍未被当前结果证明。Windows 短暂目录占用现有有限重试和回滚，测试继续核对旧输出保留、陈旧内容隔离与逐文件哈希。
+
+发布仍要求当前提交 Windows/Linux Validate 成功，Pages 使用已验证提交重新核对文档和构建；新版本没有覆盖 0.4.0 标签或历史附件。最终提交与远程结果以[Actions](https://github.com/Yuze-Li2026/ai-infra-lab/actions)及对应新发布为准。

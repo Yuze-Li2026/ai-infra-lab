@@ -1,0 +1,69 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {mkdtemp,mkdir,readFile,writeFile} from 'node:fs/promises';
+import {resolve,join} from 'node:path';
+const local=resolve('.venv-labs',process.platform==='win32'?'Scripts/python.exe':'bin/python');
+const python=process.env.LAB_TEST_PYTHON||(existsSync(local)?local:'python');
+const launcher=resolve('scripts/project.mjs'),labLauncher=resolve('scripts/lab.mjs');
+const run=(args,options={})=>spawnSync(process.execPath,[launcher,...args],{encoding:'utf8',windowsHide:true,timeout:45000,env:{...process.env,LAB_PYTHON:python},...options});
+async function temporary(){await mkdir('artifacts',{recursive:true});return mkdtemp(resolve('artifacts/course-test-'));}
+
+test('every original-course entry has a working pinned preparation plan',()=>{
+ for(const[id,part]of [['python-project'],['ostep-project'],['raft'],['needle','hw0'],['needle','hw1'],['needle','hw2'],['systems','a1'],['systems','a2']]){
+  const result=run([id,'plan',...(part?['--part',part]:[])]);assert.equal(result.status,0,result.stderr);
+  const data=JSON.parse(result.stdout);assert.ok(data.commit);assert.ok(data.environment);assert.ok(data.license);
+  if(data.kind==='pytest'||data.kind==='uv'){assert.match(data.sha256,/^[a-f0-9]{64}$/);assert.ok(data.bytes<32*1024*1024);}
+ }
+ assert.notEqual(run(['needle','plan','--part','invalid']).status,0);
+});
+
+test('course preparation preserves an existing workspace and rejects corrupted source before delivery',async()=>{
+ const dir=await temporary(),folder=join(dir,'my-project');
+ assert.equal(run(['python-project','prepare','--directory',folder]).status,0);
+ const original=await readFile(join(folder,'project.py'),'utf8');
+ assert.equal(run(['python-project','prepare','--directory',folder]).status,1);
+ assert.equal(await readFile(join(folder,'project.py'),'utf8'),original);
+ const output=join(dir,'failed.json');assert.equal(run(['python-project','check','--directory',folder,'--output',output]).status,1);
+ assert.equal(JSON.parse(await readFile(output,'utf8')).passed,false);
+ const archive=join(dir,'wrong.zip');await writeFile(archive,'not the pinned course archive');
+ const target=join(dir,'needle');assert.equal(run(['needle','prepare','--directory',target,'--archive',archive]).status,1);
+ assert.equal(existsSync(target),false);
+});
+
+test('course checks execute the learner tests and reject a changed implementation',async()=>{
+ const probe=spawnSync(python,['-c','import sys; print(sys.executable)'],{encoding:'utf8',windowsHide:true});
+ const candidates=[probe.status===0?probe.stdout.trim():python,resolve('workspaces/needle-hw0/.venv',process.platform==='win32'?'Scripts/python.exe':'bin/python')];
+ const selected=candidates.find(p=>spawnSync(p,['-c','import pytest'],{windowsHide:true}).status===0);
+ assert.ok(selected,'This verification needs pytest: install labs/requirements-ci.txt in the test environment.');
+ const dir=await temporary(),folder=join(dir,'project');assert.equal(run(['python-project','prepare','--directory',folder]).status,0);
+ const code='def main():\n    pass\ndef add(x,y):\n    return x+y\ndef scale(x):\n    return x*2\ndef parse(x):\n    return int(x)\n';
+ await writeFile(join(folder,'project.py'),code);
+ await writeFile(join(folder,'test_project.py'),'from project import add, scale, parse\ndef test_add():\n    assert add(7,-3)==4\ndef test_scale():\n    assert scale(-5)==-10\ndef test_parse():\n    assert parse("42")==42\n');
+ const report=join(dir,'report.json'),args=['python-project','check','--directory',folder,'--python',selected,'--output',report];
+ assert.equal(run(args).status,0);let data=JSON.parse(await readFile(report,'utf8'));
+ assert.equal(data.passed,true);assert.equal(data.results.find(r=>r.name==='learner-project-tests').tests,3);
+ await writeFile(join(folder,'project.py'),code.replace('return x+y','return x-y'));
+ assert.equal(run(args).status,1);data=JSON.parse(await readFile(report,'utf8'));assert.equal(data.passed,false);
+ assert.equal(data.results.find(r=>r.name==='learner-project-tests').failures,1);
+});
+
+test('lab launcher works from a different directory and refuses ignored Indoor arguments',async()=>{
+ const dir=await temporary(),file=join(dir,'indoor.py');await writeFile(file,'print(input().lower())\n');
+ const result=spawnSync(process.execPath,[labLauncher,'indoor','indoor.py'],{cwd:dir,encoding:'utf8',windowsHide:true,timeout:30000,env:{...process.env,LAB_PYTHON:python}});
+ assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/"passed": true/);
+ const bad=spawnSync(process.execPath,[labLauncher,'indoor',file,'silently-ignored-before'],{encoding:'utf8',windowsHide:true});assert.equal(bad.status,2);
+ const output=join(dir,'object.json');
+ const object=spawnSync(process.execPath,[labLauncher,'object-model','--output',output],{cwd:dir,encoding:'utf8',windowsHide:true,timeout:30000,env:{...process.env,LAB_PYTHON:python}});
+ assert.equal(object.status,0,object.stderr);assert.equal(JSON.parse(await readFile(output,'utf8')).passed,true);
+});
+
+test('course timeout terminates the spawned child tree',async()=>{
+ const dir=await temporary(),script=join(dir,'probe.py'),pid=join(dir,'child.pid');
+ const helper=resolve('scripts').replaceAll('\\','/');
+ const body=`import sys,subprocess,time,os\nfrom pathlib import Path\nsys.path.insert(0,${JSON.stringify(helper)})\nfrom processes import run\nchild_code="import subprocess,sys,time; from pathlib import Path; child=subprocess.Popen([sys.executable,'-c','import time; time.sleep(30)']); Path(sys.argv[1]).write_text(str(child.pid)); time.sleep(30)"\ntry:\n    run([sys.executable,'-c',child_code,sys.argv[1]],timeout=1,capture_output=True)\n    raise AssertionError('timeout did not fire')\nexcept TimeoutError:\n    pass\nchild_pid=int(Path(sys.argv[1]).read_text())\nif os.name=='nt':\n    import ctypes\n    kernel=ctypes.WinDLL('kernel32',use_last_error=True)\n    kernel.OpenProcess.restype=ctypes.c_void_p\n    kernel.OpenProcess.argtypes=[ctypes.c_uint,ctypes.c_int,ctypes.c_uint]\n    kernel.WaitForSingleObject.argtypes=[ctypes.c_void_p,ctypes.c_uint]\n    kernel.CloseHandle.argtypes=[ctypes.c_void_p]\n    handle=kernel.OpenProcess(0x100000,False,child_pid)\n    if handle:\n        try: assert kernel.WaitForSingleObject(handle,0)!=258,'descendant still running'\n        finally: kernel.CloseHandle(handle)\nelse:\n    status=Path('/proc')/str(child_pid)/'stat'\n    assert not status.exists() or status.read_text().split()[2]=='Z','descendant still running'\nprint('selected process tree stopped')\n`;
+ await writeFile(script,body);
+ const result=spawnSync(python,[script,pid],{encoding:'utf8',windowsHide:true,timeout:15000});
+ assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/process tree stopped/);
+});

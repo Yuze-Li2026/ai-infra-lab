@@ -24,7 +24,7 @@ npm start
 
 - 中文学习工作台；45 个节点的知识依赖图，可按核心、方向和可选范围筛选，允许预览先修和按已有成果跳过。
 - 41 项来源资源，记录原作者、版本、语言、许可、研究证据和 12 项定性评估。
-- 11 项实验入口；6 项有本地运行流程，完整原课深化实验保留实际集成状态。
+- 11 项实验入口都有专用指南；6 项本地运行，另 5 项有原课准备、隔离环境与实际测试流程。起始源码准备不计作业完成。
 - 阶段复核、实验报告导入与站内指南阅读；本地成果记录与 JSON 备份合并恢复。提交状态是本人自报，不是能力认证。
 - CS50 Indoor Voice 的补充 CLI 检查，检测正确结果、边界情况、超时和输出过量。
 - AOSA 对象模型项目：固定原始提交、保留许可、运行 28 项原测试，提供独立提交检查与性能对照。
@@ -37,9 +37,13 @@ npm start
 npm run check
 ```
 
-构建结果在 `dist/`，可部署于 GitHub Pages 的项目子路径。构建生成 SHA-256 清单并保留上一份输出到 `artifacts/`。实验需要 Python 3.10+，本次使用 3.12.14 验证；可用 `LAB_TEST_PYTHON` 指定测试解释器路径。缺失 Python 时的跳过不算实验验证通过。
+构建结果在 `dist/`，可部署于 GitHub Pages 的项目子路径。构建生成 SHA-256 清单并保留上一份输出到 `artifacts/`。只检查网页、文档和构建可用 `npm run check-site`，不需要 Python。完整 `npm run check` 包含实际实验，需要 Python 3.10+、pytest 和对应依赖；本次使用 3.12.14。CI 用 `labs/requirements-ci.txt` 加官方 PyTorch 2.10 CPU 包准备完整环境。可用 `LAB_TEST_PYTHON` 指定解释器路径，缺失环境或跳过不算实验验证通过。
 
 统一实验入口：`node scripts/lab.mjs object-model --benchmark`（也支持 dbdb、consensus、micrograd、gpu）。按[实验指南](docs/object-model-lab.md)验收自己的实现。
+
+GPU 现在接受 `--submission 自己的.py`，实际调用七个接口并核对四类七个案例及完整恢复，故意错误实现会失败。五项原课入口可先运行 `node scripts/project.mjs needle plan`；固定源码、准备和实际检查见[原课工作流程](docs/project-workflows.md)。未实现的起始代码会失败，CS336 与 MIT 的完整环境仍需按指南准备。
+
+[0.4.1 实际可用性审查](docs/usability-audit.md)记录这一轮发现的具体缺口、修复、真实执行与未验证条件；完整领域覆盖不等于全部高级工程已经运行完成。
 
 链接检查：`npm run check-links`，会访问外部站点并写入 `artifacts/links.json`；403、429、超时要人工复核，不能直接判定教材失效。
 

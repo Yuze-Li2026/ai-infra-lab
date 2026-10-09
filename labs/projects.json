@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-09",
+  "profiles": {
+    "needle-hw0": {
+      "repo": "dlsyscourse/hw0",
+      "commit": "64862053e2d82ca465307a76b25ef0bd30dd08fb",
+      "url": "https://codeload.github.com/dlsyscourse/hw0/zip/64862053e2d82ca465307a76b25ef0bd30dd08fb",
+      "bytes": 11511779,
+      "sha256": "84eb2c8eb57bf0efb50698cb561f5960fa361ee9eb36f4bbec6fc32ee7402eb7",
+      "kind": "pytest",
+      "testDirectory": "tests",
+      "pythonPath": [
+        "python",
+        "apps",
+        "src"
+      ],
+      "python": "3.12",
+      "requirements": [
+        "numpy==2.2.6",
+        "pytest==9.0.2",
+        "numdifftools==0.9.41",
+        "mugrade @ https://codeload.github.com/dlsyscourse/mugrade/zip/717e300a5c2ddc0c729746946f8dc9f0d1c0ecea",
+        "pybind11==3.0.1"
+      ],
+      "environment": "CPU Python tests; HW0 C++ extension additionally needs a supported C++ compiler and pybind11.",
+      "license": "未发现独立仓库许可证；仅在个人工作目录获取原始课程代码，不随本站再分发。"
+    },
+    "needle-hw1": {
+      "repo": "dlsyscourse/hw1",
+      "commit": "aef53fc0a64652fb280a392d9194ee70d14d093a",
+      "url": "https://codeload.github.com/dlsyscourse/hw1/zip/aef53fc0a64652fb280a392d9194ee70d14d093a",
+      "bytes": 11620862,
+      "sha256": "91c9e4f5e36f1eb9633eac641f176a6c79427af663cefa6144fe7e6d8440583a",
+      "kind": "pytest",
+      "testDirectory": "tests",
+      "pythonPath": [
+        "python",
+        "apps",
+        "src"
+      ],
+      "python": "3.12",
+      "requirements": [
+        "numpy==2.2.6",
+        "pytest==9.0.2",
+        "numdifftools==0.9.41",
+        "mugrade @ https://codeload.github.com/dlsyscourse/mugrade/zip/717e300a5c2ddc0c729746946f8dc9f0d1c0ecea",
+        "pybind11==3.0.1"
+      ],
+      "environment": "CPU Python tests; HW0 C++ extension additionally needs a supported C++ compiler and pybind11.",
+      "license": "未发现独立仓库许可证；仅在个人工作目录获取原始课程代码，不随本站再分发。"
+    },
+    "needle-hw2": {
+      "repo": "dlsyscourse/hw2",
+      "commit": "efd456b97e22fd3ce49d338bad1249a104147816",
+      "url": "https://codeload.github.com/dlsyscourse/hw2/zip/efd456b97e22fd3ce49d338bad1249a104147816",
+      "bytes": 11672043,
+      "sha256": "f0a7d16411c42f448f60f8418599e728bf47a082122b4dee4794eff0577ff529",
+      "kind": "pytest",
+      "testDirectory": "tests",
+      "pythonPath": [
+        "python",
+        "apps",
+        "src"
+      ],
+      "python": "3.12",
+      "requirements": [
+        "numpy==2.2.6",
+        "pytest==9.0.2",
+        "numdifftools==0.9.41",
+        "mugrade @ https://codeload.github.com/dlsyscourse/mugrade/zip/717e300a5c2ddc0c729746946f8dc9f0d1c0ecea",
+        "pybind11==3.0.1"
+      ],
+      "environment": "CPU Python tests; HW0 C++ extension additionally needs a supported C++ compiler and pybind11.",
+      "license": "未发现独立仓库许可证；仅在个人工作目录获取原始课程代码，不随本站再分发。"
+    },
+    "systems-a1": {
+      "repo": "stanford-cs336/assignment1-basics",
+      "commit": "a158843b20107949f1a8d7df1b05cd33b9166712",
+      "url": "https://codeload.github.com/stanford-cs336/assignment1-basics/zip/a158843b20107949f1a8d7df1b05cd33b9166712",
+      "bytes": 10639123,
+      "sha256": "13a3501a6895417828ae1014e8c0c066ecdbcd845c35812ee655034380a4895c",
+      "kind": "uv",
+      "testDirectory": "tests",
+      "python": "3.12 or 3.13",
+      "environment": "Independent uv environment; upstream requires torch~=2.11.0. A2 GPU/Triton requires its supported Linux toolchain.",
+      "license": "MIT；遵守原课 AI 与学术诚信政策，本站不生成作业答案。"
+    },
+    "systems-a2": {
+      "repo": "stanford-cs336/assignment2-systems",
+      "commit": "ca8bc81a59b70516f7ebb2da4808daade877c736",
+      "url": "https://codeload.github.com/stanford-cs336/assignment2-systems/zip/ca8bc81a59b70516f7ebb2da4808daade877c736",
+      "bytes": 932810,
+      "sha256": "a351b8ca67fd83acf8fea23a4c75d8f7d30c2be787879663607f0e8ab2785cf0",
+      "kind": "uv",
+      "testDirectory": "tests",
+      "python": "3.12 or 3.13",
+      "environment": "Independent uv environment; upstream requires torch~=2.11.0. A2 GPU/Triton requires its supported Linux toolchain.",
+      "license": "MIT；遵守原课 AI 与学术诚信政策，本站不生成作业答案。"
+    },
+    "raft": {
+      "kind": "git",
+      "url": "git://g.csail.mit.edu/6.5840-golabs-2026",
+      "commit": "513cac0aef010750fc74688da8a395974a83cf7a",
+      "testDirectory": "src",
+      "environment": "Linux or existing WSL2; Go >=1.22, make, C compiler for race detection.",
+      "license": "原课程代码与政策，以官方仓库及课程许可为准，不随本站再分发。"
+    },
+    "ostep-project": {
+      "kind": "files",
+      "url": "https://raw.githubusercontent.com/remzi-arpacidusseau/ostep-projects/76cff3f89f4bf337af6e02e53a831b7eeb1396df/concurrency-mapreduce",
+      "commit": "76cff3f89f4bf337af6e02e53a831b7eeb1396df",
+      "testDirectory": ".",
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 12085,
+          "blob": "1b385aaec4ac72ad6ed9bb0c90d7919e39808216"
+        },
+        {
+          "path": "mapreduce.h",
+          "bytes": 672,
+          "blob": "24e1aec61a532419ffa3c452a0640b850709b939"
+        }
+      ],
+      "environment": "C11 compiler with pthread support; original API plus supplemental word-count, ownership, ordering and mapper overlap checks.",
+      "license": "原仓库未发现独立许可证；个人目录获取原作者 README/API，本站不再分发其源码。"
+    },
+    "python-project": {
+      "kind": "self-designed",
+      "url": "https://cs50.harvard.edu/python/project/",
+      "commit": "cs50-python-final-project-2026-10-09",
+      "testDirectory": ".",
+      "environment": "Python 3.10+ and pytest in this project's own virtual environment.",
+      "license": "依据原题要求创建空工作目录；没有附带答案或官方评分。"
+    }
+  }
+}

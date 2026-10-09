@@ -3255,7 +3255,7 @@
       "source": "cs50",
       "url": "https://cs50.harvard.edu/python/project/",
       "hardware": "CPU / Python；依项目需求",
-      "status": "精选候选；完整本地验收待集成",
+      "status": "已提供空项目准备、原题结构检查和实际 pytest 流程；自行设计及官方提交需独立完成。",
       "goal": "完成有实际用途的独立程序，呈现设计、测试与说明。",
       "rubric": [
         "依据原课项目要求自行设计实现",
@@ -3264,20 +3264,22 @@
         "解释设计选择，不能用复制代码代替独立实现"
       ],
       "limitation": "原课程账号、提交与评分服务不是本平台能力；许可证与依赖需要在引入具体代码时核实。",
-      "integration": "candidate"
+      "integration": "candidate",
+      "guide": "./docs/project-workflows.md",
+      "preparationCommand": "node scripts/project.mjs python-project plan"
     },
     {
       "id": "ostep-project",
-      "title": "计算系统 · OSTEP Projects",
+      "title": "计算系统 · OSTEP 并发 MapReduce",
       "stage": 2,
       "nodes": [
         "os",
         "tools"
       ],
       "source": "ostep",
-      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
-      "hardware": "CPU / C 工具链；原项目环境待验证",
-      "status": "作者提供项目入口；未完成项目级选型",
+      "url": "https://github.com/remzi-arpacidusseau/ostep-projects/tree/76cff3f89f4bf337af6e02e53a831b7eeb1396df/concurrency-mapreduce",
+      "hardware": "C11、gcc 与 pthread；原 MapReduce API。Windows MinGW 需核对 pthread 支持；其他 OS 项目按需使用 Linux。",
+      "status": "已选定原作者并发 MapReduce 项目，原 API 获取已验证；提供编译与补充检查，个人实现待完成。",
       "goal": "从原作者的项目中评估适合本路线的并发、虚拟化或持久化实验。",
       "rubric": [
         "先锁定项目与 commit，再确认许可",
@@ -3286,7 +3288,9 @@
         "提交原理与设计解释"
       ],
       "limitation": "尚未选定可独立运行的具体项目，不显示为已集成实验。",
-      "integration": "candidate"
+      "integration": "candidate",
+      "guide": "./docs/project-workflows.md",
+      "preparationCommand": "node scripts/project.mjs ostep-project plan"
     },
     {
       "id": "needle",
@@ -3298,7 +3302,7 @@
       "source": "dlsys",
       "url": "https://dlsyscourse.org/",
       "hardware": "Python/C++；部分阶段需要兼容 CUDA GPU",
-      "status": "课程描述已核对；本地复现待完成",
+      "status": "固定 HW0/HW1/HW2 起始代码与原测试已接入；完整作业与 HW3/HW4 后端尚未复现。",
       "goal": "沿原课作业实现自动微分、模块与 NDArray 后端。",
       "rubric": [
         "遵从原课程代码及作业许可",
@@ -3307,7 +3311,9 @@
         "性能报告与框架设计文档"
       ],
       "limitation": "课程 mugrade 服务不保证校外可用；尚未提供已验证的环境锁文件。",
-      "integration": "candidate"
+      "integration": "candidate",
+      "guide": "./docs/project-workflows.md",
+      "preparationCommand": "node scripts/project.mjs needle plan"
     },
     {
       "id": "systems",
@@ -3320,7 +3326,7 @@
       "source": "cs336",
       "url": "https://cs336.stanford.edu/",
       "hardware": "按原作业确认 GPU 显存与算力预算",
-      "status": "课程日程已核对；实验环境未复现",
+      "status": "固定 A1/A2 起始代码与原测试流程；需独立 PyTorch 2.11 环境，实际完整原作业未复现。",
       "goal": "从原课内核和并行主题入手，训练系统优化与解释能力。",
       "rubric": [
         "固定原作业版本、硬件与依赖",
@@ -3329,7 +3335,9 @@
         "解释优化原因与失败边界"
       ],
       "limitation": "多卡与 GPU 检查未执行；不能以提交记录代替实际结果。",
-      "integration": "candidate"
+      "integration": "candidate",
+      "guide": "./docs/project-workflows.md",
+      "preparationCommand": "node scripts/project.mjs systems plan"
     },
     {
       "id": "raft",
@@ -3341,7 +3349,7 @@
       "source": "distributed",
       "url": "https://pdos.csail.mit.edu/6.5840/",
       "hardware": "CPU / Go；原实验环境待验证",
-      "status": "精选候选；Go 前置与本地验收待集成",
+      "status": "2026 官方源码获取及版本已验证；使用 src/raft1 与 make raft1，Linux/WSL2、Go 环境仍需准备。",
       "goal": "通过原课程实验理解容错语义与故障恢复。",
       "rubric": [
         "核实原实验版本与许可证",
@@ -3350,7 +3358,9 @@
         "提交正确性、恢复行为与设计解释"
       ],
       "limitation": "不重新生成一套替代原实验；独立复现后再标记已集成。",
-      "integration": "candidate"
+      "integration": "candidate",
+      "guide": "./docs/project-workflows.md",
+      "preparationCommand": "node scripts/project.mjs raft plan"
     },
     {
       "id": "object-model",
@@ -3688,11 +3698,11 @@
       "url": "https://pytorch.org/docs/stable/index.html",
       "hardware": "NVIDIA CUDA GPU；本机 RTX 5060 Laptop 8 GB，PyTorch 2.10.0+cu128；不会修改驱动",
       "goal": "比较 CPU/GPU 数值误差，测量明确边界的矩阵乘法，验证训练和恢复后的下一步。",
-      "status": "真实 GPU 的四项补充集成检查通过；尚未验证多卡。",
+      "status": "真实 CUDA：四类七个案例通过；已提供独立文件验收及完整状态恢复检查，多卡未验证。",
       "integration": "checked",
       "command": "node scripts/lab.mjs gpu",
       "guide": "./docs/gpu-lab.md",
-      "reportCommit": "pytorch-2.10.0+cu128",
+      "reportCommit": "pytorch-2.10.0+cu128-contract-v2",
       "rubric": [
         "说明精度、容差、随机种子与确定性选项",
         "计时包含同步，报告预热、样本、中位数与测量边界",
@@ -3702,12 +3712,79 @@
       "limitation": "本站基于 PyTorch 公共 API 编写的补充集成检查，不是原课程评分；参考报告不作为个人能力验收。",
       "validation": {
         "mode": "reference",
-        "commit": "pytorch-2.10.0+cu128",
-        "createdAt": "2026-10-09T02:04:52.211815+00:00",
+        "commit": "pytorch-2.10.0+cu128-contract-v2",
+        "createdAt": "2026-10-09T10:09:09.061739+00:00",
         "python": "3.12.14",
         "platform": "Windows-11-10.0.26200-SP0",
         "passed": true,
-        "tests": 4,
+        "results": [
+          {
+            "name": "fp32-matmul-correctness",
+            "tests": 3,
+            "passed": true,
+            "cases": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  2
+                ],
+                "maxAbsError": 0.0
+              },
+              {
+                "shape": [
+                  17,
+                  31,
+                  9
+                ],
+                "maxAbsError": 3.814697265625e-06
+              },
+              {
+                "shape": [
+                  512,
+                  512,
+                  512
+                ],
+                "maxAbsError": 4.57763671875e-05
+              }
+            ]
+          },
+          {
+            "name": "autograd-cpu-gpu-comparison",
+            "tests": 2,
+            "passed": true
+          },
+          {
+            "name": "small-model-training",
+            "tests": 1,
+            "passed": true,
+            "initialLoss": 11.719507217407227,
+            "finalLoss": 0.004674483090639114,
+            "losses": [
+              {
+                "step": 0,
+                "loss": 11.719507217407227
+              },
+              {
+                "step": 49,
+                "loss": 0.19429603219032288
+              },
+              {
+                "step": 99,
+                "loss": 0.02128182351589203
+              },
+              {
+                "step": 149,
+                "loss": 0.0047699506394565105
+              }
+            ]
+          },
+          {
+            "name": "checkpoint-and-exact-next-step",
+            "tests": 1,
+            "passed": true
+          }
+        ],
         "benchmark": [
           {
             "device": "cpu",
@@ -3719,20 +3796,18 @@
             "dtype": "float32",
             "warmups": 3,
             "samples_ns": [
-              2010500,
-              2122700,
-              1941100,
-              1942300,
-              1949300,
-              1991200,
-              1989800,
-              2009000,
-              2036200
+              2147500,
+              2176400,
+              2144700,
+              2065500,
+              1990000,
+              2088700,
+              2079000,
+              2082000,
+              2065900
             ],
-            "median_ms": 1.9912,
-            "min_ms": 1.9411,
-            "max_ms": 2.1227,
-            "boundary": "inputs already on device; Python dispatch and CUDA synchronization included"
+            "median_ms": 2.082,
+            "boundary": "inputs resident on device; Python dispatch and CUDA synchronization included"
           },
           {
             "device": "cuda",
@@ -3744,31 +3819,30 @@
             "dtype": "float32",
             "warmups": 3,
             "samples_ns": [
-              83500,
-              56900,
-              57000,
-              55500,
-              55400,
-              55600,
-              55500,
-              54600,
-              55200
+              59800,
+              59600,
+              58500,
+              60100,
+              57800,
+              58600,
+              57200,
+              56500,
+              55300
             ],
-            "median_ms": 0.0555,
-            "min_ms": 0.0546,
-            "max_ms": 0.0835,
-            "boundary": "inputs already on device; Python dispatch and CUDA synchronization included"
+            "median_ms": 0.0585,
+            "boundary": "inputs resident on device; Python dispatch and CUDA synchronization included"
           }
-        ]
+        ],
+        "tests": 7
       },
       "requiredChecks": [
         {
           "name": "fp32-matmul-correctness",
-          "tests": 1
+          "tests": 3
         },
         {
           "name": "autograd-cpu-gpu-comparison",
-          "tests": 1
+          "tests": 2
         },
         {
           "name": "small-model-training",

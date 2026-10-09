@@ -6,6 +6,16 @@ import {validateCatalog} from './validate.mjs';
 import {verifyVendor} from './verify-vendor.mjs';
 
 async function exists(path){try{return await lstat(path);}catch(e){if(e.code==='ENOENT')return null;throw e;}}
+async function moveDirectory(root,from,to){
+ if(!from.startsWith(root+sep)||!to.startsWith(root+sep))throw Error('Unsafe directory move');
+ for(let attempt=0;;attempt++){
+  try{return await rename(from,to);}catch(error){
+   if(process.platform!=='win32'||!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt===5)throw error;
+   // Windows may briefly hold freshly copied files. Retry finitely; preserve rollback on failure.
+   await new Promise(resolveWait=>setTimeout(resolveWait,25*2**attempt));
+  }
+ }
+}
 async function copyText(from,to){
  const bytes=await readFile(from);
  const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes).replace(/\r\n/g,'\n');
@@ -66,9 +76,9 @@ export async function build(project=process.cwd()){
  if(await exists(output)){
   backup=join(artifacts,`build-previous-${randomUUID()}`);
   if(!backup.startsWith(root+sep)||output!==join(root,'dist'))throw new Error('Unsafe build target');
-  await rename(output,backup);
+  await moveDirectory(root,output,backup);
  }
- try{await rename(stage,output);}catch(error){if(backup)await rename(backup,output);throw error;}
+ try{await moveDirectory(root,stage,output);}catch(error){if(backup)await moveDirectory(root,backup,output);throw error;}
  return {files:manifest.files.length,output,previousOutput:backup};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)console.log(await build());

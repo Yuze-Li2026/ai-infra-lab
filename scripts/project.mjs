@@ -1,0 +1,12 @@
+import {spawn} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const args=process.argv.slice(2);
+for(let i=0;i<args.length;i++)if(['--directory','--archive','--python','--output'].includes(args[i])&&args[i+1])args[++i]=resolve(args[i]);
+const local=resolve(root,'.venv-labs',process.platform==='win32'?'Scripts/python.exe':'bin/python');
+const python=process.env.LAB_PYTHON||(existsSync(local)?local:process.platform==='win32'?'python':'python3');
+const child=spawn(python,[resolve(root,'scripts/project.py'),...args],{stdio:'inherit',windowsHide:true,cwd:root});
+child.on('error',error=>{console.error('无法启动课程工具：'+error.message);process.exitCode=2;});
+child.on('exit',code=>{process.exitCode=code??1;});

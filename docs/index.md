@@ -19,7 +19,7 @@
 |3 模型|[micrograd 自动微分](micrograd-lab.md)|DLSys 张量与后端|
 |4 工程|[共识与失效恢复](consensus-lab.md)、[GPU 数值与恢复](gpu-lab.md)|6.5840 / CS336 / 生产系统方向|
 
-[高级原课实验](advanced-labs.md)列出先修、环境、产物和尚未验证的条件。[GPU 安装与验证记录](gpu-validation-plan.md)给出本机配置、固定版本、下载范围与实际结果。
+[原课准备与测试流程](project-workflows.md)提供 CS50 最终项目、OSTEP MapReduce、DLSys HW0–HW2、2026 MIT Raft 和 CS336 A1/A2 的固定源码获取、独立环境、实际测试及失败记录步骤。[高级原课实验](advanced-labs.md)列出先修、产物和更深作业尚未验证的条件。[GPU 安装与验证记录](gpu-validation-plan.md)给出本机配置、固定版本、下载范围与实际结果。
 
 ## 维护与贡献
 
@@ -34,6 +34,7 @@
 - [AI Infra 能力覆盖矩阵](coverage.md)：从零基础到训练、推理、平台、数据、编译器与设备的完整范围审计。
 - [按工程方向选择路线](learning-paths.md)：共同起点、六个专业方向与综合作品要求。
 - [逐文件审查与修复记录](file-audit.md)：审查范围、具体问题、修复与验证边界。
+- [0.4.1 实际可用性审查](usability-audit.md)：自己的作品是否真的执行、课程工作目录与测试、明确的未验证条件。
 
 - [学习路径依据与覆盖复核](path-evidence.md)：CMU、Stanford、MLSysBook 原作者路径与全部知识节点的对应关系。
 - [能力模型与持续覆盖审计](research.md)：真实能力、递归依赖、选择理由、开放缺口与更新机制。

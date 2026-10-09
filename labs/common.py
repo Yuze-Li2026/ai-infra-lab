@@ -44,7 +44,7 @@ def run_safely(lab, upstream, main):
         (ROOT / 'artifacts').mkdir(parents=True, exist_ok=True)
         return main()
     except Exception as error:
-        manifest = {'commit':'pytorch-2.10.0+cu128' if lab == 'gpu' else 'unknown', 'checksumsVerified':False}
+        manifest = {'commit':'pytorch-2.10.0+cu128-contract-v2' if lab == 'gpu' else 'unknown', 'checksumsVerified':False}
         if upstream:
             try:
                 manifest['commit'] = json.loads((Path(upstream) / 'manifest.json').read_text(encoding='utf-8'))['commit']
