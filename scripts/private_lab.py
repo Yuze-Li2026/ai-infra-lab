@@ -101,7 +101,7 @@ def serve(folder, root, port, allow_root):
     config.ServerApp.disable_check_xsrf = False
     config.ServerApp.trust_xheaders = False
     config.ServerApp.cookie_secret = bytes.fromhex(data["cookieSecret"])
-    config.ServerApp.log_level = "WARNING"
+    config.ServerApp.log_level = 30
     config.IdentityProvider.token = data["token"]
     config.PasswordIdentityProvider.hashed_password = ""
     config.PasswordIdentityProvider.password_required = False

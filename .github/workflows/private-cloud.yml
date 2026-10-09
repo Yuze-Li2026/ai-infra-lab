@@ -21,10 +21,10 @@ jobs:
           python-version: '3.12'
       - name: Install the separate notebook environment on the cloud runner
         run: |
-          python -m venv .venv-private
-          .venv-private/bin/python -m pip install --disable-pip-version-check -r labs/private-cloud/requirements.txt
+          python -m venv "$RUNNER_TEMP/private-venv"
+          "$RUNNER_TEMP/private-venv/bin/python" -m pip install --disable-pip-version-check -r labs/private-cloud/requirements.txt
           mkdir -p artifacts
-          .venv-private/bin/python -m pip freeze > artifacts/private-cloud-environment.txt
+          "$RUNNER_TEMP/private-venv/bin/python" -m pip freeze > artifacts/private-cloud-environment.txt
           sudo apt-get update -qq
           sudo apt-get install -y -qq openssh-server
       - name: Create an isolated SSH server with disposable keys
@@ -60,7 +60,7 @@ jobs:
           assert rejected.returncode==255, 'Unknown SSH key was accepted'
           PY
       - name: Test authorization, actual execution, tunnel, restart and credential revocation
-        run: .venv-private/bin/python tests/private-cloud-linux.py
+        run: '"$RUNNER_TEMP/private-venv/bin/python" tests/private-cloud-linux.py'
       - name: Stop only the temporary SSH server
         if: always()
         run: |
