@@ -1,0 +1,3 @@
+# Control-plane environment only; each course keeps its own environment.
+jupyterlab==4.6.4
+jupyter-server==2.21.1

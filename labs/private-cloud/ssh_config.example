@@ -1,0 +1,18 @@
+# Copy outside the repository (or into ignored .private/), then fill in the
+# instance connection details. Import and verify the server host key first.
+Host ai-infra-private
+    HostName INSTANCE_HOST
+    Port 22
+    User root
+    IdentityFile ~/.ssh/ai_infra_lab_ed25519
+    IdentitiesOnly yes
+    PasswordAuthentication no
+    KbdInteractiveAuthentication no
+    StrictHostKeyChecking yes
+    ForwardAgent no
+    GatewayPorts no
+    ExitOnForwardFailure yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    RequestTTY no
+    LocalForward 127.0.0.1:18888 127.0.0.1:8888

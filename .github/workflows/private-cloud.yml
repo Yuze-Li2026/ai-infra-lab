@@ -1,0 +1,83 @@
+name: Private laboratory access
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/quality-and-ui]
+    paths:
+      - .github/workflows/private-cloud.yml
+      - scripts/private_lab.py
+      - labs/private-cloud/**
+      - tests/private-cloud-linux.py
+permissions:
+  contents: read
+jobs:
+  private-access:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install the separate notebook environment on the cloud runner
+        run: |
+          python -m venv .venv-private
+          .venv-private/bin/python -m pip install --disable-pip-version-check -r labs/private-cloud/requirements.txt
+          mkdir -p artifacts
+          .venv-private/bin/python -m pip freeze > artifacts/private-cloud-environment.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq openssh-server
+      - name: Create an isolated SSH server with disposable keys
+        run: |
+          python - <<'PY'
+          import os, pathlib, subprocess
+          private=pathlib.Path(os.environ['RUNNER_TEMP'])/'lab-ssh'
+          private.mkdir(mode=0o700)
+          for name in ('host','client','unauthorized'):
+              subprocess.run(['ssh-keygen','-q','-t','ed25519','-N','','-f',str(private/name)],check=True)
+          user=os.environ['USER']
+          (private/'sshd_config').write_text('\n'.join([
+              'Port 32222','ListenAddress 127.0.0.1','HostKey '+str(private/'host'),
+              'PidFile '+str(private/'sshd.pid'),'AuthorizedKeysFile '+str(private/'client.pub'),
+              'PasswordAuthentication no','KbdInteractiveAuthentication no','UsePAM no',
+              'PermitRootLogin no','AllowUsers '+user,'AllowTcpForwarding local',
+              'GatewayPorts no','LogLevel ERROR']))
+          hostkey=(private/'host.pub').read_text().strip()
+          (private/'known_hosts').write_text('[127.0.0.1]:32222 '+hostkey+'\n')
+          (private/'ssh_config').write_text('\n'.join([
+              'Host private-test','  HostName 127.0.0.1','  Port 32222','  User '+user,
+              '  IdentityFile '+str(private/'client'),'  IdentitiesOnly yes','  BatchMode yes',
+              '  UserKnownHostsFile '+str(private/'known_hosts'),'  StrictHostKeyChecking yes',
+              '  ExitOnForwardFailure yes','  ForwardAgent no','  ServerAliveInterval 10']))
+          with open(os.environ['GITHUB_ENV'],'a') as env:
+              env.write('PRIVATE_LAB_TEST_SSH_CONFIG='+str(private/'ssh_config')+'\n')
+          subprocess.run(['sudo','mkdir','-p','/run/sshd'],check=True)
+          subprocess.run(['sudo','/usr/sbin/sshd','-f',str(private/'sshd_config')],check=True)
+          # A different key cannot establish even a shell session.
+          rejected=subprocess.run(['ssh','-F','/dev/null','-p','32222','-i',str(private/'unauthorized'),
+              '-o','IdentitiesOnly=yes','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes',
+              '-o','UserKnownHostsFile='+str(private/'known_hosts'),user+'@127.0.0.1','true'],capture_output=True)
+          assert rejected.returncode==255, 'Unknown SSH key was accepted'
+          PY
+      - name: Test authorization, actual execution, tunnel, restart and credential revocation
+        run: .venv-private/bin/python tests/private-cloud-linux.py
+      - name: Stop only the temporary SSH server
+        if: always()
+        run: |
+          python - <<'PY'
+          import os,pathlib,subprocess
+          pidfile=pathlib.Path(os.environ['RUNNER_TEMP'])/'lab-ssh/sshd.pid'
+          if pidfile.is_file():
+              pid=pidfile.read_text().strip()
+              assert pid.isdigit() and int(pid)>1
+              subprocess.run(['sudo','kill','--',pid],check=True)
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: private-cloud-evidence
+          path: |
+            artifacts/private-cloud-results.json
+            artifacts/private-cloud-environment.txt
+          retention-days: 7
+          if-no-files-found: error

@@ -9,5 +9,6 @@ __pycache__/
 .venv*/
 .env
 .env.*
+.private/
 .codex/
 提示词.txt
