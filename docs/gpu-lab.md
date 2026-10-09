@@ -14,15 +14,14 @@ node scripts/lab.mjs gpu
 
 ## 实际验收自己的 GPU 实现
 
-复制接口模板到自己的文件，完成七个接口；模板没有答案。下面的 PowerShell 命令只在一个新的作品目录使用，已有作品不要覆盖：
+创建自己的接口文件，完成七个接口；模板没有答案。下面的命令适用于 Windows/Linux/macOS，已有目录会拒绝覆盖作品：
 
-```powershell
-New-Item -ItemType Directory -Path workspaces/my-gpu
-Copy-Item labs/gpu/submission-template.py workspaces/my-gpu/implementation.py
+```sh
+node scripts/lab.mjs gpu --init workspaces/my-gpu
 node scripts/lab.mjs gpu --submission workspaces/my-gpu/implementation.py --output artifacts/my-gpu-report.json
 ```
 
-Linux/macOS 可用 `mkdir workspaces/my-gpu`、`cp labs/gpu/submission-template.py workspaces/my-gpu/implementation.py`；检查命令相同。初次运行会产生明确失败，因为模板尚未实现。自己实现后复跑，把 `artifacts/my-gpu-report.json` 导入工程实验的 GPU 卡片。`--submission` 接受一个 `.py` 文件，检查器实际调用该文件的函数；不会把你写的布尔“成功”当验收结果。
+准备命令用独占创建目录和文件，不依赖 shell 遇错后是否继续执行。初次检查会产生明确失败，因为模板尚未实现。自己实现后复跑，把 `artifacts/my-gpu-report.json` 导入工程实验的 GPU 卡片。`--submission` 接受一个 `.py` 文件，检查器实际调用该文件的函数；不会把你写的布尔“成功”当验收结果。
 
 |接口|输入与返回契约|检查器负责的验收|
 |---|---|---|

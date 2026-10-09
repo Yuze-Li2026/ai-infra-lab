@@ -57,6 +57,11 @@ test('lab launcher works from a different directory and refuses ignored Indoor a
  const output=join(dir,'object.json');
  const object=spawnSync(process.execPath,[labLauncher,'object-model','--output',output],{cwd:dir,encoding:'utf8',windowsHide:true,timeout:30000,env:{...process.env,LAB_PYTHON:python}});
  assert.equal(object.status,0,object.stderr);assert.equal(JSON.parse(await readFile(output,'utf8')).passed,true);
+ const workspace=join(dir,'gpu-work');
+ const init=()=>spawnSync(process.execPath,[labLauncher,'gpu','--init',workspace],{encoding:'utf8',windowsHide:true,timeout:10000});
+ assert.equal(init().status,0);const implementation=join(workspace,'implementation.py');
+ assert.match(await readFile(implementation,'utf8'),/NotImplementedError/);await writeFile(implementation,'# existing learner work\n');
+ assert.equal(init().status,1);assert.equal(await readFile(implementation,'utf8'),'# existing learner work\n');
 });
 
 test('course timeout terminates the spawned child tree',async()=>{
