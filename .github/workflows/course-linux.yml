@@ -43,7 +43,9 @@ jobs:
           folder=Path('workspaces')/key
           subprocess.run([sys.executable,'-m','venv',str(folder/'.venv')],check=True)
           profile=json.loads(Path('labs/projects.json').read_text())['profiles'][key]
-          python=str((folder/'.venv/bin/python').resolve())
+          # Preserve the venv entry point: resolving its symlink selects the system interpreter.
+          python=str((folder/'.venv/bin/python').absolute())
+          subprocess.run([python,'-c','import sys; assert sys.prefix != sys.base_prefix'],check=True)
           subprocess.run([python,'-m','pip','install','--disable-pip-version-check',*profile['requirements']],check=True)
           subprocess.run([python,'-c','import numpy,pytest,numdifftools,pybind11,mugrade'],check=True)
           if key=='needle-hw0':

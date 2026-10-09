@@ -46,6 +46,11 @@ test('course checks execute the learner tests and reject a changed implementatio
  const report=join(dir,'report.json'),args=['python-project','check','--directory',folder,'--python',selected,'--output',report];
  assert.equal(run(args).status,0);let data=JSON.parse(await readFile(report,'utf8'));
  assert.equal(data.passed,true);assert.equal(data.results.find(r=>r.name==='learner-project-tests').tests,3);
+ const direct=spawnSync(selected,[resolve('scripts/project.py'),'python-project','check','--directory',folder,'--python',selected,'--output','direct-python.json'],{cwd:dir,encoding:'utf8',windowsHide:true,timeout:30000});
+ assert.equal(direct.status,0,direct.stderr+direct.stdout);
+ const directReport=JSON.parse(await readFile(join(dir,'direct-python.json'),'utf8'));
+ assert.equal(directReport.results.find(r=>r.name==='learner-project-tests').tests,3);
+ assert.equal(existsSync(directReport.junit),true);assert.equal(existsSync(directReport.log),true);
  await writeFile(join(folder,'project.py'),code.replace('return x+y','return x-y'));
  assert.equal(run(args).status,1);data=JSON.parse(await readFile(report,'utf8'));assert.equal(data.passed,false);
  assert.equal(data.results.find(r=>r.name==='learner-project-tests').failures,1);

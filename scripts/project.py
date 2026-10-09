@@ -134,7 +134,7 @@ def go_test_result(text, exit_code):
 
 def course_check(key, profile, folder, args):
     now = datetime.now(timezone.utc).isoformat()
-    target = Path(args.output) if args.output else ROOT/'artifacts'/('course-'+key+'-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')+'.json')
+    target = Path(args.output).resolve() if args.output else ROOT/'artifacts'/('course-'+key+'-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')+'.json')
     target.parent.mkdir(parents=True, exist_ok=True)
     evidence = target.parent/(target.stem+'-'+uuid4().hex)
     log = evidence.with_suffix('.log'); junit = evidence.with_suffix('.xml')
