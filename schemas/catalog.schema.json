@@ -2,36 +2,344 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI Infra Lab catalog v1",
   "type": "object",
-  "required": ["schemaVersion", "reviewedAt", "stages", "sources", "nodes", "labs"],
+  "required": [
+    "schemaVersion",
+    "reviewedAt",
+    "stages",
+    "sources",
+    "nodes",
+    "labs"
+  ],
   "properties": {
-    "schemaVersion": {"const": 1},
-    "reviewedAt": {"type": "string", "format": "date"},
-    "stages": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "title", "description"], "properties": {"id": {"type": "integer", "minimum": 0}, "title": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"}}}},
-    "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
-    "nodes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/node"}},
-    "labs": {"type": "array", "items": {"$ref": "#/$defs/lab"}}
+    "schemaVersion": {
+      "const": 1
+    },
+    "reviewedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "title": {
+            "$ref": "#/$defs/text"
+          },
+          "description": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "labs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lab"
+      }
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "stage",
+          "title",
+          "nodes",
+          "labs",
+          "criteria"
+        ],
+        "properties": {
+          "stage": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "title": {
+            "$ref": "#/$defs/text"
+          },
+          "nodes": {
+            "$ref": "#/$defs/ids"
+          },
+          "labs": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/ids"
+              },
+              {
+                "minItems": 1
+              }
+            ]
+          },
+          "criteria": {
+            "type": "array",
+            "minItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        }
+      }
+    }
   },
   "$defs": {
-    "text": {"type": "string", "minLength": 1},
-    "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$", "not": {"enum": ["constructor", "prototype"]}},
-    "ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
-    "https": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "not": {
+        "enum": [
+          "constructor",
+          "prototype"
+        ]
+      }
+    },
+    "ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "https": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
     "source": {
       "type": "object",
-      "required": ["id", "title", "author", "url", "version", "language", "license", "licenseUrl", "prerequisites", "coverage", "reason", "limitations", "verification", "reviewedAt", "reviewLevel", "reuse", "evaluation", "reviewEvidence"],
+      "required": [
+        "id",
+        "title",
+        "author",
+        "url",
+        "version",
+        "language",
+        "license",
+        "licenseUrl",
+        "prerequisites",
+        "coverage",
+        "reason",
+        "limitations",
+        "verification",
+        "reviewedAt",
+        "reviewLevel",
+        "reuse",
+        "evaluation",
+        "reviewEvidence"
+      ],
       "properties": {
-        "id": {"$ref": "#/$defs/id"}, "title": {"$ref": "#/$defs/text"}, "url": {"$ref": "#/$defs/https"}, "licenseUrl": {"$ref": "#/$defs/https"}, "language": {"enum": ["zh", "en"]},
-        "evaluation": {"type": "object", "required": ["authority", "accuracy", "depth", "engineeringValue", "coverage", "teachingQuality", "difficulty", "languageFriendliness", "accessibility", "maintenance", "licensing", "stability"], "additionalProperties": {"$ref": "#/$defs/text"}},
-        "reviewEvidence": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["url", "checkedAt", "finding"], "properties": {"url": {"$ref": "#/$defs/https"}, "checkedAt": {"type": "string", "format": "date"}, "finding": {"$ref": "#/$defs/text"}}}}
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/https"
+        },
+        "licenseUrl": {
+          "$ref": "#/$defs/https"
+        },
+        "language": {
+          "enum": [
+            "zh",
+            "en"
+          ]
+        },
+        "evaluation": {
+          "type": "object",
+          "required": [
+            "authority",
+            "accuracy",
+            "depth",
+            "engineeringValue",
+            "coverage",
+            "teachingQuality",
+            "difficulty",
+            "languageFriendliness",
+            "accessibility",
+            "maintenance",
+            "licensing",
+            "stability"
+          ],
+          "additionalProperties": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "reviewEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "url",
+              "checkedAt",
+              "finding"
+            ],
+            "properties": {
+              "url": {
+                "$ref": "#/$defs/https"
+              },
+              "checkedAt": {
+                "type": "string",
+                "format": "date"
+              },
+              "finding": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        }
       }
     },
     "node": {
-      "type": "object", "required": ["id", "title", "stage", "prerequisites", "resources", "category", "objective", "guidance", "evidence", "status", "scope", "steps"],
-      "properties": {"id": {"$ref": "#/$defs/id"}, "stage": {"type": "integer", "minimum": 0}, "prerequisites": {"$ref": "#/$defs/ids"}, "resources": {"allOf": [{"$ref": "#/$defs/ids"}, {"minItems": 1}]}, "category": {"enum": ["core", "specialist", "optional"]}, "steps": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["title", "task"], "properties": {"title": {"$ref": "#/$defs/text"}, "task": {"$ref": "#/$defs/text"}}}}}
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "stage",
+        "prerequisites",
+        "resources",
+        "category",
+        "objective",
+        "guidance",
+        "evidence",
+        "status",
+        "scope",
+        "steps"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "stage": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prerequisites": {
+          "$ref": "#/$defs/ids"
+        },
+        "resources": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ids"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "category": {
+          "enum": [
+            "core",
+            "specialist",
+            "optional"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "task"
+            ],
+            "properties": {
+              "title": {
+                "$ref": "#/$defs/text"
+              },
+              "task": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        }
+      }
     },
     "lab": {
-      "type": "object", "required": ["id", "title", "stage", "nodes", "source", "url", "hardware", "status", "goal", "rubric", "limitation", "integration"],
-      "properties": {"id": {"$ref": "#/$defs/id"}, "source": {"$ref": "#/$defs/id"}, "nodes": {"allOf": [{"$ref": "#/$defs/ids"}, {"minItems": 1}]}, "url": {"$ref": "#/$defs/https"}, "integration": {"enum": ["candidate", "checked", "reproduced"]}, "guide": {"type": "string", "pattern": "^\\./docs/[a-z0-9-]+\\.md$"}, "rubric": {"type": "array", "minItems": 3, "items": {"$ref": "#/$defs/text"}}}
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "stage",
+        "nodes",
+        "source",
+        "url",
+        "hardware",
+        "status",
+        "goal",
+        "rubric",
+        "limitation",
+        "integration"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "source": {
+          "$ref": "#/$defs/id"
+        },
+        "nodes": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ids"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "url": {
+          "$ref": "#/$defs/https"
+        },
+        "integration": {
+          "enum": [
+            "candidate",
+            "checked",
+            "reproduced"
+          ]
+        },
+        "guide": {
+          "type": "string",
+          "pattern": "^\\./docs/[a-z0-9-]+\\.md$"
+        },
+        "rubric": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
     }
   }
 }

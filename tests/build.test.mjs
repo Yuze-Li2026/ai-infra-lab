@@ -12,5 +12,7 @@ test('isolated build drops stale public files, preserves prior output, and verif
  assert.equal(await readFile(join(first.previousOutput,'stale-private.txt'),'utf8'),'must not be published');
  await verifyDist(join(root,'dist'));const manifest=await readFile(join(root,'dist/build-manifest.json'),'utf8');
  await build(root);assert.equal(await readFile(join(root,'dist/build-manifest.json'),'utf8'),manifest);
+ await writeFile(join(root,'site/vendor/marked/marked.esm.js'),'tampered');await assert.rejects(build(root),/Vendor checksum mismatch/);
+ assert.equal(await readFile(join(root,'dist/build-manifest.json'),'utf8'),manifest);
  await writeFile(join(root,'dist/extra.txt'),'unexpected');await assert.rejects(verifyDist(join(root,'dist')),/Unexpected public file/);
 });

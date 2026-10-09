@@ -1127,3 +1127,28 @@ main,p,h1,h2,h3,a,button,dd {
     transform:none
   }
 }
+.stage-review-link {color:inherit;font-weight:650;text-decoration:none}
+.stage-review-link:hover {text-decoration:underline;text-underline-offset:5px}
+.report-record {border-top:1px solid var(--line,#dce5e6);margin-top:24px;padding-top:20px}
+.report-record p {font-size:13px;line-height:1.8}
+.stat strong.status-word {font-size:25px}
+.document-tools {display:flex;flex-wrap:wrap;gap:24px;margin-bottom:24px;font-size:13px}
+.document-layout {display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px;align-items:start}
+.document-body {min-width:0;max-width:850px;background:var(--paper,#fff);border:1px solid var(--line,#dce5e6);border-radius:14px;padding:42px 46px;line-height:1.95;overflow-wrap:anywhere}
+.document-body h1 {font-size:32px;line-height:1.4;margin:0 0 28px;letter-spacing:-.7px}
+.document-body h2 {font-size:22px;line-height:1.5;margin:40px 0 15px;padding-top:12px;border-top:1px solid var(--line,#dce5e6);scroll-margin-top:30px}
+.document-body h3 {font-size:17px;margin:25px 0 10px}
+.document-body p {margin:14px 0}
+.document-body ul,.document-body ol {padding-left:25px}
+.document-body li {margin:8px 0}
+.document-body a {text-decoration:underline;text-underline-offset:3px}
+.document-body pre {background:#142b37;color:#e7f5f3;border-radius:9px;padding:20px;overflow:auto;max-width:100%;font-size:13px;line-height:1.8;white-space:pre}
+.document-body code {font-family:Consolas,monospace;font-size:.9em}
+.document-body pre code {display:block;background:transparent;color:inherit;padding:0;border:0;white-space:inherit;overflow-wrap:normal}
+.document-body :not(pre)>code {background:#edf3f2;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
+.document-body blockquote {margin:24px 0;padding:8px 20px;border-left:3px solid #349180;background:#f2f7f5}
+.document-body table {font-size:13px;line-height:1.8;min-width:460px}
+.document-outline {position:sticky;top:28px;display:flex;flex-direction:column;gap:12px;border-left:1px solid var(--line,#dce5e6);padding:10px 0 10px 20px}
+.document-outline button {text-align:left;font-size:12px;line-height:1.7;white-space:normal}
+@media(max-width:1100px){.document-layout{grid-template-columns:minmax(0,1fr)}.document-outline{display:none}.document-body{max-width:none}}
+@media(max-width:600px){.document-body{padding:24px 20px}.document-body h1{font-size:25px}.document-body h2{font-size:20px}.document-tools{gap:16px}.stat strong.status-word{font-size:17px}}

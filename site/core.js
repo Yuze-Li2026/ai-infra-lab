@@ -1,7 +1,8 @@
+import {validateReportSummary} from './reports.js';
 export const STORAGE_KEY='ai-infra-lab.progress.v1';
 export const MAX_BACKUP_BYTES=2*1024*1024;
 export const DRAFT_KEY='ai-infra-lab.drafts.v1';
-export const emptyProgress=()=>({schemaVersion:1,updatedAt:new Date().toISOString(),records:{}});
+export const emptyProgress=()=>({schemaVersion:1,updatedAt:new Date().toISOString(),records:{},labReports:{}});
 export function validateProgress(value,nodes){
   if(!value||value.schemaVersion!==1||!value.records||typeof value.records!=='object'||Array.isArray(value.records))throw new Error('备份格式或版本不兼容。');
   const ids=new Set(nodes.map(n=>n.id)); const records={};
@@ -12,7 +13,12 @@ export function validateProgress(value,nodes){
     if(Date.parse(r.updatedAt)>Date.now()+300000)throw new Error('备份记录的时间明显超前，请检查设备时钟或备份内容。');
     records[id]={status:r.status,evidence:r.evidence,updatedAt:new Date(r.updatedAt).toISOString()};
   }
-  return {schemaVersion:1,updatedAt:new Date().toISOString(),records};
+  const labReports={};
+  if(value.labReports!==undefined){
+    if(!value.labReports||typeof value.labReports!=='object'||Array.isArray(value.labReports)||Object.keys(value.labReports).length>6)throw new Error('实验报告备份无效。');
+    for(const [id,summary]of Object.entries(value.labReports)){const report=validateReportSummary(summary);if(id!==report.lab)throw new Error('实验报告标识不匹配。');labReports[id]=report;}
+  }
+  return {schemaVersion:1,updatedAt:new Date().toISOString(),records,labReports};
 }
 export function ready(node,progress){return node.prerequisites.every(id=>progress.records[id]?.status==='submitted');}
 export function nextNode(nodes,progress){
@@ -26,7 +32,9 @@ export function mergeProgress(current,incoming,nodes){
   for(const [id,r] of Object.entries(b.records)){
     if(!records[id]||Date.parse(r.updatedAt)>Date.parse(records[id].updatedAt))records[id]=r;
   }
-  return validateProgress({...a,records},nodes);
+  const labReports={...a.labReports};
+  for(const [id,r]of Object.entries(b.labReports))if(!labReports[id]||Date.parse(r.importedAt)>Date.parse(labReports[id].importedAt))labReports[id]=r;
+  return validateProgress({...a,records,labReports},nodes);
 }
 export function record(progress,id,status,evidence,nodes){
   if(!nodes.some(n=>n.id===id))throw new Error('未知学习节点。');

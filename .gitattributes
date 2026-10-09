@@ -1,2 +1,5 @@
 * text=auto eol=lf
 labs/object-model/upstream/** -text
+labs/dbdb/upstream/** -text
+labs/consensus/upstream/** -text
+labs/micrograd/upstream/** -text

@@ -19,7 +19,7 @@ Windows 双击项目中的 `start.cmd`，保持命令窗口打开，在浏览器
 打开项目目录的终端，执行：
 
 ```sh
-node scripts/grade.mjs ./indoor.py python
+node scripts/lab.mjs indoor ./indoor.py
 ```
 
 检查器只主动运行你指定的程序。它不是安全沙箱，不要用来运行不信任的下载代码。每个案例限制执行时间与输出长度，但不能隔离文件和网络权限。
@@ -47,3 +47,33 @@ node scripts/grade.mjs ./indoor.py python
 完成 Python、程序抽象和测试基础后，打开“工程实验”中的对象运行时项目。按照[对象模型实验指南](object-model-lab.md)，先理解原作者设计，独立实现，再运行保留的原始测试。参考实现已通过 28 项测试，但需要你自己的设计、代码、边界测试与解释才能作为个人成果。阅读英文材料时可以对照[中英术语表](glossary.md)。
 
 高级课程仍需访问原始资源；网站本身没有离线复制这些课程。无网络时已缓存页面的可用性不作保证，本地启动后工作台核心资源与进度功能无需外部网络。
+
+## 6. 准备独立实验环境
+
+平台浏览只需要 Node 22+，不必安装 GPU 包。CPU 实验需要 Python 3.10+，建议 3.12；不要使用系统里旧的 Python 3.6。先用 `python --version` 或 Windows `py -3.12 --version` 核对。
+
+Windows 在项目目录创建环境与安装小型依赖：
+
+```powershell
+py -3.12 -m venv .venv-labs
+.venv-labs/Scripts/python.exe -m pip install -r labs/requirements-cpu.txt
+.venv-labs/Scripts/python.exe scripts/doctor.py
+```
+
+Linux/macOS：
+
+```sh
+python3 -m venv .venv-labs
+.venv-labs/bin/python -m pip install -r labs/requirements-cpu.txt
+.venv-labs/bin/python scripts/doctor.py
+```
+
+已有 `.venv-labs` 时直接使用，不必重建。`node scripts/lab.mjs` 优先选择此环境；其他环境可通过 `LAB_PYTHON` 指定完整解释器路径。对象模型与入门检查无第三方依赖；DBDB 使用文件锁兼容包，共识使用 Python 2 语法转换包。依赖安装只影响这个环境。
+
+micrograd 的两项原测试需要 PyTorch；无 NVIDIA 的机器可依据 [PyTorch 官方安装入口](https://pytorch.org/get-started/locally/) 选择适合平台的 CPU 版本，不需要 GPU 才能学习自动微分。本机已授权并安装 GPU 版，Windows / CPython 3.12 的复现锁位于 `labs/requirements-gpu-windows-lock.txt`，约 3 GB，其他系统不能直接使用该 Windows wheel。
+
+## 7. 导入报告，复核阶段
+
+实验生成 JSON 后，在“工程实验”找到对应项目点击“导入实验报告”。平台核对实验标识、固定版本、测试结果一致性、日期和大小；保留摘要、环境与 SHA-256 文件指纹。参考模式不计入个人作品，独立提交且通过的报告才会在阶段复核中显示作品检查通过。
+
+从首页点击阶段名称打开复核页，补齐知识说明与作品；“材料齐备”仍需要设计、边界测试、性能协议和独立解释。报告不作真实性签名或独立认证。备份会一并包含报告摘要；原始代码、完整报告和设计文件请另外保存。新功能兼容原来的学习备份。

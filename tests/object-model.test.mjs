@@ -1,9 +1,11 @@
 import test from 'node:test';
+import {existsSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,writeFile} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
-const python=process.env.LAB_TEST_PYTHON||'python';
+const local=resolve('.venv-labs',process.platform==='win32'?'Scripts/python.exe':'bin/python');
+const python=process.env.LAB_TEST_PYTHON||(existsSync(local)?local:'python');
 const probe=spawnSync(python,['-c','import sys; print(int(sys.version_info >= (3,10)))'],{encoding:'utf8',windowsHide:true});
 test('pinned original object-model tests pass; invalid independent implementation fails',{skip:probe.status!==0||probe.stdout.trim()!=='1'},async()=>{
  await mkdir('artifacts',{recursive:true});const dir=await mkdtemp(resolve('artifacts/lab-test-'));

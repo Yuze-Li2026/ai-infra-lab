@@ -34,6 +34,16 @@ export function validateCatalog(c){
  for(const n of c.nodes){for(const f of ['title','objective','guidance','evidence','status'])if(typeof n[f]!=='string'||!n[f].trim())throw new Error(`Missing node field ${n.id}.${f}`);if(!stages.has(n.stage)||!['core','specialist','optional'].includes(n.category)||!Array.isArray(n.prerequisites)||!Array.isArray(n.resources)||!n.resources.length)throw new Error(`Invalid node ${n.id}`);for(const p of n.prerequisites)if(!nodes.has(p)||p===n.id)throw new Error(`Invalid dependency ${n.id}/${p}`);for(const r of n.resources)if(!sources.has(r))throw new Error(`Unknown resource ${r}`);}
  const visiting=new Set(),done=new Set();function walk(id){if(visiting.has(id))throw new Error(`Dependency cycle at ${id}`);if(done.has(id))return;visiting.add(id);c.nodes.find(n=>n.id===id).prerequisites.forEach(walk);visiting.delete(id);done.add(id);}c.nodes.forEach(n=>walk(n.id));
  for(const l of c.labs){if(!sources.has(l.source)||!stages.has(l.stage)||new URL(l.url).protocol!=='https:'||!Array.isArray(l.rubric)||l.rubric.length<3||!l.hardware||!l.status||!l.limitation)throw new Error(`Invalid lab ${l.id}`);for(const n of l.nodes)if(!nodes.has(n))throw new Error(`Unknown lab prerequisite ${n}`);}
+ if(c.milestones!==undefined){
+  if(!Array.isArray(c.milestones)||c.milestones.length!==stages.size||new Set(c.milestones.map(m=>m.stage)).size!==stages.size)throw Error('Invalid milestone stages');
+  for(const m of c.milestones){
+   if(!stages.has(m.stage))throw Error('Unknown milestone stage');
+   requiredText(m,['title'],'milestone');strings(m.nodes,'milestone nodes');strings(m.labs,'milestone labs');strings(m.criteria,'milestone criteria');
+   if(!m.labs.length||m.criteria.length<3)throw Error('Incomplete milestone');
+   for(const id of m.nodes)if(!nodes.has(id)||c.nodes.find(n=>n.id===id).stage!==m.stage)throw Error('Invalid milestone node');
+   for(const id of m.labs)if(!c.labs.some(l=>l.id===id&&l.stage===m.stage&&l.command))throw Error('Invalid milestone lab');
+  }
+ }
  return {nodes:nodes.size,sources:sources.size,labs:c.labs.length};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){console.log('Catalog validated:',validateCatalog(JSON.parse(readFileSync('site/catalog.json','utf8'))));}

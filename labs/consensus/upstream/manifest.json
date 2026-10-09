@@ -1,0 +1,102 @@
+{
+  "repository": "https://github.com/aosabook/500lines",
+  "commit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+  "license": "MIT code; see LICENSE.md",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 2642,
+      "sha256": "f7a7853492bdcf538d2069848ae51348a5a0b667c0eea09ce732189ae5ed3aeb"
+    },
+    {
+      "path": "cluster.py",
+      "bytes": 20455,
+      "sha256": "27a00a0f24c1f6861ca820c1b11c9867c9221ba33c7569a048b0cb013ee24df9"
+    },
+    {
+      "path": "extract_code.py",
+      "bytes": 3270,
+      "sha256": "45eb74ce67d1014300b9cb789d79498024a38ccca09d6877d5d9b337dd2aba3a"
+    },
+    {
+      "path": "run.py",
+      "bytes": 1646,
+      "sha256": "3f7ba0c0cee181905b83036f8bc1d72e90057633fe066fa3f5571bba937b7a39"
+    },
+    {
+      "path": "test/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test/fake_network.py",
+      "bytes": 1698,
+      "sha256": "c75f304762c674c25e9d628bde2728b052dd8982af2a723488f5bdfeac6a13fa"
+    },
+    {
+      "path": "test/test_acceptor.py",
+      "bytes": 3759,
+      "sha256": "8c7e78c999f63f045b734ab9ecf3e19bea685d452c0472dd26b5ac98dafff7c5"
+    },
+    {
+      "path": "test/test_bootstrap.py",
+      "bytes": 1699,
+      "sha256": "57ea94b25933f07d9200bcecdbf5ede93b01e2abdb5272d8335cddfbff4af7a5"
+    },
+    {
+      "path": "test/test_commander.py",
+      "bytes": 2700,
+      "sha256": "386b3f877506225d7a8c855b166795c53649bcbb6640cfe8103807910b677f7a"
+    },
+    {
+      "path": "test/test_integration.py",
+      "bytes": 5420,
+      "sha256": "4e282909bba64d217e72f03b3e8a7c5fe3ac7180f0157890de9d60781392611b"
+    },
+    {
+      "path": "test/test_leader.py",
+      "bytes": 3930,
+      "sha256": "f0bcf62a207c47485a7bdac41fc1f307ad2c1315b2bf21af6c1f774486597711"
+    },
+    {
+      "path": "test/test_lines.py",
+      "bytes": 177,
+      "sha256": "cf883cf7595ef6c1a35e633464eec737da42a305ff1dc6cc54147f5aed6e163a"
+    },
+    {
+      "path": "test/test_member.py",
+      "bytes": 2368,
+      "sha256": "9cb68c220762974cb945472d5a81c33936ee0b136ef29ce7cde7163ebdb03957"
+    },
+    {
+      "path": "test/test_network.py",
+      "bytes": 1520,
+      "sha256": "c9eb3d7c5ed67e744b3dd38462dc76939f7fa35ecdfbfe414255df61339721d9"
+    },
+    {
+      "path": "test/test_replica.py",
+      "bytes": 4493,
+      "sha256": "efad0f2580a5e2129deb6e7a910d3e2e346d34d77a24b4d81ada3d00f449d632"
+    },
+    {
+      "path": "test/test_requester.py",
+      "bytes": 1272,
+      "sha256": "76cabe3ef7f894b3fc20cafd408c8632119cd10d302a343ce7b207acb9fd5ed3"
+    },
+    {
+      "path": "test/test_scout.py",
+      "bytes": 3946,
+      "sha256": "9527f8f2bd628d8a07e767adca22e6188823df5e5cab2bd7ee0939cbda460716"
+    },
+    {
+      "path": "test/test_seed.py",
+      "bytes": 1410,
+      "sha256": "ec57fd052786cd2079ffb1dd6a0fd30bbc523539b1ed16549318ff97e8e90f12"
+    },
+    {
+      "path": "test/utils.py",
+      "bytes": 1366,
+      "sha256": "82197ab678c8e19309d95c57bbdfaa09b38d269896a65021b613b461724cce1e"
+    }
+  ]
+}

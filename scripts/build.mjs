@@ -3,6 +3,7 @@ import {resolve,join,relative,sep,dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash,randomUUID} from 'node:crypto';
 import {validateCatalog} from './validate.mjs';
+import {verifyVendor} from './verify-vendor.mjs';
 
 async function exists(path){try{return await lstat(path);}catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function filesBelow(root,path=root){
@@ -28,12 +29,17 @@ export async function build(project=process.cwd()){
  await mkdir(artifacts,{recursive:true});
  if((await lstat(join(root,'site'))).isSymbolicLink())throw new Error('Site directory must not be a link');
  const stage=join(artifacts,`build-stage-${randomUUID()}`);await mkdir(stage);
- const publicFiles=['index.html','styles.css','app.js','views.js','core.js','storage.js','catalog.json'];
+ const publicFiles=['index.html','styles.css','app.js','views.js','core.js','storage.js','reports.js','documents.js','catalog.json'];
  for(const file of publicFiles){
   const from=join(root,'site',file),info=await exists(from);
   if(!info)throw new Error(`Missing public asset: ${file}`);
   if(!info.isFile()||info.isSymbolicLink())throw new Error(`Unsafe public asset: ${file}`);
   await cp(from,join(stage,file));
+ }
+ if((await lstat(join(root,'site/vendor'))).isSymbolicLink())throw Error('Vendor directory must not be a link');
+ for(const file of await verifyVendor(root)){
+  await mkdir(dirname(join(stage,'vendor',file)),{recursive:true});
+  await cp(join(root,'site/vendor',file),join(stage,'vendor',file));
  }
  const docs=join(root,'docs');
  if((await lstat(docs)).isSymbolicLink())throw new Error('Documentation directory must not be a link');

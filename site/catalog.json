@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-08",
+  "reviewedAt": "2026-10-09",
   "stages": [
     {
       "id": 0,
@@ -1198,6 +1198,138 @@
           "finding": "已固定提交、保留原文与哈希；Python 3.12.14 / Windows 下 28 项原测试通过。"
         }
       ]
+    },
+    {
+      "id": "dbdb",
+      "title": "DBDB · 持久化键值数据库",
+      "author": "Taavi Burns",
+      "url": "https://aosabook.org/en/500L/dbdb-dog-bed-database.html",
+      "version": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+      "language": "en",
+      "license": "MIT（代码）；CC BY 3.0（正文未复制）",
+      "licenseUrl": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/LICENSE.md",
+      "prerequisites": "递归、文件 I/O、数据结构与锁",
+      "coverage": "实现二叉树、延迟加载、文件锁和提交，验证关闭重开后的持久化。",
+      "reason": "原作者完整教学代码与测试规模可控，可在普通电脑检查关键机制。",
+      "limitations": "教学模型，不能替代完整工业系统或原课程所有作业。",
+      "verification": "固定源码 SHA-256 已核对；21 项检查在本机通过。",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "代码复现",
+      "reuse": "保留固定提交、原作者和许可证；原始文件不改写，兼容适配独立记录。",
+      "evaluation": {
+        "authority": "作者提供原始项目与设计说明",
+        "accuracy": "原测试断言保留；本地实际运行",
+        "depth": "实现二叉树、延迟加载、文件锁和提交，验证关闭重开后的持久化。",
+        "engineeringValue": "可独立实现、运行检查、分析边界并解释设计",
+        "coverage": "覆盖所列机制；不宣称覆盖该阶段全部知识",
+        "teachingQuality": "源码与原作者说明对应；本站仅提供导读与验收组织",
+        "difficulty": "递归、文件 I/O、数据结构与锁",
+        "languageFriendliness": "英文原文，配中文实验指南与术语表",
+        "accessibility": "精选源码本地可用；原文保留在线链接",
+        "maintenance": "固定提交；Python 3.12 兼容层独立维护",
+        "licensing": "代码 MIT 原文随项目保留，书籍正文未复制",
+        "stability": "提交固定、逐文件校验；适配与断言分开"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://aosabook.org/en/500L/dbdb-dog-bed-database.html",
+          "checkedAt": "2026-10-09",
+          "finding": "原始来源与设计范围已核对"
+        },
+        {
+          "url": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/LICENSE.md",
+          "checkedAt": "2026-10-09",
+          "finding": "许可文件随源码保留"
+        }
+      ]
+    },
+    {
+      "id": "consensus",
+      "title": "Clustering by Consensus · 故障与共识",
+      "author": "Dustin J. Mitchell",
+      "url": "https://aosabook.org/en/500L/clustering-by-consensus.html",
+      "version": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+      "language": "en",
+      "license": "MIT（代码）；CC BY 3.0（正文未复制）",
+      "licenseUrl": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/LICENSE.md",
+      "prerequisites": "并发、网络、状态机与故障模型",
+      "coverage": "通过原作者模拟网络理解日志一致性、选举、节点失效和恢复。",
+      "reason": "原作者完整教学代码与测试规模可控，可在普通电脑检查关键机制。",
+      "limitations": "确定性模拟网络；不是多主机工业服务。原始 500 行编辑限制未满足。",
+      "verification": "固定源码 SHA-256 已核对；46 项检查在本机通过。",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "代码复现",
+      "reuse": "保留固定提交、原作者和许可证；原始文件不改写，兼容适配独立记录。",
+      "evaluation": {
+        "authority": "作者提供原始项目与设计说明",
+        "accuracy": "原测试断言保留；本地实际运行",
+        "depth": "通过原作者模拟网络理解日志一致性、选举、节点失效和恢复。",
+        "engineeringValue": "可独立实现、运行检查、分析边界并解释设计",
+        "coverage": "覆盖所列机制；不宣称覆盖该阶段全部知识",
+        "teachingQuality": "源码与原作者说明对应；本站仅提供导读与验收组织",
+        "difficulty": "并发、网络、状态机与故障模型",
+        "languageFriendliness": "英文原文，配中文实验指南与术语表",
+        "accessibility": "精选源码本地可用；原文保留在线链接",
+        "maintenance": "固定提交；Python 3.12 兼容层独立维护",
+        "licensing": "代码 MIT 原文随项目保留，书籍正文未复制",
+        "stability": "提交固定、逐文件校验；适配与断言分开"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://aosabook.org/en/500L/clustering-by-consensus.html",
+          "checkedAt": "2026-10-09",
+          "finding": "原始来源与设计范围已核对"
+        },
+        {
+          "url": "https://github.com/aosabook/500lines/blob/fba689d101eb5600f5c8f4d7fd79912498e950e2/LICENSE.md",
+          "checkedAt": "2026-10-09",
+          "finding": "许可文件随源码保留"
+        }
+      ]
+    },
+    {
+      "id": "micrograd",
+      "title": "micrograd · 自动微分与训练",
+      "author": "Andrej Karpathy",
+      "url": "https://github.com/karpathy/micrograd",
+      "version": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+      "language": "en",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE",
+      "prerequisites": "Python 对象、链式法则与优化",
+      "coverage": "独立实现标量反向自动微分，用有限差分、原测试和小模型训练检查梯度。",
+      "reason": "原作者完整教学代码与测试规模可控，可在普通电脑检查关键机制。",
+      "limitations": "教学模型，不能替代完整工业系统或原课程所有作业。",
+      "verification": "固定源码 SHA-256 已核对；11 项检查在本机通过。",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "代码复现",
+      "reuse": "保留固定提交、原作者和许可证；原始文件不改写，兼容适配独立记录。",
+      "evaluation": {
+        "authority": "作者提供原始项目与设计说明",
+        "accuracy": "原测试断言保留；本地实际运行",
+        "depth": "独立实现标量反向自动微分，用有限差分、原测试和小模型训练检查梯度。",
+        "engineeringValue": "可独立实现、运行检查、分析边界并解释设计",
+        "coverage": "覆盖所列机制；不宣称覆盖该阶段全部知识",
+        "teachingQuality": "源码与原作者说明对应；本站仅提供导读与验收组织",
+        "difficulty": "Python 对象、链式法则与优化",
+        "languageFriendliness": "英文原文，配中文实验指南与术语表",
+        "accessibility": "精选源码本地可用；原文保留在线链接",
+        "maintenance": "固定提交；Python 3.12 兼容层独立维护",
+        "licensing": "代码 MIT 原文随项目保留，书籍正文未复制",
+        "stability": "提交固定、逐文件校验；适配与断言分开"
+      },
+      "reviewEvidence": [
+        {
+          "url": "https://github.com/karpathy/micrograd",
+          "checkedAt": "2026-10-09",
+          "finding": "原始来源与设计范围已核对"
+        },
+        {
+          "url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE",
+          "checkedAt": "2026-10-09",
+          "finding": "许可文件随源码保留"
+        }
+      ]
     }
   ],
   "nodes": [
@@ -1539,7 +1671,8 @@
       ],
       "resources": [
         "algorithms-mit",
-        "composing"
+        "composing",
+        "dbdb"
       ],
       "category": "core",
       "objective": "选择数据结构，分析时间和空间成本",
@@ -1746,7 +1879,8 @@
         "os"
       ],
       "resources": [
-        "dlsys"
+        "dlsys",
+        "micrograd"
       ],
       "category": "core",
       "objective": "实现并测试一个教学深度学习框架",
@@ -1850,7 +1984,8 @@
         "algorithms"
       ],
       "resources": [
-        "distributed"
+        "distributed",
+        "consensus"
       ],
       "category": "specialist",
       "objective": "理解复制、协调、故障和一致性",
@@ -2037,10 +2172,11 @@
         "用本地检查器检测输出；阅读失败反馈后修复",
         "解释输入、处理、输出与测试局限；保留运行记录"
       ],
-      "command": "node scripts/grade.mjs ./indoor.py python",
+      "command": "node scripts/lab.mjs indoor ./indoor.py",
       "limitation": "补充检查不是原课程官方评分，不证明整个编程阶段已掌握。运行学习者代码只在主动执行 CLI 后发生；超时不等于安全沙箱。",
       "integration": "checked",
-      "guide": "./docs/getting-started.md"
+      "guide": "./docs/getting-started.md",
+      "reportCommit": "supplemental-v0.1"
     },
     {
       "id": "python-project",
@@ -2153,10 +2289,9 @@
     {
       "id": "object-model",
       "title": "阶段综合实践 · 对象运行时",
-      "stage": 2,
+      "stage": 1,
       "nodes": [
         "programming",
-        "algorithms",
         "tools"
       ],
       "source": "object-model",
@@ -2171,7 +2306,7 @@
         "运行相同工作负载，比较内存和七次计时",
         "说明原理、性能权衡与教学模型局限"
       ],
-      "command": "python labs/object-model/run.py --benchmark",
+      "command": "node scripts/lab.mjs object-model --benchmark",
       "guide": "./docs/object-model-lab.md",
       "limitation": "参考复现不是学习者能力认证；Python 模型性能不能外推到工业虚拟机；无安全沙箱。",
       "validation": {
@@ -2218,8 +2353,374 @@
             "checksum": 100000000
           }
         ]
+      },
+      "reportCommit": "fba689d101eb5600f5c8f4d7fd79912498e950e2"
+    },
+    {
+      "id": "dbdb",
+      "title": "DBDB · 持久化键值数据库",
+      "stage": 2,
+      "nodes": [
+        "algorithms",
+        "os",
+        "architecture"
+      ],
+      "source": "dbdb",
+      "url": "https://aosabook.org/en/500L/dbdb-dog-bed-database.html",
+      "hardware": "CPU / Python 3.10+；依赖详见指南",
+      "goal": "实现二叉树、延迟加载、文件锁和提交，验证关闭重开后的持久化。",
+      "status": "固定源码；21 项检查通过。参考复现与独立作品分别记录。",
+      "integration": "reproduced",
+      "command": "node scripts/lab.mjs dbdb",
+      "guide": "./docs/dbdb-lab.md",
+      "reportCommit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+      "rubric": [
+        "Learn：按原作者说明解释关键机制",
+        "Design / Build：先写设计，再独立实现，不以复制参考源码验收",
+        "Test：用原断言和自选边界案例验证，提交本地报告",
+        "Optimize：固定种子与工作负载，预热后重复测量，解释时间与空间取舍",
+        "Explain：复述失败边界、简化假设与可复现步骤"
+      ],
+      "limitation": "教学模型，不能替代完整工业系统或原课程所有作业。 本地代码以当前用户权限运行；报告是本人提供的证据，不是独立认证。",
+      "validation": {
+        "mode": "reference",
+        "commit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+        "createdAt": "2026-10-09T02:16:36.355186+00:00",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "passed": true,
+        "tests": 21,
+        "benchmark": [
+          {
+            "name": "500 shuffled inserts + commit + close",
+            "seed": 37,
+            "warmups": 1,
+            "samples_ns": [
+              9644600,
+              10708800,
+              9962000,
+              9734900,
+              9610700,
+              10121900,
+              9989000
+            ],
+            "median_ms": 9.962,
+            "file_bytes": [
+              48615,
+              48615,
+              48615,
+              48615,
+              48615,
+              48615,
+              48615
+            ]
+          },
+          {
+            "name": "500 reads after reopen; values checked",
+            "warmups": 1,
+            "samples_ns": [
+              23956100,
+              23347600,
+              24219900,
+              22972400,
+              23121400,
+              23211700,
+              23727600
+            ],
+            "median_ms": 23.3476
+          }
+        ]
+      }
+    },
+    {
+      "id": "consensus",
+      "title": "Clustering by Consensus · 故障与共识",
+      "stage": 4,
+      "nodes": [
+        "dist",
+        "network",
+        "os"
+      ],
+      "source": "consensus",
+      "url": "https://aosabook.org/en/500L/clustering-by-consensus.html",
+      "hardware": "CPU / Python 3.10+；fissix 固定版本",
+      "goal": "通过原作者模拟网络理解日志一致性、选举、节点失效和恢复。",
+      "status": "固定源码；46 项检查通过。参考复现与独立作品分别记录。",
+      "integration": "reproduced",
+      "command": "node scripts/lab.mjs consensus",
+      "guide": "./docs/consensus-lab.md",
+      "reportCommit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+      "rubric": [
+        "Learn：按原作者说明解释关键机制",
+        "Design / Build：先写设计，再独立实现，不以复制参考源码验收",
+        "Test：用原断言和自选边界案例验证，提交本地报告",
+        "Optimize：固定种子与工作负载，预热后重复测量，解释时间与空间取舍",
+        "Explain：复述失败边界、简化假设与可复现步骤"
+      ],
+      "limitation": "确定性模拟网络；不是多主机工业服务。原始 500 行编辑限制未满足。 本地代码以当前用户权限运行；报告是本人提供的证据，不是独立认证。",
+      "validation": {
+        "mode": "reference",
+        "commit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+        "createdAt": "2026-10-09T02:16:37.598983+00:00",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "passed": true,
+        "tests": 46,
+        "benchmark": [
+          {
+            "name": "46 deterministic functional scenarios",
+            "warmups": 1,
+            "samples_ns": [
+              47555500,
+              60712600,
+              48084000,
+              45573700,
+              46041900,
+              43518300,
+              53516300
+            ],
+            "median_ms": 47.5555,
+            "boundary": "in-process test fixtures, assertions and simulation included; source conversion excluded; not network throughput"
+          }
+        ]
+      }
+    },
+    {
+      "id": "micrograd",
+      "title": "micrograd · 自动微分与训练",
+      "stage": 3,
+      "nodes": [
+        "framework",
+        "calculus",
+        "ml"
+      ],
+      "source": "micrograd",
+      "url": "https://github.com/karpathy/micrograd",
+      "hardware": "CPU / Python 3.10+；依赖详见指南",
+      "goal": "独立实现标量反向自动微分，用有限差分、原测试和小模型训练检查梯度。",
+      "status": "固定源码；11 项检查通过。参考复现与独立作品分别记录。",
+      "integration": "reproduced",
+      "command": "node scripts/lab.mjs micrograd",
+      "guide": "./docs/micrograd-lab.md",
+      "reportCommit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+      "rubric": [
+        "Learn：按原作者说明解释关键机制",
+        "Design / Build：先写设计，再独立实现，不以复制参考源码验收",
+        "Test：用原断言和自选边界案例验证，提交本地报告",
+        "Optimize：固定种子与工作负载，预热后重复测量，解释时间与空间取舍",
+        "Explain：复述失败边界、简化假设与可复现步骤"
+      ],
+      "limitation": "教学模型，不能替代完整工业系统或原课程所有作业。 本地代码以当前用户权限运行；报告是本人提供的证据，不是独立认证。",
+      "validation": {
+        "mode": "reference",
+        "commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+        "createdAt": "2026-10-09T02:04:46.732165+00:00",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "passed": true,
+        "tests": 11,
+        "benchmark": [
+          {
+            "workload": "50 graphs, depth 25; forward and backward",
+            "warmups": 2,
+            "samples_ns": [
+              3006700,
+              3210600,
+              3404300,
+              3430700,
+              3215600,
+              3426400,
+              3602900
+            ],
+            "median_ms": 3.4043
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpu",
+      "title": "GPU · 正确性、训练与恢复",
+      "stage": 4,
+      "nodes": [
+        "gpu",
+        "numerics",
+        "training"
+      ],
+      "source": "torch",
+      "url": "https://pytorch.org/docs/stable/index.html",
+      "hardware": "NVIDIA CUDA GPU；本机 RTX 5060 Laptop 8 GB，PyTorch 2.10.0+cu128；不会修改驱动",
+      "goal": "比较 CPU/GPU 数值误差，测量明确边界的矩阵乘法，验证训练和恢复后的下一步。",
+      "status": "真实 GPU 的四项补充集成检查通过；尚未验证多卡。",
+      "integration": "checked",
+      "command": "node scripts/lab.mjs gpu",
+      "guide": "./docs/gpu-lab.md",
+      "reportCommit": "pytorch-2.10.0+cu128",
+      "rubric": [
+        "说明精度、容差、随机种子与确定性选项",
+        "计时包含同步，报告预热、样本、中位数与测量边界",
+        "验证模型与优化器恢复后的下一步一致",
+        "分析单卡结果不能外推的条件"
+      ],
+      "limitation": "本站基于 PyTorch 公共 API 编写的补充集成检查，不是原课程评分；参考报告不作为个人能力验收。",
+      "validation": {
+        "mode": "reference",
+        "commit": "pytorch-2.10.0+cu128",
+        "createdAt": "2026-10-09T02:04:52.211815+00:00",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "passed": true,
+        "tests": 4,
+        "benchmark": [
+          {
+            "device": "cpu",
+            "shape": [
+              512,
+              512,
+              512
+            ],
+            "dtype": "float32",
+            "warmups": 3,
+            "samples_ns": [
+              2010500,
+              2122700,
+              1941100,
+              1942300,
+              1949300,
+              1991200,
+              1989800,
+              2009000,
+              2036200
+            ],
+            "median_ms": 1.9912,
+            "min_ms": 1.9411,
+            "max_ms": 2.1227,
+            "boundary": "inputs already on device; Python dispatch and CUDA synchronization included"
+          },
+          {
+            "device": "cuda",
+            "shape": [
+              512,
+              512,
+              512
+            ],
+            "dtype": "float32",
+            "warmups": 3,
+            "samples_ns": [
+              83500,
+              56900,
+              57000,
+              55500,
+              55400,
+              55600,
+              55500,
+              54600,
+              55200
+            ],
+            "median_ms": 0.0555,
+            "min_ms": 0.0546,
+            "max_ms": 0.0835,
+            "boundary": "inputs already on device; Python dispatch and CUDA synchronization included"
+          }
+        ]
       }
     }
   ],
-  "revision": "2026-10-08-v02"
+  "revision": "2026-10-09-complete-local",
+  "milestones": [
+    {
+      "stage": 0,
+      "title": "起点 · 电脑与第一行代码",
+      "nodes": [
+        "computer",
+        "arithmetic",
+        "python"
+      ],
+      "labs": [
+        "indoor"
+      ],
+      "criteria": [
+        "提交知识节点的可复现成果与原理说明",
+        "提交独立作品的通过报告；参考实现不计入",
+        "保留设计、边界测试、重复性能测量和优化解释",
+        "请同伴复核关键假设；平台不作独立认证"
+      ]
+    },
+    {
+      "stage": 1,
+      "title": "基础 · 数学与程序设计",
+      "nodes": [
+        "tools",
+        "algebra",
+        "programming",
+        "discrete",
+        "linear",
+        "calculus",
+        "probability"
+      ],
+      "labs": [
+        "object-model"
+      ],
+      "criteria": [
+        "提交知识节点的可复现成果与原理说明",
+        "提交独立作品的通过报告；参考实现不计入",
+        "保留设计、边界测试、重复性能测量和优化解释",
+        "请同伴复核关键假设；平台不作独立认证"
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "系统 · 理解计算机",
+      "nodes": [
+        "algorithms",
+        "architecture",
+        "os",
+        "network"
+      ],
+      "labs": [
+        "dbdb"
+      ],
+      "criteria": [
+        "提交知识节点的可复现成果与原理说明",
+        "提交独立作品的通过报告；参考实现不计入",
+        "保留设计、边界测试、重复性能测量和优化解释",
+        "请同伴复核关键假设；平台不作独立认证"
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "模型 · 搭建学习系统",
+      "nodes": [
+        "numerics",
+        "ml",
+        "framework",
+        "data"
+      ],
+      "labs": [
+        "micrograd"
+      ],
+      "criteria": [
+        "提交知识节点的可复现成果与原理说明",
+        "提交独立作品的通过报告；参考实现不计入",
+        "保留设计、边界测试、重复性能测量和优化解释",
+        "请同伴复核关键假设；平台不作独立认证"
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "工程 · 加速与规模化",
+      "nodes": [
+        "dist",
+        "operations"
+      ],
+      "labs": [
+        "consensus"
+      ],
+      "criteria": [
+        "提交知识节点的可复现成果与原理说明",
+        "提交独立作品的通过报告；参考实现不计入",
+        "保留设计、边界测试、重复性能测量和优化解释",
+        "请同伴复核关键假设；平台不作独立认证"
+      ]
+    }
+  ]
 }

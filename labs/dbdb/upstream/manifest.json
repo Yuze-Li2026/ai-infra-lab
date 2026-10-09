@@ -1,0 +1,72 @@
+{
+  "repository": "https://github.com/aosabook/500lines",
+  "commit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+  "license": "MIT code; see LICENSE.md",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 2642,
+      "sha256": "f7a7853492bdcf538d2069848ae51348a5a0b667c0eea09ce732189ae5ed3aeb"
+    },
+    {
+      "path": "dbdb/__init__.py",
+      "bytes": 264,
+      "sha256": "26b8d70a86acebec363e222a8766ad30cd1bc77ae471433f27c8cc33e928ae52"
+    },
+    {
+      "path": "dbdb/binary_tree.py",
+      "bytes": 4621,
+      "sha256": "1466c941af4a1e9026132a76702c39e2d4fa9845c08c8f734369c46677f065dc"
+    },
+    {
+      "path": "dbdb/interface.py",
+      "bytes": 992,
+      "sha256": "86ef2d12c70eb0c9a6460cee5d10fd30c40309fe06dc1c8473645bbead4630a0"
+    },
+    {
+      "path": "dbdb/logical.py",
+      "bytes": 2165,
+      "sha256": "7841227574fa628efb83d17c9ec0e2a09b1009be1401eff45fdeda2f8b4e120f"
+    },
+    {
+      "path": "dbdb/physical.py",
+      "bytes": 2770,
+      "sha256": "e2aeb6724bb71a40fdb580019ec6db86f7de3305885495106f93ecee41b3cb1a"
+    },
+    {
+      "path": "dbdb/tests/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dbdb/tests/test_binary_tree.py",
+      "bytes": 3440,
+      "sha256": "d0fef2e6de9170cfb4aa4a9e403fc140b003ee70c69caa7a8372c36078b22c04"
+    },
+    {
+      "path": "dbdb/tests/test_integration.py",
+      "bytes": 1980,
+      "sha256": "0e5baac3c83225cacc3cd5883c5ed14c7074b4512b0259838bc09833eaf85e7a"
+    },
+    {
+      "path": "dbdb/tests/test_physical.py",
+      "bytes": 2062,
+      "sha256": "453a4cc58455e61dc48f77f6c3f98846f4d84c44d998c9ada17261357b94030b"
+    },
+    {
+      "path": "dbdb/tool.py",
+      "bytes": 1012,
+      "sha256": "9eb6dc8622bfa650762a324c1e515d75ef87e797bc45f48fbba899770a4dec81"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 44,
+      "sha256": "4edb6ef5d0c3721948e534f51d719d5f1e71940bfa22ecc440f499070f4c620a"
+    },
+    {
+      "path": "setup.py",
+      "bytes": 301,
+      "sha256": "1fca0276f7a6f99072e1a1ad5c9dee120ec2b1666e9c630970426a7b1d0686c2"
+    }
+  ]
+}

@@ -24,8 +24,8 @@ try{
  checks.push('successful save clears only the saved session draft');
  for(const node of catalog.nodes){await page.goto(base+'/#map/'+node.id);await page.locator('#node-detail').waitFor();assert.equal(await page.locator('.detail-heading h2').innerText(),node.title);assert.equal(await page.locator('.learning-steps li').count(),3);}
  checks.push('all 24 node deep links show three steps and evidence');
- await page.goto(base+'/#labs');await page.locator('.lab-results summary').click();assert.equal(await page.locator('.lab-results tbody tr').count(),2);
- assert.match(await page.locator('.lab-results').innerText(),/28 项原测试通过/);assert.match(await page.locator('.lab-results').innerText(),/读取更慢/);
+ await page.goto(base+'/#labs');await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).locator('summary').click();assert.equal(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).locator('tbody tr').count(),2);
+ assert.match(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).innerText(),/28 项原测试通过/);assert.match(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).innerText(),/读取更慢/);
  for(const guide of catalog.labs.filter(l=>l.guide))assert.equal((await fetch(new URL(guide.guide,base))).status,200);
  checks.push('actual benchmark and local experiment guides are accessible');
  await page.screenshot({path:'artifacts/labs-desktop.png',fullPage:true});
@@ -46,8 +46,8 @@ try{
  }
  checks.push('all views plus full task form fit 320, 390, 768 and 1280 px');
  await page.setViewportSize({width:390,height:844});await page.goto(base+'/#learn');await page.locator('.focus-panel').waitFor();await page.screenshot({path:'artifacts/mobile-clean.png',fullPage:true});
- await page.goto(base+'/#resources');await page.locator('#search').fill('zz-no-result');assert.match(await page.locator('.empty').innerText(),/没有找到匹配资源/);await page.locator('#search').fill('');assert.equal(await page.locator('article.resource').count(),30);
- checks.push('resource empty state recovers to all 30 sources');
+ await page.goto(base+'/#resources');await page.locator('#search').fill('zz-no-result');assert.match(await page.locator('.empty').innerText(),/没有找到匹配资源/);await page.locator('#search').fill('');assert.equal(await page.locator('article.resource').count(),catalog.sources.length);
+ checks.push('resource empty state recovers to all catalog sources');
  await page.goto(base+'/#map');await page.locator('.skip').focus();await page.keyboard.press('Enter');assert.equal(await page.evaluate(()=>document.activeElement.id),'main');assert.equal(new URL(page.url()).hash,'#map');
  checks.push('keyboard skip focuses content without replacing the route');
  const toolsContext=await browser.newContext();await toolsContext.addInitScript(()=>Object.defineProperty(document,'modelContext',{value:{registerTool(tool){window.registeredLearningTool=tool;}}}));

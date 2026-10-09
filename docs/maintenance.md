@@ -4,7 +4,7 @@
 
 资源及知识内容修改 `site/catalog.json`；页面布局修改 `site/views.js` 和 `site/styles.css`，交互修改 `site/app.js`。保持目录字段规范，优先链接原资源。修改来源后执行 `node scripts/credits.mjs` 更新致谢。`create-catalog.mjs` 和一次性迁移脚本会拒绝覆盖现有成果，不是日常修改命令。
 
-每次变更后执行 `npm run check`，覆盖目录校验、测试、构建和产物哈希核验。测试报告存在 skip 时核实是否缺 Python 3.10+。Node 版本最低 22，无 npm 依赖，暂不存在依赖锁文件；未来加入依赖时必须提交锁文件并评估许可。
+每次变更后执行 `npm run check`，覆盖目录校验、测试、构建和产物哈希核验。测试报告存在 skip 时核实是否缺 Python 3.10+。Node 版本最低 22。Marked 与 DOMPurify 版本锁在 package-lock.json，浏览器运行文件随源码分发，普通启动/构建不需要 npm install。维护升级时使用 npm ci，再显式运行 vendor-web.mjs 并检查许可、manifest 与内容清理测试；构建不会自动下载包。
 
 链接检查 `npm run check-links` 写入本地 artifacts。失败应区分网络未知、访问限制和真实失效。更新资源先核对作者、版本和许可，再验证实验，不因新颖立即替换经典课程。
 
@@ -41,3 +41,9 @@
 本地服务器仅绑定 127.0.0.1，不向局域网开放。不提供远程执行。CLI 检查器运行任意指定 Python 文件具有当前用户权限，只检查主动选择的可信本人代码；超时、输出上限与 `-I` 不是沙箱。运行器安全隔离是未来集成外部代码前的工程缺口。
 
 新增后端、账号同步、任意插件执行或模型下载前重新审视权限、个人数据、成本及恢复方式。普通目录修改可逆；公开发布、仓库创建、危险操作、大规模安装与高风险配置仍需批准。
+
+## 实验与文档维护
+
+CPU 依赖固定于 labs/requirements-cpu.txt，GPU Windows / CPython 3.12 复现锁为 requirements-gpu-windows-lock.txt。报告包含环境、模式、版本、测试与完整计时样本。新的实验报告需维护 site/reports.js 已知类型、catalog 的 reportCommit 和里程碑。新指南需加入 site/documents.js 的允许列表。修改里程碑或报告格式后验证旧备份兼容与跨标签页合并。
+
+运行项目解释器的 scripts/doctor.py 可只读检查版本、依赖、GPU 和工具。complete-catalog.mjs 是本轮一次性整合记录，需要实际 artifacts 报告，不是日常必跑构建命令。目录以 site/catalog.json 为唯一日常数据源。

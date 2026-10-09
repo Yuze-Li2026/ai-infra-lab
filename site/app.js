@@ -1,6 +1,8 @@
 import {createViews} from './views.js';
 import {STORAGE_KEY,MAX_BACKUP_BYTES,emptyProgress,validateProgress,mergeProgress,nextNode,record,backupWithDrafts} from './core.js';
 import {persistProgressLocked,readDrafts,writeDrafts} from './storage.js';
+import {loadDocument} from './documents.js';
+import {summarizeReport,MAX_REPORT_BYTES} from './reports.js';
 const main=document.querySelector('main');
 document.querySelector('.skip').addEventListener('click',event=>{event.preventDefault();main.focus();main.scrollIntoView();});
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -21,7 +23,20 @@ async function save(next,options){
   }
 }
 const labels={learn:'我的学习',map:'知识依赖图',resources:'精选资源',labs:'工程实验',about:'来源与研究'};
-function render(){const views=createViews({catalog,progress,selected,filter,stageFilter,langFilter,drafts});const view=location.hash.slice(1).split('/')[0]||'learn';const key=Object.hasOwn(views,view)?view:'learn';main.innerHTML=views[key]();document.querySelector('#view-label').textContent=labels[key];document.querySelectorAll('nav a').forEach(a=>{a.classList.toggle('active',a.dataset.view===key);if(a.dataset.view===key)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+let documentRequest,reportLab;
+function render(){documentRequest?.abort();const views=createViews({catalog,progress,selected,filter,stageFilter,langFilter,drafts});const view=location.hash.slice(1).split('/')[0]||'learn';const key=Object.hasOwn(views,view)?view:'learn';
+if(view==='read'){
+ const controller=new AbortController();documentRequest=controller;
+ main.innerHTML='<section class="panel"><p role="status">正在打开学习指南…</p></section>';
+ document.querySelector('#view-label').textContent='学习指南';
+ document.querySelectorAll('nav a').forEach(a=>{a.classList.remove('active');a.removeAttribute('aria-current');});
+ loadDocument(location.hash.slice(6),controller.signal).then(({article,outline,title})=>{
+  if(controller.signal.aborted)return;
+  main.innerHTML='<div class="document-tools"><a href="#labs">返回工程实验</a><a href="#about">研究与使用指南</a></div><div class="document-layout"></div>';
+  main.querySelector('.document-layout').append(article,outline);document.querySelector('#view-label').textContent=title;
+ }).catch(error=>{if(!controller.signal.aborted)main.innerHTML=`<section class="panel"><h1>文档暂时无法打开</h1><p>${escape(error.message)}</p><a href="#about">返回研究来源</a></section>`;});return;
+}
+main.innerHTML=views[key]();document.querySelector('#view-label').textContent=labels[key]||'阶段验收';document.querySelectorAll('nav a[data-view]').forEach(a=>{a.classList.toggle('active',a.dataset.view===key);if(a.dataset.view===key)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   const area=document.querySelector('#evidence');
   if(area){const hint=document.createElement('p');hint.id='draft-hint';hint.className='muted';area.after(hint);updateDraftHint();}
 }
@@ -35,6 +50,7 @@ function readRoute(){const [view,id]=location.hash.slice(1).split('/');selected=
 main.addEventListener('click',async event=>{
   const b=event.target.closest('button');if(!b)return;
   if(b.dataset.retry){location.reload();return;}
+  if(b.dataset.report){reportLab=b.dataset.report;document.querySelector('#report-file').click();return;}
   if(b.dataset.node){selected=b.dataset.node;const requested=location.hash.slice(1).split('/')[0];const view=['learn','map','labs'].includes(requested)?requested:'learn';const hash=`#${view}/${selected}`;if(location.hash===hash){render();focusDetail();}else location.hash=hash;}
   else if(b.dataset.start||b.dataset.submit){
     const id=b.dataset.start||b.dataset.submit,evidence=document.querySelector('#evidence').value;
@@ -69,12 +85,25 @@ window.addEventListener('storage',e=>{
   if(e.key!==STORAGE_KEY||!e.newValue||!catalog)return;
   try{
     const merged=mergeProgress(progress,JSON.parse(e.newValue),catalog.nodes);
-    if(JSON.stringify(merged.records)===JSON.stringify(progress.records))return;
+    if(JSON.stringify([merged.records,merged.labReports])===JSON.stringify([progress.records,progress.labReports]))return;
     progress=merged;
     // Preserve the active textarea and IME composition; the next navigation renders merged state.
     if(!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))render();
     notify('已同步其他标签页的学习记录。当前未保存的说明会保留。');
   }catch{storageWarning('其他标签页写入了无法读取的记录；本页进度仍保留，请先备份。');}
+});
+document.querySelector('#report-file').addEventListener('change',async event=>{
+ const file=event.target.files[0];if(!file||!catalog)return;
+ try{
+  if(file.size>MAX_REPORT_BYTES)throw Error('报告超过 1 MB 限制。');
+  const bytes=await file.arrayBuffer();
+  const digest=await crypto.subtle.digest('SHA-256',bytes);
+  const sha256=[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('');
+  const lab=catalog.labs.find(l=>l.id===reportLab);
+  const summary=summarizeReport(JSON.parse(new TextDecoder().decode(bytes)),lab,sha256);
+  const saved=await save({...progress,labReports:{...progress.labReports,[lab.id]:summary}});
+  render();notify(saved?(summary.mode==='reference'?'已保存参考复现报告；它不计入个人作品验收。':summary.passed?'已保存作品通过报告，请补齐设计、边界测试与解释。':'已保存未通过的作品报告，请修复后复验。'):'报告尚未保存到浏览器，请备份当前记录。');
+ }catch(error){notify(`报告导入失败：${error.message}`);}finally{event.target.value='';}
 });
 document.querySelector('#export').addEventListener('click',()=>{if(!progress)return;const url=URL.createObjectURL(new Blob([JSON.stringify(backupWithDrafts(progress,drafts,catalog.nodes),null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`ai-infra-progress-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('备份已生成；未提交草稿在备份中记为学习中。');});
 document.querySelector('#import').addEventListener('click',()=>document.querySelector('#backup-file').click());

@@ -1,0 +1,4 @@
+portalocker==4.4.0
+pywin32==311; sys_platform == 'win32'
+fissix==24.4.24
+appdirs==1.4.4

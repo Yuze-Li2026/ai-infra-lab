@@ -1,0 +1,4 @@
+# Windows x64 / CPython 3.12. Official wheel and verified index SHA-256.
+# Install only after explicit approval for the large download.
+torch @ https://download-r2.pytorch.org/whl/cu128/torch-2.10.0%2Bcu128-cp312-cp312-win_amd64.whl#sha256=fbde8f6a9ec8c76979a0d14df21c10b9e5cab6f0d106a73ca73e2179bc597cae
+numpy==2.2.6

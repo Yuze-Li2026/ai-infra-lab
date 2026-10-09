@@ -1,7 +1,11 @@
 import {ready, nextNode} from './core.js';
+import {milestoneStatus,REPORT_LABS} from './reports.js';
 
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const link = (url, text, className = '') => `<a class="${className}" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(text)}</a>`;
+const link = (url, text, className = '') => {
+ const local=/^\.\/(docs\/[a-z0-9-]+\.md|CREDITS\.md|README\.md|LICENSE|CONTRIBUTING\.md)$/.test(url);
+ return `<a class="${className}" href="${escape(local?'#read/'+url.slice(2):url)}" ${local?'':'target="_blank" rel="noopener noreferrer"'}>${escape(text)}</a>`;
+};
 const chip = (text, green = false) => `<span class="chip ${green ? 'green' : ''}">${escape(text)}</span>`;
 const intro = (eyebrow, title, text) => `<div class="intro"><span class="eyebrow">${eyebrow}</span><h1>${title}</h1><p>${text}</p></div>`;
 const categoryLabels = {core:'核心必修', specialist:'方向必修', optional:'可选深入'};
@@ -61,8 +65,8 @@ export function createViews(state) {
         </section>
         <div class="principle"><span class="eyebrow">OUR APPROACH</span><p>站在巨人的肩膀上。<br><span>精选已有成果，建立连接，持续验证。</span></p></div>
       </div><section class="panel route-panel"><div class="row"><h2>你的学习路径</h2><span class="section-label">5 STAGES</span></div><p class="muted route-intro">从第一行代码，到理解真实系统。</p>
-        <div class="roadmap">${catalog.stages.map(s=>{const ns=catalog.nodes.filter(n=>n.stage===s.id);const done=ns.filter(n=>isDone(n.id)).length;return `<div class="stage ${next?.stage===s.id?'current':''}"><div class="stage-index">0${s.id}</div><div class="stage-content"><div class="row"><strong>${escape(s.title.split('·')[1]?.trim()||s.title)}</strong><span class="count">${done}/${ns.length}</span></div><p>${escape(s.description)}</p><div class="progress" role="progressbar" aria-label="${escape(s.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${ns.length}"><div style="width:${done/ns.length*100}%"></div></div></div></div>`;}).join('')}</div>
-        <a class="route-link" href="#map">查看完整知识依赖</a>
+        <div class="roadmap">${catalog.stages.map(s=>{const ns=catalog.nodes.filter(n=>n.stage===s.id);const done=ns.filter(n=>isDone(n.id)).length;return `<div class="stage ${next?.stage===s.id?'current':''}"><div class="stage-index">0${s.id}</div><div class="stage-content"><div class="row"><a class="stage-review-link" href="#milestone/${s.id}">${escape(s.title.split('·')[1]?.trim()||s.title)}</a><span class="count">${done}/${ns.length}</span></div><p>${escape(s.description)}</p><div class="progress" role="progressbar" aria-label="${escape(s.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${ns.length}"><div style="width:${done/ns.length*100}%"></div></div></div></div>`;}).join('')}</div>
+        <a class="route-link" href="#map">查看完整知识依赖</a><p class="fineprint">点击阶段名称，复核知识成果和独立作品报告。</p>
       </section></div>${selected?details(node(selected)):''}`;
   }
 
@@ -86,9 +90,22 @@ export function createViews(state) {
   function labResults(l) {
     const v=l.validation;
     if(!v)return '';
+    if(l.id!=='object-model')return `<details class="lab-results"><summary>实际复现结果 · ${v.tests} 项检查通过</summary><p>参考实现 · Python ${escape(v.python)} · ${escape(v.platform)}<br>运行日期 ${escape(v.createdAt.slice(0,10))}</p>${v.benchmark?.length?`<div class="table-wrap"><table><caption>本机测量；完整协议与局限见实验指南</caption><thead><tr><th>工作负载</th><th>中位数</th></tr></thead><tbody>${v.benchmark.map(b=>`<tr><td>${escape(b.device||b.name||'自动微分图')}</td><td>${escape(b.median_ms??b.medianMs??'详见报告')} ms</td></tr>`).join('')}</tbody></table></div>`:''}<p>原测试与补充检查分别说明；参考实现通过不代表学习者已掌握。</p></details>`;
     return `<details class="lab-results"><summary>查看实际复现结果 · ${v.tests} 项原测试通过</summary><p>参考实现 · Python ${escape(v.python)} · ${escape(v.platform)}<br>运行日期 ${escape(v.createdAt.slice(0,10))}</p>
       <div class="table-wrap"><table><caption>相同工作负载：10,000 个对象；一次预热、七次测量</caption><thead><tr><th>实现</th><th>保留内存</th><th>读取中位数</th></tr></thead><tbody>${v.benchmark.map(b=>`<tr><td>${b.stage==='03-customizable'?'字典属性存储':'共享 map 存储'}</td><td>${(b.retained_bytes/1048576).toFixed(2)} MiB</td><td>${(b.read_ns_median/1000000).toFixed(3)} ms</td></tr>`).join('')}</tbody></table></div>
       <p>本次测量中共享布局节省内存，但读取更慢。结果取决于实现与环境，不能外推到工业虚拟机，也不代表学习者已掌握。</p></details>`;
+  }
+
+  function reportRecord(l){
+   if(!REPORT_LABS.includes(l.id))return '';
+   const r=progress.labReports?.[l.id];
+   return `<div class="report-record"><div class="row"><span class="section-label">我的实验报告</span>${r?chip(r.mode==='reference'?'参考复现':r.passed?'作品检查通过':'作品尚未通过',r.mode==='submission'&&r.passed):chip('尚未导入')}</div>${r?`<p>${r.tests} 项检查 · ${new Date(r.createdAt).toLocaleDateString('zh-CN')}<br><span class="fineprint">${escape(r.python)} · ${escape(r.platform)}</span></p>`:'<p>运行器生成 JSON 后，在这里导入。报告与学习备份一起保存在本地。</p>'}<button class="quiet" data-report="${l.id}">${r?'更新实验报告':'导入实验报告'}</button><p class="fineprint">${r?.mode==='reference'?'参考报告不计入个人作品验收。':'本地报告是本人提供的证据，不是独立认证。'}</p></div>`;
+  }
+
+  function milestone(){
+   const stage=Number(location.hash.split('/')[1]);const m=milestoneStatus(catalog,progress,stage);
+   if(!m)return intro('STAGE REVIEW','没有这个阶段','请从学习路径打开阶段验收。');
+   return intro('STAGE REVIEW',escape(m.milestone.title),'把知识说明、独立作品和可复现实验放在一起复核。')+`<div class="stats"><div class="stat"><span>知识成果</span><strong>${m.submitted} <small>/ ${m.nodes.length}</small></strong><span>本人提交，需复核</span></div><div class="stat"><span>作品报告</span><strong>${m.accepted} <small>/ ${m.reports.length}</small></strong><span>独立提交模式且检查通过</span></div><div class="stat"><span>阶段状态</span><strong class="status-word">${m.ready?'材料齐备':'继续积累'}</strong><span>材料齐备仍需设计与解释评审</span></div></div><div class="columns"><section class="panel"><h2>知识与原理</h2>${m.nodes.map(n=>`<div class="list-item row">${nodeButton(n.id,'link-button')}${chip(status(n),isDone(n.id))}</div>`).join('')}</section><section class="panel"><h2>阶段验收标准</h2><ol class="rubric">${m.milestone.criteria.map(s=>`<li>${escape(s)}</li>`).join('')}</ol>${link('./docs/curriculum.md','阅读选章与复核任务','text-link')}</section></div><div class="grid lab-grid">${m.reports.map(({id})=>{const l=catalog.labs.find(l=>l.id===id);return `<section class="panel"><h2>${escape(l.title)}</h2><p>${escape(l.goal)}</p>${link(l.guide,'打开实验指南','text-link')}${reportRecord(l)}</section>`;}).join('')}</div><p class="fineprint">平台不会根据报告文件自动判定真实能力；文件指纹用于追溯，不是数字签名。</p>`;
   }
 
   function labs() {
@@ -98,15 +115,15 @@ export function createViews(state) {
       ${selected?details(node(selected)):''}<div class="grid lab-grid">${list.map(l=>`<article class="resource lab-card ${l.command?'lab-ready':''}"><div class="row"><span class="eyebrow">STAGE 0${l.stage}</span>${chip(l.integration==='reproduced'?'已复现':l.integration==='checked'?'本地检查可用':'待集成',Boolean(l.command))}</div><h2>${escape(l.title)}</h2><p>${escape(l.goal)}</p><p class="meta">${escape(source(l.source).author)}</p><div class="lab-hardware"><span class="section-label">运行条件</span><p>${escape(l.hardware)}</p></div>
         <div class="dependency">${l.nodes.map(id=>nodeButton(id,'quiet')).join('')}</div>
         ${l.command?`<div class="command-block"><span class="section-label">在项目目录中运行</span><code>${escape(l.command)}</code></div><div class="actions">${link(l.guide,'阅读实验指南','button-link primary')}${link(l.url,'原作者项目')}</div>`:`<p>${link(l.url,'查看原课程项目','text-link')}</p>`}
-        ${labResults(l)}<details class="resource-details"><summary>验收标准与集成状态</summary><p>${escape(l.status)}</p><ol class="rubric">${l.rubric.map(r=>`<li>${escape(r)}</li>`).join('')}</ol><p>${escape(l.limitation)}</p></details></article>`).join('')}</div>`;
+        ${labResults(l)}${reportRecord(l)}<details class="resource-details"><summary>验收标准与集成状态</summary><p>${escape(l.status)}</p><ol class="rubric">${l.rubric.map(r=>`<li>${escape(r)}</li>`).join('')}</ol><p>${escape(l.limitation)}</p></details></article>`).join('')}</div>`;
   }
 
   function about() {
     return intro('STANDING ON THE SHOULDERS OF GIANTS','来源透明，研究持续开放','连接世界上已有的优秀成果，并持续检查它们能否组成可学习、可实践的路径。')+`
-      <div class="research-grid"><section class="panel"><span class="eyebrow">EVIDENCE</span><h2>哪些已经验证</h2><p>已记录 ${catalog.sources.length} 项来源、${catalog.nodes.length} 个知识节点的学习步骤，以及一项固定版本对象模型项目的 28 项原始测试结果。</p><p>参考项目复现、平台测试与学习者能力验收，是不同的证据。</p>${link('./docs/release-v02.md','阅读完整验收报告','text-link')}</section>
-      <section class="panel"><span class="eyebrow">OPEN QUESTIONS</span><h2>哪些仍需验证</h2><p>依赖划分和选章需要真实学习者持续试用；GPU、多卡与工业系统实验仍需合适环境。高级候选项目不会被标记成已完成集成。</p>${link('./docs/research.md','研究依据与覆盖审计','text-link')}</section></div>
-      <section class="panel"><h2>归功于原作者</h2><p>课程、教材与文档以原始链接为主。对象模型项目复用了许可明确的 MIT 代码与原测试，并保留作者、固定提交和许可。本站原创内容使用 MIT 许可证，不能覆盖第三方权利。</p><div class="document-links">${link('./CREDITS.md','来源与致谢')}${link('./LICENSE','本站许可证')}${link('./docs/extensions.md','资源扩展规范')}${link('./docs/glossary.md','中英术语表')}</div></section>
-      <section class="panel"><h2>学习记录由你掌握</h2><p>进度保存在浏览器，本标签页的草稿可以在刷新后恢复；导出备份时也会包含草稿。换设备或清理浏览器前请备份。记录不会上传服务器。</p><div class="document-links">${link('./docs/getting-started.md','从零开始使用')}${link('./docs/architecture.md','架构与工具选择')}${link('./docs/maintenance.md','维护与恢复指南')}</div></section>`;
+      <div class="research-grid"><section class="panel"><span class="eyebrow">EVIDENCE</span><h2>哪些已经验证</h2><p>已记录 ${catalog.sources.length} 项来源、${catalog.nodes.length} 个知识节点的学习步骤，以及对象模型、数据库、自动微分与共识的固定版本测试结果；真实 GPU 已完成四项补充检查。</p><p>参考项目复现、平台测试与学习者能力验收，是不同的证据。</p>${link('./docs/release-complete.md','阅读完整验收报告','text-link')}</section>
+      <section class="panel"><span class="eyebrow">OPEN QUESTIONS</span><h2>哪些仍需验证</h2><p>依赖划分和选章需要真实学习者持续试用；多卡、原课程高级作业与工业服务实验仍需合适环境。高级候选项目不会被标记成已完成集成。</p>${link('./docs/research.md','研究依据与覆盖审计','text-link')}</section></div>
+      <section class="panel"><h2>归功于原作者</h2><p>课程、教材与文档以原始链接为主。四个精选项目复用了许可明确的 MIT 代码与原测试，并保留作者、固定提交和许可。本站原创内容使用 MIT 许可证，不能覆盖第三方权利。</p><div class="document-links">${link('./CREDITS.md','来源与致谢')}${link('./LICENSE','本站许可证')}${link('./docs/extensions.md','资源扩展规范')}${link('./docs/glossary.md','中英术语表')}</div></section>
+      <section class="panel"><h2>学习记录由你掌握</h2><p>进度保存在浏览器，本标签页的草稿可以在刷新后恢复；导出备份时也会包含草稿。换设备或清理浏览器前请备份。记录不会上传服务器。</p><div class="document-links">${link('./docs/getting-started.md','从零开始使用')}${link('./docs/architecture.md','架构与工具选择')}${link('./docs/maintenance.md','维护与恢复指南')}${link('./docs/requirements-audit.md','提示词逐项验收')}${link('./docs/curriculum.md','选章与复核任务')}${link('./docs/advanced-labs.md','高级原课实验')}</div></section>`;
   }
-  return {learn:learning,map,resources,labs,about};
+  return {learn:learning,map,resources,labs,about,milestone};
 }

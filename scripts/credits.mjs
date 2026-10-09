@@ -2,7 +2,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
 const text=`# 来源与致谢
 
-研究日期：${catalog.reviewedAt}。本站主要提供原始链接与原创中文导读。唯一随项目分发的第三方实验代码是 AOSA 对象模型项目：固定提交、文件校验和原始许可证位于 labs/object-model/upstream。初审不代表已验证完整教学效果。本站 MIT 许可证不覆盖第三方材料。
+研究日期：${catalog.reviewedAt}。本站主要提供原始链接与原创中文导读。随项目分发的精选第三方实验代码包括 AOSA 对象模型、DBDB、共识与 micrograd；各自 upstream 目录保留固定提交、校验和与原始许可证。初审不代表已验证完整教学效果。本站 MIT 许可证不覆盖第三方材料。
 
 ${catalog.sources.map(s=>`## ${s.title}
 
@@ -18,7 +18,11 @@ ${catalog.sources.map(s=>`## ${s.title}
 
 Carl Friedrich Bolz 的 A Simple Object Model 代码与测试来自 aosabook/500lines，提交 fba689d101eb5600f5c8f4d7fd79912498e950e2。Copyright (c) Carl Friedrich Bolz。MIT 代码及 CC BY 3.0 文字的许可原文保留在 labs/object-model/upstream/LICENSE.md；未复制书籍正文。
 
-平台使用浏览器、Node.js 与 Python 标准库，无第三方运行时包。对象模型适配器只组织原测试运行；Indoor Voice 检查器为原创补充检查，不是 CS50 官方评分。Playwright 仅用于可选开发验收，不随平台分发。
+DBDB 作者 Taavi Burns；Clustering by Consensus 作者 Dustin J. Mitchell。同属 aosabook/500lines 固定提交。micrograd 作者 Andrej Karpathy，固定提交 7bc720e951fe422b8f8814aa5aa1b64121d26b4c，MIT 原文位于 labs/micrograd/upstream/LICENSE。AOSA 正文为 CC BY 3.0，本站未复制书籍正文；保留的许可文件适用于代码。
+
+站内阅读器复用 Marked 18.1.0（MIT）及 DOMPurify 3.4.16（Apache-2.0 或 MPL-2.0 双许可，保留原许可）；版本、逐文件 SHA-256 与原许可位于 site/vendor。平台无 CDN 与商业运行服务依赖。实验依赖 portalocker、pywin32、fissix、appdirs 及可选 PyTorch/NumPy，见 labs 的版本锁与上游各自许可；这些安装包不随网站分发。
+
+对象模型与共识、数据库适配器组织保留的原测试；兼容修改独立于原始文件。Indoor Voice、GPU 和 micrograd 的有限差分/训练检查是补充检查，不能冒充官方课程评分。Playwright 仅用于可选开发验收，不随平台分发。
 
 本文件由 site/catalog.json 生成；修改来源后运行 node scripts/credits.mjs。
 `;
