@@ -80,7 +80,11 @@ try:
     else:
         pid = int(heartbeat.with_suffix('.pid').read_text())
         status = Path('/proc') / str(pid) / 'stat'
-        assert not status.exists() or status.read_text().split()[2] == 'Z', 'descendant still running'
+        try:
+            state = status.read_text().split()[2]
+        except (FileNotFoundError, ProcessLookupError):
+            state = None  # The kernel may reap /proc between lookup and read.
+        assert state in [None, 'Z'], 'descendant still running'
     before = heartbeat.read_text()
     assert before, 'grandchild never executed'
     time.sleep(.25)

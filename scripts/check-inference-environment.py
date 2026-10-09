@@ -88,7 +88,7 @@ def main():
                  '-v', str(cache) + ':/root/.cache/huggingface', '--entrypoint', 'vllm', VERSIONS['image'],
                  'serve', VERSIONS['model'], '--revision', VERSIONS['revision'], '--host', '0.0.0.0',
                  '--port', '8000', '--dtype', 'float32', '--max-model-len', '256', '--max-num-seqs', '2',
-                 '--enforce-eager', '--disable-log-requests'], timeout=120)
+                 '--enforce-eager', '--no-enable-log-requests'], timeout=120)
         binding = command(['docker', 'port', name, '8000/tcp']).stdout.strip()
         assert binding.startswith('127.0.0.1:') and '\n' not in binding
         base = 'http://' + binding

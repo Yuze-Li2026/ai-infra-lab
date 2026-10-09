@@ -21,6 +21,13 @@ try{
  assert.equal(await loadingPage.locator('#import').isEnabled(),true);
  await loadingPage.close();checks.push('backup controls stay disabled until delayed catalog and stored records are ready');
  await page.goto(base+'/#learn');await page.locator('.start-guide').waitFor();
+ assert.equal(await page.locator('[data-lab-total] strong').innerText(),String(catalog.labs.length));
+ assert.ok((await page.locator('[data-lab-total]').innerText()).includes(`${catalog.labs.filter(l=>l.command).length} 个本地运行 · ${catalog.labs.filter(l=>l.preparationCommand).length} 个原课流程`));
+ await page.goto(base+'/#labs');await page.locator('.lab-card').first().waitFor();
+ assert.equal(await page.locator('.lab-card').count(),catalog.labs.length);
+ assert.equal(await page.locator('.lab-card.lab-ready').count(),catalog.labs.filter(l=>l.command).length);
+ checks.push('homepage experiment total equals every unfiltered lab card, with local commands and original-course workflows identified separately');
+ await page.goto(base+'/#learn');await page.locator('.start-guide').waitFor();
  assert.equal(await page.locator('.start-guide').getAttribute('open'),'');
  await page.getByRole('link',{name:/打开第一个任务/}).click();await page.locator('#node-detail').waitFor();
  assert.match(await page.locator('.study-scope').innerText(),/文件操作与原课环境起步/);

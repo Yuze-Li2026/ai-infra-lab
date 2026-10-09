@@ -68,7 +68,7 @@ export function createViews(state) {
       <div class="stats">
         <div class="stat"><span>学习进度</span><strong>${count} <small>/ ${catalog.nodes.length}</small></strong><span>知识节点已提交成果</span></div>
         <div class="stat"><span>精选知识来源</span><strong>${catalog.sources.length}</strong><span>课程、教材与原始文档</span></div>
-        <div class="stat"><span>本地工程实践</span><strong>${String(catalog.labs.filter(l=>l.command).length).padStart(2,'0')}</strong><span>提供可运行流程的实验</span></div>
+        <div class="stat" data-lab-total><span>工程实验入口</span><strong>${catalog.labs.length}</strong><span>${catalog.labs.filter(l=>l.command).length} 个本地运行 · ${catalog.labs.filter(l=>l.preparationCommand).length} 个原课流程</span></div>
       </div>
       <div class="columns"><div>
         <section class="panel focus-panel"><div class="row"><span class="eyebrow">YOUR NEXT STEP</span>${chip(next?`阶段 0${next.stage}`:'当前路径')}</div>
