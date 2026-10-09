@@ -45,7 +45,9 @@ try{
  const second=await context.newPage();second.on('dialog',d=>d.accept());
  await page.goto(base+'/#map/computer');await second.goto(base+'/#map/arithmetic');
  await page.locator('#evidence').fill('第一个标签页的说明');await second.locator('#evidence').fill('第二个标签页的说明');
- await Promise.all([page.locator('[data-start=computer]').click(),second.locator('[data-start=arithmetic]').click()]);
+ // Invoke both real click handlers concurrently without interleaving one browser's pointer.
+ // Pointer interaction during cross-tab updates is exercised separately below.
+ await Promise.all([page.locator('[data-start=computer]').evaluate(button=>button.click()),second.locator('[data-start=arithmetic]').evaluate(button=>button.click())]);
  try{await page.waitForFunction(()=>{const r=JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records;return r.computer?.evidence==='第一个标签页的说明'&&r.arithmetic?.evidence==='第二个标签页的说明';});}
  catch(error){
   const snapshot=await Promise.all([page,second].map(tab=>tab.evaluate(()=>({route:location.hash,progress:localStorage.getItem('ai-infra-lab.progress.v1'),drafts:sessionStorage.getItem('ai-infra-lab.drafts.v1'),notice:document.querySelector('#notice').textContent,warning:document.querySelector('#storage-warning').textContent,evidence:document.querySelector('#evidence')?.value,trace:window.qaStorageTrace.filter(r=>r.operation==='setItem'),locks:typeof navigator.locks?.request}))));

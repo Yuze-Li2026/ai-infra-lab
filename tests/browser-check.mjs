@@ -18,6 +18,7 @@ try{
  await page.goto(base);await page.getByRole('heading',{name:'把知识变成工程能力'}).waitFor();
  await page.screenshot({path:'artifacts/desktop.png',fullPage:true});checks.push('desktop learning workspace');
  await page.getByRole('button',{name:'打开学习任务'}).click();await page.locator('#evidence').fill('已创建学习文件夹并独立运行程序，已保存输出截图并解释了路径、编辑与执行的区别。');await page.getByRole('button',{name:'提交成果记录'}).click();
+ await page.getByRole('status').filter({hasText:'成果记录已保存'}).waitFor();
  assert.equal(await page.locator('.stat strong').first().innerText(),`1 / ${catalog.nodes.length}`);await page.reload();assert.equal(await page.locator('.stat strong').first().innerText(),`1 / ${catalog.nodes.length}`);checks.push('submit evidence and persist after reload');
  await page.locator('a[data-view="map"]').click();await page.locator('.node[data-node=python]').click();await page.locator('#evidence').fill('x');await page.getByRole('button',{name:'提交成果记录'}).click();await page.getByRole('status').filter({hasText:'缺少成果说明'}).waitFor();checks.push('short evidence rejected');
  await page.locator('a[data-view="resources"]').click();await page.locator('#language').selectOption('zh');assert.equal(await page.locator('article.resource').count(),catalog.sources.filter(s=>s.language==='zh').length);await page.locator('#search').fill('不存在的课程');assert.equal(await page.locator('article.resource').count(),0);checks.push('resource language and text filtering');

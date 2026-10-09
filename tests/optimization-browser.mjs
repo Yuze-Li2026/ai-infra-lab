@@ -14,7 +14,7 @@ try{
  await page.goto(url);await page.getByRole('button',{name:'打开学习任务'}).click();
  await page.locator('#evidence').fill(evidence);await page.locator('a[data-view=resources]').click();
  await page.locator('a[data-view=learn]').click();await page.getByRole('button',{name:'打开学习任务'}).click();assert.equal(await page.locator('#evidence').inputValue(),evidence);
- await page.getByRole('button',{name:'记录为学习中'}).click();checks.push('unsaved evidence survives internal navigation');
+ await page.getByRole('button',{name:'记录为学习中'}).click();await page.getByRole('status').filter({hasText:'学习状态已保存'}).waitFor();checks.push('unsaved evidence survives internal navigation');
  await page.locator('a[data-view=resources]').click();
  await page.locator('#search').evaluate(el=>{window.imeInput=el;el.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));el.value='动';el.dispatchEvent(new InputEvent('input',{bubbles:true,isComposing:true,data:'动'}));});
  assert.equal(await page.evaluate(()=>window.imeInput===document.querySelector('#search')),true);
@@ -25,14 +25,15 @@ try{
  await page.getByRole('button',{name:'打开学习任务'}).click();await page.locator('#evidence').fill(evidence);await page.getByRole('button',{name:'提交成果记录'}).click();
  await second.waitForFunction(()=>JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records.computer.status==='submitted');
  assert.equal(await second.locator('#evidence').inputValue(),'第二个标签页的未保存说明');
- await second.getByRole('button',{name:'记录为学习中'}).click();await second.reload();
+ await second.getByRole('button',{name:'记录为学习中'}).click();await second.getByRole('status').filter({hasText:'学习状态已保存'}).waitFor();await second.reload();
  const records=await second.evaluate(()=>JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records);assert.equal(records.computer.status,'submitted');assert.equal(records.arithmetic.evidence,'第二个标签页的未保存说明');await second.close();checks.push('two tabs preserve independent records and active draft');
  await page.goto(url+'/#learn');await page.getByRole('button',{name:'打开学习任务'}).click();
  await page.evaluate(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='ai-infra-lab.progress.v1')throw new DOMException('storage full','QuotaExceededError');return original.call(this,k,v);};});
  await page.locator('#evidence').fill(evidence);await page.getByRole('button',{name:'提交成果记录'}).click();
+ await page.locator('#storage-warning').filter({hasText:'尚未保存到浏览器'}).waitFor();
  assert.match(await page.locator('#storage-warning').innerText(),/尚未保存到浏览器/);assert.match(await page.locator('#notice').innerText(),/保存未成功/);checks.push('quota failure never displays a successful save');
  await page.reload();await page.evaluate(()=>localStorage.setItem('ai-infra-lab.progress.v1','{broken'));
- await page.reload();await page.getByRole('button',{name:'打开学习任务'}).click();await page.locator('#evidence').fill(evidence);await page.getByRole('button',{name:'提交成果记录'}).click();assert.equal(await page.evaluate(()=>localStorage.getItem('ai-infra-lab.progress.v1')),'{broken');checks.push('corrupt progress is not overwritten by normal save');
+ await page.reload();await page.getByRole('button',{name:'打开学习任务'}).click();await page.locator('#evidence').fill(evidence);await page.getByRole('button',{name:'提交成果记录'}).click();await page.getByRole('status').filter({hasText:'保存未成功'}).waitFor();assert.equal(await page.evaluate(()=>localStorage.getItem('ai-infra-lab.progress.v1')),'{broken');checks.push('corrupt progress is not overwritten by normal save');
  await page.locator('#backup-file').setInputFiles('artifacts/qa-backup.json');await page.getByRole('status').filter({hasText:'合并恢复'}).waitFor();
  assert.equal(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.startsWith('ai-infra-lab.progress.v1.recovery.')&&localStorage.getItem(k)==='{broken')),true);checks.push('explicit restore keeps original corrupt bytes');
  const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
