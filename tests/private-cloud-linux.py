@@ -147,10 +147,11 @@ def run():
             if not ssh_config:
                 raise RuntimeError("Real SSH acceptance needs PRIVATE_LAB_TEST_SSH_CONFIG")
             forwarded = free_port()
-            tunnel = subprocess.Popen(["ssh", "-F", ssh_config, "-N", "-L", f"127.0.0.1:{forwarded}:127.0.0.1:{port}", "private-test"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            tunnel = subprocess.Popen(["ssh", "-F", ssh_config, "-N", "-L", f"127.0.0.1:{forwarded}:127.0.0.1:{port}", "private-test"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
             try:
                 for _ in range(50):
-                    assert tunnel.poll() is None, "SSH tunnel exited"
+                    if tunnel.poll() is not None:
+                        raise AssertionError("SSH tunnel exited: " + tunnel.stderr.read()[-2000:])
                     try:
                         if request(f"http://127.0.0.1:{forwarded}", "/api/contents", old["token"])[0] == 200:
                             break

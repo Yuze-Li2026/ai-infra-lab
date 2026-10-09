@@ -31,7 +31,9 @@ jobs:
         run: |
           python - <<'PY'
           import os, pathlib, subprocess
-          private=pathlib.Path(os.environ['RUNNER_TEMP'])/'lab-ssh'
+          # OpenSSH StrictModes also validates ancestors of AuthorizedKeysFile.
+          # The Actions work/_temp tree is not an SSH trust directory.
+          private=pathlib.Path.home()/'.ai-infra-ci-ssh'
           private.mkdir(mode=0o700)
           for name in ('host','client','unauthorized'):
               subprocess.run(['ssh-keygen','-q','-t','ed25519','-N','','-f',str(private/name)],check=True)
@@ -52,11 +54,16 @@ jobs:
           with open(os.environ['GITHUB_ENV'],'a') as env:
               env.write('PRIVATE_LAB_TEST_SSH_CONFIG='+str(private/'ssh_config')+'\n')
           subprocess.run(['sudo','mkdir','-p','/run/sshd'],check=True)
-          subprocess.run(['sudo','/usr/sbin/sshd','-f',str(private/'sshd_config')],check=True)
+          subprocess.run(['sudo','/usr/sbin/sshd','-E',str(private/'sshd.log'),'-f',str(private/'sshd_config')],check=True)
+          accepted=subprocess.run(['ssh','-F',str(private/'ssh_config'),'private-test','true'],capture_output=True,text=True,timeout=15)
+          if accepted.returncode:
+              print(accepted.stderr)
+              subprocess.run(['sudo','cat',str(private/'sshd.log')],check=True)
+              raise RuntimeError('The owner SSH key could not connect')
           # A different key cannot establish even a shell session.
           rejected=subprocess.run(['ssh','-F','/dev/null','-p','32222','-i',str(private/'unauthorized'),
               '-o','IdentitiesOnly=yes','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes',
-              '-o','UserKnownHostsFile='+str(private/'known_hosts'),user+'@127.0.0.1','true'],capture_output=True)
+              '-o','UserKnownHostsFile='+str(private/'known_hosts'),user+'@127.0.0.1','true'],capture_output=True,timeout=15)
           assert rejected.returncode==255, 'Unknown SSH key was accepted'
           PY
       - name: Test authorization, actual execution, tunnel, restart and credential revocation
@@ -66,7 +73,7 @@ jobs:
         run: |
           python - <<'PY'
           import os,pathlib,subprocess
-          pidfile=pathlib.Path(os.environ['RUNNER_TEMP'])/'lab-ssh/sshd.pid'
+          pidfile=pathlib.Path.home()/'.ai-infra-ci-ssh/sshd.pid'
           if pidfile.is_file():
               pid=pidfile.read_text().strip()
               assert pid.isdigit() and int(pid)>1
