@@ -6,4 +6,4 @@
 
 平台修改执行 `npm run validate`、`npm test`、`npm run build`。重大图谱变更检查依赖和进度迁移。请勿提交课程答案、未授权材料、个人学习数据、模型权重和凭据。
 
-问题反馈尽量包含系统、Node/Python 版本、复现步骤与错误输出；删去个人信息。项目发布后再确定 issue/PR 入口，当前没有创建或宣称存在远程仓库。
+问题反馈尽量包含系统、Node/Python 版本、复现步骤与错误输出；删去个人信息。通过[Issues](https://github.com/Yuze-Li2026/ai-infra-lab/issues)反馈普通问题，通过[Pull requests](https://github.com/Yuze-Li2026/ai-infra-lab/pulls)提交审阅。安全漏洞使用 SECURITY 中的私密入口。

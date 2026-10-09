@@ -83,4 +83,4 @@
 
 ## GitHub 只读检查
 
-[账号公开主页](https://github.com/Yuze-Li2026) 在研究时显示 3 个仓库、0 个 Projects，热门仓库为 `fft-notes`、`linear-algebra-map`、`stat-learning-numpy`。仓库列表与 API 查询未成功，无法确认私有仓库和名称全量冲突。`ai-infra-lab` 是本地包名，尚未创建远程仓库；创建前必须重新查询并取得所有者同意。
+[账号公开主页](https://github.com/Yuze-Li2026) 初次研究时显示 3 个仓库，原公开项目包括 `fft-notes`、`linear-algebra-map`、`stat-learning-numpy`。2026-10-09 所有者批准公开发布；经认证核对目标仓库不存在后创建 [ai-infra-lab](https://github.com/Yuze-Li2026/ai-infra-lab)，完整历史哈希核对一致。没有修改其他仓库；不声称公开主页能证明私有项目的情况。

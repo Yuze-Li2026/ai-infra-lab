@@ -31,6 +31,7 @@
 
 ## 核对研究与质量
 
+- [学习路径依据与覆盖复核](path-evidence.md)：CMU、Stanford、MLSysBook 原作者路径与全部知识节点的对应关系。
 - [能力模型与持续覆盖审计](research.md)：真实能力、递归依赖、选择理由、开放缺口与更新机制。
 - [架构与工具选择](architecture.md)：模块、静态约束与复用成熟组件的依据。
 - [验收标准](acceptance.md)、[实际验证记录](verification.md)、[本地完整链验收](release-complete.md)。

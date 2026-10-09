@@ -1,0 +1,32 @@
+// Optional post-deployment QA using existing Playwright and a fresh browser context.
+import {createRequire} from 'node:module';
+import {resolve} from 'node:path';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {allowedDocuments} from '../site/documents.js';
+const require=createRequire(resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'));
+const {chromium}=require('playwright');
+const base=new URL(process.env.LAB_LIVE_URL||'https://yuze-li2026.github.io/ai-infra-lab/');
+assert.equal(base.protocol,'https:');
+const browser=await chromium.launch({headless:true,executablePath:process.env.LAB_BROWSER_PATH});
+const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true,reducedMotion:'reduce'});
+const page=await context.newPage(),checks=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
+try{
+ const manifest=JSON.parse(await readFile('dist/build-manifest.json','utf8'));
+ const publicManifest=await context.request.get(new URL('build-manifest.json',base).href);
+ assert.equal(publicManifest.status(),200);assert.deepEqual(await publicManifest.json(),manifest);
+ for(const file of manifest.files){const response=await context.request.get(new URL(file.path,base).href);assert.equal(response.status(),200,file.path);const bytes=await response.body();assert.equal(bytes.length,file.bytes,file.path);assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sha256,file.path);}
+ checks.push(`all ${manifest.files.length} public file sizes and SHA-256 match the reviewed local build`);
+ await page.goto(base.href);await page.getByRole('heading',{name:'把知识变成工程能力'}).waitFor();
+ await page.getByRole('button',{name:'打开学习任务'}).click();await page.locator('#evidence').fill('线上临时上下文验收：已创建文件并运行独立程序，解释编辑、执行与路径，并保存真实命令输出。');await page.getByRole('button',{name:'提交成果记录'}).click();await page.reload();assert.equal(await page.locator('.stat strong').first().innerText(),'1 / 24');
+ const download=page.waitForEvent('download');await page.locator('#export').click();const backup=await readFile(await(await download).path(),'utf8');await page.evaluate(()=>localStorage.clear());await page.reload();await page.locator('#backup-file').setInputFiles({name:'live-backup.json',mimeType:'application/json',buffer:Buffer.from(backup)});await page.getByRole('status').filter({hasText:'合并恢复'}).waitFor();assert.equal(await page.locator('.stat strong').first().innerText(),'1 / 24');checks.push('real HTTPS submission, reload, backup and restore in isolated context');
+ const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
+ for(const node of catalog.nodes){await page.goto(base.href+'#map/'+node.id);await page.getByRole('heading',{name:node.title,exact:true}).waitFor();}checks.push('all 24 task deep links');
+ for(const doc of allowedDocuments){await page.goto(base.href+'#read/'+doc);await page.locator('.document-body').waitFor();if(doc!=='LICENSE')await page.locator('.document-body h1').waitFor();assert.equal(await page.locator('.document-body script,.document-body iframe').count(),0);}checks.push(`all ${allowedDocuments.size} guides and license render at repository prefix`);
+ await page.goto(base.href+'#read/docs/dbdb-lab.md');await page.getByRole('link',{name:'环境准备',exact:true}).click();await page.locator('.document-body h1').filter({hasText:'从第一个文件开始'}).waitFor();assert.equal(new URL(page.url()).pathname,base.pathname);checks.push('relative guide link stays within Pages workspace');
+ for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:900});for(const route of ['learn','map','resources','labs','about','read/docs/path-evidence.md']){await page.goto(base.href+'#'+route);await page.locator(route.startsWith('read')?'.document-body h1':'main h1').waitFor();assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${width} ${route}`);}}checks.push('all views and evidence guide fit four viewport sizes');
+ await page.setViewportSize({width:1440,height:1000});await page.goto(base.href);await page.getByRole('heading',{name:'把知识变成工程能力'}).waitFor();await page.screenshot({path:'artifacts/live-desktop.png',fullPage:true});await page.setViewportSize({width:390,height:844});await page.screenshot({path:'artifacts/live-mobile.png',fullPage:true});await page.setViewportSize({width:1000,height:900});await page.addStyleTag({content:'html{font-size:32px}'});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));checks.push('200% text remains usable');
+ assert.deepEqual(errors,[]);checks.push('no browser runtime errors');
+ const result={passed:true,url:base.href,checkedAt:new Date().toISOString(),publicFiles:manifest.files.length,checks};await writeFile('artifacts/live-browser-results.json',JSON.stringify(result,null,2)+'\n');console.log(result);
+}finally{await context.close();await browser.close();}

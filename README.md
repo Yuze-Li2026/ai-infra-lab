@@ -8,6 +8,8 @@
 
 ## 立即使用
 
+公开源码：[Yuze-Li2026/ai-infra-lab](https://github.com/Yuze-Li2026/ai-infra-lab)。本地使用方式如下；线上入口与部署证据见下方发布状态。
+
 安装 [Node.js](https://nodejs.org/) 22 或更新版本后，在 Windows 双击 `start.cmd`；或在本目录运行：
 
 ```sh
@@ -45,6 +47,8 @@ npm run check
 
 [完整文档中心](docs/index.md)按学习者、实验者和维护者分类；[常见故障](docs/faq.md)、[维护者教程](docs/maintainer-tutorial.md)与[安全政策](SECURITY.md)均提供具体操作和边界。
 
+[学习路径依据与覆盖复核](docs/path-evidence.md)把 CMU DLSys、Stanford CS336、MLSysBook 原作者路径与本站节点、成果要求逐项对照；具体精读范围见选章指南。
+
 - [零基础使用及入门验收](docs/getting-started.md)
 - [研究、能力模型、覆盖缺口](docs/research.md)
 - [产品架构与开源工具评估](docs/architecture.md)
@@ -57,6 +61,6 @@ npm run check
 
 ## 发布状态
 
-本地 Git 版本已保存，并完成从源码归档恢复构建的演练；尚未创建远程仓库、推送或公开发布。2026-10-09 只读检查账号公开主页，显示 `fft-notes`、`linear-algebra-map`、`stat-learning-numpy` 三项；没有完成认证后的全量仓库查询，因此 `ai-infra-lab` 名称仍需创建前复核。不得修改其他项目。仓库创建与公开发布必须得到项目所有者批准。
+2026-10-09 已取得所有者公开发布授权，核对目标仓库不存在后创建上述公开仓库。远程与本地源码历史的提交、文件树哈希一致；首轮 [Windows/Linux 验证](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37877122668)全部通过。Pages 正在按发布门槛准备，最终部署与线上复验记录见[验证记录](docs/verification.md)。账号其他项目未修改。
 
 原创代码与组织说明使用 MIT 许可证。外部教材、课程、实验和代码保留各自许可；本站许可证不授予对它们的再分发权利。
