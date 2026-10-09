@@ -20,21 +20,21 @@
 
 ## 从依据到学习任务
 
-|能力范围|本站节点与精选入口|需要保存的能力证据|
-|---|---|---|
-|零基础与程序|computer、python；CS50 Python|独立程序、边界输入、错误定位与 README；最终项目不能由 Indoor Voice 代替|
-|工具与复现|tools；Missing Semester|终端命令、Git 历史、实际版本和恢复记录|
-|数学起点|arithmetic、algebra；OpenStax|单位、比例、函数和指数的手算与解释|
-|计算数学|discrete、linear、calculus、probability；MIT OCW、Stat 110、OpenIntro|证明、矩阵/梯度推导、有限差分和统计推断|
-|抽象与算法|programming、algorithms；Composing Programs、MIT 6.006|数据结构、复杂度、边界测试和对象模型设计|
-|计算机与系统|architecture、os；Beej C、CS61C、OSTEP|内存与并发不变量、原项目测试、失败恢复|
-|网络与持久性|network；CS144、DBDB|协议与 I/O 解释、重启后读取、失败路径与锁的限制|
-|模型与数值|ml、numerics；D2L、DLSys|梯度、稳定性、训练质量、重复测量协议|
-|框架|framework；DLSys、micrograd|计算图、独立自动微分、数值对照，再进入完整张量后端|
-|数据工程|data；CS336、MLSysBook|来源和许可、切分与泄漏检查、加载吞吐、可复现训练|
-|GPU 与分布式|gpu、dist、training；CUDA、6.5840、PyTorch Distributed|正确性、通信与同步计时、故障注入和检查点恢复|
-|服务与运行|inference、operations；vLLM、SRE、Kubernetes|质量基线、延迟/吞吐、SLO、权限和回滚|
-|编译器方向|compiler；MLIR Toy|IR、语义等价、编译条件和优化前后测量|
+| 能力范围 | 本站节点与精选入口 | 需要保存的能力证据 |
+| --- | --- | --- |
+| 零基础与程序 | computer、python；CS50 Python | 独立程序、边界输入、错误定位与 README；最终项目不能由 Indoor Voice 代替 |
+| 工具与复现 | tools；Missing Semester | 终端命令、Git 历史、实际版本和恢复记录 |
+| 数学起点 | arithmetic、algebra；OpenStax | 单位、比例、函数和指数的手算与解释 |
+| 计算数学 | discrete、linear、calculus、probability；MIT OCW、Stat 110、OpenIntro | 证明、矩阵/梯度推导、有限差分和统计推断 |
+| 抽象与算法 | programming、algorithms；Composing Programs、MIT 6.006 | 数据结构、复杂度、边界测试和对象模型设计 |
+| 计算机与系统 | architecture、os；Beej C、CS61C、OSTEP | 内存与并发不变量、原项目测试、失败恢复 |
+| 网络与持久性 | network；CS144、DBDB | 协议与 I/O 解释、重启后读取、失败路径与锁的限制 |
+| 模型与数值 | ml、numerics；D2L、DLSys | 梯度、稳定性、训练质量、重复测量协议 |
+| 框架 | framework；DLSys、micrograd | 计算图、独立自动微分、数值对照，再进入完整张量后端 |
+| 数据工程 | data；CS336、MLSysBook | 来源和许可、切分与泄漏检查、加载吞吐、可复现训练 |
+| GPU 与分布式 | gpu、dist、training；CUDA、6.5840、PyTorch Distributed | 正确性、通信与同步计时、故障注入和检查点恢复 |
+| 服务与运行 | inference、operations；vLLM、SRE、Kubernetes | 质量基线、延迟/吞吐、SLO、权限和回滚 |
+| 编译器方向 | compiler；MLIR Toy | IR、语义等价、编译条件和优化前后测量 |
 
 上表保留最初 24 节点的基础路径对照。本轮扩展到 45 个节点，完整逐项对应见[覆盖矩阵](coverage.md)，按方向组合见[学习路径](learning-paths.md)。全部节点的主资源、精读范围、诊断题和提交要求见[选章与复核任务](curriculum.md)。具体 URL、作者、版本、许可、12 维选择依据保存在资源目录，并可从[来源与致谢](../CREDITS.md)核对。
 

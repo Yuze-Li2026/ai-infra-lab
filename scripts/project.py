@@ -121,6 +121,17 @@ def prepare(profile, folder, args):
     print(json.dumps({'prepared':True,'directory':str(folder),'commit':profile['commit'],
                       'next':'阅读专用指南，创建该课程自己的环境，再独立实现并运行 check。'},ensure_ascii=False))
 
+def go_test_result(text, exit_code):
+    started = set(re.findall(r'^=== RUN\s+(Test\S+)', text, re.MULTILINE))
+    outcomes = {name: status for status, name in re.findall(r'^--- (PASS|FAIL|SKIP): (Test\S+)', text, re.MULTILINE)}
+    complete = bool(started) and set(outcomes) == started
+    failures = sum(status == 'FAIL' for status in outcomes.values())
+    skipped = sum(status == 'SKIP' for status in outcomes.values())
+    return {'name':'original-raft1-make-target', 'tests':len(started), 'failures':failures,
+            'skipped':skipped, 'completed':complete, 'exitCode':exit_code,
+            'passed':exit_code == 0 and complete and failures == 0 and skipped == 0}
+
+
 def course_check(key, profile, folder, args):
     now = datetime.now(timezone.utc).isoformat()
     target = Path(args.output) if args.output else ROOT/'artifacts'/('course-'+key+'-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')+'.json')
@@ -185,9 +196,7 @@ def course_check(key, profile, folder, args):
                             'skipped':skipped,'failures':failures,'exitCode':run.returncode})
         elif profile['kind']=='git' and run:
             text = log.read_text(encoding='utf-8', errors='replace')
-            passed_names = re.findall(r'^--- PASS: (Test\S+)',text,re.MULTILINE)
-            results.append({'name':'original-raft1-make-target','tests':len(set(passed_names)),
-                            'passed':run.returncode==0 and bool(passed_names),'exitCode':run.returncode})
+            results.append(go_test_result(text, run.returncode))
         elif run:
             results.append({'name':'original-course-command','tests':0,'passed':False,'exitCode':run.returncode,
                             'note':'保留原始日志；没有机器可核对的完整测试范围，不标记为验收通过。'})

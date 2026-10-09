@@ -1,0 +1,103 @@
+name: Original course Linux environments
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/quality-and-ui]
+    paths:
+      - .github/workflows/course-linux.yml
+      - scripts/project.py
+      - scripts/processes.py
+      - scripts/check-course-environment.py
+      - labs/projects.json
+permissions:
+  contents: read
+jobs:
+  needle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - part: hw0
+            tests: 6
+          - part: hw1
+            tests: 29
+          - part: hw2
+            tests: 93
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Prepare the pinned original starter
+        run: python scripts/project.py needle prepare --part ${{ matrix.part }}
+      - name: Install the isolated course environment on the cloud runner
+        env:
+          COURSE_PART: ${{ matrix.part }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          key='needle-'+os.environ['COURSE_PART']
+          folder=Path('workspaces')/key
+          subprocess.run([sys.executable,'-m','venv',str(folder/'.venv')],check=True)
+          profile=json.loads(Path('labs/projects.json').read_text())['profiles'][key]
+          python=str((folder/'.venv/bin/python').resolve())
+          subprocess.run([python,'-m','pip','install','--disable-pip-version-check',*profile['requirements']],check=True)
+          subprocess.run([python,'-c','import numpy,pytest,numdifftools,pybind11,mugrade'],check=True)
+          if key=='needle-hw0':
+              env={**os.environ,'PATH':str((folder/'.venv/bin').resolve())+os.pathsep+os.environ['PATH']}
+              subprocess.run(['make'],cwd=folder,env=env,check=True)
+              subprocess.run([python,'-c','import simple_ml_ext'],cwd=folder/'src',check=True)
+          PY
+      - name: Execute the complete original tests and retain their expected TODO failures
+        env:
+          COURSE_PART: ${{ matrix.part }}
+        run: |
+          python - <<'PY'
+          import os,subprocess,sys
+          part=os.environ['COURSE_PART']
+          result=subprocess.run([sys.executable,'scripts/project.py','needle','check','--part',part,'--output','artifacts/course-'+part+'.json'])
+          if result.returncode!=1: raise SystemExit('Expected the pinned unimplemented starter to fail: '+str(result.returncode))
+          PY
+      - name: Check execution evidence separately from assignment success
+        run: python scripts/check-course-environment.py artifacts/course-${{ matrix.part }}.json --tests ${{ matrix.tests }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: original-${{ matrix.part }}-linux-evidence
+          path: artifacts/course-*
+          retention-days: 7
+          if-no-files-found: error
+  raft:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Prepare and collect the pinned MIT tests
+        run: |
+          go version
+          python scripts/project.py raft prepare
+          mkdir -p artifacts
+          cd workspaces/raft/src
+          go test -list . ./raft1 > ../../../artifacts/course-raft-tests.txt
+      - name: Execute the original Makefile target with the race detector
+        run: |
+          python - <<'PY'
+          import subprocess,sys
+          result=subprocess.run([sys.executable,'scripts/project.py','raft','check','--output','artifacts/course-raft.json'])
+          if result.returncode!=1: raise SystemExit('Expected the pinned unimplemented starter to fail: '+str(result.returncode))
+          PY
+      - name: Check that every collected test finished
+        run: python scripts/check-course-environment.py artifacts/course-raft.json --go-list artifacts/course-raft-tests.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: original-raft-linux-evidence
+          path: artifacts/course-*
+          retention-days: 7
+          if-no-files-found: error

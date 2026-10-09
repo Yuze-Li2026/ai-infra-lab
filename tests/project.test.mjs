@@ -74,3 +74,9 @@ test('course timeout terminates the spawned child tree',async()=>{
  const result=spawnSync(python,[script,pid],{encoding:'utf8',windowsHide:true,timeout:15000});
  assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/process tree stopped/);
 });
+
+test('Go log accounting counts failed tests and rejects incomplete or skipped runs',()=>{
+ const source=`import sys\nsys.path.insert(0,sys.argv[1])\nfrom project import go_test_result\nfailed=go_test_result('=== RUN   TestOne\\n--- FAIL: TestOne (0.1s)\\n=== RUN   TestTwo\\n--- FAIL: TestTwo (0.1s)\\n',2)\nassert failed['tests']==2 and failed['failures']==2 and failed['completed'] and not failed['passed']\nassert not go_test_result('=== RUN   TestOne\\n',0)['passed']\nassert not go_test_result('=== RUN   TestOne\\n--- SKIP: TestOne (0s)\\n',0)['passed']\nassert not go_test_result('',0)['passed']\nassert go_test_result('=== RUN   TestOne\\n--- PASS: TestOne (0.1s)\\n',0)['passed']\nprint('Go result accounting verified; fixture is not actual course execution')\n`;
+ const result=spawnSync(python,['-c',source,resolve('scripts')],{encoding:'utf8',windowsHide:true,timeout:10000});
+ assert.equal(result.status,0,result.stderr);
+});

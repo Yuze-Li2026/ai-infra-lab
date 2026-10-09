@@ -5,11 +5,19 @@ import {readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const require=createRequire(process.env.LAB_PLAYWRIGHT_ROOT?resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'):import.meta.url);
 const {chromium}=require('playwright');
-const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{})});
+const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{channel:'chrome'})});
 const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true,reducedMotion:'reduce'});
+await context.addInitScript(()=>{
+ window.qaStorageTrace=[];const get=Storage.prototype.getItem,set=Storage.prototype.setItem;
+ for(const [name,original]of [['getItem',get],['setItem',set]])Storage.prototype[name]=function(key,...args){
+  const result=original.call(this,key,...args);
+  if(key==='ai-infra-lab.progress.v1')window.qaStorageTrace.push({operation:name,value:name==='getItem'?result:args[0],at:performance.now()});
+  return result;
+ };
+});
 const page=await context.newPage();page.on('dialog',d=>d.accept());
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
-const base='http://127.0.0.1:4173',checks=[];
+const base=process.env.LAB_QA_URL||'http://127.0.0.1:4173',checks=[];
 const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
 try{
  await page.goto(base+'/#map/programming');await page.locator('#evidence').waitFor();
@@ -22,8 +30,12 @@ try{
  await page.locator('[data-start=programming]').click();await page.waitForFunction(()=>JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1'))?.records.programming);
  assert.equal(await page.evaluate(()=>Object.keys(JSON.parse(sessionStorage.getItem('ai-infra-lab.drafts.v1'))).length),0);
  checks.push('successful save clears only the saved session draft');
- for(const node of catalog.nodes){await page.goto(base+'/#map/'+node.id);await page.locator('#node-detail').waitFor();assert.equal(await page.locator('.detail-heading h2').innerText(),node.title);assert.equal(await page.locator('.learning-steps li').count(),3);}
- checks.push(`all ${catalog.nodes.length} node deep links show three steps and evidence`);
+ for(const node of catalog.nodes){
+  await page.goto(base+'/#map/'+node.id);await page.locator('#node-detail').waitFor();assert.equal(await page.locator('.detail-heading h2').innerText(),node.title);assert.equal(await page.locator('.learning-steps li').count(),3);
+  await page.locator('#node-detail').getByRole('link',{name:'打开中文学习指南',exact:true}).click();await page.waitForFunction(()=>document.activeElement?.tagName==='H3');
+  assert.equal(await page.locator(':focus').innerText(),node.title);
+ }
+ checks.push(`all ${catalog.nodes.length} node deep links show three steps and evidence and reach their own Chinese guide chapter`);
  await page.goto(base+'/#labs');await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).locator('summary').click();assert.equal(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).locator('tbody tr').count(),2);
  assert.match(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).innerText(),/28 项原测试通过/);assert.match(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).innerText(),/读取更慢/);
  for(const guide of catalog.labs.filter(l=>l.guide))assert.equal((await fetch(new URL(guide.guide,base))).status,200);
@@ -34,8 +46,22 @@ try{
  await page.goto(base+'/#map/computer');await second.goto(base+'/#map/arithmetic');
  await page.locator('#evidence').fill('第一个标签页的说明');await second.locator('#evidence').fill('第二个标签页的说明');
  await Promise.all([page.locator('[data-start=computer]').click(),second.locator('[data-start=arithmetic]').click()]);
- await page.waitForFunction(()=>{const r=JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records;return r.computer?.evidence==='第一个标签页的说明'&&r.arithmetic?.evidence==='第二个标签页的说明';});
- assert.equal(await page.evaluate(()=>typeof navigator.locks?.request),'function');await second.close();checks.push('simultaneous browser saves preserve both nodes with Web Locks');
+ try{await page.waitForFunction(()=>{const r=JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records;return r.computer?.evidence==='第一个标签页的说明'&&r.arithmetic?.evidence==='第二个标签页的说明';});}
+ catch(error){
+  const snapshot=await Promise.all([page,second].map(tab=>tab.evaluate(()=>({route:location.hash,progress:localStorage.getItem('ai-infra-lab.progress.v1'),drafts:sessionStorage.getItem('ai-infra-lab.drafts.v1'),notice:document.querySelector('#notice').textContent,warning:document.querySelector('#storage-warning').textContent,evidence:document.querySelector('#evidence')?.value,trace:window.qaStorageTrace.filter(r=>r.operation==='setItem'),locks:typeof navigator.locks?.request}))));
+  console.error('Concurrent save failure:',JSON.stringify(snapshot));throw error;
+ }
+ assert.equal(await page.evaluate(()=>typeof navigator.locks?.request),'function');checks.push('simultaneous browser saves preserve both nodes with Web Locks');
+ // A storage event between pointerdown and pointerup must not replace the save button.
+ await page.locator('#evidence').fill('按下按钮后其他标签页保存，本页的输入和点击仍必须保留。');
+ await page.evaluate(()=>{window.pendingStorageUpdate=false;window.addEventListener('storage',()=>{window.pendingStorageUpdate=true;},{once:true});});
+ await page.locator('[data-start=computer]').scrollIntoViewIfNeeded();
+ const bounds=await page.locator('[data-start=computer]').boundingBox();
+ await page.mouse.move(bounds.x+bounds.width/2,bounds.y+bounds.height/2);await page.mouse.down();
+ await second.locator('#evidence').fill('另一个标签页在按钮按下期间更新。');await second.locator('[data-start=arithmetic]').click();
+ await page.waitForFunction(()=>window.pendingStorageUpdate);await page.mouse.up();
+ await page.waitForFunction(()=>JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records.computer.evidence==='按下按钮后其他标签页保存，本页的输入和点击仍必须保留。');
+ await second.close();checks.push('a real cross-tab update during a held pointer press preserves the pending save and local text');
  await page.goto(base+'/#map/architecture');await page.locator('#node-detail').waitFor();await page.screenshot({path:'artifacts/task-desktop.png',fullPage:true});
  for(const width of [320,390,768,1280]){
   await page.setViewportSize({width,height:900});

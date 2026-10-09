@@ -36,13 +36,13 @@
 
 2026 春 CS336 五项作业可作为训练方向的连续检验，具体要求以原课当期页面为准：
 
-|原作业|本站先修任务|独立产物与主要复核|
-|---|---|---|
-|A1 Basics|models、framework、numerics、data|tokenizer、模型、优化与训练；形状、梯度、数据切分、训练曲线与复现|
-|A2 Systems|gpu、profiling、collectives、memory|内核正确性、显存、同步计时、通信与优化前后端到端结果|
-|A3 Scaling|scaling、training、evaluation|算力预算、不同配置测量、拟合与外推边界；失败与重复实验|
-|A4 Data|data、storage、privacy、evaluation|数据来源、清洗与去重、泄漏检查、质量及训练影响|
-|A5 Alignment|posttraining、experiments、evaluation|后训练目标、奖励与采样设置、稳定性、评估及版本|
+| 原作业 | 本站先修任务 | 独立产物与主要复核 |
+| --- | --- | --- |
+| A1 Basics | models、framework、numerics、data | tokenizer、模型、优化与训练；形状、梯度、数据切分、训练曲线与复现 |
+| A2 Systems | gpu、profiling、collectives、memory | 内核正确性、显存、同步计时、通信与优化前后端到端结果 |
+| A3 Scaling | scaling、training、evaluation | 算力预算、不同配置测量、拟合与外推边界；失败与重复实验 |
+| A4 Data | data、storage、privacy、evaluation | 数据来源、清洗与去重、泄漏检查、质量及训练影响 |
+| A5 Alignment | posttraining、experiments、evaluation | 后训练目标、奖励与采样设置、稳定性、评估及版本 |
 
 原课 AI 政策要求自主完成作业，本站只连接资源、先修与验收，不提供作业答案；先核对当期政策。其他方向有独立路线，见[方向学习路径](learning-paths.md)。
 

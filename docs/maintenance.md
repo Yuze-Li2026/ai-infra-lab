@@ -4,7 +4,11 @@
 
 资源及知识内容修改 `site/catalog.json`；页面布局修改 `site/views.js` 和 `site/styles.css`，交互修改 `site/app.js`。保持目录字段规范，优先链接原资源。修改来源后执行 `node scripts/credits.mjs` 更新致谢。`create-catalog.mjs` 和一次性迁移脚本会拒绝覆盖现有成果，不是日常修改命令。
 
-每次变更后执行 `npm run check`，覆盖目录校验、测试、构建和产物哈希核验。测试报告存在 skip 时核实是否缺 Python 3.10+。Node 版本最低 22。Marked 与 DOMPurify 版本锁在 package-lock.json，浏览器运行文件随源码分发，普通启动/构建不需要 npm install。维护升级时使用 npm ci，再显式运行 vendor-web.mjs 并检查许可、manifest 与内容清理测试；构建不会自动下载包。
+Node 版本最低 22。先执行 `npm ci --ignore-scripts` 安装锁定的维护依赖，再按环境指南准备 Python 实验依赖。每次变更后执行 `npm run check`，覆盖目录、Markdown 格式、链接、知识覆盖、实际测试、构建和产物哈希。完整测试缺少依赖、出现失败或跳过时均返回非零；应修复环境或代码后复验。
+
+修改界面后运行 `npm run test:browser`。脚本构建网站、生成真实 DBDB 参考报告、启动独立本地端口，按顺序执行浏览器检查并关闭测试服务。Windows 默认使用已安装的 Edge，其他系统默认使用已安装的 Chrome；可用 `LAB_BROWSER_PATH` 指定浏览器完整路径。脚本不下载浏览器。汇总写入 `artifacts/browser-suite-results.json`，每组原始日志单独保存；GPU 报告导入检查另外需要事先生成真实 GPU 检查报告。
+
+Marked 与 DOMPurify 的运行文件随源码分发，普通启动及 `npm run check-site` 不需要安装 npm 依赖。只有升级这两个组件时，才显式执行 `node scripts/vendor-web.mjs` 并复核许可、清单与内容清理检查；构建不会自动下载或改写第三方文件。文档维护遵循[写作规范](writing-guide.md)。
 
 链接检查 `npm run check-links` 写入本地 artifacts。失败应区分网络未知、访问限制和真实失效。更新资源先核对作者、版本和许可，再验证实验，不因新颖立即替换经典课程。
 

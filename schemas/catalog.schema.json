@@ -194,6 +194,12 @@
             "$ref": "#/$defs/text"
           }
         },
+        "originalUrl": {
+          "$ref": "#/$defs/https"
+        },
+        "readingLabel": {
+          "enum": ["作者中文", "官方中文", "社区译文"]
+        },
         "reviewEvidence": {
           "type": "array",
           "minItems": 1,

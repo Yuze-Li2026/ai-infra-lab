@@ -1,7 +1,7 @@
 import {createViews} from './views.js';
 import {STORAGE_KEY,MAX_BACKUP_BYTES,emptyProgress,validateProgress,mergeProgress,nextNode,record,backupWithDrafts} from './core.js';
 import {persistProgressLocked,readDrafts,writeDrafts} from './storage.js';
-import {loadDocument} from './documents.js';
+import {loadDocument,focusSection} from './documents.js';
 import {summarizeReport,MAX_REPORT_BYTES,reportAccepted} from './reports.js';
 const main=document.querySelector('main');
 document.querySelector('.skip').addEventListener('click',event=>{event.preventDefault();main.focus();main.scrollIntoView();});
@@ -30,10 +30,12 @@ if(view==='read'){
  main.innerHTML='<section class="panel"><p role="status">正在打开学习指南…</p></section>';
  document.querySelector('#view-label').textContent='学习指南';
  document.querySelectorAll('nav a').forEach(a=>{a.classList.remove('active');a.removeAttribute('aria-current');});
- loadDocument(location.hash.slice(6),controller.signal).then(({article,outline,title})=>{
+ loadDocument(location.hash.slice(6),controller.signal).then(({article,outline,title,sections,section,sectionMissing})=>{
   if(controller.signal.aborted)return;
   main.innerHTML='<div class="document-tools"><a href="#labs">返回工程实验</a><a href="#about">研究与使用指南</a></div><div class="document-layout"></div>';
   main.querySelector('.document-layout').append(article,outline);document.querySelector('#view-label').textContent=title;
+  if(sections.has(section))focusSection(sections.get(section));
+  if(sectionMissing)notify('文档已打开，但没有找到链接中的章节。请使用本页目录。');
  }).catch(error=>{if(!controller.signal.aborted)main.innerHTML=`<section class="panel"><h1>文档暂时无法打开</h1><p>${escape(error.message)}</p><a href="#about">返回研究来源</a></section>`;});return;
 }
 main.innerHTML=views[key]();document.querySelector('#view-label').textContent=labels[key]||'阶段验收';document.querySelectorAll('nav a[data-view]').forEach(a=>{a.classList.toggle('active',a.dataset.view===key);if(a.dataset.view===key)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -49,6 +51,17 @@ function focusDetail(){const detail=document.querySelector('#node-detail');detai
 function readRoute(){const [view,id]=location.hash.slice(1).split('/');selected=['learn','map','labs'].includes(view)&&catalog.nodes.some(n=>n.id===id)?id:null;}
 main.addEventListener('click',async event=>{
   const b=event.target.closest('button');if(!b)return;
+  if(b.hasAttribute('data-copy')){
+    const code=b.closest('.command-block,.code-block')?.querySelector('code');if(!code)return;
+    try{
+      await navigator.clipboard.writeText(code.textContent);b.textContent='已复制';notify('已复制到剪贴板。');
+      setTimeout(()=>{b.textContent='复制';},1800);
+    }catch{
+      const range=document.createRange();range.selectNodeContents(code);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);
+      notify('浏览器未允许复制，已选中内容。请按 Ctrl+C、⌘C，或使用系统复制菜单。');
+    }
+    return;
+  }
   if(b.dataset.retry){location.reload();return;}
   if(b.dataset.report){reportLab=b.dataset.report;document.querySelector('#report-file').click();return;}
   if(b.dataset.node){selected=b.dataset.node;const requested=location.hash.slice(1).split('/')[0];const view=['learn','map','labs'].includes(requested)?requested:'learn';const hash=`#${view}/${selected}`;if(location.hash===hash){render();focusDetail();}else location.hash=hash;}
@@ -76,7 +89,14 @@ main.addEventListener('input',e=>{
   if(e.target.id==='search'&&!e.isComposing)searchResources(e.target);
 });
 main.addEventListener('compositionend',e=>{if(e.target.id==='search')searchResources(e.target);});
-main.addEventListener('change',e=>{if(e.target.id==='language'){langFilter=e.target.value;render();}if(e.target.id==='lab-stage'){stageFilter=e.target.value;render();}if(e.target.id==='node-category'){nodeCategory=e.target.value;render();document.querySelector('#node-category')?.focus();}});
+main.addEventListener('change',e=>{
+ const id=e.target.id;
+ if(id==='language')langFilter=e.target.value;
+ else if(id==='lab-stage')stageFilter=e.target.value;
+ else if(id==='node-category')nodeCategory=e.target.value;
+ else return;
+ render();document.getElementById(id)?.focus();
+});
 window.addEventListener('hashchange',()=>{if(!catalog)return;readRoute();render();if(selected)focusDetail();else window.scrollTo(0,0);});
 window.addEventListener('beforeunload',e=>{
   if(drafts.size||!document.querySelector('#storage-warning').hidden){e.preventDefault();e.returnValue='';}
@@ -87,19 +107,20 @@ window.addEventListener('storage',e=>{
     const merged=mergeProgress(progress,JSON.parse(e.newValue),catalog.nodes);
     if(JSON.stringify([merged.records,merged.labReports])===JSON.stringify([progress.records,progress.labReports]))return;
     progress=merged;
-    // Preserve the active textarea and IME composition; the next navigation renders merged state.
-    if(!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))render();
-    notify('已同步其他标签页的学习记录。当前未保存的说明会保留。');
+    // Replacing the DOM between pointerdown and click can lose a pending save.
+    // Merge now; render on the next local operation, retaining inputs and focus.
+    notify('已同步其他标签页的学习记录；下次切换页面或保存时更新显示。当前输入会保留。');
   }catch{storageWarning('其他标签页写入了无法读取的记录；本页进度仍保留，请先备份。');}
 });
 document.querySelector('#report-file').addEventListener('change',async event=>{
  const file=event.target.files[0];if(!file||!catalog)return;
+ const lab=catalog.labs.find(l=>l.id===reportLab);
  try{
   if(file.size>MAX_REPORT_BYTES)throw Error('报告超过 1 MB 限制。');
   const bytes=await file.arrayBuffer();
   const digest=await crypto.subtle.digest('SHA-256',bytes);
   const sha256=[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('');
-  const lab=catalog.labs.find(l=>l.id===reportLab);
+  if(!lab)throw Error('请选择要导入报告的实验。');
   const summary=summarizeReport(JSON.parse(new TextDecoder().decode(bytes)),lab,sha256);
   const saved=await save({...progress,labReports:{...progress.labReports,[lab.id]:summary}});
   render();notify(saved?(summary.mode==='reference'?'已保存参考复现报告；它不计入个人作品验收。':reportAccepted(lab,summary)?'已保存作品通过报告，请补齐设计、边界测试与解释。':summary.passed?'已保存部分范围通过报告；完整测试范围尚待补齐。':'已保存未通过的作品报告，请修复后复验。'):'报告尚未保存到浏览器，请备份当前记录。');

@@ -151,7 +151,7 @@
       "title": "计算机教育中缺失的一课",
       "author": "Missing Semester 中文翻译社区",
       "url": "https://missing-semester-cn.github.io/",
-      "version": "中文社区在线版本",
+      "version": "2026 与 2020 课程目录；部分 2026 讲次仍为英文",
       "language": "zh",
       "license": "待核实，仅链接",
       "licenseUrl": "https://missing-semester-cn.github.io/",
@@ -159,13 +159,13 @@
       "coverage": "终端、Git 与工具中文辅助",
       "reason": "降低英文阅读门槛；保留原课对照",
       "limitations": "社区译文；未逐句复核，不能标为官方翻译",
-      "verification": "主页已访问",
-      "reviewedAt": "2026-10-08",
+      "verification": "原课官网列出此社区译站，同时声明未审校社区译文；中文站目录已核对",
+      "reviewedAt": "2026-10-09",
       "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
       "reuse": "仅链接与原创简短导读，不镜像、不转载",
       "evaluation": {
         "authority": "作者与机构：Missing Semester 中文翻译社区；原始来源见链接",
-        "accuracy": "主页已访问",
+        "accuracy": "原课官网列出此社区译站，同时声明未审校社区译文；中文站目录已核对",
         "depth": "终端、Git 与工具中文辅助",
         "engineeringValue": "降低英文阅读门槛；保留原课对照",
         "coverage": "终端、Git 与工具中文辅助",
@@ -173,7 +173,7 @@
         "difficulty": "基本电脑操作",
         "languageFriendliness": "中文；术语及具体代码仍需复核",
         "accessibility": "主页已访问",
-        "maintenance": "中文社区在线版本",
+        "maintenance": "2026 与 2020 课程目录；部分 2026 讲次仍为英文",
         "licensing": "待核实，仅链接",
         "stability": "可变在线资源；正式实验集成前固定版本或 commit"
       },
@@ -182,8 +182,15 @@
           "url": "https://missing-semester-cn.github.io/",
           "checkedAt": "2026-10-08",
           "finding": "主页已访问"
+        },
+        {
+          "url": "https://missing.csail.mit.edu/",
+          "checkedAt": "2026-10-09",
+          "finding": "Translations 列出简体中文站，但明确未验证社区译文质量"
         }
-      ]
+      ],
+      "originalUrl": "https://missing.csail.mit.edu/",
+      "readingLabel": "社区译文"
     },
     {
       "id": "composing",
@@ -394,7 +401,7 @@
       "reason": "中文原始维护资源，结合代码与数学",
       "limitations": "旧依赖组合需复现；不能保证所有 Notebook 即开即用",
       "verification": "中文目录和许可证入口已访问",
-      "reviewedAt": "2026-10-08",
+      "reviewedAt": "2026-10-09",
       "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
       "reuse": "仅链接与原创简短导读，不镜像、不转载",
       "evaluation": {
@@ -416,8 +423,14 @@
           "url": "https://zh.d2l.ai/",
           "checkedAt": "2026-10-08",
           "finding": "中文目录和许可证入口已访问"
+        },
+        {
+          "url": "https://zh.d2l.ai/",
+          "checkedAt": "2026-10-09",
+          "finding": "作者中文站列出数学、模型、优化和计算性能章节，并自述被多个国家的大学用于教学；采用信息属于作者披露"
         }
-      ]
+      ],
+      "readingLabel": "作者中文"
     },
     {
       "id": "dlsys",
@@ -711,17 +724,17 @@
       "id": "security",
       "title": "Kubernetes Security",
       "author": "Kubernetes contributors",
-      "url": "https://kubernetes.io/docs/concepts/security/",
+      "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
       "version": "官方滚动文档",
-      "language": "en",
+      "language": "zh",
       "license": "待核实，仅链接",
       "licenseUrl": "https://kubernetes.io/docs/concepts/security/",
       "prerequisites": "网络、操作系统与部署基础",
       "coverage": "基础设施权限与安全隔离",
       "reason": "补充只关注性能的路线容易漏掉的运维能力",
       "limitations": "进阶分支；零基础不先装集群",
-      "verification": "官方安全文档入口已访问",
-      "reviewedAt": "2026-10-08",
+      "verification": "已核对项目官方中文入口和英文对照；没有据此声称集群环境已验证",
+      "reviewedAt": "2026-10-09",
       "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
       "reuse": "仅链接与原创简短导读，不镜像、不转载",
       "evaluation": {
@@ -732,7 +745,7 @@
         "coverage": "基础设施权限与安全隔离",
         "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
         "difficulty": "网络、操作系统与部署基础",
-        "languageFriendliness": "英文，中文导读可用；完整译文未提供",
+        "languageFriendliness": "官方站点提供中文；部分页面或新特性仍需对照英文和目标集群版本",
         "accessibility": "官方安全文档入口已访问",
         "maintenance": "官方滚动文档",
         "licensing": "待核实，仅链接",
@@ -743,8 +756,15 @@
           "url": "https://kubernetes.io/docs/concepts/security/",
           "checkedAt": "2026-10-08",
           "finding": "官方安全文档入口已访问"
+        },
+        {
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/security/",
+          "checkedAt": "2026-10-09",
+          "finding": "项目官网的中文概念入口可读，保留英文原文供版本与术语对照"
         }
-      ]
+      ],
+      "originalUrl": "https://kubernetes.io/docs/concepts/security/",
+      "readingLabel": "官方中文"
     },
     {
       "id": "algorithms-mit",
@@ -1545,24 +1565,29 @@
       "id": "kubernetes",
       "title": "Kubernetes 官方概念",
       "author": "Kubernetes contributors",
-      "url": "https://kubernetes.io/docs/concepts/overview/",
+      "url": "https://kubernetes.io/zh-cn/docs/concepts/overview/",
       "prerequisites": "Linux、网络、分布式、权限",
       "coverage": "容器、Pod、资源、调度、存储与集群",
       "reason": "先概念和隔离练习，再部署；不要求新手安装集群",
-      "language": "en",
+      "language": "zh",
       "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
       "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
       "licenseUrl": "https://kubernetes.io/docs/concepts/overview/",
       "reviewedAt": "2026-10-09",
       "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
       "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
-      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "verification": "已核对项目官方中文入口和英文对照；没有据此声称集群环境已验证",
       "limitations": "先概念和隔离练习，再部署；不要求新手安装集群。版本与硬件兼容必须按具体实验复核。",
       "reviewEvidence": [
         {
           "url": "https://kubernetes.io/docs/concepts/overview/",
           "checkedAt": "2026-10-09",
           "finding": "容器、Pod、资源、调度、存储与集群；用于覆盖与先修审计"
+        },
+        {
+          "url": "https://kubernetes.io/zh-cn/docs/concepts/overview/",
+          "checkedAt": "2026-10-09",
+          "finding": "项目官网的中文概念入口可读，保留英文原文供版本与术语对照"
         }
       ],
       "evaluation": {
@@ -1573,12 +1598,14 @@
         "coverage": "容器、Pod、资源、调度、存储与集群",
         "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
         "difficulty": "Linux、网络、分布式、权限",
-        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "languageFriendliness": "官方站点提供中文；部分页面或新特性仍需对照英文和目标集群版本",
         "accessibility": "本轮官方入口可读；平台不镜像外部内容",
         "maintenance": "滚动文档；审阅日期不等于版本锁",
         "licensing": "只链接；免费阅读不意味着可以转载",
         "stability": "原项目维护，运行时另锁版本、依赖及提交"
-      }
+      },
+      "originalUrl": "https://kubernetes.io/docs/concepts/overview/",
+      "readingLabel": "官方中文"
     },
     {
       "id": "ray",
@@ -3729,7 +3756,7 @@
                   3,
                   2
                 ],
-                "maxAbsError": 0.0
+                "maxAbsError": 0
               },
               {
                 "shape": [
@@ -3737,7 +3764,7 @@
                   31,
                   9
                 ],
-                "maxAbsError": 3.814697265625e-06
+                "maxAbsError": 0.000003814697265625
               },
               {
                 "shape": [
@@ -3745,7 +3772,7 @@
                   512,
                   512
                 ],
-                "maxAbsError": 4.57763671875e-05
+                "maxAbsError": 0.0000457763671875
               }
             ]
           },

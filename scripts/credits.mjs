@@ -8,6 +8,7 @@ ${catalog.sources.map(s=>`## ${s.title}
 
 - 原作者：${s.author}
 - 来源：[${s.title}](${s.url})
+- 阅读版本：${s.readingLabel||(s.language==='zh'?'中文':'英文原文')}${s.originalUrl?'；[英文对照]('+s.originalUrl+')':''}
 - 版本：${s.version}
 - 许可：${s.license}；[核查入口](${s.licenseUrl})
 - 使用方式：${s.reuse}

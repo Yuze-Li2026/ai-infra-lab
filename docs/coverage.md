@@ -14,40 +14,40 @@
 
 节点 ID 与网页知识任务一一对应；精读范围、先修、实践与成果逐项见[选章指南](curriculum.md)。不同方向需要不同深度，核心、方向必修和可选深入已经在知识地图标注。
 
-|真实能力范围|对应节点|主要一手依据|必须复核的产物|
-|---|---|---|---|
-|绝对零基础：文件、运行、单位、输入输出|`computer`、`arithmetic`、`python`|CS50、OpenStax|运行记录、单位计算、独立程序与边界输入|
-|抽象、语言、版本和工程交付|`programming`、`tools`、`engineering`|Composing Programs、Missing Semester、CS50|模块接口、测试、Git 历史、依赖锁、空目录重建|
-|必要数学：函数、证明、线性代数、微积分、概率统计|`algebra`、`discrete`、`linear`、`calculus`、`probability`|MIT OCW、Stat110、OpenIntro|手算与证明、梯度复核、抽样和统计不确定性|
-|算法、系统语言与机器组织|`algorithms`、`architecture`|MIT 6.006、Beej C、CS61C、CS106L|复杂度、内存图、越界诊断、缓存成本|
-|进程、并发、虚拟内存与隔离|`os`、`linux`|OSTEP、Kubernetes|竞态与锁不变量、权限、OOM、资源释放|
-|网络、数据库与存储路径|`network`、`storage`|CS144、DBDB、MLSysBook Data Storage|可靠传输、索引/提交、读写预算、失败与恢复|
-|数值、优化与基本学习机制|`numerics`、`ml`|D2L、DLSys、CS61C|误差容差、损失与梯度、泛化与稳定性|
-|张量运行时和模型计算|`framework`、`models`|DLSys、D2L、CS336 A1|shape/广播/layout、自动微分、算子、模型与 tokenizer|
-|数据与实验基础设施|`data`、`experiments`|CS336 A4、MLflow、MLSysBook|来源/许可、过滤去重、切分、加载、随机状态、模型产物与谱系|
-|评估、漂移与鲁棒性|`evaluation`|CS336、OpenIntro、MLSysBook|污染检查、置信区间、失败分组、质量门槛|
-|硬件与 GPU 编程|`accelerators`、`gpu`|CUDA、Triton、CS336、MLSysBook|执行/内存模型、硬件路径、内核正确性与预算|
-|性能工程与低精度|`profiling`、`precision`|PyTorch Profiler、vLLM quantization、MLSysBook|时间线、roofline、传输与同步、校准、质量/显存/端到端性能|
-|分布式正确性与通信|`dist`、`collectives`|MIT 6.5840、AOSA、PyTorch、NCCL|故障语义、多数派、collective 输出、拓扑与通信曲线|
-|训练并行与显存优化|`training`、`memory`|PyTorch/FSDP、CS336 A2|DP/TP/PP、分片、重计算、累积、offload、梯度与恢复等价|
-|训练预算与后训练系统|`scaling`、`posttraining`|CS336 A3/A5、MLSysBook|规模曲线、不确定性、rollout/learner 数据版本、奖励与评估|
-|推理与检索基础设施|`inference`、`retrieval`|vLLM、CS336、MLSysBook Data Storage|prefill/decode、KV cache、批处理、TTFT/TPOT、ANN 召回、更新与权限|
-|部署、集群与生产生命周期|`orchestration`、`lifecycle`|Kubernetes、Ray、MLflow、SRE|队列/拓扑/配额、模型契约、灰度、漂移、回滚与产物版本|
-|可靠性、安全、成本与责任|`operations`、`privacy`、`sustainability`|SRE、Kubernetes Security、MLSysBook|SLI/SLO、告警/恢复、威胁/权限模型、隐私、有效成本与能耗边界|
-|编译器与其他设备/工作负载|`compiler`、`edge`、`multimodal`|MLIR、torch.compile、D2L、CS336、MLSysBook|IR/lowering、动态形状、语义等价、设备兼容、视觉/音频/稀疏工作负载|
-|端到端设计与综合判断|`system-design`|MLSysBook、SRE、CS336|需求、容量、拓扑、质量、安全、成本、故障演练和独立评审|
+| 真实能力范围 | 对应节点 | 主要一手依据 | 必须复核的产物 |
+| --- | --- | --- | --- |
+| 绝对零基础：文件、运行、单位、输入输出 | `computer`、`arithmetic`、`python` | CS50、OpenStax | 运行记录、单位计算、独立程序与边界输入 |
+| 抽象、语言、版本和工程交付 | `programming`、`tools`、`engineering` | Composing Programs、Missing Semester、CS50 | 模块接口、测试、Git 历史、依赖锁、空目录重建 |
+| 必要数学：函数、证明、线性代数、微积分、概率统计 | `algebra`、`discrete`、`linear`、`calculus`、`probability` | MIT OCW、Stat110、OpenIntro | 手算与证明、梯度复核、抽样和统计不确定性 |
+| 算法、系统语言与机器组织 | `algorithms`、`architecture` | MIT 6.006、Beej C、CS61C、CS106L | 复杂度、内存图、越界诊断、缓存成本 |
+| 进程、并发、虚拟内存与隔离 | `os`、`linux` | OSTEP、Kubernetes | 竞态与锁不变量、权限、OOM、资源释放 |
+| 网络、数据库与存储路径 | `network`、`storage` | CS144、DBDB、MLSysBook Data Storage | 可靠传输、索引/提交、读写预算、失败与恢复 |
+| 数值、优化与基本学习机制 | `numerics`、`ml` | D2L、DLSys、CS61C | 误差容差、损失与梯度、泛化与稳定性 |
+| 张量运行时和模型计算 | `framework`、`models` | DLSys、D2L、CS336 A1 | shape/广播/layout、自动微分、算子、模型与 tokenizer |
+| 数据与实验基础设施 | `data`、`experiments` | CS336 A4、MLflow、MLSysBook | 来源/许可、过滤去重、切分、加载、随机状态、模型产物与谱系 |
+| 评估、漂移与鲁棒性 | `evaluation` | CS336、OpenIntro、MLSysBook | 污染检查、置信区间、失败分组、质量门槛 |
+| 硬件与 GPU 编程 | `accelerators`、`gpu` | CUDA、Triton、CS336、MLSysBook | 执行/内存模型、硬件路径、内核正确性与预算 |
+| 性能工程与低精度 | `profiling`、`precision` | PyTorch Profiler、vLLM quantization、MLSysBook | 时间线、roofline、传输与同步、校准、质量/显存/端到端性能 |
+| 分布式正确性与通信 | `dist`、`collectives` | MIT 6.5840、AOSA、PyTorch、NCCL | 故障语义、多数派、collective 输出、拓扑与通信曲线 |
+| 训练并行与显存优化 | `training`、`memory` | PyTorch/FSDP、CS336 A2 | DP/TP/PP、分片、重计算、累积、offload、梯度与恢复等价 |
+| 训练预算与后训练系统 | `scaling`、`posttraining` | CS336 A3/A5、MLSysBook | 规模曲线、不确定性、rollout/learner 数据版本、奖励与评估 |
+| 推理与检索基础设施 | `inference`、`retrieval` | vLLM、CS336、MLSysBook Data Storage | prefill/decode、KV cache、批处理、TTFT/TPOT、ANN 召回、更新与权限 |
+| 部署、集群与生产生命周期 | `orchestration`、`lifecycle` | Kubernetes、Ray、MLflow、SRE | 队列/拓扑/配额、模型契约、灰度、漂移、回滚与产物版本 |
+| 可靠性、安全、成本与责任 | `operations`、`privacy`、`sustainability` | SRE、Kubernetes Security、MLSysBook | SLI/SLO、告警/恢复、威胁/权限模型、隐私、有效成本与能耗边界 |
+| 编译器与其他设备/工作负载 | `compiler`、`edge`、`multimodal` | MLIR、torch.compile、D2L、CS336、MLSysBook | IR/lowering、动态形状、语义等价、设备兼容、视觉/音频/稀疏工作负载 |
+| 端到端设计与综合判断 | `system-design` | MLSysBook、SRE、CS336 | 需求、容量、拓扑、质量、安全、成本、故障演练和独立评审 |
 
 这张表覆盖训练、推理、平台、数据、编译器与设备等主要分支，而不是把“AI Infra”缩成 LLM 推理或一块 GPU。全栈深度不能由一个小项目证明；按[方向路线](learning-paths.md)选择深入任务。
 
 ## 原课到工程的验证梯度
 
-|层次|目前可验证的状态|怎样继续深化|
-|---|---|---|
-|基础知识|有原资源、精读范围、依赖、成果要求|完成原作者习题并由同伴检查推导与解释|
-|小型本地链|入门检查、四阶段对象模型、DBDB、micrograd、共识与单卡补充检查可运行|独立实现、原测试、额外边界、性能测量与解释|
-|完整大学项目|CS50 Final Project、OSTEP、DLSys、CS336、6.5840 的入口与条件明确|按当前原题和政策实施；固定提交、环境与测试；未执行就保留未执行|
-|方向工程|新增机制均有先修、官方读法和产物要求|在合适环境做真实调度、服务、低精度、编译器或多卡实验|
-|生产与教学成效|未由本机测试证明|长期运行、规模/故障/权限复核，以及真实新手试学与独立评审|
+| 层次 | 目前可验证的状态 | 怎样继续深化 |
+| --- | --- | --- |
+| 基础知识 | 有原资源、精读范围、依赖、成果要求 | 完成原作者习题并由同伴检查推导与解释 |
+| 小型本地链 | 入门检查、四阶段对象模型、DBDB、micrograd、共识与单卡补充检查可运行 | 独立实现、原测试、额外边界、性能测量与解释 |
+| 完整大学项目 | CS50 Final Project、OSTEP、DLSys、CS336、6.5840 的入口与条件明确 | 按当前原题和政策实施；固定提交、环境与测试；未执行就保留未执行 |
+| 方向工程 | 新增机制均有先修、官方读法和产物要求 | 在合适环境做真实调度、服务、低精度、编译器或多卡实验 |
+| 生产与教学成效 | 未由本机测试证明 | 长期运行、规模/故障/权限复核，以及真实新手试学与独立评审 |
 
 单卡的四项检查不验证多卡、NCCL、真实服务或自写内核；共识模拟不验证真实网络和磁盘崩溃；micrograd 不验证张量后端；DBDB 不验证工业事务或断电耐久性。完整高级实施清单见[高级原课实验](advanced-labs.md)。
 

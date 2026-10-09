@@ -2,12 +2,12 @@ import {createRequire} from 'node:module';
 import {resolve} from 'node:path';
 import {readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-const require=createRequire(resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'));
+const require=createRequire(process.env.LAB_PLAYWRIGHT_ROOT?resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'):import.meta.url);
 const {chromium}=require('playwright');
-const browser=await chromium.launch({headless:true,executablePath:process.env.LAB_BROWSER_PATH});
+const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{channel:'chrome'})});
 const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true,reducedMotion:'reduce'});
 const page=await context.newPage();page.on('dialog',d=>d.accept());const errors=[],checks=[];page.on('pageerror',e=>errors.push(e.message));
-const base='http://127.0.0.1:4173',catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
+const base=process.env.LAB_QA_URL||'http://127.0.0.1:4173',catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
 try{
  await page.goto(base+'/#labs');await page.locator('[data-report=dbdb]').click();await page.locator('#report-file').setInputFiles('artifacts/dbdb-report.json');
  await page.getByRole('status').filter({hasText:'参考复现报告'}).waitFor();

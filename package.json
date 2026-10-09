@@ -9,17 +9,25 @@
   "scripts": {
     "start": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node scripts/test.mjs",
+    "test:browser": "node scripts/browser-check.mjs",
     "validate": "node scripts/validate.mjs",
     "check-links": "node scripts/check-links.mjs",
     "verify-dist": "node scripts/verify-dist.mjs",
-    "check": "npm run validate && npm run check-docs && npm run check-coverage && npm test && npm run build && npm run verify-dist",
+    "check": "npm run validate && npm run lint-docs && npm run check-docs && npm run check-coverage && npm test && npm run build && npm run verify-dist",
     "check-site": "npm run validate && npm run check-docs && npm run check-coverage && npm run build && npm run verify-dist",
     "check-coverage": "node scripts/check-coverage.mjs",
-    "check-docs": "node scripts/check-docs.mjs"
+    "check-docs": "node scripts/check-docs.mjs",
+    "lint-docs": "node scripts/lint-docs.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "dompurify": "3.4.16",
-    "marked": "18.1.0"
+    "markdownlint": "0.41.1",
+    "marked": "18.1.0",
+    "playwright": "1.64.0"
+  },
+  "overrides": {
+    "katex": "0.18.2"
   }
 }

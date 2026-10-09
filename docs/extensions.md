@@ -8,6 +8,8 @@
 
 `evaluation` 含 `authority / accuracy / depth / engineeringValue / coverage / teachingQuality / difficulty / languageFriendliness / accessibility / maintenance / licensing / stability`。写依据和局限，不填无证据的“世界顶级”。`version` 不得只写 latest 便声称已固定；滚动资源在代码集成前改为 release 或 commit。
 
+中文资源可选 `readingLabel`，只接受“作者中文”“官方中文”或“社区译文”，同时要求 `language` 为 `zh`。`originalUrl` 是可选的无凭据 HTTPS 英文对照地址，资源卡片与任务阅读列表会显示入口，链接检查一并核对。标签仅说明来源身份，不证明翻译质量；`reviewEvidence` 必须记录身份与版本的核查依据。
+
 许可证未知时注明待核实、仅链接。不下载和镜像课程材料；代码、文字、视频、插图、数据、模型分别核实许可。社区译文、官方译文和机器译文必须区分；未经审校的机器译文明确标示。
 
 ## 知识节点 Node

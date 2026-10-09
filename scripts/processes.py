@@ -13,12 +13,14 @@ def run(command, timeout, **kwargs):
         try:
             stdout,stderr=child.communicate(timeout=timeout)
         except (subprocess.TimeoutExpired,KeyboardInterrupt) as error:
-            if child.poll() is None:
-                if os.name=='nt':
+            if os.name=='nt' and child.poll() is None:
+                try:
                     subprocess.run(['taskkill','/PID',str(child.pid),'/T','/F'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=10)
-                else:
-                    try: os.killpg(child.pid,signal.SIGKILL)
-                    except ProcessLookupError: pass
+                except subprocess.TimeoutExpired:
+                    child.kill()
+            elif os.name!='nt':
+                try: os.killpg(child.pid,signal.SIGKILL)
+                except ProcessLookupError: pass
             if child.poll() is None: child.kill()
             child.communicate()
             if isinstance(error,KeyboardInterrupt): raise

@@ -1,5 +1,6 @@
 import {ready, nextNode} from './core.js';
 import {milestoneStatus,REPORT_LABS,reportAccepted} from './reports.js';
+import {headingSlugger} from './documents.js';
 
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const link = (url, text, className = '') => {
@@ -19,6 +20,7 @@ export function createViews(state) {
   const completed = () => catalog.nodes.filter(n => isDone(n.id)).length;
   const status = n => isDone(n.id) ? '已提交成果' : progress.records[n.id]?.status === 'started' ? '学习中' : ready(n, progress) ? '可开始' : '待先修';
   const nodeButton = (id, cls = 'quiet') => `<button class="${cls}" data-node="${id}">${escape(node(id).title)}</button>`;
+  const chapterLink = n => `<a class="text-link" href="#read/docs/curriculum.md#${encodeURIComponent(headingSlugger()(n.title))}">打开中文学习指南</a>`;
 
   function details(n) {
     const value = drafts.has(n.id) ? drafts.get(n.id) : progress.records[n.id]?.evidence || '';
@@ -27,10 +29,11 @@ export function createViews(state) {
     return `<section class="detail panel" id="node-detail" tabindex="-1" aria-label="学习任务详情">
       <div class="detail-heading"><div><span class="eyebrow">LEARNING BRIEF / 阶段 ${n.stage}</span><h2>${escape(n.title)}</h2></div>${chip(status(n), ready(n,progress))}</div>
       <p class="detail-objective">${escape(n.objective)}</p>
+      <p class="study-scope"><span class="section-label">本次学到哪里</span>${escape(n.scope)}。${chapterLink(n)} · ${link('./docs/glossary.md','查阅术语')}</p>
       <div class="dependency-block"><span class="section-label">先修知识</span><div class="dependency">${n.prerequisites.map(id=>nodeButton(id)).join('') || '<span class="muted">无先修要求，可以从这里开始。</span>'}</div></div>
       <div class="detail-columns"><div>
         <h3>学习步骤</h3><ol class="learning-steps">${n.steps.map((s,i)=>`<li><span class="step-number">0${i+1}</span><div><strong>${escape(s.title)}</strong><p>${escape(s.task)}</p></div></li>`).join('')}</ol>
-        <h3>精选原始资源</h3><div class="reading-list">${n.resources.map((id,i)=>`<div><span class="section-label">${i===0?'主资源':'补充阅读'}</span>${link(source(id).url,source(id).title)}<small>${escape(source(id).author)}</small></div>`).join('')}</div>
+        <h3>精选原始资源</h3><p class="fineprint">先完成主资源中的本次选章；遇到理解缺口，再查补充阅读。正文讲授以原作者材料为准，本站中文指南帮助选章和复核。</p><div class="reading-list">${n.resources.map((id,i)=>`<div><span class="section-label">${i===0?'主资源':'补充阅读'} · ${escape(source(id).readingLabel||(source(id).language==='zh'?'中文':'英文原文'))}</span>${link(source(id).url,source(id).title)}${source(id).originalUrl?link(source(id).originalUrl,'英文对照','original-edition'):''}<small>${escape(source(id).author)}</small></div>`).join('')}</div>
         ${related.length ? `<h3>相关实践</h3><ul class="related-labs">${related.map(l=>`<li>${link(l.guide||l.url,l.title)}<small>${escape(l.status)}</small></li>`).join('')}</ul>` : ''}
         <details class="review-note"><summary>学习范围与研究状态</summary><p>${escape(n.scope)}</p><p>${escape(n.status)}。已有基础可以用对应作品和测试证明跳过。</p></details>
       </div><div class="evidence-panel">
@@ -48,6 +51,15 @@ export function createViews(state) {
     const count = completed();
     const records = Object.entries(progress.records).sort((a,b)=>Date.parse(b[1].updatedAt)-Date.parse(a[1].updatedAt)).slice(0,3);
     return intro('YOUR LEARNING WORKSPACE','把知识变成工程能力','沿着清晰的先修路径，向原作者学习，用自己的工程成果向前走。') + `
+      <details class="start-guide" ${records.length?'':'open'}><summary>第一次使用 <span>选择起点，直接开始</span></summary>
+        <p class="start-note">在线阅读与记录无需安装或注册。实验在电脑终端运行，到对应任务再准备工具。</p>
+        <div class="start-options">
+          <a href="#learn/computer"><span class="section-label">从零开始</span><strong>打开第一个任务 <span aria-hidden="true">↗</span></strong><span>认识文件与程序，按步骤留下第一份成果。</span></a>
+          <a href="#read/docs/learning-paths.md"><span class="section-label">已有基础</span><strong>按工程方向选路线 <span aria-hidden="true">↗</span></strong><span>预览所需知识，用已有作品复核基础。</span></a>
+          <a href="#read/docs/getting-started.md"><span class="section-label">准备实践</span><strong>完成第一次本地检查 <span aria-hidden="true">↗</span></strong><span>从无第三方依赖的 Python 练习开始。</span></a>
+        </div>
+        <p class="fineprint">手机可阅读和记录；换设备前用“备份进度”保存，再在另一台设备恢复。</p>
+      </details>
       <div class="stats">
         <div class="stat"><span>学习进度</span><strong>${count} <small>/ ${catalog.nodes.length}</small></strong><span>知识节点已提交成果</span></div>
         <div class="stat"><span>精选知识来源</span><strong>${catalog.sources.length}</strong><span>课程、教材与原始文档</span></div>
@@ -56,8 +68,8 @@ export function createViews(state) {
       <div class="columns"><div>
         <section class="panel focus-panel"><div class="row"><span class="eyebrow">YOUR NEXT STEP</span>${chip(next?`阶段 0${next.stage}`:'当前路径')}</div>
           ${next ? `<h2 class="focus-title">${escape(next.title)}</h2><p>${escape(next.objective)}</p>
-            <div class="focus-resource"><span class="section-label">从这个资源开始</span><strong>${escape(source(next.resources[0]).title)}</strong><span>${escape(source(next.resources[0]).author)}</span></div>
-            <div class="actions"><button class="primary" data-node="${next.id}">打开学习任务</button>${link(source(next.resources[0]).url,'访问主资源','focus-link')}</div>
+            <div class="focus-resource"><span class="section-label">本次选读 · ${escape(source(next.resources[0]).title)}</span><strong>${escape(next.scope)}</strong><span>完成依据：${escape(next.evidence)}</span></div>
+            <div class="actions"><button class="primary" data-node="${next.id}">打开学习任务</button>${chapterLink(next)}</div>
             <p class="focus-footnote">学习原理 · 独立实现 · 验证与解释</p>` : '<h2 class="focus-title">每一份成果，都值得复核</h2><p>当前节点均已提交成果。回看作品，检查设计与测试，继续解决真实工程问题。</p>'}
         </section>
         <section class="panel recent-panel"><div class="row"><h2>近期学习</h2><span class="section-label">YOUR NOTES</span></div>
@@ -85,7 +97,7 @@ export function createViews(state) {
     return intro('THE READING ROOM','精选资源，保留原始来源','每一项都有选择理由、适用范围与原作者。先找到合适的主资源，再按需深入。')+`
       <div class="filters"><input id="search" type="search" aria-label="搜索资源" value="${escape(filter)}" placeholder="搜索课程、作者或想掌握的能力"><select id="language" aria-label="资源语言"><option value="all">全部语言</option><option value="zh" ${langFilter==='zh'?'selected':''}>中文资源</option><option value="en" ${langFilter==='en'?'selected':''}>英文资源</option></select></div>
       <div class="section-meta"><span>${list.length} 项资源</span><span>最近研究日期 ${catalog.reviewedAt}</span></div>
-      <div class="grid">${list.map(s=>`<article class="resource"><div class="row"><span class="eyebrow">${s.language==='zh'?'中文资源':'ORIGINAL SOURCE'}</span>${chip(s.id==='object-model'?'原测试已复现':'资料已初审',s.id==='object-model')}</div><h2>${escape(s.title)}</h2><div class="meta">${escape(s.author)}</div><p>${escape(s.reason)}</p><p class="resource-prereq"><span>先修</span>${escape(s.prerequisites)}</p>${link(s.url,'阅读原始资源','text-link')}
+      <div class="grid">${list.map(s=>`<article class="resource"><div class="row"><span class="eyebrow">${escape(s.readingLabel||(s.language==='zh'?'中文资源':'英文原文'))}</span>${chip(s.id==='object-model'?'原测试已复现':'资料已初审',s.id==='object-model')}</div><h2>${escape(s.title)}</h2><div class="meta">${escape(s.author)}</div><p>${escape(s.reason)}</p><p class="resource-prereq"><span>先修</span>${escape(s.prerequisites)}</p><div class="reading-actions">${link(s.url,s.language==='zh'?'阅读中文资源':'阅读原始资源','text-link')}${s.originalUrl?link(s.originalUrl,'英文对照','text-link'):''}</div>
         <details class="resource-details"><summary>选择依据、版本与许可</summary><dl><dt>版本</dt><dd>${escape(s.version)}</dd>${Object.entries(s.evaluation).map(([key,value])=>`<dt>${escape(evaluationLabels[key]||key)}</dt><dd>${escape(value)}</dd>`).join('')}<dt>验证与局限</dt><dd>${escape(s.verification)} · ${s.reviewedAt}</dd><dd>${escape(s.limitations)}</dd></dl>${link(s.licenseUrl,'核查许可来源')}</details></article>`).join('')||'<div class="empty panel"><h2>没有找到匹配资源</h2><p>尝试更短的关键词，或切换到全部语言。</p></div>'}</div>`;
   }
 
@@ -114,17 +126,18 @@ export function createViews(state) {
   function labs() {
     const list=catalog.labs.filter(l=>stageFilter==='all'||String(l.stage)===stageFilter).sort((a,b)=>Number(Boolean(b.command))-Number(Boolean(a.command))||a.stage-b.stage);
     return intro('THE ENGINEERING BENCH','用工程成果验证学习','从原作者的项目出发，经历设计、实现、测试、优化与解释。每个实验都标明运行条件和实际验证程度。')+`
+      <details class="start-guide practice-guide"><summary>第一次做实验 <span>准备 → 实现 → 检查 → 记录</span></summary><ol class="practice-steps"><li><strong>先读指南</strong><span>核对先修和运行条件，只安装当前实验需要的工具。</span></li><li><strong>独立实现</strong><span>准备自己的作品；参考命令用于复现，不能代替作业。</span></li><li><strong>运行检查</strong><span>在电脑终端执行指南中的作品检查命令，按错误信息修复。</span></li><li><strong>保存证据</strong><span>导入支持的 JSON 报告，记录原理、代码位置与测试结论。</span></li></ol><div class="document-links">${link('./docs/getting-started.md','源码下载、环境准备与报告导入')}${link('./docs/learning-paths.md','选择工程方向')}</div><p class="fineprint">本站目前不能直接执行代码。卡片会分别标明参考复现、作品检查和原课准备流程的验证状态。</p></details>
       <div class="filters"><select id="lab-stage" aria-label="实验阶段"><option value="all">全部阶段</option>${catalog.stages.map(s=>`<option value="${s.id}" ${stageFilter===String(s.id)?'selected':''}>${escape(s.title)}</option>`).join('')}</select></div>
       ${selected?details(node(selected)):''}<div class="grid lab-grid">${list.map(l=>`<article class="resource lab-card ${l.command?'lab-ready':''}"><div class="row"><span class="eyebrow">STAGE 0${l.stage}</span>${chip(l.integration==='reproduced'?'已复现':l.integration==='checked'?'本地检查可用':l.preparationCommand?'原课准备流程':'待集成',Boolean(l.command))}</div><h2>${escape(l.title)}</h2><p>${escape(l.goal)}</p><p class="meta">${escape(source(l.source).author)}</p><div class="lab-hardware"><span class="section-label">运行条件</span><p>${escape(l.hardware)}</p></div>
         <div class="dependency">${l.nodes.map(id=>nodeButton(id,'quiet')).join('')}</div>
-        ${l.command||l.preparationCommand?`<div class="command-block"><span class="section-label">${l.command?'在项目目录中运行':'先核对原课准备计划'}</span><code>${escape(l.command||l.preparationCommand)}</code></div>`:''}
+        ${l.command||l.preparationCommand?`<div class="command-block"><div class="command-tools"><span class="section-label">${l.command?(l.id==='indoor'?'作品检查 · 在项目目录的终端运行':'参考复现 · 在项目目录的终端运行'):'准备计划 · 在项目目录的终端运行'}</span><button type="button" class="copy-button" data-copy aria-label="复制命令">复制</button></div><code>${escape(l.command||l.preparationCommand)}</code></div>`:''}
         <div class="actions">${l.guide?link(l.guide,l.command?'阅读实验指南':'准备与测试步骤','button-link primary'):''}${link(l.url,'原作者项目')}</div>
         ${labResults(l)}${reportRecord(l)}<details class="resource-details"><summary>验收标准与集成状态</summary><p>${escape(l.status)}</p><ol class="rubric">${l.rubric.map(r=>`<li>${escape(r)}</li>`).join('')}</ol><p>${escape(l.limitation)}</p></details></article>`).join('')}</div>`;
   }
 
   function about() {
     return intro('STANDING ON THE SHOULDERS OF GIANTS','来源透明，研究持续开放','连接世界上已有的优秀成果，并持续检查它们能否组成可学习、可实践的路径。')+`
-      <div class="research-grid"><section class="panel"><span class="eyebrow">EVIDENCE</span><h2>哪些已经验证</h2><p>已记录 ${catalog.sources.length} 项来源、${catalog.nodes.length} 个知识节点的学习步骤，以及对象模型、数据库、自动微分与共识的固定版本测试结果；真实 GPU 已完成四项补充检查。</p><p>参考项目复现、平台测试与学习者能力验收，是不同的证据。</p>${link('./docs/release-complete.md','阅读完整验收报告','text-link')}</section>
+      <div class="research-grid"><section class="panel"><span class="eyebrow">EVIDENCE</span><h2>哪些已经验证</h2><p>已记录 ${catalog.sources.length} 项来源、${catalog.nodes.length} 个知识节点的学习步骤，以及对象模型、数据库、自动微分与共识的固定版本测试结果；真实 GPU 的当前记录包含 ${catalog.labs.find(l=>l.id==='gpu').validation.tests} 项补充检查。</p><p>参考项目复现、平台测试与学习者能力验收，是不同的证据。</p>${link('./docs/delivery-checklist.md','查看交付条件与待验证项','text-link')} ${link('./docs/usability-audit.md','查看已有运行证据','text-link')}</section>
       <section class="panel"><span class="eyebrow">OPEN QUESTIONS</span><h2>哪些仍需验证</h2><p>依赖划分和选章需要真实学习者持续试用；多卡、原课程高级作业与工业服务实验仍需合适环境。高级候选项目不会被标记成已完成集成。</p>${link('./docs/research.md','研究依据与覆盖审计','text-link')} ${link('./docs/path-evidence.md','原作者路径与能力对照','text-link')}</section></div>
       <section class="panel"><h2>归功于原作者</h2><p>课程、教材与文档以原始链接为主。四个精选项目复用了许可明确的 MIT 代码与原测试，并保留作者、固定提交和许可。本站原创内容使用 MIT 许可证，不能覆盖第三方权利。</p><div class="document-links">${link('./CREDITS.md','来源与致谢')}${link('./LICENSE','本站许可证')}${link('./docs/extensions.md','资源扩展规范')}${link('./docs/glossary.md','中英术语表')}</div></section>
       <section class="panel"><h2>学习记录由你掌握</h2><p>进度保存在浏览器，本标签页的草稿可以在刷新后恢复；导出备份时也会包含草稿。换设备或清理浏览器前请备份。记录不会上传服务器。</p><div class="document-links">${link('./docs/index.md','文档中心')}${link('./docs/getting-started.md','从零开始使用')}${link('./docs/architecture.md','架构与工具选择')}${link('./docs/maintenance.md','维护与恢复指南')}${link('./docs/requirements-audit.md','提示词逐项验收')}${link('./docs/curriculum.md','选章与复核任务')}${link('./docs/advanced-labs.md','高级原课实验')}</div></section>`;

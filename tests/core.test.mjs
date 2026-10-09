@@ -61,7 +61,7 @@ test('Web Locks serialize writes from concurrent stale snapshots',async()=>{
  assert.equal(calls,2);assert.equal(Object.keys(JSON.parse(storage.getItem(STORAGE_KEY)).records).length,2);
 });
 test('catalog rejects incomplete steps, unsafe identifiers, and credential URLs',()=>{
- for(const mutate of [c=>c.nodes[0].steps=[],c=>c.nodes[0].id='constructor',c=>c.sources[0].url='https://user:password@example.com',c=>c.labs.find(l=>l.validation).validation.commit='obsolete']){
+ for(const mutate of [c=>c.nodes[0].steps=[],c=>c.nodes[0].id='constructor',c=>c.sources[0].url='https://user:password@example.com',c=>c.sources[0].originalUrl='javascript:alert(1)',c=>c.sources[0].readingLabel='官方中文',c=>c.labs.find(l=>l.validation).validation.commit='obsolete']){
   const c=structuredClone(catalog);mutate(c);assert.throws(()=>validateCatalog(c));
  }
 });

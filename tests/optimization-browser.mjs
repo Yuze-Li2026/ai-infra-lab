@@ -4,11 +4,11 @@ import {readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const require=createRequire(process.env.LAB_PLAYWRIGHT_ROOT?resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'):import.meta.url);
 const {chromium}=require('playwright');
-const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{})});
+const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{channel:'chrome'})});
 const context=await browser.newContext({viewport:{width:1280,height:900}});
 const page=await context.newPage();page.on('dialog',d=>d.accept());
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
-const checks=[];const url='http://127.0.0.1:4173';const key='ai-infra-lab.progress.v1';
+const checks=[];const url=process.env.LAB_QA_URL||'http://127.0.0.1:4173';const key='ai-infra-lab.progress.v1';
 const evidence='已完成文件创建和运行，保存了原始测试结果，并能独立解释输入、输出与错误处理。';
 try{
  await page.goto(url);await page.getByRole('button',{name:'打开学习任务'}).click();

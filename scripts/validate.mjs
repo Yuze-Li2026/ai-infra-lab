@@ -13,6 +13,8 @@ export function validateCatalog(c){
   requiredText(s,['title','author','version','prerequisites','coverage','reason','limitations','verification','reviewedAt','license','reuse','reviewLevel'],'source');
   if(!['zh','en'].includes(s.language)||!/^\d{4}-\d{2}-\d{2}$/.test(s.reviewedAt)||Number.isNaN(Date.parse(s.reviewedAt)))throw new Error(`Invalid review metadata: ${s.id}`);
   https(s.url);https(s.licenseUrl);
+  if(s.originalUrl!==undefined)https(s.originalUrl);
+  if(s.readingLabel!==undefined&&(!['作者中文','官方中文','社区译文'].includes(s.readingLabel)||s.language!=='zh'))throw Error(`Invalid source reading edition: ${s.id}`);
   if(!s.evaluation||typeof s.evaluation!=='object'||Array.isArray(s.evaluation))throw new Error(`Invalid evaluation: ${s.id}`);
   if(!Array.isArray(s.reviewEvidence)||!s.reviewEvidence.length)throw new Error(`Missing review evidence: ${s.id}`);
   for(const evidence of s.reviewEvidence){requiredText(evidence,['url','checkedAt','finding'],'review evidence');https(evidence.url);}

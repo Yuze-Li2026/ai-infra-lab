@@ -5,12 +5,12 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {allowedDocuments} from '../site/documents.js';
-const require=createRequire(resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'));
+const require=createRequire(process.env.LAB_PLAYWRIGHT_ROOT?resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'):import.meta.url);
 const {chromium}=require('playwright');
 const base=new URL(process.env.LAB_LIVE_URL||'https://yuze-li2026.github.io/ai-infra-lab/');
 const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
 assert.equal(base.protocol,'https:');
-const browser=await chromium.launch({headless:true,executablePath:process.env.LAB_BROWSER_PATH});
+const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{channel:'chrome'})});
 const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true,reducedMotion:'reduce'});
 const page=await context.newPage(),checks=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
 try{
@@ -26,7 +26,11 @@ try{
  for(const doc of allowedDocuments){await page.goto(base.href+'#read/'+doc);await page.locator('.document-body').waitFor();if(doc!=='LICENSE')await page.locator('.document-body h1').waitFor();assert.equal(await page.locator('.document-body script,.document-body iframe').count(),0);}checks.push(`all ${allowedDocuments.size} guides and license render at repository prefix`);
  await page.goto(base.href+'#read/docs/dbdb-lab.md');await page.getByRole('link',{name:'环境准备',exact:true}).click();await page.locator('.document-body h1').filter({hasText:'从第一个文件开始'}).waitFor();assert.equal(new URL(page.url()).pathname,base.pathname);checks.push('relative guide link stays within Pages workspace');
  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:900});for(const route of ['learn','map','resources','labs','about','read/docs/path-evidence.md']){await page.goto(base.href+'#'+route);await page.locator(route.startsWith('read')?'.document-body h1':'main h1').waitFor();assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${width} ${route}`);}}checks.push('all views and evidence guide fit four viewport sizes');
- await page.setViewportSize({width:1440,height:1000});await page.goto(base.href);await page.getByRole('heading',{name:'把知识变成工程能力'}).waitFor();await page.screenshot({path:'artifacts/live-desktop.png',fullPage:true});await page.setViewportSize({width:390,height:844});await page.screenshot({path:'artifacts/live-mobile.png',fullPage:true});await page.setViewportSize({width:1000,height:900});await page.addStyleTag({content:'html{font-size:32px}'});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));checks.push('200% text remains usable');
+ await page.setViewportSize({width:1440,height:1000});await page.goto(base.href);await page.getByRole('heading',{name:'把知识变成工程能力'}).waitFor();await page.screenshot({path:'artifacts/live-desktop.png',fullPage:true});await page.setViewportSize({width:390,height:844});await page.screenshot({path:'artifacts/live-mobile.png',fullPage:true});await page.setViewportSize({width:1000,height:900});
+ const originalSize=await page.locator('main h1').evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+ await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
+ assert.equal(await page.locator('main h1').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)),originalSize*2);
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));checks.push('200% text actually doubles the heading size without page overflow');
  assert.deepEqual(errors,[]);checks.push('no browser runtime errors');
  const result={passed:true,url:base.href,checkedAt:new Date().toISOString(),publicFiles:manifest.files.length,checks};await writeFile('artifacts/live-browser-results.json',JSON.stringify(result,null,2)+'\n');console.log(result);
 }finally{await context.close();await browser.close();}

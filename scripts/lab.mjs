@@ -1,4 +1,4 @@
-import {spawn} from 'node:child_process';
+import {runProcess} from './process.mjs';
 import {existsSync,constants} from 'node:fs';
 import {mkdir,copyFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
@@ -26,7 +26,10 @@ if(lab==='indoor'){
  command=process.execPath;parameters=[resolve(root,'scripts/grade.mjs'),resolve(args[0]),python];
 }
 console.log(`运行 ${lab}：${lab==='indoor'||args.includes('--submission')?'指定作品':'参考实现'}。代码使用本地用户权限；默认报告位于项目 artifacts。`);
-const child=spawn(command,parameters,{stdio:'inherit',windowsHide:true,cwd:root});
-const timeout=setTimeout(()=>{console.error('实验超过 10 分钟，已停止。请缩小工作负载或检查死循环。');child.kill();},600000);
-child.on('error',error=>{clearTimeout(timeout);console.error(`启动失败：${error.message}。请阅读站内“从零开始使用”中的环境准备。`);process.exitCode=2;});
-child.on('exit',code=>{clearTimeout(timeout);process.exitCode=code??1;});
+const controller=new AbortController();
+const interrupt=()=>controller.abort();process.once('SIGINT',interrupt);process.once('SIGTERM',interrupt);
+const result=await runProcess(command,parameters,{cwd:root,inherit:true,signal:controller.signal,env:{...process.env,PYTHONUTF8:'1',PYTHONIOENCODING:'utf-8'}});
+process.removeListener('SIGINT',interrupt);process.removeListener('SIGTERM',interrupt);
+if(result.reason)console.error(`实验停止：${result.reason==='timeout'?'超过 10 分钟':result.reason}。请检查日志后复验。`);
+if(result.error)console.error(`运行失败：${result.error}`);
+process.exitCode=result.reason==='interrupted'?130:result.reason?1:result.error?2:result.code??1;

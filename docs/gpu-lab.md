@@ -23,15 +23,15 @@ node scripts/lab.mjs gpu --submission workspaces/my-gpu/implementation.py --outp
 
 准备命令用独占创建目录和文件，不依赖 shell 遇错后是否继续执行。初次检查会产生明确失败，因为模板尚未实现。自己实现后复跑，把 `artifacts/my-gpu-report.json` 导入工程实验的 GPU 卡片。`--submission` 接受一个 `.py` 文件，检查器实际调用该文件的函数；不会把你写的布尔“成功”当验收结果。
 
-|接口|输入与返回契约|检查器负责的验收|
-|---|---|---|
-|`matmul(left, right)`|返回输入设备上的 FP32 矩阵乘积，不改写输入|非方阵、小矩阵和 512 方阵，对照 CPU oracle|
-|`squared_gradient(inputs)`|返回 `sum(inputs ** 2)` 的梯度，不改写输入|两种张量形状，对照 CPU autograd|
-|`build_model(device)`|返回 4 特征到 1 输出的 `torch.nn.Module`，放在指定设备|输出形状、真实 MSE 和状态|
-|`build_optimizer(model)`|返回管理该模型所有参数的 PyTorch 优化器|参数归属与恢复后的实际更新|
-|`train_step(model, optimizer, inputs, labels)`|执行一个训练步，返回有限标量 loss|150 步后真实预测 MSE 低于初始值的 5%；伪造 loss 不计通过|
-|`save_checkpoint(path, model, optimizer, step)`|把模型、优化器、步数和 CPU/CUDA RNG 写到指定文件|每次运行使用自己的临时检查点，不覆盖已有作品文件|
-|`load_checkpoint(path, model, optimizer, device)`|完整恢复并返回存储的步数|扰动 RNG 后恢复、预测相同、下一训练步的完整模型状态完全相同|
+| 接口 | 输入与返回契约 | 检查器负责的验收 |
+| --- | --- | --- |
+| `matmul(left, right)` | 返回输入设备上的 FP32 矩阵乘积，不改写输入 | 非方阵、小矩阵和 512 方阵，对照 CPU oracle |
+| `squared_gradient(inputs)` | 返回 `sum(inputs ** 2)` 的梯度，不改写输入 | 两种张量形状，对照 CPU autograd |
+| `build_model(device)` | 返回 4 特征到 1 输出的 `torch.nn.Module`，放在指定设备 | 输出形状、真实 MSE 和状态 |
+| `build_optimizer(model)` | 返回管理该模型所有参数的 PyTorch 优化器 | 参数归属与恢复后的实际更新 |
+| `train_step(model, optimizer, inputs, labels)` | 执行一个训练步，返回有限标量 loss | 150 步后真实预测 MSE 低于初始值的 5%；伪造 loss 不计通过 |
+| `save_checkpoint(path, model, optimizer, step)` | 把模型、优化器、步数和 CPU/CUDA RNG 写到指定文件 | 每次运行使用自己的临时检查点，不覆盖已有作品文件 |
+| `load_checkpoint(path, model, optimizer, device)` | 完整恢复并返回存储的步数 | 扰动 RNG 后恢复、预测相同、下一训练步的完整模型状态完全相同 |
 
 工作负载是确定性回归，模型应支持固定输入和恢复对照；不能用随机层的未固定预测绕过状态检查。结果保留实现文件的 SHA-256、环境、误差、真实训练轨迹和性能样本。参考实现位于 `labs/gpu/reference.py`，可以研究 API，但复制它跑 submission 只证明执行路由，不能证明独立实现。课程报告不作真实性签名。
 

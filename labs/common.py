@@ -3,6 +3,8 @@ import hashlib
 import json
 import platform
 import sys
+import os
+import tempfile
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -23,14 +25,33 @@ def report(lab, manifest, results, benchmark=None, mode='reference', notes=None,
     value = {'schemaVersion': 1, 'lab': lab, 'mode': mode, 'commit': manifest['commit'],
              'createdAt': datetime.now(timezone.utc).isoformat(), 'python': platform.python_version(),
              'platform': platform.platform(), 'upstreamChecksumsVerified': manifest.get('checksumsVerified', True),
-             'passed': all(r['passed'] for r in results), 'results': results,
+             'passed': bool(results) and all(r['passed'] and r.get('tests', 1) > 0 for r in results), 'results': results,
              'benchmark': benchmark or [], 'notes': notes or [],
              'limits': 'Local report, not independent certification. Learner code runs with user permissions.'}
     target = Path(output) if output else ROOT / 'artifacts' / (lab + '-report.json')
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    atomic_json(target, value)
     print(json.dumps({'lab': lab, 'passed': value['passed'], 'tests': sum(r.get('tests', 1) for r in results), 'report': str(target)}))
     return value
+
+
+def atomic_json(target, value):
+    """Publish a complete report, preserving the previous file if writing fails."""
+    target = Path(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=target.parent,
+                                         prefix=target.name+'.', suffix='.tmp', delete=False) as stream:
+            temporary = Path(stream.name)
+            json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
+            stream.write('\n')
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, target)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def run_safely(lab, upstream, main):

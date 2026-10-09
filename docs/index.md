@@ -11,18 +11,20 @@
 
 ## 进行工程实验
 
-|阶段|本地流程|深入原课程|
-|---|---|---|
-|0 起点|[原课入门练习与检查](getting-started.md)|CS50 原课练习与最终项目|
-|1 基础|[对象运行时](object-model-lab.md)|CS50 综合项目与数学复核|
-|2 系统|[DBDB 持久数据库](dbdb-lab.md)|OSTEP / 原 OS 项目|
-|3 模型|[micrograd 自动微分](micrograd-lab.md)|DLSys 张量与后端|
-|4 工程|[共识与失效恢复](consensus-lab.md)、[GPU 数值与恢复](gpu-lab.md)|6.5840 / CS336 / 生产系统方向|
+| 阶段 | 本地流程 | 深入原课程 |
+| --- | --- | --- |
+| 0 起点 | [原课入门练习与检查](getting-started.md) | CS50 原课练习与最终项目 |
+| 1 基础 | [对象运行时](object-model-lab.md) | CS50 综合项目与数学复核 |
+| 2 系统 | [DBDB 持久数据库](dbdb-lab.md) | OSTEP / 原 OS 项目 |
+| 3 模型 | [micrograd 自动微分](micrograd-lab.md) | DLSys 张量与后端 |
+| 4 工程 | [共识与失效恢复](consensus-lab.md)、[GPU 数值与恢复](gpu-lab.md) | 6.5840 / CS336 / 生产系统方向 |
 
 [原课准备与测试流程](project-workflows.md)提供 CS50 最终项目、OSTEP MapReduce、DLSys HW0–HW2、2026 MIT Raft 和 CS336 A1/A2 的固定源码获取、独立环境、实际测试及失败记录步骤。[高级原课实验](advanced-labs.md)列出先修、产物和更深作业尚未验证的条件。[GPU 安装与验证记录](gpu-validation-plan.md)给出本机配置、固定版本、下载范围与实际结果。
 
 ## 维护与贡献
 
+- [文档写作规范](writing-guide.md)：文档类型、术语、格式、命令验证和审校方法。
+- [工程交付验收清单](delivery-checklist.md)：本轮范围、验收条件、证据和未完成项。
 - [维护者从一次修改到发布](maintainer-tutorial.md)：实际修改位置、检查命令、审阅、发布与回滚。
 - [维护、部署和恢复](maintenance.md)：日常操作、学习数据、源码归档和问题诊断。
 - [声明式扩展规范](extensions.md)：来源、节点、实验、报告、里程碑与文档接入。
