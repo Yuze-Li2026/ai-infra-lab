@@ -4,6 +4,7 @@ import http.cookiejar
 import json
 import os
 from pathlib import Path
+import re
 import signal
 import socket
 import subprocess
@@ -49,7 +50,12 @@ def running(state, work, port):
         process = subprocess.Popen([sys.executable, str(LAUNCHER), "serve", "--state", str(state), "--root", str(work), "--port", str(port)], stdout=log, stderr=log, start_new_session=True)
         try:
             for _ in range(90):
-                assert process.poll() is None, "Jupyter exited before readiness; private log retained only during test"
+                if process.poll() is not None:
+                    diagnostic = log_path.read_text(errors="replace")[-12000:]
+                    diagnostic = re.sub(r"[0-9a-fA-F]{48,}", "[redacted]", diagnostic)
+                    diagnostic = re.sub(r"(?i)(token=)[^\s&]+", r"\1[redacted]", diagnostic)
+                    print(diagnostic, file=sys.stderr)
+                    raise AssertionError("Jupyter exited before readiness; redacted startup diagnostic printed")
                 try:
                     status, _ = request(f"http://127.0.0.1:{port}", "/api/contents")
                     if status == 403:
