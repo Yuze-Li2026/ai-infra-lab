@@ -105,9 +105,8 @@ def serve(folder, root, port, allow_root):
     config.IdentityProvider.token = data["token"]
     config.PasswordIdentityProvider.hashed_password = ""
     config.PasswordIdentityProvider.password_required = False
-    app = LabApp.instance(config=config)
-    app.initialize([])
-    server = app.serverapp
+    config.LabApp.core_mode = True
+    server = LabApp.initialize_server(argv=[], load_other_extensions=False, config=config)
     # Inspect effective traits after all config loading, before listening.
     if (server.ip != "127.0.0.1" or server.port != port or server.port_retries != 0
             or server.allow_origin or server.allow_origin_pat or server.disable_check_xsrf
@@ -117,7 +116,7 @@ def serve(folder, root, port, allow_root):
             or server.cookie_secret != bytes.fromhex(data["cookieSecret"])):
         raise ValueError("An external Jupyter configuration changed the private access policy")
     print("Private lab ready on loopback; connect through your SSH tunnel. No cloud billing changes.", flush=True)
-    app.start()
+    server.start()
 
 
 def main():
