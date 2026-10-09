@@ -6,6 +6,11 @@ import {validateCatalog} from './validate.mjs';
 import {verifyVendor} from './verify-vendor.mjs';
 
 async function exists(path){try{return await lstat(path);}catch(e){if(e.code==='ENOENT')return null;throw e;}}
+async function copyText(from,to){
+ const bytes=await readFile(from);
+ const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes).replace(/\r\n/g,'\n');
+ await writeFile(to,text,'utf8');
+}
 async function filesBelow(root,path=root){
  const result=[];
  for(const entry of await readdir(path,{withFileTypes:true})){
@@ -34,7 +39,7 @@ export async function build(project=process.cwd()){
   const from=join(root,'site',file),info=await exists(from);
   if(!info)throw new Error(`Missing public asset: ${file}`);
   if(!info.isFile()||info.isSymbolicLink())throw new Error(`Unsafe public asset: ${file}`);
-  await cp(from,join(stage,file));
+  await copyText(from,join(stage,file));
  }
  if((await lstat(join(root,'site/vendor'))).isSymbolicLink())throw Error('Vendor directory must not be a link');
  for(const file of await verifyVendor(root)){
@@ -45,11 +50,11 @@ export async function build(project=process.cwd()){
  if((await lstat(docs)).isSymbolicLink())throw new Error('Documentation directory must not be a link');
  for(const file of await filesBelow(docs)){
   if(!file.endsWith('.md'))continue;
-  await mkdir(dirname(join(stage,'docs',file)),{recursive:true});await cp(join(docs,file),join(stage,'docs',file));
+  await mkdir(dirname(join(stage,'docs',file)),{recursive:true});await copyText(join(docs,file),join(stage,'docs',file));
  }
  for(const file of ['README.md','CREDITS.md','LICENSE','CONTRIBUTING.md']){
   if((await lstat(join(root,file))).isSymbolicLink())throw new Error(`Unsafe document: ${file}`);
-  await cp(join(root,file),join(stage,file));
+  await copyText(join(root,file),join(stage,file));
  }
  await writeFile(join(stage,'.nojekyll'),'');
  const manifest={schemaVersion:1,files:[]};
