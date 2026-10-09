@@ -56,7 +56,7 @@ export async function build(project=process.cwd()){
   if((await lstat(join(root,file))).isSymbolicLink())throw new Error(`Unsafe document: ${file}`);
   await copyText(join(root,file),join(stage,file));
  }
- await writeFile(join(stage,'.nojekyll'),'');
+ // Pages uses the explicit Actions artifact, so no branch/Jekyll control file is needed.
  const manifest={schemaVersion:1,files:[]};
  for(const path of await filesBelow(stage)){
   const bytes=await readFile(join(stage,path));manifest.files.push({path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});

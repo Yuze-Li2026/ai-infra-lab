@@ -8,7 +8,7 @@
 
 ## 立即使用
 
-公开源码：[Yuze-Li2026/ai-infra-lab](https://github.com/Yuze-Li2026/ai-infra-lab)。本地使用方式如下；线上入口与部署证据见下方发布状态。
+直接打开[在线学习工作台](https://yuze-li2026.github.io/ai-infra-lab/)或[在线文档中心](https://yuze-li2026.github.io/ai-infra-lab/#read/docs/index.md)。公开源码：[Yuze-Li2026/ai-infra-lab](https://github.com/Yuze-Li2026/ai-infra-lab)。本地使用方式如下。
 
 安装 [Node.js](https://nodejs.org/) 22 或更新版本后，在 Windows 双击 `start.cmd`；或在本目录运行：
 
@@ -61,6 +61,6 @@ npm run check
 
 ## 发布状态
 
-2026-10-09 已取得所有者公开发布授权，核对目标仓库不存在后创建上述公开仓库。远程与本地源码历史的提交、文件树哈希一致；首轮 [Windows/Linux 验证](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37877122668)全部通过。Pages 正在按发布门槛准备，最终部署与线上复验记录见[验证记录](docs/verification.md)。账号其他项目未修改。
+2026-10-09 已取得所有者公开发布授权，核对目标仓库不存在后创建上述公开仓库。远程与本地源码历史的提交、文件树哈希一致；[Windows/Linux 验证](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37877772893)和[Pages 部署](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37878054021)成功。线上 24 项任务、29 份文档/许可、四种屏宽及备份恢复已实测；具体文件清单与发布修复见[验证记录](docs/verification.md)。后续提交的最新结果可从仓库 Actions 核对，账号其他项目未修改。
 
 原创代码与组织说明使用 MIT 许可证。外部教材、课程、实验和代码保留各自许可；本站许可证不授予对它们的再分发权利。

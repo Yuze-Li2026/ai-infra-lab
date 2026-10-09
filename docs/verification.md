@@ -67,4 +67,20 @@ DBDB 21 项原测试、共识 46 项功能原测试（500 行编辑约束单独�
 
 首轮代码提交 `79aafab` 的 [Validate 运行 37877122668](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37877122668)已完成：Windows、Ubuntu 均成功。Windows 日志显示 24 测试、24 通过、0 跳过；原对象模型 28、DBDB 21、共识 46 项成功，报告作为工作流附件保存。远程使用 Python 3.12 与 PyTorch 2.10.0+cpu，不是 GPU 验证；GPU 证据来自前述本机实际运行。
 
-Pages 工作流仅手动触发，并检查部署提交本身已有成功的 Validate。Actions 已按官方稳定发布固定完整提交哈希；新版本必须重新通过 CI。最终网站地址、部署运行及线上文件哈希/浏览器复验将在执行后记录，不以创建仓库冒充网站上线。
+Pages 工作流仅手动触发，并检查部署提交本身已有成功的 Validate。Actions 已按官方稳定发布固定完整提交哈希；新版本必须重新通过 CI。
+
+更新后的 `9c16b87` 在 [Validate 37877772893](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37877772893)再次通过 Windows/Linux 矩阵；Ubuntu 日志同样为 24 项、24 通过、0 跳过。该版本的源码归档在独立新目录恢复后通过全部测试，44 个构建文件与工作目录哈希一致，报告保存在 artifacts/recovery-latest-report.json；复用了已准备依赖，没有宣称全新机器安装。
+
+## Pages 与实际线上检查
+
+[Publish Pages 37878054021](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37878054021)成功，网站为[在线学习工作台](https://yuze-li2026.github.io/ai-infra-lab/)。独立临时浏览器上下文实测：24 个任务直达、29 份文档/许可阅读、指南相对跳转、学习提交/刷新/导出/恢复、320/390/768/1280 屏宽和 200% 文本，无运行时异常。只修改了测试上下文的数据。
+
+首次逐文件检查发现 .nojekyll 控制文件返回 404；另外 43 个可访问文件的大小和 SHA-256 均与本地一致。本站通过[官方自定义 Actions 发布方式](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)直接部署构建产物，不运行 Jekyll。后续构建移除这个无用控制文件，让清单中每个文件都可以在实际网站严格核验。不会把该 404 写成“全部文件通过”。
+
+最新版复验命令如下。先构建，等待同一提交的 Validate 与 Pages 都成功，再运行；任何内容哈希不一致或交互失败会非零退出，不能发布旧清单。已有浏览器依赖条件与本地浏览器检查相同。
+
+```sh
+node tests/live-browser.mjs
+```
+
+默认检查项目正式 URL，可用 LAB_LIVE_URL 指定自己的 HTTPS 部署地址。结果保存在 artifacts/live-browser-results.json，截图为 live-desktop.png 和 live-mobile.png；这些本地产物不混入公开构建。最新部署提交与运行可在[验证工作流](https://github.com/Yuze-Li2026/ai-infra-lab/actions/workflows/validate.yml)和[发布工作流](https://github.com/Yuze-Li2026/ai-infra-lab/actions/workflows/pages.yml)核对。

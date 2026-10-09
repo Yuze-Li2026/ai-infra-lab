@@ -10,12 +10,14 @@
 
 ## 部署（需要项目所有者批准）
 
-2026-10-09 所有者已批准本项目公开发布，并创建[源码仓库](https://github.com/Yuze-Li2026/ai-infra-lab)。首轮 Windows/Linux 验证已通过，Pages 的实际部署状态见[验证记录](verification.md)。首次创建或向其他目的地公开发布仍需所有者批准；本项目后续操作遵循已授予的范围。
+2026-10-09 所有者已批准本项目公开发布，并创建[源码仓库](https://github.com/Yuze-Li2026/ai-infra-lab)和[在线工作台](https://yuze-li2026.github.io/ai-infra-lab/)。Windows/Linux 验证和 Pages 已实际成功，版本与线上检查见[验证记录](verification.md)。首次创建或向其他目的地公开发布仍需所有者批准；本项目后续操作遵循已授予的范围。
 
 1. 取得仓库创建批准，认证查询账号下全量仓库及名称冲突。建议名称 `ai-infra-lab`，不能覆盖已有仓库。
 2. 检查本地 Git 状态和历史，复核个人成果、凭据和 artifacts 未纳入版本。创建批准的新仓库并推送。
 3. 在 GitHub Pages 设置中选择 GitHub Actions。检查环境保护规则，再手动运行 `Publish Pages (manual)`。
 4. 确认部署 URL、子路径静态资源、手机显示和数据备份行为。发布前必须再次通过校验、测试与构建。
+
+线上复验使用 `node tests/live-browser.mjs`，需已有 Playwright 与浏览器；环境变量说明见验证记录。脚本逐个检查公开文件的大小与 SHA-256，并使用临时上下文测试学习和恢复，不能操作用户真实进度。本站只支持已说明的 Actions 产物部署，不依赖分支上的 Jekyll 控制文件。
 
 验证工作流在 push/PR 时执行，发布工作流只有 `workflow_dispatch`。发布先查询当前同一提交的 Windows/Linux Validate 是否成功；通过后才构建和部署，不会拿其他提交的绿色结果放行。Actions 版本升级先查官方发布、固定提交，再实际执行验证与部署；核对结果保存在工作流中的版本注释。
 
