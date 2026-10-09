@@ -27,7 +27,9 @@
 
 本机已有 Windows、Node、Python 3.12、单卡 CUDA 与 MinGW。尚未安装 Linux/WSL2、Go 和 CS336 的独立 PyTorch 2.11 环境。先使用已有条件完成平台、CPU 与单卡检查；跨系统课程验证可使用仓库 Linux CI。新增大规模下载、付费算力或系统配置须按具体方案获得授权。
 
-`Original course Linux environments` 是单独的工作流，可手动触发，也在 `codex/quality-and-ui` 验证分支的相关文件变更时执行。它在标准 Ubuntu runner 内安装课程依赖、编译 HW0 扩展并执行固定版本原测试，分别核对环境可运行与未实现作业仍失败，不能替代学习者通过作业。新增工作流只有在远程真正执行后才构成 Linux 证据；未执行或失败时，本项仍未完成。
+`Original course Linux environments` 是单独的工作流，可手动触发，也在 `codex/quality-and-ui` 验证分支的相关文件变更时执行。[运行 37927817570](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/37927817570)已在 Ubuntu 24.04 真正执行：DLSys HW0/HW1/HW2 的隔离环境、HW0 C++ 扩展和 MIT Raft 原测试均完成环境验证。起始作业依旧失败，不能替代学习者通过作业。实际计数、源码版本和日志位置见[验证记录](verification.md#linux-原课环境)。Q03 只新增这些环境的证据，其余课程条件继续开放。
+
+平台提交 `2e44909` 已通过 Windows/Ubuntu CI；同提交源码归档恢复后通过 35 项自动测试、五组浏览器检查，50 个公开内容文件哈希一致。本轮改进保留在验证分支，尚未部署到公开网站。完整交付仍须补齐下述高级环境及最终同提交部署复核。
 
 真实多卡通信、Kubernetes/Ray 集群、完整推理服务、编译器后端以及全部原课作业仍在范围内，但不能由本地小规模测试证明。每项需明确设备、安装、运行和验收条件；没有相应条件时保留未完成状态，不改成“全部工程已验证”。
 

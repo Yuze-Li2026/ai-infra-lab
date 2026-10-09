@@ -64,6 +64,8 @@ Linux/macOS 使用 `python3 -m venv workspaces/needle-hw0/.venv`，解释器为�
 
 检查器保留原始测试，配置每份作业的 `PYTHONPATH`，实际运行整个 `tests` 并保存 JUnit。起始 TODO 尚未实现，失败是正常结果。HW0 的 C++ 检查还需要原 `Makefile` 指定的 pybind11 扩展；Linux 在作业目录使用同一环境的 Python 与 `make` 编译。原 Makefile 使用 `.so` 和 POSIX 参数，不能把它直接当作 Windows `.pyd` 构建命令；未编译的 C++ 部分不会因为 Python 部分通过而被忽略。不要改原测试来绕过失败。
 
+Ubuntu 24.04 上已实际验证这三份固定起始代码的环境、HW0 扩展编译及完整测试执行。环境可运行，未实现作业仍失败；版本、日志和具体结果见[Linux 原课环境记录](verification.md#linux-原课环境)。这不代表学习者自己的实现通过。
+
 阅读原 notebook 的题目与接口，独立完成后检查广播/形状、梯度、网络/优化器与数据加载，再做规模、内存和性能对照。本站不会输出作业答案，不声称已经替学习者完成原 HW。
 
 ## MIT 6.5840：实际 Raft 实验
@@ -76,7 +78,7 @@ node scripts/project.mjs raft prepare
 node scripts/project.mjs raft check
 ```
 
-运行需要 Linux 或已有 WSL2、Go 1.22+、make 和供竞态检测使用的 C 编译器。Windows 原生命令行会明确失败；工具不会安装 WSL、发行版或 Go。本机源码获取已核对，但没有这些完整运行条件，因此尚未验证实际 Raft 测试。
+运行需要 Linux 或已有 WSL2、Go 1.22+、make 和供竞态检测使用的 C 编译器。Windows 原生命令行会明确失败；工具不会安装 WSL、发行版或 Go。固定源码及原 `make raft1` 已在 Ubuntu 24.04 CI 实际执行，环境验证通过，起始实现仍失败，详见[Linux 原课环境记录](verification.md#linux-原课环境)。本机 Windows 尚未安装 Linux/WSL2；云端结果不改变本机的运行条件。
 
 按原题独立完成 `src/raft1/raft.go`，在作品的 `src` 下先使用 `make RUN="-run 3A" raft1` 定位第一部分，然后 `make raft1` 跑完整目标；本站 `check` 调用同一完整目标，保存原日志并核对实际 Go 测试通过行及退出码。继续按原课完成 3B/3C/3D、上层 KV 和分片，重复故障场景与 `-race`；这些更深部分不会被本站一次 Raft 命令自动标记为掌握。AOSA 共识模拟器与此独立实验分别记录。
 

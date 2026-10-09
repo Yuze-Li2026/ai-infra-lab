@@ -84,6 +84,28 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await page.screenshot({path:'artifacts/ui-text-200.png'});screenshots.push('artifacts/ui-text-200.png');
   checks.push('320, 390, 768 and 1440 pixel layouts fit; 200% text actually doubles the computed heading size without page overflow');
+  for(const width of [320,390,768,1440]){
+    await page.setViewportSize({width,height:900});
+    for(const route of ['learn','map','resources','labs','map/computer','read/docs/getting-started.md']){
+      await page.goto(base+'/#'+route);await page.locator('main h1').waitFor();
+      await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`200% text: ${width} ${route}`);
+      const crowded=await page.locator('.sidebar nav a,.topbar button,.quick-help').evaluateAll(elements=>elements.filter(element=>{
+        const bounds=element.getBoundingClientRect();
+        const range=document.createRange();range.selectNodeContents(element);
+        return element.scrollWidth>element.clientWidth+1||[...range.getClientRects()].some(rect=>rect.width>0&&(rect.left<bounds.left-1||rect.right>bounds.right+1));
+      }).map(element=>element.textContent.trim()));
+      assert.deepEqual(crowded,[],`text extends outside a navigation or toolbar control: ${width} ${route}`);
+    }
+    if(width<=390){
+      await page.goto(base+'/#learn');await page.locator('main h1').waitFor();
+      await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
+      const path=`artifacts/ui-text-200-${width}.png`;await page.screenshot({path});screenshots.push(path);
+      await page.locator('.sidebar').getByRole('link',{name:'精选资源',exact:true}).click();await page.locator('#language').waitFor();
+      assert.equal(new URL(page.url()).hash,'#resources');
+    }
+  }
+  checks.push('at 200% text, six routes fit four widths; navigation and toolbar text stay inside their controls, and mobile navigation remains operable');
   const keyboardPage=await context.newPage();
   await keyboardPage.goto(base+'/#learn');await keyboardPage.locator('main h1').waitFor();
   await keyboardPage.keyboard.press('Tab');assert.match(await keyboardPage.locator(':focus').innerText(),/跳到学习内容/);

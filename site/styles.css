@@ -195,6 +195,7 @@ button:disabled {
 }
 .topbar>div {
   display:flex;
+  flex-wrap:wrap;
   align-items:center;
   gap:8px
 }
@@ -1083,13 +1084,17 @@ main,p,h1,h2,h3,a,button,dd {
     display:none
   }
   .sidebar nav {
-    grid-template-columns:repeat(5,minmax(0,1fr));
+    display:flex;
+    flex-wrap:wrap;
     gap:3px
   }
   .sidebar nav a {
+    flex:1 1 calc(4em + 2px);
+    min-width:min(100%,calc(4em + 2px));
     justify-content:center;
-    white-space:nowrap;
-    padding:10px 2px;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    padding:10px 0;
     font-size:0.8125rem
   }
   .sidebar nav svg {
