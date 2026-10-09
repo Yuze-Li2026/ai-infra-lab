@@ -29,26 +29,28 @@ def owned_process(command, **kwargs):
     finally:
         # Closing the job also stops descendants whose direct parent has exited.
         # POSIX children remain in the session's process group unless they explicitly detach.
-        if job:
-            job.close()
-        elif child:
-            stop_group(child)
-        if child:
-            if child.poll() is None:
-                child.kill()
-            try:
-                child.communicate(timeout=5)
-            except subprocess.TimeoutExpired as error:
-                # Do not fall back to an unbounded communicate()/Popen.__exit__().
-                raise RuntimeError('进程清理超过 5 秒；无法确认输出管道已关闭。') from error
-            finally:
-                # Windows communicate() uses reader threads. Closing a buffered pipe
-                # still held by such a thread could itself block indefinitely.
-                readers = [getattr(child, name, None) for name in ('_stdout_thread', '_stderr_thread')]
-                if not any(thread and thread.is_alive() for thread in readers):
-                    for stream in (child.stdin, child.stdout, child.stderr):
-                        if stream:
-                            stream.close()
+        try:
+            if job:
+                job.close()
+            elif child:
+                stop_group(child)
+        finally:
+            if child:
+                if child.poll() is None:
+                    child.kill()
+                try:
+                    child.communicate(timeout=5)
+                except subprocess.TimeoutExpired as error:
+                    # Do not fall back to an unbounded communicate()/Popen.__exit__().
+                    raise RuntimeError('进程清理超过 5 秒；无法确认输出管道已关闭。') from error
+                finally:
+                    # Closing a buffered pipe still held by a Windows reader
+                    # thread could itself block indefinitely.
+                    readers = [getattr(child, name, None) for name in ('_stdout_thread', '_stderr_thread')]
+                    if not any(thread and thread.is_alive() for thread in readers):
+                        for stream in (child.stdin, child.stdout, child.stderr):
+                            if stream:
+                                stream.close()
 
 
 def run(command, timeout, **kwargs):

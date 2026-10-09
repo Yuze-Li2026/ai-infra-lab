@@ -3,7 +3,7 @@ import DOMPurify from './vendor/dompurify/purify.es.mjs';
 
 export const allowedDocuments=new Set(['README.md','CREDITS.md','CONTRIBUTING.md','LICENSE','SECURITY.md',
  'docs/index.md','docs/faq.md','docs/maintainer-tutorial.md','docs/ai-maintenance.md','docs/path-evidence.md','docs/coverage.md','docs/learning-paths.md','docs/file-audit.md','docs/knowledge-index.md','docs/private-cloud.md',
- 'docs/getting-started.md','docs/environment-preparation.md','docs/glossary.md','docs/research.md','docs/architecture.md','docs/extensions.md','docs/acceptance.md','docs/writing-guide.md','docs/delivery-checklist.md',
+ 'docs/getting-started.md','docs/environment-preparation.md','docs/cluster-environments.md','docs/glossary.md','docs/research.md','docs/architecture.md','docs/extensions.md','docs/acceptance.md','docs/writing-guide.md','docs/delivery-checklist.md',
  'docs/maintenance.md','docs/verification.md','docs/optimization-review.md','docs/release-v02.md','docs/requirements-audit.md',
  'docs/object-model-lab.md','docs/dbdb-lab.md','docs/consensus-lab.md','docs/micrograd-lab.md','docs/gpu-lab.md','docs/gpu-validation-plan.md','docs/advanced-labs.md','docs/project-workflows.md','docs/usability-audit.md','docs/curriculum.md','docs/release-complete.md']);
 

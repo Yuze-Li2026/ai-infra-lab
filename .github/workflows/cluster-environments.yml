@@ -1,0 +1,56 @@
+name: Isolated CPU cluster environments
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/quality-and-ui]
+    paths:
+      - .github/workflows/cluster-environments.yml
+      - labs/cluster-validation/**
+      - scripts/check-cluster-environment.py
+      - scripts/check-ray-cluster.py
+      - scripts/processes.py
+permissions:
+  contents: read
+jobs:
+  cluster:
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [kubernetes, ray]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install the pinned Kubernetes tools on this disposable runner
+        if: matrix.engine == 'kubernetes'
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,stat,urllib.request
+          from pathlib import Path
+          versions=json.loads(Path('labs/cluster-validation/versions.json').read_text())
+          destination=Path(os.environ['RUNNER_TEMP'])/'infra-tools'
+          destination.mkdir()
+          kind=versions['kind']
+          data=urllib.request.urlopen(kind['linuxAmd64'],timeout=60).read()
+          assert hashlib.sha256(data).hexdigest()==kind['sha256']
+          (destination/'kind').write_bytes(data)
+          base='https://dl.k8s.io/release/v'+versions['kubernetes']['version']+'/bin/linux/amd64/kubectl'
+          data=urllib.request.urlopen(base,timeout=60).read()
+          digest=urllib.request.urlopen(base+'.sha256',timeout=30).read().decode().strip()
+          assert hashlib.sha256(data).hexdigest()==digest
+          (destination/'kubectl').write_bytes(data)
+          for file in destination.iterdir():file.chmod(0o755)
+          with open(os.environ['GITHUB_PATH'],'a') as path:path.write(str(destination)+'\n')
+          PY
+      - name: Execute real cluster requests and fault recovery
+        run: python scripts/check-cluster-environment.py ${{ matrix.engine }} --run
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: ${{ matrix.engine }}-cluster-evidence
+          path: artifacts/${{ matrix.engine }}-cluster-*.json
+          retention-days: 7
+          if-no-files-found: error

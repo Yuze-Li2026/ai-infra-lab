@@ -1,6 +1,7 @@
 """Own Windows descendants before any learner code starts (not a sandbox)."""
 import ctypes
 from ctypes import wintypes
+import time
 
 
 class BasicLimits(ctypes.Structure):
@@ -29,6 +30,13 @@ class ThreadEntry(ctypes.Structure):
                 ('tpBasePri', wintypes.LONG), ('tpDeltaPri', wintypes.LONG), ('dwFlags', wintypes.DWORD)]
 
 
+class Accounting(ctypes.Structure):
+    _fields_ = [(name, ctypes.c_int64) for name in ('TotalUserTime', 'TotalKernelTime',
+                'ThisPeriodTotalUserTime', 'ThisPeriodTotalKernelTime')] + [
+                (name, wintypes.DWORD) for name in ('TotalPageFaultCount', 'TotalProcesses',
+                'ActiveProcesses', 'TotalTerminatedProcesses')]
+
+
 class WindowsJob:
     def __init__(self):
         self.api = ctypes.WinDLL('kernel32', use_last_error=True)
@@ -36,6 +44,8 @@ class WindowsJob:
             'CreateJobObjectW': ([ctypes.c_void_p, wintypes.LPCWSTR], wintypes.HANDLE),
             'SetInformationJobObject': ([wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD], wintypes.BOOL),
             'AssignProcessToJobObject': ([wintypes.HANDLE, wintypes.HANDLE], wintypes.BOOL),
+            'TerminateJobObject': ([wintypes.HANDLE, wintypes.UINT], wintypes.BOOL),
+            'QueryInformationJobObject': ([wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD, ctypes.c_void_p], wintypes.BOOL),
             'OpenProcess': ([wintypes.DWORD, wintypes.BOOL, wintypes.DWORD], wintypes.HANDLE),
             'CloseHandle': ([wintypes.HANDLE], wintypes.BOOL),
             'CreateToolhelp32Snapshot': ([wintypes.DWORD, wintypes.DWORD], wintypes.HANDLE),
@@ -95,5 +105,21 @@ class WindowsJob:
     def close(self):
         if self.handle:
             handle, self.handle = self.handle, None
-            if not self.api.CloseHandle(handle):
-                raise ctypes.WinError(ctypes.get_last_error())
+            try:
+                if not self.api.TerminateJobObject(handle, 1):
+                    raise ctypes.WinError(ctypes.get_last_error())
+                # Termination is asynchronous. Keep the handle until the kernel
+                # reports no active members, instead of returning at kill request.
+                deadline = time.monotonic() + 5
+                while True:
+                    accounting = Accounting()
+                    if not self.api.QueryInformationJobObject(handle, 1, ctypes.byref(accounting), ctypes.sizeof(accounting), None):
+                        raise ctypes.WinError(ctypes.get_last_error())
+                    if accounting.ActiveProcesses == 0:
+                        break
+                    if time.monotonic() >= deadline:
+                        raise RuntimeError('Windows 任务在 5 秒内未确认全部进程退出。')
+                    time.sleep(.01)
+            finally:
+                if not self.api.CloseHandle(handle):
+                    raise ctypes.WinError(ctypes.get_last_error())

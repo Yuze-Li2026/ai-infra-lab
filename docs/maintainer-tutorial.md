@@ -31,7 +31,7 @@ npm run check
 
 Windows 的命令运行器通过 Python 标准库调用系统 [Job Object](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects)：先以暂停状态创建命令，加入本次任务，再恢复执行。若无法建立归属，命令保持未执行并返回错误。监督进程退出或被终止时，系统关闭本次任务的子进程，包括直接父进程已退出的后代；不按程序名称结束其他实验。Node 包装层依次选择 `LAB_TEST_PYTHON`、`LAB_PYTHON`、本站 `.venv-labs/Scripts/python.exe`、PATH 中的 `python`，因此 Windows 上的实验与完整复验需要 Python；浏览、构建和离线维护状态不经过这个运行器。
 
-Linux 使用独立会话和进程组。Python 运行器的超时清理另设 5 秒上限，清理失败返回错误，不再无限等待输出管道。Node 运行器保留标准输入、分块 UTF-8、输出上限、中断与退出码。正常结束也清理 Windows 任务中遗留的后代，因此不能通过这个入口启动长期后台服务。
+Linux 使用独立会话和进程组。Windows 先请求终止，再等待内核确认任务中没有活动进程，最多 5 秒；Python 随后的管道清理也设 5 秒上限，任一清理失败都会返回错误，不无限等待。Node 运行器保留标准输入、分块 UTF-8、输出上限、中断与退出码。正常结束也清理 Windows 任务中遗留的后代，因此不能通过这个入口启动长期后台服务。
 
 这些规则管理本次启动的普通进程，不能隔离恶意代码、撤销文件修改或限制全部系统访问；主动脱离 POSIX 进程组、通过系统服务创建进程等行为不在其安全保证内。运行不可信作品仍需单独的受限操作系统环境。实现集中在 `scripts/process.mjs`、`scripts/processes.py`、`scripts/windows_job.py` 和 `scripts/windows_process.py`；修改后必须复验正常输出、超时、父进程提前退出、无关进程存活及原课调用。
 

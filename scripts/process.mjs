@@ -12,7 +12,11 @@ async function stopTree(child){
   if(process.platform==='win32'){
     // Terminating the owner closes its non-inheritable job handle; Windows stops
     // its descendants even when their original parent has already exited.
-    if(child.exitCode===null)child.kill('SIGKILL');
+    await new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>reject(Error('Windows process pipes did not close within 5 seconds')),5000);
+      child.once('close',()=>{clearTimeout(timer);resolve();});
+      if(child.exitCode===null)child.kill('SIGKILL');
+    });
   }else{
     try{process.kill(-child.pid,'SIGKILL');}catch(error){if(error.code!=='ESRCH')throw error;}
   }

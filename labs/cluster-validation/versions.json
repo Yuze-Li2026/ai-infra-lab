@@ -1,0 +1,23 @@
+{
+  "kind": {
+    "version": "0.33.0",
+    "linuxAmd64": "https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-linux-amd64",
+    "sha256": "aee6151561422756b764a4ae28e7f44cda5af5a9eead3cc9985112b1de8d8e0d",
+    "source": "https://github.com/kubernetes-sigs/kind/releases/tag/v0.33.0"
+  },
+  "kubernetes": {
+    "version": "1.37.0",
+    "image": "kindest/node:v1.37.0@sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5"
+  },
+  "busybox": {
+    "version": "1.37.0",
+    "image": "busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e"
+  },
+  "ray": {
+    "version": "2.59.0",
+    "image": "rayproject/ray:2.59.0-py312-cpu@sha256:0ffca209fb4c984d648db550b8dbe7879bdba3bbb5d96ee5894843cf6ac12eb5",
+    "source": "https://hub.docker.com/r/rayproject/ray"
+  },
+  "verifiedMetadataAt": "2026-10-09",
+  "limits": "Linux amd64 CPU integration environments on one host. No production, GPU or cross-machine availability claim."
+}

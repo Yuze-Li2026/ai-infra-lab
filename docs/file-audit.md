@@ -255,6 +255,8 @@
 
 ### 接手入口
 
+集群环境新增固定镜像摘要与隔离工作流：`scripts/check-cluster-environment.py` 使用随机资源名和独立 kubeconfig，分别执行 Kubernetes 权限/服务/副本/配额/回滚、Ray 双节点/跨节点任务/actor 检查点恢复；清理仅针对本次资源。`scripts/check-ray-cluster.py` 保留真实任务异常和节点标识。JSON 结果与日志明确单宿主 CPU 范围，kubeconfig 不上传。流程是否可用以实际云端结果为准，不以本机静态检查代替。
+
 新增 `AGENTS.md`、`docs/ai-maintenance.md` 与 PR 模板，核对学习者/维护者分工、资源标准、已有授权、数据保护、同提交验证和交接要求。维护命令 `scripts/maintenance-status.mjs` 只读本地状态，不获取凭据、安装依赖或访问网络；从其他目录调用也定位本站源码。
 
 `scripts/verification-state.mjs` 核对明确的源码范围、稳定排序、路径与内容哈希、忽略产物以及拒绝符号链接。测试与浏览器汇总记录运行前后指纹，环境诊断失败也保存失败报告，防止旧成功结果留下误导。`tests/verification-state.test.mjs` 实际验证过期、运行中变化、缺失、损坏和未绑定报告，保留损坏原文，并用真实失败的解释器探测替换旧成功记录。相关维护说明同时接入文档格式和链接检查；不会进入学习页面的操作流程。
