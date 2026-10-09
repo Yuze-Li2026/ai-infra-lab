@@ -19,6 +19,8 @@
 
 [隔离的 Kubernetes 与 Ray 环境](cluster-environments.md)：进入调度方向后，在专用 CPU 实验机检查真实节点、权限、任务与故障恢复，理解与 GPU、多机生产系统的区别。
 
+[CPU 推理服务与编译器环境](inference-compiler-environments.md)：使用固定真实模型执行 vLLM 请求、认证与重启，或将 MLIR 编译成 LLVM CPU 产物并核对数值结果。
+
 | 阶段 | 本地流程 | 深入原课程 |
 | --- | --- | --- |
 | 0 起点 | [原课入门练习与检查](getting-started.md) | CS50 原课练习与最终项目 |

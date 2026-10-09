@@ -48,9 +48,11 @@
 
 ## 推理、可靠性与编译器方向
 
-- [vLLM 官方文档](https://docs.vllm.ai/en/latest/)：核对 GPU/平台兼容和模型许可证，先预算权重、KV cache 与并发。设计负载、质量基线、TTFT、逐 token 延迟和吞吐，并保留失败请求与恢复。本站尚未下载服务模型或验证 vLLM。
+进入这些方向前，可先执行[隔离集群环境](cluster-environments.md)和[CPU 推理与编译器环境](inference-compiler-environments.md)中的复验流程。它们检查真实依赖与系统行为；是否通过以具体提交的实际报告为准，不代替后面的完整方向作品。
+
+- [vLLM 官方文档](https://docs.vllm.ai/en/latest/)：核对 GPU/平台兼容和模型许可证，先预算权重、KV cache 与并发。设计负载、质量基线、TTFT、逐 token 延迟和吞吐，并保留失败请求与恢复。CPU 环境工具使用固定 Qwen3-0.6B；完整 GPU 服务与生产负载另行验证。
 - [Google SRE](https://sre.google/sre-book/table-of-contents/) 与 [Kubernetes Security](https://kubernetes.io/docs/concepts/security/)：明确 SLO、权限边界、告警、回滚和恢复。优先在自己的隔离测试环境进行故障注入，不修改真实业务。
-- [MLIR Toy](https://mlir.llvm.org/docs/Tutorials/Toy/)：先修 AST、类型、IR 与编译器构建；记录 LLVM 提交、构建条件、语义等价测试和优化前后 IR。本站尚未编译 MLIR，不把课程链接当作工具链可用证明。
+- [MLIR Toy](https://mlir.llvm.org/docs/Tutorials/Toy/)：先修 AST、类型、IR 与编译器构建；记录 LLVM 提交、构建条件、语义等价测试和优化前后 IR。IREE 的 CPU 编译流程提供实际产物检查，不能代替 Toy 全课程或 LLVM 源码构建。
 
 ## 统一产物清单
 

@@ -74,12 +74,17 @@ try:
     while True:
         try:
             after = ray.get(actor.state.remote(), timeout=5)
-            break
+            if (after['pid'], after['node']) != (before['pid'], before['node']):
+                break
+            if time.monotonic() >= deadline:
+                raise RuntimeError('Actor termination never produced a replacement process')
+            time.sleep(.5)
         except (ray.exceptions.RayActorError, ray.exceptions.GetTimeoutError):
             if time.monotonic() >= deadline:
                 raise
             time.sleep(.5)
     assert after['value'] == 1 and (after['pid'], after['node']) != (before['pid'], before['node'])
+    result['actorRecovery'] = {'before': before, 'after': after}
     assert ray.get(actor.increment.remote(), timeout=30)['value'] == 2
     result['checks'].append('killed actor restarts as a new process and restores persisted application state')
 

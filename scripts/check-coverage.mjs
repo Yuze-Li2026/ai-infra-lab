@@ -1,9 +1,15 @@
 import {readFile} from 'node:fs/promises';
 import {renderKnowledgeIndex} from './knowledge-index.mjs';
 import {validateCatalog} from './validate.mjs';
+import {catalogCounts,verifyDocumentCounts} from './catalog-counts.mjs';
 export async function checkCoverage(root='.'){
  const c=JSON.parse(await readFile(`${root}/site/catalog.json`,'utf8'));
  validateCatalog(c);
+ const counts=catalogCounts(c);
+ // Current guides use live totals; versioned audit logs retain historical counts.
+ for(const path of ['README.md','docs/coverage.md','docs/curriculum.md','docs/index.md','docs/knowledge-index.md','docs/requirements-audit.md','docs/delivery-checklist.md']){
+  verifyDocumentCounts(await readFile(`${root}/${path}`,'utf8'),counts,path);
+ }
  if((await readFile(`${root}/docs/knowledge-index.md`,'utf8')).replace(/\r\n/g,'\n')!==renderKnowledgeIndex(c))throw Error('逐项知识清单与目录不一致：运行 node scripts/knowledge-index.mjs 后审阅');
  const matrix=await readFile(`${root}/docs/coverage.md`,'utf8'),curriculum=await readFile(`${root}/docs/curriculum.md`,'utf8');
  for(const n of c.nodes){

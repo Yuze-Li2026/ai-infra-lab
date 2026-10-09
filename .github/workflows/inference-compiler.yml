@@ -1,0 +1,52 @@
+name: CPU inference and compiler environments
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/quality-and-ui]
+    paths:
+      - .github/workflows/inference-compiler.yml
+      - labs/compiler-validation/**
+      - labs/inference-validation/**
+      - scripts/check-compiler-environment.py
+      - scripts/check-inference-environment.py
+      - scripts/processes.py
+permissions:
+  contents: read
+jobs:
+  compiler:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m venv "$RUNNER_TEMP/compiler-venv"
+          "$RUNNER_TEMP/compiler-venv/bin/python" -m pip install --require-hashes --only-binary=:all: -r labs/compiler-validation/requirements-linux-py312.txt
+          "$RUNNER_TEMP/compiler-venv/bin/python" scripts/check-compiler-environment.py
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: compiler-cpu-evidence
+          path: artifacts/compiler-results.json
+          retention-days: 7
+          if-no-files-found: error
+  inference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - run: python scripts/check-inference-environment.py --run
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: inference-cpu-evidence
+          path: |
+            artifacts/inference-results.json
+            artifacts/inference-log.json
+          retention-days: 7
+          if-no-files-found: error

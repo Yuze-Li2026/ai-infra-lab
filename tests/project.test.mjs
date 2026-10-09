@@ -72,12 +72,10 @@ test('lab launcher works from a different directory and refuses ignored Indoor a
 });
 
 test('course timeout terminates the spawned child tree',async()=>{
- const dir=await temporary(),script=join(dir,'probe.py'),pid=join(dir,'child.pid');
- const helper=resolve('scripts').replaceAll('\\','/');
- const body=`import sys,subprocess,time,os\nfrom pathlib import Path\nsys.path.insert(0,${JSON.stringify(helper)})\nfrom processes import run\nchild_code="import subprocess,sys,time; from pathlib import Path; child=subprocess.Popen([sys.executable,'-c','import time; time.sleep(30)']); Path(sys.argv[1]).write_text(str(child.pid)); time.sleep(30)"\ntry:\n    run([sys.executable,'-c',child_code,sys.argv[1]],timeout=1,capture_output=True)\n    raise AssertionError('timeout did not fire')\nexcept TimeoutError:\n    pass\nchild_pid=int(Path(sys.argv[1]).read_text())\nif os.name=='nt':\n    import ctypes\n    kernel=ctypes.WinDLL('kernel32',use_last_error=True)\n    kernel.OpenProcess.restype=ctypes.c_void_p\n    kernel.OpenProcess.argtypes=[ctypes.c_uint,ctypes.c_int,ctypes.c_uint]\n    kernel.WaitForSingleObject.argtypes=[ctypes.c_void_p,ctypes.c_uint]\n    kernel.CloseHandle.argtypes=[ctypes.c_void_p]\n    handle=kernel.OpenProcess(0x100000,False,child_pid)\n    if handle:\n        try: assert kernel.WaitForSingleObject(handle,0)!=258,'descendant still running'\n        finally: kernel.CloseHandle(handle)\nelse:\n    status=Path('/proc')/str(child_pid)/'stat'\n    assert not status.exists() or status.read_text().split()[2]=='Z','descendant still running'\nprint('selected process tree stopped')\n`;
- await writeFile(script,body);
- const result=spawnSync(python,[script,pid],{encoding:'utf8',windowsHide:true,timeout:15000});
- assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/process tree stopped/);
+ const dir=await temporary();
+ const result=spawnSync(python,[resolve('tests/process-tree-probe.py'),dir,'--parent-alive'],{encoding:'utf8',windowsHide:true,timeout:15000});
+ assert.equal(result.status,0,result.stderr||result.error?.message);
+ assert.match(result.stdout,/exited-parent cleanup and unrelated process verified/);
 });
 
 test('course timeout also owns descendants after their parent has exited',async()=>{

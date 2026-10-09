@@ -1,0 +1,11 @@
+{
+  "image": "vllm/vllm-openai-cpu:v0.31.0-x86_64@sha256:8024248339dc6878daa5349344ed29d49c8a6732f6bdf7400fda32ce33e4b30b",
+  "vllmVersion": "0.31.0",
+  "model": "Qwen/Qwen3-0.6B",
+  "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "license": "Apache-2.0",
+  "modelSource": "https://huggingface.co/Qwen/Qwen3-0.6B",
+  "runtimeSource": "https://docs.vllm.ai/en/stable/getting_started/installation/cpu/",
+  "metadataCheckedAt": "2026-10-09",
+  "download": "Official CPU image is about 1.57 GB compressed; model weights add about 1.2 GB. Download only on an approved experimental host."
+}

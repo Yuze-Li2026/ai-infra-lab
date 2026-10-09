@@ -144,12 +144,21 @@ def main():
             assert denied.returncode != 0 and 'exceeded quota' in denied.stderr
             checks.append('API admission rejects a workload exceeding the namespace CPU budget')
             kubectl('patch', 'deployment', 'web', '--type=json', '-p', json.dumps([{'op': 'replace', 'path': '/spec/template/spec/containers/0/command', 'value': ['sh', '-c', 'exit 23']}]))
+            # Rollout first terminates an old Pod (default grace is 30 seconds).
+            # Wait for actual execution of the broken revision, not a fixed delay.
+            deadline = time.monotonic() + 120
+            while True:
+                failed_pods = json.loads(kubectl('get', 'pods', '-l', 'app=web', '-o', 'json').stdout)['items']
+                if any(status.get(phase, {}).get('terminated', {}).get('exitCode') == 23
+                       for pod in failed_pods for status in pod['status'].get('containerStatuses', [])
+                       for phase in ['state', 'lastState']):
+                    break
+                if time.monotonic() >= deadline:
+                    kubectl('get', 'events', '--sort-by=.lastTimestamp', expected=None)
+                    raise RuntimeError('Expected the failed revision to actually execute and exit 23')
+                time.sleep(2)
             failed = kubectl('rollout', 'status', 'deployment/web', '--timeout=20s', expected=None, timeout=40)
             assert failed.returncode != 0
-            failed_pods = json.loads(kubectl('get', 'pods', '-l', 'app=web', '-o', 'json').stdout)['items']
-            assert any(status.get(phase, {}).get('terminated', {}).get('exitCode') == 23
-                       for pod in failed_pods for status in pod['status'].get('containerStatuses', [])
-                       for phase in ['state', 'lastState']), 'Expected the failed revision to actually execute and exit 23'
             kubectl('rollout', 'undo', 'deployment/web')
             kubectl('rollout', 'status', 'deployment/web', '--timeout=120s')
             assert kubectl('exec', 'deployment/web', '--', 'wget', '-qO-', 'http://web:8080').stdout.strip() == 'infra-v1'

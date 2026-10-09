@@ -3,6 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {sourceSnapshot,reportStatus} from './verification-state.mjs';
+import {catalogCounts} from './catalog-counts.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 if(process.argv.length>2){
@@ -30,7 +31,7 @@ console.log(JSON.stringify({
   schemaVersion:1,observedAt:new Date().toISOString(),packageVersion:packageInfo.version,
   runtime:{node:process.version,supported:Number(process.versions.node.split('.')[0])>=22},
   git:inRepository?{commit:git(['rev-parse','HEAD']),branch:git(['branch','--show-current']),dirty:changes===null?null:changes.length>0}:null,
-  source,catalog:{nodes:catalog.nodes.length,sources:catalog.sources.length,labs:catalog.labs.length},
+  source,catalog:catalogCounts(catalog),
   reports:{tests:{path:'artifacts/test-results.json',...tests},browser:{path:'artifacts/browser-suite-results.json',...browser}},
   handoff:['AGENTS.md','docs/ai-maintenance.md','docs/delivery-checklist.md','docs/verification.md'],
   limits:'Read-only local inventory. Reports are not signed. No remote CI, deployment, GPU availability or complete project acceptance is inferred.'
