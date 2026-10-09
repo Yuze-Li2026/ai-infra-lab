@@ -165,6 +165,17 @@ def run():
                 tunnel.terminate()
                 tunnel.wait(timeout=10)
             checks.append("real SSH key tunnel works and retains Jupyter authentication")
+            backup, restored = root / "downloaded-work", root / "restored-work"
+            # Match the documented download and fresh-directory restore. SCP
+            # uses the same verified SSH identity, with forwarding disabled.
+            for source, destination in [(f"private-test:{work}", str(backup)), (str(backup), f"private-test:{restored}")]:
+                subprocess.run(["scp", "-F", ssh_config, "-o", "ClearAllForwardings=yes", "-r", source, destination],
+                               check=True, capture_output=True, text=True, timeout=20)
+            assert (backup / "owner-note.txt").read_text() == "persistent owner note"
+            assert (restored / "owner-note.txt").read_text() == "persistent owner note"
+            assert not (backup / "credentials.json").exists()
+            assert (work / "owner-note.txt").read_text() == "persistent owner note"
+            checks.append("SCP downloads work and restores to a separate directory without credentials or overwriting originals")
             # /proc records listening sockets; no wildcard listener for this port.
             for table in (Path("/proc/net/tcp"), Path("/proc/net/tcp6")):
                 for line in table.read_text().splitlines()[1:]:

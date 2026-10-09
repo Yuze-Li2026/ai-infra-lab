@@ -15,6 +15,7 @@ REPORT = ROOT / 'artifacts/course-cs336-a1.json'
 
 def run():
     output = {'environmentVerified': False, 'assignmentPassed': False, 'gpuVerified': False}
+    REPORT.parent.mkdir(exist_ok=True)
     try:
         if os.name != 'posix':
             raise RuntimeError('Use the real Linux course environment')
@@ -69,6 +70,9 @@ def run():
         output.update(environmentVerified=True, sourceCommit=evidence['commit'], collectedTests=len(expected),
                       execution=result, upstreamExpectedFailures=xfailed,
                       limits='Only A1 fixed dependencies, collection and original CPU test execution. Original xfail is recorded separately, never counted as pass. No A2 GPU or student implementation.')
+    except Exception as error:
+        output['error'] = type(error).__name__ + ': ' + str(error)
+        raise
     finally:
         REPORT.parent.mkdir(exist_ok=True)
         REPORT.with_name(REPORT.stem + '-environment.json').write_text(json.dumps(output, indent=2) + '\n', encoding='utf-8')

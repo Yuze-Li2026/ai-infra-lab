@@ -43,7 +43,7 @@ jobs:
               'PidFile '+str(private/'sshd.pid'),'AuthorizedKeysFile '+str(private/'client.pub'),
               'PasswordAuthentication no','KbdInteractiveAuthentication no','UsePAM yes',
               'PermitRootLogin no','AllowUsers '+user,'AllowTcpForwarding local',
-              'GatewayPorts no','LogLevel VERBOSE']))
+              'GatewayPorts no','Subsystem sftp internal-sftp','LogLevel VERBOSE']))
           hostkey=(private/'host.pub').read_text().strip()
           (private/'known_hosts').write_text('[127.0.0.1]:32222 '+hostkey+'\n')
           (private/'ssh_config').write_text('\n'.join([
