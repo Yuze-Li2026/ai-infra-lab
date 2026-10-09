@@ -34,5 +34,6 @@ jobs:
             artifacts/*-report.json
             artifacts/*-results.json
             artifacts/*browser*.log
+            artifacts/*failure.png
           retention-days: 7
           if-no-files-found: error

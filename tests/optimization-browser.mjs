@@ -27,13 +27,19 @@ try{
  assert.equal(await second.locator('#evidence').inputValue(),'第二个标签页的未保存说明');
  await second.getByRole('button',{name:'记录为学习中'}).click();await second.getByRole('status').filter({hasText:'学习状态已保存'}).waitFor();await second.reload();
  const records=await second.evaluate(()=>JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records);assert.equal(records.computer.status,'submitted');assert.equal(records.arithmetic.evidence,'第二个标签页的未保存说明');await second.close();checks.push('two tabs preserve independent records and active draft');
- await page.goto(url+'/#learn');await page.getByRole('button',{name:'打开学习任务'}).click();
+ // Use a known task and wait for its controls before injecting a storage fault.
+ // A reload may retain a different task's detail while a recommendation changes the hash.
+ await page.goto(url+'/#learn/computer');await page.locator('[data-submit="computer"]').waitFor();
  await page.evaluate(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='ai-infra-lab.progress.v1')throw new DOMException('storage full','QuotaExceededError');return original.call(this,k,v);};});
  await page.locator('#evidence').fill(evidence);await page.getByRole('button',{name:'提交成果记录'}).click();
  await page.locator('#storage-warning').filter({hasText:'尚未保存到浏览器'}).waitFor();
  assert.match(await page.locator('#storage-warning').innerText(),/尚未保存到浏览器/);assert.match(await page.locator('#notice').innerText(),/保存未成功/);checks.push('quota failure never displays a successful save');
- await page.reload();await page.evaluate(()=>localStorage.setItem('ai-infra-lab.progress.v1','{broken'));
- await page.reload();await page.getByRole('button',{name:'打开学习任务'}).click();await page.locator('#evidence').fill(evidence);await page.getByRole('button',{name:'提交成果记录'}).click();await page.getByRole('status').filter({hasText:'保存未成功'}).waitFor();assert.equal(await page.evaluate(()=>localStorage.getItem('ai-infra-lab.progress.v1')),'{broken');checks.push('corrupt progress is not overwritten by normal save');
+ await page.reload();await page.locator('[data-submit="computer"]').waitFor();
+ await page.evaluate(()=>localStorage.setItem('ai-infra-lab.progress.v1','{broken'));
+ await page.reload();await page.locator('#storage-warning').filter({hasText:'无法读取已有记录'}).waitFor();
+ await page.locator('#evidence').fill(evidence);await page.locator('[data-submit="computer"]').click();
+ await page.getByRole('status').filter({hasText:'保存未成功'}).waitFor();
+ assert.equal(await page.evaluate(()=>localStorage.getItem('ai-infra-lab.progress.v1')),'{broken');checks.push('corrupt progress is not overwritten by normal save');
  await page.locator('#backup-file').setInputFiles('artifacts/qa-backup.json');await page.getByRole('status').filter({hasText:'合并恢复'}).waitFor();
  assert.equal(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.startsWith('ai-infra-lab.progress.v1.recovery.')&&localStorage.getItem(k)==='{broken')),true);checks.push('explicit restore keeps original corrupt bytes');
  const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
@@ -42,4 +48,12 @@ try{
  await page.locator('#backup-file').setInputFiles({name:'large.json',mimeType:'application/json',buffer});await page.getByRole('status').filter({hasText:'合并恢复'}).waitFor();
  await page.waitForFunction(()=>JSON.parse(localStorage.getItem('ai-infra-lab.progress.v1')).records.compiler?.evidence.length===6000);checks.push('valid backup exceeding old 250 KB limit restores');
  assert.deepEqual(errors,[]);await writeFile('artifacts/optimization-results.json',JSON.stringify({passed:true,checks},null,2));console.log(JSON.stringify({passed:true,checks},null,2));
+}catch(error){
+ const diagnostic=await page.evaluate(()=>({url:location.href,notice:document.querySelector('#notice')?.textContent,
+  warning:document.querySelector('#storage-warning')?.textContent,
+  taskButtons:[...document.querySelectorAll('[data-start],[data-submit]')].map(button=>({start:button.dataset.start,submit:button.dataset.submit,disabled:button.disabled}))})).catch(()=>null);
+ const result={passed:false,checks,errors,error:error.message,diagnostic};
+ await writeFile('artifacts/optimization-results.json',JSON.stringify(result,null,2)+'\n');
+ await page.screenshot({path:'artifacts/optimization-failure.png'}).catch(()=>{});
+ console.error(JSON.stringify(result,null,2));throw error;
 }finally{await context.close();await browser.close();}
