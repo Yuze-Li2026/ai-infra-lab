@@ -1,5 +1,7 @@
 # 中文维护指南
 
+AI 接手先读仓库根目录的 `AGENTS.md` 与[AI 维护流程](ai-maintenance.md)，运行 `npm run maintenance:status` 核对当前源码与本地报告。例行排错、环境核对和验证由维护者完成，不转交给只使用网站学习的读者。
+
 ## 修改和检查
 
 资源及知识内容修改 `site/catalog.json`；页面布局修改 `site/views.js` 和 `site/styles.css`，交互修改 `site/app.js`。保持目录字段规范，优先链接原资源。修改来源后执行 `node scripts/credits.mjs` 更新致谢。`create-catalog.mjs` 和一次性迁移脚本会拒绝覆盖现有成果，不是日常修改命令。

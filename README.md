@@ -28,6 +28,8 @@ GPU 与系统实验需要相应的本地工具和硬件，网站不远程执行�
 
 ## 维护与验证
 
+AI 接手从仓库根目录 `AGENTS.md` 和[AI 维护流程](docs/ai-maintenance.md)开始；学习者可以直接描述改进想法。`npm run maintenance:status` 离线查看当前源码及报告是否过期，不安装依赖或发布网站。
+
 维护者在项目目录安装固定开发依赖，并按[环境指南](docs/getting-started.md)准备 Python 3.12、CPU 实验依赖和 PyTorch：
 
 ```sh
