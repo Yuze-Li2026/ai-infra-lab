@@ -1,6 +1,7 @@
 // One-time migration of reviewed, pinned experiments. Source originals are never generated here.
 import {readFile,writeFile} from 'node:fs/promises';
 const c=JSON.parse(await readFile('site/catalog.json','utf8'));
+if(c.revision!=='2026-10-08-v02')throw Error('历史迁移只适用于初始 v0.2 目录，拒绝覆盖当前研究、报告与验收要求。');
 const commit='fba689d101eb5600f5c8f4d7fd79912498e950e2';
 const publicValidation=r=>({mode:r.mode,commit:r.commit,createdAt:r.createdAt,python:r.python,platform:r.platform,passed:r.passed,tests:r.results.reduce((n,x)=>n+x.tests,0),benchmark:r.benchmark});
 const projects=[

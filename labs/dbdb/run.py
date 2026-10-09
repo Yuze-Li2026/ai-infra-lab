@@ -57,6 +57,7 @@ def unlock(file): return at_zero(portalocker.unlock, file)
     nose.tools = tools
     sys.modules['nose'], sys.modules['nose.tools'] = nose, tools
     suite = unittest.TestSuite()
+    random.seed(37)  # Preserve original test logic with a reproducible randomized fixture.
     for path in sorted((UPSTREAM / 'dbdb/tests').glob('test_*.py')):
         spec = importlib.util.spec_from_file_location(path.stem, path)
         module = importlib.util.module_from_spec(spec)

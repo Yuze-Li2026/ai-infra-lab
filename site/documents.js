@@ -2,12 +2,13 @@ import {marked} from './vendor/marked/marked.esm.js';
 import DOMPurify from './vendor/dompurify/purify.es.mjs';
 
 export const allowedDocuments=new Set(['README.md','CREDITS.md','CONTRIBUTING.md','LICENSE','SECURITY.md',
- 'docs/index.md','docs/faq.md','docs/maintainer-tutorial.md','docs/path-evidence.md',
+ 'docs/index.md','docs/faq.md','docs/maintainer-tutorial.md','docs/path-evidence.md','docs/coverage.md','docs/learning-paths.md','docs/file-audit.md',
  'docs/getting-started.md','docs/glossary.md','docs/research.md','docs/architecture.md','docs/extensions.md','docs/acceptance.md',
  'docs/maintenance.md','docs/verification.md','docs/optimization-review.md','docs/release-v02.md','docs/requirements-audit.md',
  'docs/object-model-lab.md','docs/dbdb-lab.md','docs/consensus-lab.md','docs/micrograd-lab.md','docs/gpu-lab.md','docs/gpu-validation-plan.md','docs/advanced-labs.md','docs/curriculum.md','docs/release-complete.md']);
 
 export function renderDocument(markdown,path){
+ if(!DOMPurify.isSupported)throw Error('当前浏览器不支持安全文档阅读，请更新浏览器后重试。');
  const article=document.createElement('article');article.className='document-body';
  article.innerHTML=DOMPurify.sanitize(marked.parse(markdown,{gfm:true}),{USE_PROFILES:{html:true},FORBID_TAGS:['img','style','form','input','button','iframe'],FORBID_ATTR:['style']});
  const base=new URL(path,new URL('.',location.href));

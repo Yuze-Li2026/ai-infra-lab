@@ -49,3 +49,9 @@
 CPU 依赖固定于 labs/requirements-cpu.txt，GPU Windows / CPython 3.12 复现锁为 requirements-gpu-windows-lock.txt。报告包含环境、模式、版本、测试与完整计时样本。新的实验报告需维护 site/reports.js 已知类型、catalog 的 reportCommit 和里程碑。新指南需加入 site/documents.js 的允许列表。修改里程碑或报告格式后验证旧备份兼容与跨标签页合并。
 
 运行项目解释器的 scripts/doctor.py 可只读检查版本、依赖、GPU 和工具。complete-catalog.mjs 是本轮一次性整合记录，需要实际 artifacts 报告，不是日常必跑构建命令。目录以 site/catalog.json 为唯一日常数据源。
+
+## 0.4.0 覆盖与验收更新
+
+本轮由 24 节点扩展到 45 节点、41 项来源，完整领域对应见[覆盖矩阵](coverage.md)，方向组合见[学习路径](learning-paths.md)。每个新增任务都有先修、原始资源、步骤和独立成果要求；高级工程的实际运行状态仍保持开放。
+
+阶段作品验收核对提交模式、当前版本及全部 `requiredChecks` 名称与最少测试数。旧备份仍兼容，但没有检查范围的旧摘要需重新导入原报告。运行实验禁止 `-O` 或 `PYTHONOPTIMIZE`，以免原测试断言被移除。维护时同步更新目录、选章说明与覆盖矩阵，并执行 `npm run check`。本轮发现、逐文件范围与复验见[审查记录](file-audit.md)。

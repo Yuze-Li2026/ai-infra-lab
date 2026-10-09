@@ -2,11 +2,11 @@ import {createViews} from './views.js';
 import {STORAGE_KEY,MAX_BACKUP_BYTES,emptyProgress,validateProgress,mergeProgress,nextNode,record,backupWithDrafts} from './core.js';
 import {persistProgressLocked,readDrafts,writeDrafts} from './storage.js';
 import {loadDocument} from './documents.js';
-import {summarizeReport,MAX_REPORT_BYTES} from './reports.js';
+import {summarizeReport,MAX_REPORT_BYTES,reportAccepted} from './reports.js';
 const main=document.querySelector('main');
 document.querySelector('.skip').addEventListener('click',event=>{event.preventDefault();main.focus();main.scrollIntoView();});
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let catalog,progress,selected,filter='',stageFilter='all',langFilter='all';
+let catalog,progress,selected,filter='',stageFilter='all',langFilter='all',nodeCategory='all';
 const drafts=new Map();
 const completed=()=>catalog.nodes.filter(n=>progress.records[n.id]?.status==='submitted').length;
 let timer;function notify(message){const n=document.querySelector('#notice');n.textContent=message;n.hidden=false;clearTimeout(timer);timer=setTimeout(()=>n.hidden=true,6500);}
@@ -24,7 +24,7 @@ async function save(next,options){
 }
 const labels={learn:'我的学习',map:'知识依赖图',resources:'精选资源',labs:'工程实验',about:'来源与研究'};
 let documentRequest,reportLab;
-function render(){documentRequest?.abort();const views=createViews({catalog,progress,selected,filter,stageFilter,langFilter,drafts});const view=location.hash.slice(1).split('/')[0]||'learn';const key=Object.hasOwn(views,view)?view:'learn';
+function render(){documentRequest?.abort();const views=createViews({catalog,progress,selected,filter,stageFilter,langFilter,drafts,nodeCategory});const view=location.hash.slice(1).split('/')[0]||'learn';const key=Object.hasOwn(views,view)?view:'learn';
 if(view==='read'){
  const controller=new AbortController();documentRequest=controller;
  main.innerHTML='<section class="panel"><p role="status">正在打开学习指南…</p></section>';
@@ -76,7 +76,7 @@ main.addEventListener('input',e=>{
   if(e.target.id==='search'&&!e.isComposing)searchResources(e.target);
 });
 main.addEventListener('compositionend',e=>{if(e.target.id==='search')searchResources(e.target);});
-main.addEventListener('change',e=>{if(e.target.id==='language'){langFilter=e.target.value;render();}if(e.target.id==='lab-stage'){stageFilter=e.target.value;render();}});
+main.addEventListener('change',e=>{if(e.target.id==='language'){langFilter=e.target.value;render();}if(e.target.id==='lab-stage'){stageFilter=e.target.value;render();}if(e.target.id==='node-category'){nodeCategory=e.target.value;render();document.querySelector('#node-category')?.focus();}});
 window.addEventListener('hashchange',()=>{if(!catalog)return;readRoute();render();if(selected)focusDetail();else window.scrollTo(0,0);});
 window.addEventListener('beforeunload',e=>{
   if(drafts.size||!document.querySelector('#storage-warning').hidden){e.preventDefault();e.returnValue='';}
@@ -102,7 +102,7 @@ document.querySelector('#report-file').addEventListener('change',async event=>{
   const lab=catalog.labs.find(l=>l.id===reportLab);
   const summary=summarizeReport(JSON.parse(new TextDecoder().decode(bytes)),lab,sha256);
   const saved=await save({...progress,labReports:{...progress.labReports,[lab.id]:summary}});
-  render();notify(saved?(summary.mode==='reference'?'已保存参考复现报告；它不计入个人作品验收。':summary.passed?'已保存作品通过报告，请补齐设计、边界测试与解释。':'已保存未通过的作品报告，请修复后复验。'):'报告尚未保存到浏览器，请备份当前记录。');
+  render();notify(saved?(summary.mode==='reference'?'已保存参考复现报告；它不计入个人作品验收。':reportAccepted(lab,summary)?'已保存作品通过报告，请补齐设计、边界测试与解释。':summary.passed?'已保存部分范围通过报告；完整测试范围尚待补齐。':'已保存未通过的作品报告，请修复后复验。'):'报告尚未保存到浏览器，请备份当前记录。');
  }catch(error){notify(`报告导入失败：${error.message}`);}finally{event.target.value='';}
 });
 document.querySelector('#export').addEventListener('click',()=>{if(!progress)return;const url=URL.createObjectURL(new Blob([JSON.stringify(backupWithDrafts(progress,drafts,catalog.nodes),null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`ai-infra-progress-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('备份已生成；未提交草稿在备份中记为学习中。');});

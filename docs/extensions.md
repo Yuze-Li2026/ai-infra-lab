@@ -34,4 +34,6 @@
 
 可导入实验设置固定 reportCommit；新增实验类型同时维护 site/reports.js 与对应测试。原始报告含 schemaVersion、lab、mode、commit、createdAt、passed、results、python、platform，results 明确区分原断言与补充检查。mode 只能为 reference 或 submission，参考通过不等于个人作品。页面只保存摘要、SHA-256 与导入时间，不存任意 HTML 或执行代码。
 
+验收实验必须声明 `requiredChecks`，每组含稳定 `name` 与最低原测试计数 `tests`；报告保留各组的名称、计数与通过状态，不能仅凭总体 passed 或测试总数验收。对象模型名称取原阶段 ID。旧摘要无范围时仍保留，但要重新导入原报告后才计入完整材料；失败零测试报告可以保存诊断，不计入验收。里程碑不能遗漏所在阶段的核心节点。新增节点同步更新 coverage.md 与 curriculum.md，`npm run check-coverage` 检查对应关系。
+
 milestones 的 stage、nodes、labs、criteria 必须与目录引用一致；阶段知识说明与当前版本独立通过报告齐备时只称材料齐备。新增指南加入 site/documents.js 的允许列表和 docs/index.md，运行 npm run check-docs。新增根文档同时维护构建白名单与本地服务器白名单，避免本机能读但发布缺失。

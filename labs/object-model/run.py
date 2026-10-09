@@ -85,7 +85,7 @@ def benchmark():
 def main():
     parser = argparse.ArgumentParser(description="AOSA object-model reproducibility adapter")
     parser.add_argument("--stage", choices=STAGES)
-    parser.add_argument("--submission", help="Directory containing your independent objmodel.py; requires --stage")
+    parser.add_argument("--submission", help="Independent implementation directory; with --stage contains objmodel.py, otherwise contains all four stage directories")
     parser.add_argument("--benchmark", action="store_true", help="Measure pinned reference stages 3 and 4")
     parser.add_argument("--output", default="artifacts/object-model-report.json")
     parser.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
@@ -94,8 +94,8 @@ def main():
         parser.error("Python 3.10 or newer is required")
     if not __debug__:
         parser.error("Do not disable assertions with -O")
-    if args.submission and (not args.stage or args.benchmark):
-        parser.error("--submission requires --stage and cannot be combined with --benchmark")
+    if args.submission and args.benchmark:
+        parser.error("--submission cannot be combined with reference --benchmark")
     if args.child:
         print(json.dumps(child(args.stage, args.submission), ensure_ascii=True))
         return
@@ -104,7 +104,10 @@ def main():
     for stage in ([args.stage] if args.stage else STAGES):
         command = [sys.executable, "-I", "-B", str(Path(__file__).resolve()), "--child", "--stage", stage]
         if args.submission:
-            command += ["--submission", str(Path(args.submission).resolve())]
+            submission = Path(args.submission).resolve()
+            if not args.stage:
+                submission = submission / stage
+            command += ["--submission", str(submission)]
         try:
             proc = subprocess.run(command, capture_output=True, text=True, encoding="utf-8", timeout=15)
             if proc.returncode:

@@ -23,7 +23,7 @@ try{
  assert.equal(await page.evaluate(()=>Object.keys(JSON.parse(sessionStorage.getItem('ai-infra-lab.drafts.v1'))).length),0);
  checks.push('successful save clears only the saved session draft');
  for(const node of catalog.nodes){await page.goto(base+'/#map/'+node.id);await page.locator('#node-detail').waitFor();assert.equal(await page.locator('.detail-heading h2').innerText(),node.title);assert.equal(await page.locator('.learning-steps li').count(),3);}
- checks.push('all 24 node deep links show three steps and evidence');
+ checks.push(`all ${catalog.nodes.length} node deep links show three steps and evidence`);
  await page.goto(base+'/#labs');await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).locator('summary').click();assert.equal(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).locator('tbody tr').count(),2);
  assert.match(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).innerText(),/28 项原测试通过/);assert.match(await page.locator('.lab-results').filter({hasText:'28 项原测试通过'}).innerText(),/读取更慢/);
  for(const guide of catalog.labs.filter(l=>l.guide))assert.equal((await fetch(new URL(guide.guide,base))).status,200);
@@ -53,7 +53,7 @@ try{
  const toolsContext=await browser.newContext();await toolsContext.addInitScript(()=>Object.defineProperty(document,'modelContext',{value:{registerTool(tool){window.registeredLearningTool=tool;}}}));
  const toolPage=await toolsContext.newPage();await toolPage.goto(base);await toolPage.waitForFunction(()=>Boolean(window.registeredLearningTool));
  const toolResult=await toolPage.evaluate(()=>{const t=window.registeredLearningTool;const result=t.execute({});let rejects=0;for(const input of [[],null,{change:true}]){try{t.execute(input);}catch{rejects++;}}return {result,rejects,storage:localStorage.length};});
- assert.equal(toolResult.result.total,24);assert.equal(toolResult.rejects,3);assert.equal(toolResult.storage,0);await toolsContext.close();
+ assert.equal(toolResult.result.total,catalog.nodes.length);assert.equal(toolResult.rejects,3);assert.equal(toolResult.storage,0);await toolsContext.close();
  checks.push('optional read-only tool contract with mock host (not native WebMCP compatibility)');
  assert.deepEqual(errors,[]);checks.push('no browser runtime errors');
  const result={passed:true,checks};await writeFile('artifacts/release-browser-results.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

@@ -140,17 +140,17 @@
 - 许可：厂商文档条款；仅链接；[核查入口](https://docs.nvidia.com/cuda/cuda-programming-guide/)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
 - 验证：官方目录已访问；2026-10-08
-- 局限：必须固定工具链、驱动与硬件；本次未安装 CUDA
+- 局限：必须固定工具链、驱动与硬件；本机实测 PyTorch 自带 CUDA 运行时，未安装 CUDA 编译工具链或验证自写内核。
 
 ## PyTorch Distributed
 
 - 原作者：PyTorch contributors
-- 来源：[PyTorch Distributed](https://docs.pytorch.org/docs/stable/distributed.html)
-- 版本：stable 滚动文档，具体发行版待锁定
+- 来源：[PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)
+- 版本：2.10 API；与本地 PyTorch 2.10.0 对照
 - 许可：待逐项核实文档许可，仅链接；[核查入口](https://docs.pytorch.org/docs/stable/distributed.html)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
-- 验证：入口可访问，正文深审待完成；2026-10-08
-- 局限：这里只验证入口重定向，未验证多卡程序
+- 验证：已访问 2.10 API 并核对集合通信、后端与初始化主题；本机仍只验证单卡补充检查。；2026-10-09
+- 局限：多进程/多卡通信尚未复现；滚动 stable 文档可能与锁定的 2.10 不同。
 
 ## vLLM
 
@@ -169,7 +169,7 @@
 - 版本：站点标示 2026 双卷版本
 - 许可：站点标示 CC BY-NC-SA 4.0；各工具单独核查；[核查入口](https://mlsysbook.ai/)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
-- 验证：总览、目录入口与许可页脚已访问；2026-10-08
+- 验证：总览、目录入口与许可页脚已访问；2026-10-09
 - 局限：不把教材的完整性宣称作为本项目已验证事实
 
 ## Kubernetes Security
@@ -331,6 +331,86 @@
 - 使用方式：保留固定提交、原作者和许可证；原始文件不改写，兼容适配独立记录。
 - 验证：固定源码 SHA-256 已核对；11 项检查在本机通过。；2026-10-09
 - 局限：教学模型，不能替代完整工业系统或原课程所有作业。
+
+## NCCL 官方通信指南
+
+- 原作者：NVIDIA
+- 来源：[NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：用实际通信语义复核分布式训练；不是网络入门课。版本与硬件兼容必须按具体实验复核。
+
+## Triton 官方编程教程
+
+- 原作者：Triton contributors
+- 来源：[Triton 官方编程教程](https://triton-lang.org/main/getting-started/tutorials/index.html)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://triton-lang.org/main/getting-started/tutorials/index.html)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：与 CS336 系统作业衔接；运行依赖平台与 GPU。版本与硬件兼容必须按具体实验复核。
+
+## PyTorch Profiler 官方配方
+
+- 原作者：PyTorch contributors
+- 来源：[PyTorch Profiler 官方配方](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：把测量落实到时间线；不能由单项计时代替端到端分析。版本与硬件兼容必须按具体实验复核。
+
+## PyTorch FSDP 2.10 API
+
+- 原作者：PyTorch contributors
+- 来源：[PyTorch FSDP 2.10 API](https://docs.pytorch.org/docs/2.10/fsdp.html)
+- 版本：2.10 文档
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://docs.pytorch.org/docs/2.10/fsdp.html)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：固定到现有实验版本供对照；多卡运行尚未验证。版本与硬件兼容必须按具体实验复核。
+
+## torch.compile 官方教程
+
+- 原作者：PyTorch contributors
+- 来源：[torch.compile 官方教程](https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：将 IR 原理连接实际框架；滚动教程可能超出现有 2.10 API。版本与硬件兼容必须按具体实验复核。
+
+## Kubernetes 官方概念
+
+- 原作者：Kubernetes contributors
+- 来源：[Kubernetes 官方概念](https://kubernetes.io/docs/concepts/overview/)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://kubernetes.io/docs/concepts/overview/)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：先概念和隔离练习，再部署；不要求新手安装集群。版本与硬件兼容必须按具体实验复核。
+
+## Ray 官方集群概念
+
+- 原作者：Ray contributors
+- 来源：[Ray 官方集群概念](https://docs.ray.io/en/latest/cluster/key-concepts.html)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://docs.ray.io/en/latest/cluster/key-concepts.html)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：补充 AI 工作负载调度和数据执行；不是平台运行依赖。版本与硬件兼容必须按具体实验复核。
+
+## MLflow 官方机器学习文档
+
+- 原作者：MLflow contributors
+- 来源：[MLflow 官方机器学习文档](https://mlflow.org/docs/latest/ml/)
+- 版本：2026-10-09 滚动官方文档快照；实验前另行固定发行版
+- 许可：仅链接；代码、文档与示例各自许可在实际复用前核对；[核查入口](https://mlflow.org/docs/latest/ml/)
+- 使用方式：原始链接与本站简短中文任务说明；不镜像文档或分发示例
+- 验证：已访问官方文档并核对所列主题；不等于本机工具链已验证；2026-10-09
+- 局限：将模型版本与可复现产物关联；服务尚未安装验证。版本与硬件兼容必须按具体实验复核。
 
 ## 集成代码与工具
 

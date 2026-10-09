@@ -5,7 +5,7 @@ import {validateCatalog} from '../scripts/validate.mjs';
 import {emptyProgress,nextNode,record,ready,validateProgress,mergeProgress,STORAGE_KEY,MAX_BACKUP_BYTES,backupWithDrafts} from '../site/core.js';
 import {persistProgress,persistProgressLocked,readDrafts,writeDrafts} from '../site/storage.js';
 const catalog=JSON.parse(readFileSync('site/catalog.json','utf8'));
-test('catalog references and graph are valid',()=>assert.equal(validateCatalog(catalog).nodes,24));
+test('catalog references and graph are valid',()=>assert.equal(validateCatalog(catalog).nodes,catalog.nodes.length));
 test('dependency cycle and missing sources rejected',()=>{const c=structuredClone(catalog);c.nodes[0].prerequisites=['python'];assert.throws(()=>validateCatalog(c),/cycle/);const d=structuredClone(catalog);d.nodes[0].resources=['missing-source'];assert.throws(()=>validateCatalog(d),/Unknown resource/);});
 test('zero beginner can advance through prerequisites',()=>{let p=emptyProgress();assert.equal(nextNode(catalog.nodes,p).id,'computer');assert.equal(ready(catalog.nodes.find(n=>n.id==='python'),p),false);p=record(p,'computer','submitted','已独立创建文件并运行程序，保存截图并解释了输出与文件路径的区别。',catalog.nodes);assert.equal(ready(catalog.nodes.find(n=>n.id==='python'),p),true);assert.equal(nextNode(catalog.nodes,p).id,'arithmetic');});
 test('self reported mastery requires evidence; unknown backup versions and IDs rejected',()=>{assert.throws(()=>record(emptyProgress(),'computer','submitted','done',catalog.nodes));assert.throws(()=>validateProgress({schemaVersion:2,records:{}},catalog.nodes));assert.throws(()=>validateProgress({schemaVersion:1,records:{evil:{}}},catalog.nodes));});

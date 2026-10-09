@@ -548,7 +548,7 @@
       "prerequisites": "C/C++、体系结构和并发",
       "coverage": "GPU 执行、内存与并行编程",
       "reason": "硬件编程的一手依据",
-      "limitations": "必须固定工具链、驱动与硬件；本次未安装 CUDA",
+      "limitations": "必须固定工具链、驱动与硬件；本机实测 PyTorch 自带 CUDA 运行时，未安装 CUDA 编译工具链或验证自写内核。",
       "verification": "官方目录已访问",
       "reviewedAt": "2026-10-08",
       "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
@@ -579,30 +579,30 @@
       "id": "torch",
       "title": "PyTorch Distributed",
       "author": "PyTorch contributors",
-      "url": "https://docs.pytorch.org/docs/stable/distributed.html",
-      "version": "stable 滚动文档，具体发行版待锁定",
+      "url": "https://docs.pytorch.org/docs/2.10/distributed.html",
+      "version": "2.10 API；与本地 PyTorch 2.10.0 对照",
       "language": "en",
       "license": "待逐项核实文档许可，仅链接",
       "licenseUrl": "https://docs.pytorch.org/docs/stable/distributed.html",
       "prerequisites": "PyTorch、进程、网络和并行算法",
       "coverage": "通信与分布式训练",
       "reason": "生产框架官方 API 作为实现对照",
-      "limitations": "这里只验证入口重定向，未验证多卡程序",
-      "verification": "入口可访问，正文深审待完成",
-      "reviewedAt": "2026-10-08",
+      "limitations": "多进程/多卡通信尚未复现；滚动 stable 文档可能与锁定的 2.10 不同。",
+      "verification": "已访问 2.10 API 并核对集合通信、后端与初始化主题；本机仍只验证单卡补充检查。",
+      "reviewedAt": "2026-10-09",
       "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
       "reuse": "仅链接与原创简短导读，不镜像、不转载",
       "evaluation": {
         "authority": "作者与机构：PyTorch contributors；原始来源见链接",
-        "accuracy": "入口可访问，正文深审待完成",
+        "accuracy": "已访问 2.10 API 并核对集合通信、后端与初始化主题；本机仍只验证单卡补充检查。",
         "depth": "通信与分布式训练",
         "engineeringValue": "生产框架官方 API 作为实现对照",
         "coverage": "通信与分布式训练",
         "teachingQuality": "根据目录与作业结构初审，学习者试用待完成",
         "difficulty": "PyTorch、进程、网络和并行算法",
         "languageFriendliness": "英文，中文导读可用；完整译文未提供",
-        "accessibility": "入口可访问，正文深审待完成",
-        "maintenance": "stable 滚动文档，具体发行版待锁定",
+        "accessibility": "已访问 2.10 官方 API 页面；未执行多卡",
+        "maintenance": "2.10 API；与本地 PyTorch 2.10.0 对照",
         "licensing": "待逐项核实文档许可，仅链接",
         "stability": "可变在线资源；正式实验集成前固定版本或 commit"
       },
@@ -611,6 +611,11 @@
           "url": "https://docs.pytorch.org/docs/stable/distributed.html",
           "checkedAt": "2026-10-08",
           "finding": "入口可访问，正文深审待完成"
+        },
+        {
+          "url": "https://docs.pytorch.org/docs/2.10/distributed.html",
+          "checkedAt": "2026-10-09",
+          "finding": "官方后端支持表与 collective 定义已核对；本机未执行多卡"
         }
       ]
     },
@@ -667,7 +672,7 @@
       "reason": "用于交叉检查系统能力边界与遗漏",
       "limitations": "不把教材的完整性宣称作为本项目已验证事实",
       "verification": "总览、目录入口与许可页脚已访问",
-      "reviewedAt": "2026-10-08",
+      "reviewedAt": "2026-10-09",
       "reviewLevel": "初步桌面审阅，未完成教学效果或环境复现验证",
       "reuse": "仅链接与原创简短导读，不镜像、不转载",
       "evaluation": {
@@ -689,6 +694,16 @@
           "url": "https://mlsysbook.ai/",
           "checkedAt": "2026-10-08",
           "finding": "总览、目录入口与许可页脚已访问"
+        },
+        {
+          "url": "https://mlsysbook.ai/vol1/",
+          "checkedAt": "2026-10-09",
+          "finding": "基础卷目录用于数据、模型、压缩、硬件、部署与生命周期范围复核"
+        },
+        {
+          "url": "https://mlsysbook.ai/vol2/",
+          "checkedAt": "2026-10-09",
+          "finding": "规模卷目录与 Data Storage、Edge Intelligence、Security/Privacy、Sustainable AI 章节用于缺口复核；未执行所有实验"
         }
       ]
     },
@@ -1330,6 +1345,318 @@
           "finding": "许可文件随源码保留"
         }
       ]
+    },
+    {
+      "id": "nccl",
+      "title": "NCCL 官方通信指南",
+      "author": "NVIDIA",
+      "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+      "prerequisites": "CUDA、网络、并行算法",
+      "coverage": "collective、stream、拓扑与错误处理",
+      "reason": "用实际通信语义复核分布式训练；不是网络入门课",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "用实际通信语义复核分布式训练；不是网络入门课。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html",
+          "checkedAt": "2026-10-09",
+          "finding": "collective、stream、拓扑与错误处理；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "NVIDIA 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "collective、stream、拓扑与错误处理",
+        "engineeringValue": "用实际通信语义复核分布式训练；不是网络入门课",
+        "coverage": "collective、stream、拓扑与错误处理",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "CUDA、网络、并行算法",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "triton",
+      "title": "Triton 官方编程教程",
+      "author": "Triton contributors",
+      "url": "https://triton-lang.org/main/getting-started/tutorials/index.html",
+      "prerequisites": "Python、GPU 执行与内存模型",
+      "coverage": "向量加法、矩阵乘法、softmax、attention 内核",
+      "reason": "与 CS336 系统作业衔接；运行依赖平台与 GPU",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://triton-lang.org/main/getting-started/tutorials/index.html",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "与 CS336 系统作业衔接；运行依赖平台与 GPU。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://triton-lang.org/main/getting-started/tutorials/index.html",
+          "checkedAt": "2026-10-09",
+          "finding": "向量加法、矩阵乘法、softmax、attention 内核；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "Triton contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "向量加法、矩阵乘法、softmax、attention 内核",
+        "engineeringValue": "与 CS336 系统作业衔接；运行依赖平台与 GPU",
+        "coverage": "向量加法、矩阵乘法、softmax、attention 内核",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "Python、GPU 执行与内存模型",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "profiler",
+      "title": "PyTorch Profiler 官方配方",
+      "author": "PyTorch contributors",
+      "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+      "prerequisites": "PyTorch、统计测量、并发",
+      "coverage": "CPU/CUDA 活动、算子时间、形状与内存",
+      "reason": "把测量落实到时间线；不能由单项计时代替端到端分析",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "把测量落实到时间线；不能由单项计时代替端到端分析。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+          "checkedAt": "2026-10-09",
+          "finding": "CPU/CUDA 活动、算子时间、形状与内存；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "PyTorch contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "CPU/CUDA 活动、算子时间、形状与内存",
+        "engineeringValue": "把测量落实到时间线；不能由单项计时代替端到端分析",
+        "coverage": "CPU/CUDA 活动、算子时间、形状与内存",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "PyTorch、统计测量、并发",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "fsdp",
+      "title": "PyTorch FSDP 2.10 API",
+      "author": "PyTorch contributors",
+      "url": "https://docs.pytorch.org/docs/2.10/fsdp.html",
+      "prerequisites": "PyTorch、collective、分布式训练",
+      "coverage": "参数分片、混合精度、通信与状态保存",
+      "reason": "固定到现有实验版本供对照；多卡运行尚未验证",
+      "language": "en",
+      "version": "2.10 文档",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://docs.pytorch.org/docs/2.10/fsdp.html",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "固定到现有实验版本供对照；多卡运行尚未验证。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://docs.pytorch.org/docs/2.10/fsdp.html",
+          "checkedAt": "2026-10-09",
+          "finding": "参数分片、混合精度、通信与状态保存；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "PyTorch contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "参数分片、混合精度、通信与状态保存",
+        "engineeringValue": "固定到现有实验版本供对照；多卡运行尚未验证",
+        "coverage": "参数分片、混合精度、通信与状态保存",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "PyTorch、collective、分布式训练",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "固定 2.10；新版另行比较",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "torch-compile",
+      "title": "torch.compile 官方教程",
+      "author": "PyTorch contributors",
+      "url": "https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html",
+      "prerequisites": "张量图、Python、编译器基础",
+      "coverage": "图捕获、编译、动态形状与性能",
+      "reason": "将 IR 原理连接实际框架；滚动教程可能超出现有 2.10 API",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "将 IR 原理连接实际框架；滚动教程可能超出现有 2.10 API。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html",
+          "checkedAt": "2026-10-09",
+          "finding": "图捕获、编译、动态形状与性能；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "PyTorch contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "图捕获、编译、动态形状与性能",
+        "engineeringValue": "将 IR 原理连接实际框架；滚动教程可能超出现有 2.10 API",
+        "coverage": "图捕获、编译、动态形状与性能",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "张量图、Python、编译器基础",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "kubernetes",
+      "title": "Kubernetes 官方概念",
+      "author": "Kubernetes contributors",
+      "url": "https://kubernetes.io/docs/concepts/overview/",
+      "prerequisites": "Linux、网络、分布式、权限",
+      "coverage": "容器、Pod、资源、调度、存储与集群",
+      "reason": "先概念和隔离练习，再部署；不要求新手安装集群",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://kubernetes.io/docs/concepts/overview/",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "先概念和隔离练习，再部署；不要求新手安装集群。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://kubernetes.io/docs/concepts/overview/",
+          "checkedAt": "2026-10-09",
+          "finding": "容器、Pod、资源、调度、存储与集群；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "Kubernetes contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "容器、Pod、资源、调度、存储与集群",
+        "engineeringValue": "先概念和隔离练习，再部署；不要求新手安装集群",
+        "coverage": "容器、Pod、资源、调度、存储与集群",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "Linux、网络、分布式、权限",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "ray",
+      "title": "Ray 官方集群概念",
+      "author": "Ray contributors",
+      "url": "https://docs.ray.io/en/latest/cluster/key-concepts.html",
+      "prerequisites": "Python、分布式、资源调度",
+      "coverage": "任务、actor、对象存储、集群与资源",
+      "reason": "补充 AI 工作负载调度和数据执行；不是平台运行依赖",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://docs.ray.io/en/latest/cluster/key-concepts.html",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "补充 AI 工作负载调度和数据执行；不是平台运行依赖。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://docs.ray.io/en/latest/cluster/key-concepts.html",
+          "checkedAt": "2026-10-09",
+          "finding": "任务、actor、对象存储、集群与资源；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "Ray contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "任务、actor、对象存储、集群与资源",
+        "engineeringValue": "补充 AI 工作负载调度和数据执行；不是平台运行依赖",
+        "coverage": "任务、actor、对象存储、集群与资源",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "Python、分布式、资源调度",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
+    },
+    {
+      "id": "mlflow",
+      "title": "MLflow 官方机器学习文档",
+      "author": "MLflow contributors",
+      "url": "https://mlflow.org/docs/latest/ml/",
+      "prerequisites": "模型、实验、版本管理",
+      "coverage": "实验记录、模型产物、注册与部署生命周期",
+      "reason": "将模型版本与可复现产物关联；服务尚未安装验证",
+      "language": "en",
+      "version": "2026-10-09 滚动官方文档快照；实验前另行固定发行版",
+      "license": "仅链接；代码、文档与示例各自许可在实际复用前核对",
+      "licenseUrl": "https://mlflow.org/docs/latest/ml/",
+      "reviewedAt": "2026-10-09",
+      "reviewLevel": "官方目录与关键机制桌面核对；完整工程实验未复现",
+      "reuse": "原始链接与本站简短中文任务说明；不镜像文档或分发示例",
+      "verification": "已访问官方文档并核对所列主题；不等于本机工具链已验证",
+      "limitations": "将模型版本与可复现产物关联；服务尚未安装验证。版本与硬件兼容必须按具体实验复核。",
+      "reviewEvidence": [
+        {
+          "url": "https://mlflow.org/docs/latest/ml/",
+          "checkedAt": "2026-10-09",
+          "finding": "实验记录、模型产物、注册与部署生命周期；用于覆盖与先修审计"
+        }
+      ],
+      "evaluation": {
+        "authority": "MLflow contributors 维护的一手文档",
+        "accuracy": "官方定义可用于语义对照；未逐例执行",
+        "depth": "实验记录、模型产物、注册与部署生命周期",
+        "engineeringValue": "将模型版本与可复现产物关联；服务尚未安装验证",
+        "coverage": "实验记录、模型产物、注册与部署生命周期",
+        "teachingQuality": "有结构化概念或配方；适合作为进阶参考，不替代基础课程",
+        "difficulty": "模型、实验、版本管理",
+        "languageFriendliness": "英文原文；本站中文导读与术语辅助，未提供官方译文",
+        "accessibility": "本轮官方入口可读；平台不镜像外部内容",
+        "maintenance": "滚动文档；审阅日期不等于版本锁",
+        "licensing": "只链接；免费阅读不意味着可以转载",
+        "stability": "原项目维护，运行时另锁版本、依赖及提交"
+      }
     }
   ],
   "nodes": [
@@ -1662,6 +1989,39 @@
       "estimatedHours": null
     },
     {
+      "id": "engineering",
+      "title": "软件工程与可测试交付",
+      "stage": 1,
+      "category": "core",
+      "prerequisites": [
+        "programming",
+        "tools"
+      ],
+      "resources": [
+        "missing",
+        "cs50"
+      ],
+      "scope": "包与模块、接口、类型、异常、构建依赖、测试与 CI",
+      "objective": "让代码能由他人重建、审查和维护",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "提交接口说明、依赖锁、CI 日志与重建记录；解释测试覆盖盲点",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "包与模块、接口、类型、异常、构建依赖、测试与 CI；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "为已有项目划分接口、固定依赖并建立自动检查"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "从空目录重建；测试正常、异常和资源释放；保留一次修复前失败。提交接口说明、依赖锁、CI 日志与重建记录；解释测试覆盖盲点"
+        }
+      ]
+    },
+    {
       "id": "algorithms",
       "title": "数据结构与复杂度",
       "stage": 2,
@@ -1796,6 +2156,72 @@
         }
       ],
       "estimatedHours": null
+    },
+    {
+      "id": "storage",
+      "title": "数据库、索引与存储系统",
+      "stage": 2,
+      "category": "core",
+      "prerequisites": [
+        "algorithms",
+        "os"
+      ],
+      "resources": [
+        "dbdb",
+        "mlsys"
+      ],
+      "scope": "索引、事务/日志、锁、持久化、列式与对象存储、缓存和检查点",
+      "objective": "沿数据路径解释正确性与 I/O 成本",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "索引与一致性设计、吞吐/延迟分布、故障恢复记录；区分教学库与工业数据库",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "索引、事务/日志、锁、持久化、列式与对象存储、缓存和检查点；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "完成 DBDB，再选 MLSysBook Data Storage；比较本地文件、对象与共享存储"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "用固定数据对比顺序/随机读取；故障后核对提交边界和校验和。索引与一致性设计、吞吐/延迟分布、故障恢复记录；区分教学库与工业数据库"
+        }
+      ]
+    },
+    {
+      "id": "linux",
+      "title": "Linux 与资源隔离",
+      "stage": 2,
+      "category": "core",
+      "prerequisites": [
+        "os",
+        "tools"
+      ],
+      "resources": [
+        "ostep",
+        "kubernetes"
+      ],
+      "scope": "进程、权限、信号、文件描述符、namespace、cgroup、容器镜像",
+      "objective": "看懂服务与实验的进程、文件和资源边界",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "环境版本、最小权限、限制与故障日志；Windows 测试不当作 Linux 实验",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "进程、权限、信号、文件描述符、namespace、cgroup、容器镜像；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "在已有隔离 Linux 环境检查进程、权限与 CPU/内存限额；先读官方容器概念"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "比较受限与不受限工作负载，解释 OOM、退出信号和资源回收。环境版本、最小权限、限制与故障日志；Windows 测试不当作 Linux 实验"
+        }
+      ]
     },
     {
       "id": "numerics",
@@ -1940,6 +2366,107 @@
       "estimatedHours": null
     },
     {
+      "id": "models",
+      "title": "模型结构与计算工作负载",
+      "stage": 3,
+      "category": "core",
+      "prerequisites": [
+        "framework",
+        "ml"
+      ],
+      "resources": [
+        "d2l",
+        "cs336"
+      ],
+      "scope": "MLP、CNN、RNN、attention/Transformer、tokenizer、embedding、MoE 与稀疏访问",
+      "objective": "由结构推导形状、计算量与内存；AI Infra 不局限于 LLM",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "小型模型与单元测试、FLOPs/内存预算、质量基线；不要求下载大模型",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "MLP、CNN、RNN、attention/Transformer、tokenizer、embedding、MoE 与稀疏访问；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "选 D2L CNN/RNN/attention，再按 CS336 Assignment 1 实现小型 tokenizer、模型与优化器"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "检查张量形状、mask、梯度和参数量；比较卷积、attention 与 embedding 的访存需求。小型模型与单元测试、FLOPs/内存预算、质量基线；不要求下载大模型"
+        }
+      ]
+    },
+    {
+      "id": "evaluation",
+      "title": "评估、实验设计与鲁棒性",
+      "stage": 3,
+      "category": "core",
+      "prerequisites": [
+        "ml",
+        "probability",
+        "data"
+      ],
+      "resources": [
+        "cs336",
+        "openintro",
+        "mlsys"
+      ],
+      "scope": "数据切分、污染、质量指标、置信区间、漂移、鲁棒性与性能公平比较",
+      "objective": "说明系统优化是否保住质量，以及结论是否可靠",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "评估协议、失败样本、统计不确定性和质量/性能取舍；避免测试集参与调参",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "数据切分、污染、质量指标、置信区间、漂移、鲁棒性与性能公平比较；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "固定训练/验证/测试边界；按原课评估主题设计数据与质量基线"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "测多个种子、样本分组和负载；比较精度变化与性能误差。评估协议、失败样本、统计不确定性和质量/性能取舍；避免测试集参与调参"
+        }
+      ]
+    },
+    {
+      "id": "experiments",
+      "title": "实验追踪与模型产物",
+      "stage": 3,
+      "category": "core",
+      "prerequisites": [
+        "data",
+        "engineering"
+      ],
+      "resources": [
+        "mlflow",
+        "mlsys"
+      ],
+      "scope": "配置、数据版本、随机状态、环境、模型/优化器产物、谱系与注册",
+      "objective": "让一次训练可以被定位、重建和复核",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "可复现实验目录、版本清单与恢复记录；MLflow 仅为参考选型，不自动装服务",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "配置、数据版本、随机状态、环境、模型/优化器产物、谱系与注册；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "组织配置、提交、数据哈希与模型元数据；按官方 tracking/model 文档核对字段"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "重跑小模型；从保存状态继续并比较下一步；检查缺失产物时明确失败。可复现实验目录、版本清单与恢复记录；MLflow 仅为参考选型，不自动装服务"
+        }
+      ]
+    },
+    {
       "id": "gpu",
       "title": "GPU 内核与性能工程",
       "stage": 4,
@@ -1950,7 +2477,8 @@
       ],
       "resources": [
         "cuda",
-        "cs336"
+        "cs336",
+        "triton"
       ],
       "category": "specialist",
       "objective": "分析算力与带宽瓶颈，优化算子",
@@ -2017,7 +2545,8 @@
         "framework",
         "data",
         "gpu",
-        "dist"
+        "dist",
+        "collectives"
       ],
       "resources": [
         "torch",
@@ -2053,7 +2582,8 @@
         "framework",
         "gpu",
         "network",
-        "data"
+        "data",
+        "models"
       ],
       "resources": [
         "vllm",
@@ -2128,7 +2658,8 @@
       ],
       "resources": [
         "mlir",
-        "dlsys"
+        "dlsys",
+        "torch-compile"
       ],
       "category": "optional",
       "objective": "理解图转换、融合和编译约束",
@@ -2151,6 +2682,523 @@
         }
       ],
       "estimatedHours": null
+    },
+    {
+      "id": "accelerators",
+      "title": "加速器与数据中心架构",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "architecture",
+        "numerics"
+      ],
+      "resources": [
+        "cuda",
+        "mlsys",
+        "cs336"
+      ],
+      "scope": "SIMD/SIMT、tensor core、HBM、NUMA、PCIe/NVLink、NIC、TPU/异构与机柜供电",
+      "objective": "根据工作负载选硬件，区分单卡峰值与系统吞吐",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "带单位的预算、硬件兼容表与可证伪预测；异构硬件未实测不写已通过",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "SIMD/SIMT、tensor core、HBM、NUMA、PCIe/NVLink、NIC、TPU/异构与机柜供电；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "沿 CUDA 与 MLSysBook Compute Infrastructure 画主机、设备与网络的数据路径"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "核算容量/带宽/计算上界；用原课资源核算练习解释瓶颈。带单位的预算、硬件兼容表与可证伪预测；异构硬件未实测不写已通过"
+        }
+      ]
+    },
+    {
+      "id": "profiling",
+      "title": "性能剖析与端到端基准",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "gpu",
+        "numerics",
+        "data"
+      ],
+      "resources": [
+        "profiler",
+        "cs336"
+      ],
+      "scope": "时间线、异步同步、roofline、算术强度、H2D、数据加载、内存、尾延迟",
+      "objective": "根据测量证据定位瓶颈，而不是比较一次最快值",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "剖析 trace、测量边界与优化前后报告；内核加速必须另测端到端收益",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "时间线、异步同步、roofline、算术强度、H2D、数据加载、内存、尾延迟；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "按官方 profiler 配方标注加载、拷贝、前后向和 optimizer；区分预热与编译开销"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "CPU oracle 与 GPU 容差一起复核；固定线程、batch、时钟条件并记录分布。剖析 trace、测量边界与优化前后报告；内核加速必须另测端到端收益"
+        }
+      ]
+    },
+    {
+      "id": "collectives",
+      "title": "集体通信与高速网络",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "dist",
+        "gpu",
+        "network"
+      ],
+      "resources": [
+        "nccl",
+        "torch",
+        "mlsys"
+      ],
+      "scope": "AllReduce、AllGather、ReduceScatter、AlltoAll、ring/tree、RDMA、拓扑与超时",
+      "objective": "解释分布式计算的通信语义、顺序和带宽瓶颈",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "输出 oracle、通信量推导、延迟/带宽曲线与故障日志；CPU 多进程不冒充多卡",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "AllReduce、AllGather、ReduceScatter、AlltoAll、ring/tree、RDMA、拓扑与超时；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "先按 PyTorch 2.10 后端表核对平台，再用小数组验证各 collective 的输出"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "在可用多进程环境故意制造次序/形状错误；测消息大小、拓扑与 overlap。输出 oracle、通信量推导、延迟/带宽曲线与故障日志；CPU 多进程不冒充多卡"
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "title": "训练显存与并行内存优化",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "framework",
+        "gpu",
+        "collectives"
+      ],
+      "resources": [
+        "fsdp",
+        "torch",
+        "cs336"
+      ],
+      "scope": "参数、梯度、优化器、激活；梯度累积、重计算、offload、ZeRO/FSDP、分片检查点",
+      "objective": "用显存预算选择并行方案，保留训练等价性",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "内存分项、拓扑与状态保存方案、数值/吞吐对照；没有多卡只提交理论预算",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "参数、梯度、优化器、激活；梯度累积、重计算、offload、ZeRO/FSDP、分片检查点；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "先核算小模型内存，再按官方 FSDP/CS336 系统作业比较分片与累积"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "记录峰值 allocated/reserved、通信与耗时；检查梯度、loss 和断点恢复。内存分项、拓扑与状态保存方案、数值/吞吐对照；没有多卡只提交理论预算"
+        }
+      ]
+    },
+    {
+      "id": "scaling",
+      "title": "规模规律与训练预算",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "training",
+        "models",
+        "probability"
+      ],
+      "resources": [
+        "cs336",
+        "mlsys"
+      ],
+      "scope": "参数/数据/计算量、scaling laws、MFU、强弱扩展、straggler 与恢复成本",
+      "objective": "在预算内规划训练，并说明外推的不确定性",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "预算模型、拟合诊断、扩展效率与失败开销；原课 API/云费用先另行确认",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "参数/数据/计算量、scaling laws、MFU、强弱扩展、straggler 与恢复成本；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "按 CS336 Assignment 3 先理解预算与拟合；用获准的小规模实验建立曲线"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "分离硬件峰值、有效吞吐和质量；报告范围、残差与未验证外推。预算模型、拟合诊断、扩展效率与失败开销；原课 API/云费用先另行确认"
+        }
+      ]
+    },
+    {
+      "id": "posttraining",
+      "title": "后训练与 rollout 基础设施",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "models",
+        "evaluation",
+        "data"
+      ],
+      "resources": [
+        "cs336",
+        "mlsys"
+      ],
+      "scope": "SFT、偏好优化、RLVR、rollout/learner、奖励、同步/异步与样本版本",
+      "objective": "看懂训练后处理的系统链路和正确性约束",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "数据与奖励说明、同步协议、质量/资源报告；与原课作业政策相符",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "SFT、偏好优化、RLVR、rollout/learner、奖励、同步/异步与样本版本；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "按 CS336 Assignment 5 理解 SFT 与 reasoning RL；先确定数据、奖励和评估边界"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "在小模型/获准环境比较样本版本、生成吞吐与训练质量；检查奖励投机。数据与奖励说明、同步协议、质量/资源报告；与原课作业政策相符"
+        }
+      ]
+    },
+    {
+      "id": "precision",
+      "title": "低精度、量化与模型压缩",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "numerics",
+        "models",
+        "gpu"
+      ],
+      "resources": [
+        "vllm",
+        "mlsys"
+      ],
+      "scope": "FP16/BF16/FP8、loss scaling、PTQ/QAT、INT8/INT4、校准、稀疏/剪枝与蒸馏",
+      "objective": "同时评估低精度的误差、硬件收益与输出质量",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "校准来源、兼容版本、精度与性能报告；文件变小不自动证明更快",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "FP16/BF16/FP8、loss scaling、PTQ/QAT、INT8/INT4、校准、稀疏/剪枝与蒸馏；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "按 vLLM quantization 与 MLSysBook Model Compression 选一个兼容方案，不混用训练精度与权重量化"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "固定校准/测试数据；对照 FP32、误差、质量、显存与端到端延迟。校准来源、兼容版本、精度与性能报告；文件变小不自动证明更快"
+        }
+      ]
+    },
+    {
+      "id": "orchestration",
+      "title": "集群调度与资源管理",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "dist",
+        "operations",
+        "linux"
+      ],
+      "resources": [
+        "kubernetes",
+        "ray",
+        "mlsys"
+      ],
+      "scope": "requests/limits、quota、device plugin、亲和性、拓扑、gang scheduling、弹性和队列公平",
+      "objective": "使任务按权限与资源约束运行并能从故障恢复",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "调度配置、任务状态轨迹、利用率与恢复；集群工具尚未在本机安装验证",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "requests/limits、quota、device plugin、亲和性、拓扑、gang scheduling、弹性和队列公平；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "沿 Kubernetes scheduling/eviction 与 Ray task/actor 概念制定小集群的调度策略"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "在已有测试环境复现排队、OOM、抢占与节点不可用；核对资源是否释放。调度配置、任务状态轨迹、利用率与恢复；集群工具尚未在本机安装验证"
+        }
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "title": "模型部署与生命周期",
+      "stage": 4,
+      "category": "core",
+      "prerequisites": [
+        "experiments",
+        "evaluation",
+        "operations"
+      ],
+      "resources": [
+        "mlflow",
+        "sre",
+        "mlsys"
+      ],
+      "scope": "模型注册、打包、schema、导出/兼容、灰度、A/B、监控、漂移与回滚",
+      "objective": "把模型版本、服务版本与质量基线一起管理",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "部署与回滚记录、版本谱系、SLI/SLO 与质量门槛；替身不标生产服务已验证",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "模型注册、打包、schema、导出/兼容、灰度、A/B、监控、漂移与回滚；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "制定加载、输入输出契约与版本清单；按官方模型产物和 SRE 原则设计灰度"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "用小模型服务/测试替身演练新旧版本、无效输入与回滚；保存部署前后质量。部署与回滚记录、版本谱系、SLI/SLO 与质量门槛；替身不标生产服务已验证"
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "安全、隐私与治理",
+      "stage": 4,
+      "category": "core",
+      "prerequisites": [
+        "data",
+        "operations",
+        "engineering"
+      ],
+      "resources": [
+        "security",
+        "mlsys"
+      ],
+      "scope": "IAM/RBAC、租户隔离、密钥、供应链、模型/数据许可、PII、投毒、审计与删除",
+      "objective": "识别数据、模型和基础设施的信任边界",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "威胁模型、权限矩阵与负面测试；法规与合同按实际地区另核，不提供法律结论",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "IAM/RBAC、租户隔离、密钥、供应链、模型/数据许可、PII、投毒、审计与删除；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "按 Kubernetes Security 与 MLSysBook Security & Privacy 建模访问边界；只用合成非敏感数据"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "检查越权、日志泄漏、依赖来源和过期访问；设计撤销/清理与审计流程。威胁模型、权限矩阵与负面测试；法规与合同按实际地区另核，不提供法律结论"
+        }
+      ]
+    },
+    {
+      "id": "sustainability",
+      "title": "容量、成本与能源效率",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "profiling",
+        "operations"
+      ],
+      "resources": [
+        "sre",
+        "mlsys"
+      ],
+      "scope": "容量规划、成本/成功任务、GPU 利用、存储/网络费用、能耗、PUE 与碳核算边界",
+      "objective": "评价有效产出和可靠性的经济/能源代价",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "容量规划、成本/成功任务、GPU 利用、存储/网络费用、能耗、PUE 与碳核算边界；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "用已有测量核算吞吐、闲置与恢复开销；按 MLSysBook Sustainable AI 明确统计边界"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "比较batch/精度策略；没有功率计只报告估算并保留假设，不制造实测电量。单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买"
+        }
+      ]
+    },
+    {
+      "id": "retrieval",
+      "title": "检索、向量索引与 RAG 系统",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "storage",
+        "data",
+        "inference"
+      ],
+      "resources": [
+        "mlsys",
+        "vllm"
+      ],
+      "scope": "embedding、ANN、召回/延迟、混合检索、索引更新、元数据权限、RAG 缓存与评估",
+      "objective": "将检索与生成的质量、延迟、更新和权限组合验收",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "检索/生成分项基线、负面案例与版本图；不把通用聊天 demo 当完整 RAG 验收",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "embedding、ANN、召回/延迟、混合检索、索引更新、元数据权限、RAG 缓存与评估；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "精读 MLSysBook Data Storage 的 Retrieval Infrastructure；用许可明确的小数据建立精确检索 oracle"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "比较近似召回、索引内存、延迟和更新一致性；检查检索权限与证据来源。检索/生成分项基线、负面案例与版本图；不把通用聊天 demo 当完整 RAG 验收"
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "title": "边缘、移动与异构部署",
+      "stage": 4,
+      "category": "optional",
+      "prerequisites": [
+        "models",
+        "precision",
+        "accelerators"
+      ],
+      "resources": [
+        "mlsys",
+        "torch-compile"
+      ],
+      "scope": "模型导出、算子兼容、设备 runtime、实时预算、热/功率、离线与更新",
+      "objective": "让模型在受限设备满足质量和资源要求",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "兼容矩阵、设备实测和可回滚更新；未有设备仅能提交预算与模拟结果",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "模型导出、算子兼容、设备 runtime、实时预算、热/功率、离线与更新；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "按 MLSysBook Edge Intelligence 选已有设备；先核对导出与运行时算子支持"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "比较主机 oracle 与设备输出；检查启动、峰值内存、延迟抖动与降频。兼容矩阵、设备实测和可回滚更新；未有设备仅能提交预算与模拟结果"
+        }
+      ]
+    },
+    {
+      "id": "multimodal",
+      "title": "多模态与其他模型系统",
+      "stage": 4,
+      "category": "optional",
+      "prerequisites": [
+        "models",
+        "data",
+        "evaluation"
+      ],
+      "resources": [
+        "d2l",
+        "cs336",
+        "mlsys"
+      ],
+      "scope": "视觉/音频、变长序列、diffusion、推荐稀疏特征、模态同步与动态 batching",
+      "objective": "把基础设施方法迁移到 LLM 之外的真实工作负载",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "预处理与模型链路、数据许可和质量/吞吐报告；方向按岗位需求深入",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "视觉/音频、变长序列、diffusion、推荐稀疏特征、模态同步与动态 batching；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "选 D2L 原模型实践及 CS336 multimodality 主题；先解释样本形状与预处理"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "在获准的小数据上测 decode/preprocess、padding、batch 与质量；避免只测模型算子。预处理与模型链路、数据许可和质量/吞吐报告；方向按岗位需求深入"
+        }
+      ]
+    },
+    {
+      "id": "system-design",
+      "title": "端到端 AI 系统设计与复核",
+      "stage": 4,
+      "category": "specialist",
+      "prerequisites": [
+        "training",
+        "inference",
+        "orchestration",
+        "lifecycle",
+        "privacy"
+      ],
+      "resources": [
+        "mlsys",
+        "sre",
+        "cs336"
+      ],
+      "scope": "需求/SLO、容量、拓扑、数据/模型生命周期、安全、故障、成本和演进",
+      "objective": "将分散能力连接成可审查的系统设计",
+      "guidance": "主资源按所列主题选读；完成原作者允许的练习，再用成果接受复核。环境不足时保留未执行状态。",
+      "evidence": "需求、架构、独立代码、原测试、性能/质量/安全报告和恢复演练；标明未实测部分",
+      "status": "已补齐一手依据与成果路径；完整方向工程验证和教学试用待完成",
+      "steps": [
+        {
+          "title": "理解机制与边界",
+          "task": "需求/SLO、容量、拓扑、数据/模型生命周期、安全、故障、成本和演进；先用主资源查明定义、假设与失败条件。"
+        },
+        {
+          "title": "设计与独立实践",
+          "task": "从一个实际问题写需求、约束与预算，选原作者项目作为实现载体"
+        },
+        {
+          "title": "测试、优化与解释",
+          "task": "由同伴用故障、扩容、质量下降与预算变化挑战假设；在可用环境复核关键链路。需求、架构、独立代码、原测试、性能/质量/安全报告和恢复演练；标明未实测部分"
+        }
+      ]
     }
   ],
   "labs": [
@@ -2176,7 +3224,25 @@
       "limitation": "补充检查不是原课程官方评分，不证明整个编程阶段已掌握。运行学习者代码只在主动执行 CLI 后发生；超时不等于安全沙箱。",
       "integration": "checked",
       "guide": "./docs/getting-started.md",
-      "reportCommit": "supplemental-v0.1"
+      "reportCommit": "supplemental-v0.1",
+      "requiredChecks": [
+        {
+          "name": "mixed case",
+          "tests": 1
+        },
+        {
+          "name": "digits and punctuation",
+          "tests": 1
+        },
+        {
+          "name": "unicode",
+          "tests": 1
+        },
+        {
+          "name": "empty line",
+          "tests": 1
+        }
+      ]
     },
     {
       "id": "python-project",
@@ -2354,7 +3420,25 @@
           }
         ]
       },
-      "reportCommit": "fba689d101eb5600f5c8f4d7fd79912498e950e2"
+      "reportCommit": "fba689d101eb5600f5c8f4d7fd79912498e950e2",
+      "requiredChecks": [
+        {
+          "name": "01-smalltalk-like",
+          "tests": 5
+        },
+        {
+          "name": "02-attr-based",
+          "tests": 6
+        },
+        {
+          "name": "03-customizable",
+          "tests": 8
+        },
+        {
+          "name": "04-maps",
+          "tests": 9
+        }
+      ]
     },
     {
       "id": "dbdb",
@@ -2430,7 +3514,13 @@
             "median_ms": 23.3476
           }
         ]
-      }
+      },
+      "requiredChecks": [
+        {
+          "name": "upstream-suite",
+          "tests": 21
+        }
+      ]
     },
     {
       "id": "consensus",
@@ -2483,7 +3573,13 @@
             "boundary": "in-process test fixtures, assertions and simulation included; source conversion excluded; not network throughput"
           }
         ]
-      }
+      },
+      "requiredChecks": [
+        {
+          "name": "upstream-functional-suite",
+          "tests": 46
+        }
+      ]
     },
     {
       "id": "micrograd",
@@ -2535,7 +3631,49 @@
             "median_ms": 3.4043
           }
         ]
-      }
+      },
+      "requiredChecks": [
+        {
+          "name": "original-pytorch-comparison-tests",
+          "tests": 2
+        },
+        {
+          "name": "supplemental-gradient-add",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-multiply",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-reuse",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-power",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-divide",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-relu-positive",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-relu-negative",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-gradient-composed",
+          "tests": 1
+        },
+        {
+          "name": "supplemental-independent-training-check",
+          "tests": 1
+        }
+      ]
     },
     {
       "id": "gpu",
@@ -2622,10 +3760,28 @@
             "boundary": "inputs already on device; Python dispatch and CUDA synchronization included"
           }
         ]
-      }
+      },
+      "requiredChecks": [
+        {
+          "name": "fp32-matmul-correctness",
+          "tests": 1
+        },
+        {
+          "name": "autograd-cpu-gpu-comparison",
+          "tests": 1
+        },
+        {
+          "name": "small-model-training",
+          "tests": 1
+        },
+        {
+          "name": "checkpoint-and-exact-next-step",
+          "tests": 1
+        }
+      ]
     }
   ],
-  "revision": "2026-10-09-complete-local",
+  "revision": "2026-10-09-coverage-audit",
   "milestones": [
     {
       "stage": 0,
@@ -2655,7 +3811,8 @@
         "discrete",
         "linear",
         "calculus",
-        "probability"
+        "probability",
+        "engineering"
       ],
       "labs": [
         "object-model"
@@ -2674,7 +3831,9 @@
         "algorithms",
         "architecture",
         "os",
-        "network"
+        "network",
+        "storage",
+        "linux"
       ],
       "labs": [
         "dbdb"
@@ -2693,7 +3852,10 @@
         "numerics",
         "ml",
         "framework",
-        "data"
+        "data",
+        "models",
+        "evaluation",
+        "experiments"
       ],
       "labs": [
         "micrograd"
@@ -2710,7 +3872,9 @@
       "title": "工程 · 加速与规模化",
       "nodes": [
         "dist",
-        "operations"
+        "operations",
+        "lifecycle",
+        "privacy"
       ],
       "labs": [
         "consensus"

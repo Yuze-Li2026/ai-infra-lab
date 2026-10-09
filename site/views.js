@@ -1,5 +1,5 @@
 import {ready, nextNode} from './core.js';
-import {milestoneStatus,REPORT_LABS} from './reports.js';
+import {milestoneStatus,REPORT_LABS,reportAccepted} from './reports.js';
 
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const link = (url, text, className = '') => {
@@ -12,7 +12,7 @@ const categoryLabels = {core:'核心必修', specialist:'方向必修', optional
 const evaluationLabels = {authority:'权威性',accuracy:'准确性',depth:'理论深度',engineeringValue:'工程价值',coverage:'覆盖程度',teachingQuality:'教学质量',difficulty:'先修难度',languageFriendliness:'语言友好度',accessibility:'可访问性',maintenance:'维护状态',licensing:'许可证',stability:'长期稳定性'};
 
 export function createViews(state) {
-  const {catalog, progress, selected, filter, stageFilter, langFilter, drafts} = state;
+  const {catalog, progress, selected, filter, stageFilter, langFilter, drafts,nodeCategory='all'} = state;
   const source = id => catalog.sources.find(s => s.id === id);
   const node = id => catalog.nodes.find(n => n.id === id);
   const isDone = id => progress.records[id]?.status === 'submitted';
@@ -71,11 +71,13 @@ export function createViews(state) {
   }
 
   function map() {
+    const visible=n=>nodeCategory==='all'||n.category===nodeCategory;
     return intro('KNOWLEDGE ATLAS','先理解依赖，再决定路线','从起点逐层展开。点击节点，查看前置知识、学习步骤，以及它将支持的下一项能力。') +
+      `<div class="filters"><select id="node-category" aria-label="知识范围"><option value="all">全部知识</option>${Object.entries(categoryLabels).map(([id,label])=>`<option value="${id}" ${nodeCategory===id?'selected':''}>${label}</option>`).join('')}</select>${link('./docs/learning-paths.md','按工程方向选择路线','text-link')}${link('./docs/coverage.md','查看官方依据与覆盖审计','text-link')}</div>`+
       (selected ? details(node(selected)) : '') +
       `<div class="map-legend">${chip('可开始',true)}${chip('待先修')}${chip('已提交成果',true)}<span>所有节点均可预览；已有基础可提交成果跳过。</span></div>` +
-      catalog.stages.map(s=>`<section class="map-stage"><div class="map-stage-heading"><span class="stage-big">0${s.id}</span><div><h2>${escape(s.title)}</h2><p>${escape(s.description)}</p></div></div>
-        <div class="node-grid">${catalog.nodes.filter(n=>n.stage===s.id).map(n=>`<button class="node ${isDone(n.id)?'done':!ready(n,progress)?'locked':''} ${selected===n.id?'selected':''}" data-node="${n.id}" aria-pressed="${selected===n.id}"><span class="node-meta">${categoryLabels[n.category]} <span>${status(n)}</span></span><strong>${escape(n.title)}</strong><span class="node-prereq">前置：${escape(n.prerequisites.map(id=>node(id).title).join('、')||'从零开始')}</span></button>`).join('')}</div></section>`).join('');
+      catalog.stages.filter(s=>catalog.nodes.some(n=>n.stage===s.id&&visible(n))).map(s=>`<section class="map-stage"><div class="map-stage-heading"><span class="stage-big">0${s.id}</span><div><h2>${escape(s.title)}</h2><p>${escape(s.description)}</p></div></div>
+        <div class="node-grid">${catalog.nodes.filter(n=>n.stage===s.id&&visible(n)).map(n=>`<button class="node ${isDone(n.id)?'done':!ready(n,progress)?'locked':''} ${selected===n.id?'selected':''}" data-node="${n.id}" aria-pressed="${selected===n.id}"><span class="node-meta">${categoryLabels[n.category]} <span>${status(n)}</span></span><strong>${escape(n.title)}</strong><span class="node-prereq">前置：${escape(n.prerequisites.map(id=>node(id).title).join('、')||'从零开始')}</span></button>`).join('')}</div></section>`).join('');
   }
 
   function resources() {
@@ -99,7 +101,8 @@ export function createViews(state) {
   function reportRecord(l){
    if(!REPORT_LABS.includes(l.id))return '';
    const r=progress.labReports?.[l.id];
-   return `<div class="report-record"><div class="row"><span class="section-label">我的实验报告</span>${r?chip(r.mode==='reference'?'参考复现':r.passed?'作品检查通过':'作品尚未通过',r.mode==='submission'&&r.passed):chip('尚未导入')}</div>${r?`<p>${r.tests} 项检查 · ${new Date(r.createdAt).toLocaleDateString('zh-CN')}<br><span class="fineprint">${escape(r.python)} · ${escape(r.platform)}</span></p>`:'<p>运行器生成 JSON 后，在这里导入。报告与学习备份一起保存在本地。</p>'}<button class="quiet" data-report="${l.id}">${r?'更新实验报告':'导入实验报告'}</button><p class="fineprint">${r?.mode==='reference'?'参考报告不计入个人作品验收。':'本地报告是本人提供的证据，不是独立认证。'}</p></div>`;
+   const complete=reportAccepted(l,r);
+   return `<div class="report-record"><div class="row"><span class="section-label">我的实验报告</span>${r?chip(r.mode==='reference'?'参考复现':complete?'完整范围通过':r.passed?'范围待补齐':'作品尚未通过',complete):chip('尚未导入')}</div>${r?`<p>${r.tests} 项检查 · ${new Date(r.createdAt).toLocaleDateString('zh-CN')}<br><span class="fineprint">${escape(r.python)} · ${escape(r.platform)}</span></p>`:'<p>运行器生成 JSON 后，在这里导入。报告与学习备份一起保存在本地。</p>'}<button class="quiet" data-report="${l.id}">${r?'更新实验报告':'导入实验报告'}</button><p class="fineprint">${r?.mode==='reference'?'参考报告不计入个人作品验收。':r?.passed&&!complete?'需导入当前版本的完整测试报告；旧备份与单阶段报告仍保留。':'本地报告是本人提供的证据，不是独立认证。'}</p></div>`;
   }
 
   function milestone(){

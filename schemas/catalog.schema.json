@@ -338,6 +338,26 @@
           "items": {
             "$ref": "#/$defs/text"
           }
+        },
+        "requiredChecks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "tests"
+            ],
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/text"
+              },
+              "tests": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
         }
       }
     }

@@ -1,7 +1,7 @@
 // One-time reviewed migration. Refuses to overwrite this revision after application.
 import {readFileSync,writeFileSync} from 'node:fs';
 const c=JSON.parse(readFileSync('site/catalog.json','utf8'));
-if(c.revision==='2026-10-08-v02')throw new Error('This research revision is already applied; edit catalog.json directly.');
+if(c.revision||c.sources.some(s=>s.id==='algorithms-mit'))throw new Error('历史迁移已应用或目录已有新版本，拒绝回写。请直接编辑 catalog.json。');
 const additions=[
  ['algorithms-mit','MIT 6.006 Introduction to Algorithms','Erik Demaine / Srini Devadas','https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/','Fall 2011','Python、离散数学','数据结构、排序、图搜索、最短路与动态规划','理论题与编程作业配合，覆盖复杂度与实现','相较单纯刷题，保留证明和成本模型；旧作业运行环境需单独处理','课程页与 syllabus 明确 Python / 离散数学先修；作业采用理论与代码结合。','OCW 许可与单项例外，暂仅链接'],
  ['algebra-text','Algebra and Trigonometry 2e','Jay Abramson / OpenStax','https://openstax.org/books/algebra-and-trigonometry-2e/pages/1-introduction-to-prerequisites','2e 在线版','四则运算、分数与比例','方程、函数、多项式、指数、对数及三角基础','承接前代数，为微积分与数量关系建模提供教材路径','相较直接进入大学微积分，提供中间桥梁；不要求所有章节必修','原书章节入口已访问，完整习题体验未做学习者试用。','以书页版权及使用条款为准，暂仅链接'],

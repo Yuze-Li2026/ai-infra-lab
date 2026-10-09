@@ -2,7 +2,7 @@ import test from 'node:test';
 import {existsSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {mkdir,mkdtemp,readFile,writeFile} from 'node:fs/promises';
+import {mkdir,mkdtemp,readFile,writeFile,cp} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 const local=resolve('.venv-labs',process.platform==='win32'?'Scripts/python.exe':'bin/python');
 const python=process.env.LAB_TEST_PYTHON||(existsSync(local)?local:'python');
@@ -16,4 +16,10 @@ test('pinned original object-model tests pass; invalid independent implementatio
  await writeFile(join(dir,'objmodel.py'),'raise RuntimeError("deliberately incomplete submission")\n');
  const bad=spawnSync(python,['-I','-B','labs/object-model/run.py','--stage','01-smalltalk-like','--submission',dir,'--output',join(dir,'submission.json')],{encoding:'utf8',windowsHide:true,timeout:30000});
  assert.equal(bad.status,1);assert.equal(JSON.parse(await readFile(join(dir,'submission.json'),'utf8')).passed,false);
+ // Runner plumbing only: copied reference verifies all-stage routing, not learner independence.
+ const stages=['01-smalltalk-like','02-attr-based','03-customizable','04-maps'];
+ const complete=join(dir,'all-stages');await mkdir(complete);
+ for(const stage of stages){await mkdir(join(complete,stage));await cp(`labs/object-model/upstream/objmodel/code/${stage}/objmodel.py`,join(complete,stage,'objmodel.py'));}
+ const full=spawnSync(python,['-I','-B','labs/object-model/run.py','--submission',complete,'--output',join(dir,'full.json')],{encoding:'utf8',windowsHide:true,timeout:30000});
+ assert.equal(full.status,0,full.stderr);assert.deepEqual(JSON.parse(await readFile(join(dir,'full.json'),'utf8')).results.map(r=>r.stage),stages);
 });

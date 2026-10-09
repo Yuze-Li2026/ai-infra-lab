@@ -36,3 +36,5 @@ node scripts/lab.mjs dbdb --submission ./my-dbdb --output artifacts/my-dbdb.json
 原项目依赖旧 nose 和 portalocker。Python 3.12 运行器将 nose 的两个断言别名映射到 unittest，保留 setup/teardown；CLI 明确使用当前解释器并解码参数；Windows 使用 portalocker 4.4.0 的 Win32Locker 和零偏移兼容。物理测试在 Windows 通过同一文件句柄读取夹具，断言保持不变，持久化仍由关闭重开测试验证。
 
 逐项解释这些适配改变了什么、没有证明什么。此项目是教学数据库，不具有完整隔离、压缩或断电恢复保证。阶段验收需包含设计、独立代码、原测试、额外边界案例、测量协议和原理解释。
+
+原版树节点使用 Python `pickle` 反序列化，只能打开自己生成、来源可信的实验数据库；不要打开陌生 `.db` 文件。原版存储只有 flush，不能据此宣称断电耐久性。适配保留这些教学设计，未把它改成安全生产数据库。随机夹具固定种子 37；运行器拒绝 `-O`/`PYTHONOPTIMIZE`，防止原测试断言被移除。

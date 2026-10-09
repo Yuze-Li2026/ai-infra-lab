@@ -7,6 +7,7 @@ import platform
 import statistics
 import sys
 import time
+import tempfile
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from common import ROOT, report, run_safely
 
@@ -67,11 +68,13 @@ def main():
         optimizer.step()
         if step in [0,49,99,149]: losses.append({'step':step,'loss':loss.item()})
     results.append({'name':'small-model-training','tests':1,'passed':losses[-1]['loss']<losses[0]['loss']*.05,'losses':losses})
-    checkpoint = ROOT / 'artifacts/gpu-checkpoint.pt'
-    torch.save({'model':model.state_dict(),'optimizer':optimizer.state_dict(),'step':150},checkpoint)
     restored = torch.nn.Sequential(torch.nn.Linear(4,16), torch.nn.Tanh(), torch.nn.Linear(16,1)).to(device)
     restored_optimizer = torch.optim.Adam(restored.parameters(),lr=.03)
-    state = torch.load(checkpoint,map_location=device,weights_only=True)
+    # Each run owns its checkpoint, including concurrent runs; no pre-existing file is overwritten.
+    with tempfile.TemporaryDirectory(prefix='ai-infra-gpu-') as directory:
+        checkpoint = Path(directory) / 'checkpoint.pt'
+        torch.save({'model':model.state_dict(),'optimizer':optimizer.state_dict(),'step':150},checkpoint)
+        state = torch.load(checkpoint,map_location=device,weights_only=True)
     restored.load_state_dict(state['model'])
     restored_optimizer.load_state_dict(state['optimizer'])
     with torch.no_grad(): equality=torch.equal(model(inputs),restored(inputs))

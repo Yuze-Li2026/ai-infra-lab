@@ -23,5 +23,7 @@ for(const [lab,modules,expected]of [['dbdb','portalocker',21],['consensus','fiss
   const bad=spawnSync(python,['-B',`labs/${lab}/run.py`,'--submission',submission,'--output',failedOutput],{encoding:'utf8',windowsHide:true,timeout:45000});
   assert.equal(bad.status,1,bad.stderr);const failed=JSON.parse(await readFile(failedOutput,'utf8'));assert.equal(failed.mode,'submission');assert.equal(failed.passed,false);
   assert.equal(await readFile(file,'utf8'),source);
+  const optimized=spawnSync(python,['-O',`labs/${lab}/run.py`,'--output',failedOutput],{encoding:'utf8',windowsHide:true,timeout:10000});
+  assert.equal(optimized.status,1);assert.equal(JSON.parse(await readFile(failedOutput,'utf8')).passed,false);
  });
 }

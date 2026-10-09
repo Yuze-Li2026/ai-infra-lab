@@ -37,6 +37,11 @@ def run_safely(lab, upstream, main):
     """Turn setup/runtime failures into an explicit failed local report."""
     import sys
     try:
+        if sys.version_info < (3, 10):
+            raise RuntimeError('实验需要 Python 3.10 或更新版本。')
+        if not __debug__:
+            raise RuntimeError('禁止 -O / PYTHONOPTIMIZE：它会移除原测试的 assert 断言。')
+        (ROOT / 'artifacts').mkdir(parents=True, exist_ok=True)
         return main()
     except Exception as error:
         manifest = {'commit':'pytorch-2.10.0+cu128' if lab == 'gpu' else 'unknown', 'checksumsVerified':False}

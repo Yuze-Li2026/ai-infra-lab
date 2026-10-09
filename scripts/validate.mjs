@@ -27,6 +27,10 @@ export function validateCatalog(c){
   requiredText(l,['title','goal','status','hardware','limitation'],'lab');strings(l.nodes,'lab nodes');strings(l.rubric,'lab rubric');https(l.url);
   if(!l.nodes.length||!['candidate','checked','reproduced'].includes(l.integration))throw new Error(`Invalid lab integration: ${l.id}`);
   if(l.command){requiredText(l,['guide'],'lab guide');if(!/^\.\/docs\/[a-z0-9-]+\.md$/.test(l.guide))throw new Error('Lab guide must be a local document');}
+  if(l.requiredChecks!==undefined){
+   if(!Array.isArray(l.requiredChecks)||!l.requiredChecks.length||new Set(l.requiredChecks.map(r=>r.name)).size!==l.requiredChecks.length)throw Error('Invalid required test scope');
+   for(const r of l.requiredChecks)if(typeof r.name!=='string'||!r.name.trim()||r.name.length>128||!Number.isSafeInteger(r.tests)||r.tests<1)throw Error('Invalid required test scope');
+  }
  }
  const unique=(list,name)=>{const ids=new Set();for(const x of list){if(typeof x.id!=='string'&&name!=='stages')throw new Error(`Invalid ${name} ID`);if(ids.has(x.id))throw new Error(`Duplicate ${name}: ${x.id}`);ids.add(x.id);}return ids;};
  const nodes=unique(c.nodes,'nodes'),sources=unique(c.sources,'sources'),stages=unique(c.stages,'stages');unique(c.labs,'labs');
@@ -41,7 +45,8 @@ export function validateCatalog(c){
    requiredText(m,['title'],'milestone');strings(m.nodes,'milestone nodes');strings(m.labs,'milestone labs');strings(m.criteria,'milestone criteria');
    if(!m.labs.length||m.criteria.length<3)throw Error('Incomplete milestone');
    for(const id of m.nodes)if(!nodes.has(id)||c.nodes.find(n=>n.id===id).stage!==m.stage)throw Error('Invalid milestone node');
-   for(const id of m.labs)if(!c.labs.some(l=>l.id===id&&l.stage===m.stage&&l.command))throw Error('Invalid milestone lab');
+   for(const n of c.nodes.filter(n=>n.stage===m.stage&&n.category==='core'))if(!m.nodes.includes(n.id))throw Error('Milestone omits core knowledge');
+   for(const id of m.labs)if(!c.labs.some(l=>l.id===id&&l.stage===m.stage&&l.command&&l.requiredChecks?.length))throw Error('Invalid milestone lab or missing test scope');
   }
  }
  return {nodes:nodes.size,sources:sources.size,labs:c.labs.length};

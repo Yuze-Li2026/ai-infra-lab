@@ -353,3 +353,301 @@ GPU、分布式、推理与可靠性
 起点用原课练习验证输入输出；基础用对象运行时验证抽象；系统用 DBDB 验证数据结构与持久化；模型用 micrograd 验证导数与训练；工程用共识模拟验证故障语义，GPU 补充检查验证单卡环境。数学推导、系统解释与各方向知识不能只由这些项目的测试代替。
 
 平台的“材料齐备”只表示已提交规定节点说明与独立作品通过报告，最终应由同伴检查设计、边界案例、性能协议和解释；未经过独立评审不称能力认证。
+
+## 本轮补齐的学习任务
+
+以下任务由官方目录反推能力与先修，不是复制课程讲义。完整高级环境尚未复现；先保留设计与理论核算，再在适合的环境按原课/官方示例实践。
+
+### 软件工程与可测试交付
+
+类别：核心必修。前置：抽象、递归与测试、终端、Git 与可复现环境。
+
+精读范围：包与模块、接口、类型、异常、构建依赖、测试与 CI。
+
+主资源：[The Missing Semester](https://missing.csail.mit.edu/)。 补充：[CS50 Python](https://cs50.harvard.edu/python/)。
+
+- 理解机制与边界：包与模块、接口、类型、异常、构建依赖、测试与 CI；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：为已有项目划分接口、固定依赖并建立自动检查
+- 测试、优化与解释：从空目录重建；测试正常、异常和资源释放；保留一次修复前失败。提交接口说明、依赖锁、CI 日志与重建记录；解释测试覆盖盲点
+
+成果标准：提交接口说明、依赖锁、CI 日志与重建记录；解释测试覆盖盲点。
+
+### 数据库、索引与存储系统
+
+类别：核心必修。前置：数据结构与复杂度、操作系统与并发。
+
+精读范围：索引、事务/日志、锁、持久化、列式与对象存储、缓存和检查点。
+
+主资源：[DBDB · 持久化键值数据库](https://aosabook.org/en/500L/dbdb-dog-bed-database.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：索引、事务/日志、锁、持久化、列式与对象存储、缓存和检查点；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：完成 DBDB，再选 MLSysBook Data Storage；比较本地文件、对象与共享存储
+- 测试、优化与解释：用固定数据对比顺序/随机读取；故障后核对提交边界和校验和。索引与一致性设计、吞吐/延迟分布、故障恢复记录；区分教学库与工业数据库
+
+成果标准：索引与一致性设计、吞吐/延迟分布、故障恢复记录；区分教学库与工业数据库。
+
+### Linux 与资源隔离
+
+类别：核心必修。前置：操作系统与并发、终端、Git 与可复现环境。
+
+精读范围：进程、权限、信号、文件描述符、namespace、cgroup、容器镜像。
+
+主资源：[Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/)。 补充：[Kubernetes 官方概念](https://kubernetes.io/docs/concepts/overview/)。
+
+- 理解机制与边界：进程、权限、信号、文件描述符、namespace、cgroup、容器镜像；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：在已有隔离 Linux 环境检查进程、权限与 CPU/内存限额；先读官方容器概念
+- 测试、优化与解释：比较受限与不受限工作负载，解释 OOM、退出信号和资源回收。环境版本、最小权限、限制与故障日志；Windows 测试不当作 Linux 实验
+
+成果标准：环境版本、最小权限、限制与故障日志；Windows 测试不当作 Linux 实验。
+
+### 模型结构与计算工作负载
+
+类别：核心必修。前置：张量、自动微分与框架、机器学习与优化基础。
+
+精读范围：MLP、CNN、RNN、attention/Transformer、tokenizer、embedding、MoE 与稀疏访问。
+
+主资源：[动手学深度学习](https://zh.d2l.ai/)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
+
+- 理解机制与边界：MLP、CNN、RNN、attention/Transformer、tokenizer、embedding、MoE 与稀疏访问；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：选 D2L CNN/RNN/attention，再按 CS336 Assignment 1 实现小型 tokenizer、模型与优化器
+- 测试、优化与解释：检查张量形状、mask、梯度和参数量；比较卷积、attention 与 embedding 的访存需求。小型模型与单元测试、FLOPs/内存预算、质量基线；不要求下载大模型
+
+成果标准：小型模型与单元测试、FLOPs/内存预算、质量基线；不要求下载大模型。
+
+### 评估、实验设计与鲁棒性
+
+类别：核心必修。前置：机器学习与优化基础、概率与统计推理、数据管线与可复现训练。
+
+精读范围：数据切分、污染、质量指标、置信区间、漂移、鲁棒性与性能公平比较。
+
+主资源：[Stanford CS336](https://cs336.stanford.edu/)。 补充：[OpenIntro Statistics](https://www.openintro.org/book/os/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：数据切分、污染、质量指标、置信区间、漂移、鲁棒性与性能公平比较；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：固定训练/验证/测试边界；按原课评估主题设计数据与质量基线
+- 测试、优化与解释：测多个种子、样本分组和负载；比较精度变化与性能误差。评估协议、失败样本、统计不确定性和质量/性能取舍；避免测试集参与调参
+
+成果标准：评估协议、失败样本、统计不确定性和质量/性能取舍；避免测试集参与调参。
+
+### 实验追踪与模型产物
+
+类别：核心必修。前置：数据管线与可复现训练、软件工程与可测试交付。
+
+精读范围：配置、数据版本、随机状态、环境、模型/优化器产物、谱系与注册。
+
+主资源：[MLflow 官方机器学习文档](https://mlflow.org/docs/latest/ml/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：配置、数据版本、随机状态、环境、模型/优化器产物、谱系与注册；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：组织配置、提交、数据哈希与模型元数据；按官方 tracking/model 文档核对字段
+- 测试、优化与解释：重跑小模型；从保存状态继续并比较下一步；检查缺失产物时明确失败。可复现实验目录、版本清单与恢复记录；MLflow 仅为参考选型，不自动装服务
+
+成果标准：可复现实验目录、版本清单与恢复记录；MLflow 仅为参考选型，不自动装服务。
+
+### 加速器与数据中心架构
+
+类别：方向必修。前置：C/C++、内存与计算机组织、数值稳定性与性能测量。
+
+精读范围：SIMD/SIMT、tensor core、HBM、NUMA、PCIe/NVLink、NIC、TPU/异构与机柜供电。
+
+主资源：[CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-programming-guide/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
+
+- 理解机制与边界：SIMD/SIMT、tensor core、HBM、NUMA、PCIe/NVLink、NIC、TPU/异构与机柜供电；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：沿 CUDA 与 MLSysBook Compute Infrastructure 画主机、设备与网络的数据路径
+- 测试、优化与解释：核算容量/带宽/计算上界；用原课资源核算练习解释瓶颈。带单位的预算、硬件兼容表与可证伪预测；异构硬件未实测不写已通过
+
+成果标准：带单位的预算、硬件兼容表与可证伪预测；异构硬件未实测不写已通过。
+
+### 性能剖析与端到端基准
+
+类别：方向必修。前置：GPU 内核与性能工程、数值稳定性与性能测量、数据管线与可复现训练。
+
+精读范围：时间线、异步同步、roofline、算术强度、H2D、数据加载、内存、尾延迟。
+
+主资源：[PyTorch Profiler 官方配方](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
+
+- 理解机制与边界：时间线、异步同步、roofline、算术强度、H2D、数据加载、内存、尾延迟；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：按官方 profiler 配方标注加载、拷贝、前后向和 optimizer；区分预热与编译开销
+- 测试、优化与解释：CPU oracle 与 GPU 容差一起复核；固定线程、batch、时钟条件并记录分布。剖析 trace、测量边界与优化前后报告；内核加速必须另测端到端收益
+
+成果标准：剖析 trace、测量边界与优化前后报告；内核加速必须另测端到端收益。
+
+### 集体通信与高速网络
+
+类别：方向必修。前置：分布式与故障恢复、GPU 内核与性能工程、网络与存储 I/O。
+
+精读范围：AllReduce、AllGather、ReduceScatter、AlltoAll、ring/tree、RDMA、拓扑与超时。
+
+主资源：[NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)。 补充：[PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：AllReduce、AllGather、ReduceScatter、AlltoAll、ring/tree、RDMA、拓扑与超时；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：先按 PyTorch 2.10 后端表核对平台，再用小数组验证各 collective 的输出
+- 测试、优化与解释：在可用多进程环境故意制造次序/形状错误；测消息大小、拓扑与 overlap。输出 oracle、通信量推导、延迟/带宽曲线与故障日志；CPU 多进程不冒充多卡
+
+成果标准：输出 oracle、通信量推导、延迟/带宽曲线与故障日志；CPU 多进程不冒充多卡。
+
+### 训练显存与并行内存优化
+
+类别：方向必修。前置：张量、自动微分与框架、GPU 内核与性能工程、集体通信与高速网络。
+
+精读范围：参数、梯度、优化器、激活；梯度累积、重计算、offload、ZeRO/FSDP、分片检查点。
+
+主资源：[PyTorch FSDP 2.10 API](https://docs.pytorch.org/docs/2.10/fsdp.html)。 补充：[PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
+
+- 理解机制与边界：参数、梯度、优化器、激活；梯度累积、重计算、offload、ZeRO/FSDP、分片检查点；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：先核算小模型内存，再按官方 FSDP/CS336 系统作业比较分片与累积
+- 测试、优化与解释：记录峰值 allocated/reserved、通信与耗时；检查梯度、loss 和断点恢复。内存分项、拓扑与状态保存方案、数值/吞吐对照；没有多卡只提交理论预算
+
+成果标准：内存分项、拓扑与状态保存方案、数值/吞吐对照；没有多卡只提交理论预算。
+
+### 规模规律与训练预算
+
+类别：方向必修。前置：分布式训练系统、模型结构与计算工作负载、概率与统计推理。
+
+精读范围：参数/数据/计算量、scaling laws、MFU、强弱扩展、straggler 与恢复成本。
+
+主资源：[Stanford CS336](https://cs336.stanford.edu/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：参数/数据/计算量、scaling laws、MFU、强弱扩展、straggler 与恢复成本；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：按 CS336 Assignment 3 先理解预算与拟合；用获准的小规模实验建立曲线
+- 测试、优化与解释：分离硬件峰值、有效吞吐和质量；报告范围、残差与未验证外推。预算模型、拟合诊断、扩展效率与失败开销；原课 API/云费用先另行确认
+
+成果标准：预算模型、拟合诊断、扩展效率与失败开销；原课 API/云费用先另行确认。
+
+### 后训练与 rollout 基础设施
+
+类别：方向必修。前置：模型结构与计算工作负载、评估、实验设计与鲁棒性、数据管线与可复现训练。
+
+精读范围：SFT、偏好优化、RLVR、rollout/learner、奖励、同步/异步与样本版本。
+
+主资源：[Stanford CS336](https://cs336.stanford.edu/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：SFT、偏好优化、RLVR、rollout/learner、奖励、同步/异步与样本版本；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：按 CS336 Assignment 5 理解 SFT 与 reasoning RL；先确定数据、奖励和评估边界
+- 测试、优化与解释：在小模型/获准环境比较样本版本、生成吞吐与训练质量；检查奖励投机。数据与奖励说明、同步协议、质量/资源报告；与原课作业政策相符
+
+成果标准：数据与奖励说明、同步协议、质量/资源报告；与原课作业政策相符。
+
+### 低精度、量化与模型压缩
+
+类别：方向必修。前置：数值稳定性与性能测量、模型结构与计算工作负载、GPU 内核与性能工程。
+
+精读范围：FP16/BF16/FP8、loss scaling、PTQ/QAT、INT8/INT4、校准、稀疏/剪枝与蒸馏。
+
+主资源：[vLLM](https://docs.vllm.ai/en/latest/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：FP16/BF16/FP8、loss scaling、PTQ/QAT、INT8/INT4、校准、稀疏/剪枝与蒸馏；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：按 vLLM quantization 与 MLSysBook Model Compression 选一个兼容方案，不混用训练精度与权重量化
+- 测试、优化与解释：固定校准/测试数据；对照 FP32、误差、质量、显存与端到端延迟。校准来源、兼容版本、精度与性能报告；文件变小不自动证明更快
+
+成果标准：校准来源、兼容版本、精度与性能报告；文件变小不自动证明更快。
+
+### 集群调度与资源管理
+
+类别：方向必修。前置：分布式与故障恢复、可靠性、安全与可观测性、Linux 与资源隔离。
+
+精读范围：requests/limits、quota、device plugin、亲和性、拓扑、gang scheduling、弹性和队列公平。
+
+主资源：[Kubernetes 官方概念](https://kubernetes.io/docs/concepts/overview/)。 补充：[Ray 官方集群概念](https://docs.ray.io/en/latest/cluster/key-concepts.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：requests/limits、quota、device plugin、亲和性、拓扑、gang scheduling、弹性和队列公平；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：沿 Kubernetes scheduling/eviction 与 Ray task/actor 概念制定小集群的调度策略
+- 测试、优化与解释：在已有测试环境复现排队、OOM、抢占与节点不可用；核对资源是否释放。调度配置、任务状态轨迹、利用率与恢复；集群工具尚未在本机安装验证
+
+成果标准：调度配置、任务状态轨迹、利用率与恢复；集群工具尚未在本机安装验证。
+
+### 模型部署与生命周期
+
+类别：核心必修。前置：实验追踪与模型产物、评估、实验设计与鲁棒性、可靠性、安全与可观测性。
+
+精读范围：模型注册、打包、schema、导出/兼容、灰度、A/B、监控、漂移与回滚。
+
+主资源：[MLflow 官方机器学习文档](https://mlflow.org/docs/latest/ml/)。 补充：[Site Reliability Engineering](https://sre.google/sre-book/table-of-contents/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：模型注册、打包、schema、导出/兼容、灰度、A/B、监控、漂移与回滚；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：制定加载、输入输出契约与版本清单；按官方模型产物和 SRE 原则设计灰度
+- 测试、优化与解释：用小模型服务/测试替身演练新旧版本、无效输入与回滚；保存部署前后质量。部署与回滚记录、版本谱系、SLI/SLO 与质量门槛；替身不标生产服务已验证
+
+成果标准：部署与回滚记录、版本谱系、SLI/SLO 与质量门槛；替身不标生产服务已验证。
+
+### 安全、隐私与治理
+
+类别：核心必修。前置：数据管线与可复现训练、可靠性、安全与可观测性、软件工程与可测试交付。
+
+精读范围：IAM/RBAC、租户隔离、密钥、供应链、模型/数据许可、PII、投毒、审计与删除。
+
+主资源：[Kubernetes Security](https://kubernetes.io/docs/concepts/security/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：IAM/RBAC、租户隔离、密钥、供应链、模型/数据许可、PII、投毒、审计与删除；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：按 Kubernetes Security 与 MLSysBook Security & Privacy 建模访问边界；只用合成非敏感数据
+- 测试、优化与解释：检查越权、日志泄漏、依赖来源和过期访问；设计撤销/清理与审计流程。威胁模型、权限矩阵与负面测试；法规与合同按实际地区另核，不提供法律结论
+
+成果标准：威胁模型、权限矩阵与负面测试；法规与合同按实际地区另核，不提供法律结论。
+
+### 容量、成本与能源效率
+
+类别：方向必修。前置：性能剖析与端到端基准、可靠性、安全与可观测性。
+
+精读范围：容量规划、成本/成功任务、GPU 利用、存储/网络费用、能耗、PUE 与碳核算边界。
+
+主资源：[Site Reliability Engineering](https://sre.google/sre-book/table-of-contents/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：容量规划、成本/成功任务、GPU 利用、存储/网络费用、能耗、PUE 与碳核算边界；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：用已有测量核算吞吐、闲置与恢复开销；按 MLSysBook Sustainable AI 明确统计边界
+- 测试、优化与解释：比较batch/精度策略；没有功率计只报告估算并保留假设，不制造实测电量。单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买
+
+成果标准：单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买。
+
+### 检索、向量索引与 RAG 系统
+
+类别：方向必修。前置：数据库、索引与存储系统、数据管线与可复现训练、推理服务与性能。
+
+精读范围：embedding、ANN、召回/延迟、混合检索、索引更新、元数据权限、RAG 缓存与评估。
+
+主资源：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[vLLM](https://docs.vllm.ai/en/latest/)。
+
+- 理解机制与边界：embedding、ANN、召回/延迟、混合检索、索引更新、元数据权限、RAG 缓存与评估；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：精读 MLSysBook Data Storage 的 Retrieval Infrastructure；用许可明确的小数据建立精确检索 oracle
+- 测试、优化与解释：比较近似召回、索引内存、延迟和更新一致性；检查检索权限与证据来源。检索/生成分项基线、负面案例与版本图；不把通用聊天 demo 当完整 RAG 验收
+
+成果标准：检索/生成分项基线、负面案例与版本图；不把通用聊天 demo 当完整 RAG 验收。
+
+### 边缘、移动与异构部署
+
+类别：可选深入。前置：模型结构与计算工作负载、低精度、量化与模型压缩、加速器与数据中心架构。
+
+精读范围：模型导出、算子兼容、设备 runtime、实时预算、热/功率、离线与更新。
+
+主资源：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[torch.compile 官方教程](https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)。
+
+- 理解机制与边界：模型导出、算子兼容、设备 runtime、实时预算、热/功率、离线与更新；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：按 MLSysBook Edge Intelligence 选已有设备；先核对导出与运行时算子支持
+- 测试、优化与解释：比较主机 oracle 与设备输出；检查启动、峰值内存、延迟抖动与降频。兼容矩阵、设备实测和可回滚更新；未有设备仅能提交预算与模拟结果
+
+成果标准：兼容矩阵、设备实测和可回滚更新；未有设备仅能提交预算与模拟结果。
+
+### 多模态与其他模型系统
+
+类别：可选深入。前置：模型结构与计算工作负载、数据管线与可复现训练、评估、实验设计与鲁棒性。
+
+精读范围：视觉/音频、变长序列、diffusion、推荐稀疏特征、模态同步与动态 batching。
+
+主资源：[动手学深度学习](https://zh.d2l.ai/)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+- 理解机制与边界：视觉/音频、变长序列、diffusion、推荐稀疏特征、模态同步与动态 batching；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：选 D2L 原模型实践及 CS336 multimodality 主题；先解释样本形状与预处理
+- 测试、优化与解释：在获准的小数据上测 decode/preprocess、padding、batch 与质量；避免只测模型算子。预处理与模型链路、数据许可和质量/吞吐报告；方向按岗位需求深入
+
+成果标准：预处理与模型链路、数据许可和质量/吞吐报告；方向按岗位需求深入。
+
+### 端到端 AI 系统设计与复核
+
+类别：方向必修。前置：分布式训练系统、推理服务与性能、集群调度与资源管理、模型部署与生命周期、安全、隐私与治理。
+
+精读范围：需求/SLO、容量、拓扑、数据/模型生命周期、安全、故障、成本和演进。
+
+主资源：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[Site Reliability Engineering](https://sre.google/sre-book/table-of-contents/)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
+
+- 理解机制与边界：需求/SLO、容量、拓扑、数据/模型生命周期、安全、故障、成本和演进；先用主资源查明定义、假设与失败条件。
+- 设计与独立实践：从一个实际问题写需求、约束与预算，选原作者项目作为实现载体
+- 测试、优化与解释：由同伴用故障、扩容、质量下降与预算变化挑战假设；在可用环境复核关键链路。需求、架构、独立代码、原测试、性能/质量/安全报告和恢复演练；标明未实测部分
+
+成果标准：需求、架构、独立代码、原测试、性能/质量/安全报告和恢复演练；标明未实测部分。

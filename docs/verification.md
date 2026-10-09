@@ -2,7 +2,7 @@
 
 日期：2026-10-09。Windows、Node v24.21.0、Python 3.12.14；浏览器为本机 Edge 无头模式。使用已有运行时与包，没有安装驱动、下载模型或浏览器。测试使用独立临时浏览器上下文，没有操作使用者的真实学习进度。
 
-## 已执行
+## 0.3.0 历史检查
 
 |检查|实际结果|
 |---|---|
@@ -84,3 +84,23 @@ node tests/live-browser.mjs
 ```
 
 默认检查项目正式 URL，可用 LAB_LIVE_URL 指定自己的 HTTPS 部署地址。结果保存在 artifacts/live-browser-results.json，截图为 live-desktop.png 和 live-mobile.png；这些本地产物不混入公开构建。最新部署提交与运行可在[验证工作流](https://github.com/Yuze-Li2026/ai-infra-lab/actions/workflows/validate.yml)和[发布工作流](https://github.com/Yuze-Li2026/ai-infra-lab/actions/workflows/pages.yml)核对。
+
+## 0.4.0 逐文件审查后的复验
+
+2026-10-09 按文件夹提示词重新阅读维护文件与冻结上游，清单覆盖 148 个文件；方法、发现与修复见[逐文件审查](file-audit.md)。学习范围扩展为 45 节点、41 来源，20 类能力对应官方课程、MLSysBook 两卷与原始 API，见[覆盖矩阵](coverage.md)。全部节点都有选章说明，结构检查不代表领域已经穷尽。
+
+|本轮实际检查|结果|
+|---|---|
+|Node 自动测试|25 通过、0 失败、0 跳过；新增部分报告不能计为完整验收、旧摘要兼容和零测试失败报告检查|
+|本地浏览器|13 + 8 + 10 + 13，共 44 组通过；45 个任务直达、范围筛选、报告、备份、阅读与安全失败路径|
+|文档|31 份 Markdown 加本站许可，均接入站内阅读；链接与每节点范围检查通过|
+|真实单卡|4 项 CUDA 检查再次通过：FP32、梯度、训练、独立临时检查点恢复|
+|原项目|对象模型 28、DBDB 21、共识 46 项原测试；micrograd 原测试 2 与补充检查 9 项通过|
+|首次启动|DBDB 与共识分别从独立新副本、无 artifacts 目录启动通过，21/46 项原测试成功|
+|历史工具保护|create-catalog、research-v02、complete-catalog、refactor-v02 拒绝当前目录，字节没有变化|
+|外部入口|49/49 可达；首轮 9 个超时经定向重试成功，保留两次尝试，不把超时写成资源失效|
+|公开输出|46 项内容文件及构建清单；白名单、逐文件 SHA-256、陈旧输出隔离通过|
+
+浏览器使用独立临时上下文；submission UI 夹具不代表真实学习者完成作品。桌面及移动截图已检查，新增入口沿用相同间距、颜色与文字层级。新增任务、实测通过和未执行高级工程分别记录。macOS、多卡、真实集群、全部原课作业、设备和长期教学成效仍未由本轮证明。
+
+发布只在同一提交的 Windows/Linux Validate 成功后触发 Pages。源码归档恢复、部署、线上清单与交互复验的最终具体提交和工作流 URL 记录于[0.4.0 发布附件](https://github.com/Yuze-Li2026/ai-infra-lab/releases/tag/v0.4.0)中的 verification JSON 与 SHA256SUMS；可据此核对源代码、静态网站和只含 main 的历史 bundle。恢复使用已准备的 Python 依赖，不声称是全新机器安装。
