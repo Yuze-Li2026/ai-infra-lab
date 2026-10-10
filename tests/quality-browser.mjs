@@ -26,6 +26,11 @@ try{
  await page.goto(base+'/#labs');await page.locator('.lab-card').first().waitFor();
  assert.equal(await page.locator('.lab-card').count(),catalog.labs.length);
  assert.equal(await page.locator('.lab-card.lab-ready').count(),catalog.labs.filter(l=>l.command).length);
+ await page.locator('[data-release-scope]').getByRole('link',{name:'环境验证状态',exact:true}).click();
+ await page.waitForFunction(()=>document.activeElement?.tagName==='H2');
+ assert.equal(await page.locator(':focus').innerText(),'环境验证状态');
+ assert.match(await page.locator('.document-body').innerText(),/A2 的四项 GPU 测试、真实多卡、A3–A5/);
+ checks.push('experiment guidance reaches the advanced environment table without claiming unexecuted GPU tests passed');
  checks.push('homepage experiment total equals every unfiltered lab card, with local commands and original-course workflows identified separately');
  await page.goto(base+'/#learn');await page.locator('.start-guide').waitFor();
  assert.equal(await page.locator('.start-guide').getAttribute('open'),'');

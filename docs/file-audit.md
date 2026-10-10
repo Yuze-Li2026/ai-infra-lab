@@ -293,7 +293,13 @@
 
 `labs/common.py` 与 `tests/report-files.test.mjs` 核对 Windows 临时占用的有界重试、旧报告保护和真实句柄测试。CS336 检查及工作流明确 CPU 与 GPU 范围；`site/documents.js` 和浏览器回归核对表格名称、Tab 焦点与方向键滚动。腾讯云说明按官方资料核对规格、额度、过期和停机规则，来源同步 `scripts/credits.mjs` 与 `CREDITS.md`。最终附件保留同提交的完整文件清单、结构检查和哈希，不能把清单读取称为第三方全量源码语义审计。
 
-### 接手入口
+### 1.0 首版增量复核
+
+本轮不扩充功能和课程数量。`site/views.js`、`site/index.html` 核对首版入口、环境状态链接和既有阅读层级；`site/catalog.json` 修正 MapReduce 已选题却仍写未选题的矛盾，以及 DLSys、Raft、CS336 的过期环境说明。原测试、起始作业、个人数据格式与冻结依赖没有改动。
+
+`README.md`、文档中心、高级实验、交付清单、提示词审计、验证记录与 AI 维护说明统一首版范围；`AGENTS.md` 保留所有者最新决定和后续高级验收。版本清单同步更新。浏览器回归核对支持说明实际可达，继续检查手机、键盘和 200% 文字；发布附件保存同提交全部受控文件的结构检查与哈希。此记录不把自动清单检查当作每个第三方文件的独立安全审计。
+
+### 接手入口说明
 
 集群环境新增固定镜像摘要与隔离工作流：`scripts/check-cluster-environment.py` 使用随机资源名和独立 kubeconfig，分别执行 Kubernetes 权限/服务/副本/配额/回滚、Ray 双节点/跨节点任务/actor 检查点恢复；清理仅针对本次资源。`scripts/check-ray-cluster.py` 保留真实任务异常和节点标识。JSON 结果与日志明确单宿主 CPU 范围，kubeconfig 不上传。流程是否可用以实际云端结果为准，不以本机静态检查代替。
 

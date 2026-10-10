@@ -6127,7 +6127,7 @@
         "测量性能并复现故障",
         "提交原理与设计解释"
       ],
-      "limitation": "尚未选定可独立运行的具体项目，不显示为已集成实验。",
+      "limitation": "固定 MapReduce 原 API 与本站补充检查已接入；其他 OSTEP 项目、完整 Unix 平台及个人实现分别验证。补充检查不是原课官方评分。",
       "integration": "candidate",
       "guide": "./docs/project-workflows.md",
       "preparationCommand": "node scripts/project.mjs ostep-project plan"
@@ -6142,7 +6142,7 @@
       "source": "dlsys",
       "url": "https://dlsyscourse.org/",
       "hardware": "Python/C++；部分阶段需要兼容 CUDA GPU",
-      "status": "固定 HW0/HW1/HW2 起始代码与原测试已接入；完整作业与 HW3/HW4 后端尚未复现。",
+      "status": "固定 HW0/HW1/HW2 起始代码在 Linux 执行原测试，HW0 C++ 扩展已构建；保留起始 TODO 失败，HW3/HW4 与 CUDA 后端尚未验证。",
       "goal": "沿原课作业实现自动微分、模块与 NDArray 后端。",
       "rubric": [
         "遵从原课程代码及作业许可",
@@ -6150,7 +6150,7 @@
         "CPU/GPU 对照与数值误差说明",
         "性能报告与框架设计文档"
       ],
-      "limitation": "课程 mugrade 服务不保证校外可用；尚未提供已验证的环境锁文件。",
+      "limitation": "已记录 Linux 固定依赖和原测试执行；不含完整课程传递依赖锁、mugrade 在线提交或学习者作业通过。",
       "integration": "candidate",
       "guide": "./docs/project-workflows.md",
       "preparationCommand": "node scripts/project.mjs needle plan"
@@ -6166,7 +6166,7 @@
       "source": "cs336",
       "url": "https://cs336.stanford.edu/",
       "hardware": "按原作业确认 GPU 显存与算力预算",
-      "status": "固定 A1/A2 起始代码与原测试流程；需独立 PyTorch 2.11 环境，实际完整原作业未复现。",
+      "status": "A1 已按原锁在 Linux 执行原测试；A2 仅验证 CPU 范围，四项 GPU 测试未执行。完整作业由学习者独立实现。",
       "goal": "从原课内核和并行主题入手，训练系统优化与解释能力。",
       "rubric": [
         "固定原作业版本、硬件与依赖",
@@ -6174,7 +6174,7 @@
         "重复测量并分析瓶颈",
         "解释优化原因与失败边界"
       ],
-      "limitation": "多卡与 GPU 检查未执行；不能以提交记录代替实际结果。",
+      "limitation": "A2 GPU、真实多卡和 A3–A5 尚未验收；环境验证、起始代码失败与个人作品通过分别记录。",
       "integration": "candidate",
       "guide": "./docs/project-workflows.md",
       "preparationCommand": "node scripts/project.mjs systems plan"
@@ -6188,8 +6188,8 @@
       ],
       "source": "distributed",
       "url": "https://pdos.csail.mit.edu/6.5840/",
-      "hardware": "CPU / Go；原实验环境待验证",
-      "status": "2026 官方源码获取及版本已验证；使用 src/raft1 与 make raft1，Linux/WSL2、Go 环境仍需准备。",
+      "hardware": "Linux / CPU / Go；需按指南准备独立原课环境",
+      "status": "2026 固定源码、Linux 原测试与竞态检测已执行；起始 TODO 失败保留。使用 src/raft1 与 make raft1。",
       "goal": "通过原课程实验理解容错语义与故障恢复。",
       "rubric": [
         "核实原实验版本与许可证",
@@ -6197,7 +6197,7 @@
         "按原测试进行故障注入",
         "提交正确性、恢复行为与设计解释"
       ],
-      "limitation": "不重新生成一套替代原实验；独立复现后再标记已集成。",
+      "limitation": "原环境执行不证明 Raft 实现正确；学习者作品、跨机运行与其他操作系统仍需独立验收。",
       "integration": "candidate",
       "guide": "./docs/project-workflows.md",
       "preparationCommand": "node scripts/project.mjs raft plan"
