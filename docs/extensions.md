@@ -26,9 +26,9 @@
 
 ## 实验 Lab
 
-字段：`id / title / stage / nodes / source / url / hardware / status / goal / rubric / limitation / integration`；可选 `command / guide / validation`。`integration` 使用 `candidate / checked / reproduced`。`guide` 必须是站内相对地址；`validation` 保留实际运行环境、固定提交、测试数量与原始测量摘要。
+字段：`id / title / stage / nodes / source / url / hardware / status / goal / rubric / limitation / integration`；可选 `command / preparationCommand / guide / validation / reportCommit / requiredChecks`。`integration` 使用 `candidate / checked / reproduced`。`guide` 必须是站内相对地址；`validation` 保留实际运行环境、固定提交、测试数量与原始测量摘要。
 
-集成级别分为候选、可复现、具备本地验收、完成跨平台验证。不得省略校外访问条件、CPU/GPU 要求或课程评分服务限制。进入“可复现”之前需补充版本锁定、依赖、操作系统、正确性测试、性能测量协议、恢复方式和具体许可记录；初版候选并不满足这些门槛。
+`candidate` 表示尚未完成本站运行集成，`checked` 表示已有本地补充检查，`reproduced` 表示固定参考实现已有实测。原课准备入口由 `preparationCommand` 单独标识；环境验证与课程完成另记，不增加未定义的集成枚举。不得省略校外访问条件、CPU/GPU 要求或课程评分服务限制。进入“可复现”之前需补充版本锁定、依赖、操作系统、正确性测试、性能测量协议、恢复方式和具体许可记录；初版候选并不满足这些门槛。
 
 外部代码不在浏览器里自动执行。将来运行器应隔离权限和依赖，不使用本页超时检查当作安全沙箱。引入容器也需说明挂载、网络、资源限制和退出恢复行为。
 

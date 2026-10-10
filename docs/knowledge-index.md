@@ -1,6 +1,6 @@
 # 逐项知识与原始资料
 
-核对日期：2026-10-09。45 个学习模块细分为 198 项选读任务。每项都有原始来源、章节定位、独立复核要求和实践环境。条目数量用于检查漏项，不是领域已经穷尽的证明。
+核对日期：2026-10-10。45 个学习模块细分为 198 项选读任务。每项都有原始来源、章节定位、独立复核要求和实践环境。条目数量用于检查漏项，不是领域已经穷尽的证明。
 
 先按[学习路径](learning-paths.md)选方向，再用[中文选章指南](curriculum.md)了解先修与整体目标。下表章节名称用于在原站定位；原站改版时先查看目录。练习要求由本站组织，不冒称原作者评分，也不表示对应环境已经部署。做到实践时先读[按实验准备环境](environment-preparation.md)，个人云端准备见[私有实验室](private-cloud.md)，实际环境证据见[验证记录](verification.md)。
 
@@ -304,7 +304,7 @@
 
 | 知识与选读 | 独立复核 | 实践条件 |
 | --- | --- | --- |
-| **数据并行与梯度同步** · [PyTorch Distributed](https://docs.pytorch.org/docs/2.10/generated/torch.nn.parallel.DistributedDataParallel.html)；DistributedDataParallel | 与单进程基线核对梯度、有效 batch 和训练轨迹 | 多卡 GPU |
+| **数据并行与梯度同步** · [PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/generated/torch.nn.parallel.DistributedDataParallel.html)；DistributedDataParallel | 与单进程基线核对梯度、有效 batch 和训练轨迹 | 多卡 GPU |
 | **张量并行与通信** · [Megatron Core 用户指南](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html)；User Guide：Tensor Parallelism | 逐层分析切分、通信量和算子形状 | 多卡 GPU |
 | **流水线并行与调度** · [Megatron Core 用户指南](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html)；User Guide：Pipeline Parallelism | 画 microbatch 调度，计算气泡与激活保存成本 | 多卡 GPU |
 | **上下文、专家与混合并行** · [Megatron Core 用户指南](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/index.html)；User Guide：Context Parallelism；MoE | 解释并行组的交叠及不同拓扑下的瓶颈 | 多卡 GPU |
@@ -356,7 +356,7 @@
 | **算力、带宽与 Roofline** · [CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-programming-guide/)；Performance Guidelines | 计算算术强度并与实际瓶颈对照 | 单卡 GPU |
 | **CPU NUMA、PCIe 与 NVLink** · [NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)；Troubleshooting：GPU-to-GPU；Topology | 画设备拓扑，分别测量点对点和主机传输 | 多卡 GPU |
 | **电力、冷却与故障域** · [Machine Learning Systems](https://mlsysbook.ai/)；Volume II：Compute Infrastructure | 估算机架容量，区分设备故障与故障域设计 | 阅读与推导 |
-| **GPU、TPU、NPU 与后端约束** · [ExecuTorch 部署指南](https://docs.pytorch.org/executorch/stable/index.html)；Backends；Hardware Support | 为目标后端核对算子、dtype、内存和工具链支持 | 指定目标设备 |
+| **GPU、TPU、NPU 与后端约束** · [Machine Learning Systems](https://mlsysbook.ai/vol1/hw_acceleration/hw_acceleration.html)；Hardware Acceleration：GPU、TPU、Heterogeneous SoC Design；具体运行后端另核对厂商文档 | 为目标后端核对算子、dtype、内存和工具链支持 | 指定目标设备 |
 | **ROCm、HIP 与跨厂商移植** · [AMD ROCm 文档](https://rocm.docs.amd.com/en/latest/)；Compatibility Matrix；HIP；Frameworks | 先核对设备支持，再对照正确性与性能，不假设 CUDA 二进制可直接运行 | 指定目标设备 |
 
 ## 性能剖析与端到端基准
@@ -379,7 +379,7 @@
 | **AllReduce、AllGather、ReduceScatter** · [NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)；Usage：Collective Operations | 手算小数据的输出并在多卡核对 | 多卡 GPU |
 | **Ring、Tree 与通信成本** · [Machine Learning Systems](https://mlsysbook.ai/)；Volume II：Collective Communication | 按消息量、带宽和延迟比较通信算法 | 阅读与推导 |
 | **InfiniBand、RoCE 与 GPUDirect RDMA** · [NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)；Troubleshooting：Networking；GPU-to-NIC | 核对网卡、驱动、拓扑和链路测试后再调参数 | 集群 / 管理权限 |
-| **计算通信重叠与梯度分桶** · [PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)；DistributedDataParallel；Communication Hooks | 对比不同 bucket 的通信等待与端到端时间 | 多卡 GPU |
+| **计算通信重叠与梯度分桶** · [PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/distributed.html)；DistributedDataParallel；Communication Hooks | 对比不同 bucket 的通信等待与端到端时间 | 多卡 GPU |
 | **挂起、超时和通信诊断** · [NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)；Troubleshooting：RAS；Logging；Diagnostics | 模拟 worker 退出并保存有界超时和诊断证据 | 多卡 GPU |
 
 ## 训练显存与并行内存优化
@@ -390,7 +390,7 @@
 | --- | --- | --- |
 | **参数、梯度、状态与激活预算** · [Stanford CS336](https://cs336.stanford.edu/)；2026 Resource Accounting；Systems | 按 dtype 和并行策略列显存预算并实测峰值 | 单卡 GPU |
 | **ZeRO/FSDP 状态分片** · [PyTorch FSDP 2.10 API](https://docs.pytorch.org/docs/2.10/fsdp.html)；FullyShardedDataParallel；ShardingStrategy | 核对峰值、通信与恢复文件，说明分片节省来自哪里 | 多卡 GPU |
-| **激活重计算与 Offload** · [PyTorch Distributed](https://docs.pytorch.org/docs/2.10/checkpoint.html)；torch.utils.checkpoint；Offload 另参照本节 FSDP 的 CPUOffload | 测量重计算或搬运带来的耗时与显存变化 | 单卡 GPU |
+| **激活重计算与 Offload** · [PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/checkpoint.html)；torch.utils.checkpoint；Offload 另参照本节 FSDP 的 CPUOffload | 测量重计算或搬运带来的耗时与显存变化 | 单卡 GPU |
 | **分片检查点与恢复拓扑** · [PyTorch Distributed Checkpoint](https://docs.pytorch.org/docs/2.10/distributed.checkpoint.html)；State Dict；StorageWriter；StorageReader | 保存后在支持的拓扑重载并核对下一步训练 | 多卡 GPU |
 
 ## 规模规律与训练预算
@@ -412,7 +412,7 @@
 | --- | --- | --- |
 | **SFT 与序列打包** · [TRL 后训练指南](https://huggingface.co/docs/trl/index)；SFT Trainer | 验证 masking、padding、样本边界与 loss 计算 | 单卡 GPU |
 | **偏好数据、奖励模型与 DPO** · [TRL 后训练指南](https://huggingface.co/docs/trl/index)；Reward Trainer；DPO Trainer | 检查偏好对、参考模型和训练指标是否一致 | 单卡 GPU |
-| **PPO/GRPO 与 rollout 管线** · [TRL 后训练指南](https://huggingface.co/docs/trl/index)；GRPO Trainer；PPO Trainer | 记录采样、奖励、更新的吞吐和数据版本 | 多卡 GPU |
+| **PPO/GRPO 与 rollout 管线** · [TRL 后训练指南](https://huggingface.co/docs/trl/v0.24.0/ppo_trainer)；v0.24.0：PPO Trainer 与同版 GRPO Trainer；旧版选读，运行时不能混用新版 API | 记录采样、奖励、更新的吞吐和数据版本 | 多卡 GPU |
 | **RLVR、验证器与奖励失真** · [Stanford CS336](https://cs336.stanford.edu/)；2026 Lecture 16：RLVR | 构造验证器反例，解释奖励增长与任务改善的区别 | 单卡 GPU |
 | **在线采样、权重同步与复现** · [TRL 后训练指南](https://huggingface.co/docs/trl/index)；vLLM Integration；Distributed Training | 核对采样使用的模型版本和更新顺序，测试中断恢复 | 多卡 GPU |
 
@@ -423,7 +423,7 @@
 | 知识与选读 | 独立复核 | 实践条件 |
 | --- | --- | --- |
 | **FP32、FP16、BF16 与 FP8** · [CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-programming-guide/)；Floating-Point；Tensor Cores | 比较范围、精度和硬件支持，不仅比较字节数 | 单卡 GPU |
-| **混合精度、缩放与溢出** · [动手学深度学习](https://zh.d2l.ai/)；数值稳定性；计算性能 | 用极端输入复核梯度与 loss，记录数值异常 | 单卡 GPU |
+| **混合精度、缩放与溢出** · [PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/amp.html)；torch.amp：Autocasting；Gradient Scaling；算子支持表 | 用极端输入复核梯度与 loss，记录数值异常 | 单卡 GPU |
 | **PTQ、QAT、校准与 QDQ** · [ONNX Runtime 模型量化](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html)；Quantization Overview；Static/Dynamic；Quantization Debugging | 选择代表性校准集，比较精度、延迟和模型大小 | 普通 CPU |
 | **剪枝、蒸馏与结构化稀疏** · [Machine Learning Systems](https://mlsysbook.ai/)；Volume I：Model Compression | 明确压缩策略、质量阈值和实际硬件加速条件 | 单卡 GPU |
 
@@ -503,7 +503,7 @@
 
 | 知识与选读 | 独立复核 | 实践条件 |
 | --- | --- | --- |
-| **图像、音频与视频预处理** · [动手学深度学习](https://zh.d2l.ai/)；计算机视觉；数据预处理 | 核对形状、采样率、归一化与批处理成本 | 普通 CPU |
+| **图像、音频与视频预处理** · [SGLang 推理文档](https://docs.sglang.io/docs/supported-models/multimodal_language_models)；Multimodal Language Models：模态支持表；沿所选模型链接核对图像处理器、音频采样率和视频抽帧要求 | 核对形状、采样率、归一化与批处理成本 | 普通 CPU |
 | **ViT、跨模态注意力与生成** · [Stanford CS336](https://cs336.stanford.edu/)；2026 Lecture 17：Alignment and Multimodality | 分解编码器、投影和解码的计算与内存需求 | 单卡 GPU |
 | **多模态输入与服务调度** · [SGLang 推理文档](https://docs.sglang.io/)；Multimodal Models；Serving | 控制输入大小并测量编码和解码尾延迟 | 单卡 GPU |
 | **非文本质量与系统约束** · [Machine Learning Systems](https://mlsysbook.ai/)；Volume I：Network Architectures；Benchmarking | 同时记录任务质量、时间分辨率、延迟与存储成本 | 单卡 GPU |

@@ -80,7 +80,7 @@ node scripts/project.mjs raft prepare
 node scripts/project.mjs raft check
 ```
 
-运行需要 Linux 或已有 WSL2、Go 1.22+、make 和供竞态检测使用的 C 编译器。Windows 原生命令行会明确失败；工具不会安装 WSL、发行版或 Go。固定源码及原 `make raft1` 已在 Ubuntu 24.04 CI 实际执行，环境验证通过，起始实现仍失败，详见[Linux 原课环境记录](verification.md#linux-原课环境)。本机 Windows 尚未安装 Linux/WSL2；云端结果不改变本机的运行条件。
+运行需要 Linux 或已有 WSL2、Go 1.22+、make 和供竞态检测使用的 C 编译器。Windows 原生命令行会明确失败；工具不会安装 WSL、发行版或 Go。固定源码及原 `make raft1` 已在 Ubuntu 24.04 CI 实际执行，环境验证通过，起始实现仍失败，详见[Linux 原课环境记录](verification.md#linux-原课环境)。使用 Windows 时仍需准备满足原课要求的 Linux/WSL2 环境；云端验证不能代替本机环境检查。
 
 按原题独立完成 `src/raft1/raft.go`，在作品的 `src` 下先使用 `make RUN="-run 3A" raft1` 定位第一部分，然后 `make raft1` 跑完整目标；本站 `check` 调用同一完整目标，保存原日志并核对实际 Go 测试通过行及退出码。继续按原课完成 3B/3C/3D、上层 KV 和分片，重复故障场景与 `-race`；这些更深部分不会被本站一次 Raft 命令自动标记为掌握。AOSA 共识模拟器与此独立实验分别记录。
 

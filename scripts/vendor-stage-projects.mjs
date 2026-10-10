@@ -1,31 +1,45 @@
-// Explicit maintenance command; fixed small upstream files only, never run by the build.
-import {mkdir,writeFile,readFile} from 'node:fs/promises';
+// Restore the three pinned integrations using their committed manifests.
+// This command downloads only the selected small files; it never updates versions.
+import {mkdir,writeFile,readFile,lstat} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-const commit='fba689d101eb5600f5c8f4d7fd79912498e950e2';
-const tree=JSON.parse(await readFile('artifacts/aosa-tree.json','utf8'));
-async function download(repo,ref,path){
- try{const r=await fetch(`https://raw.githubusercontent.com/${repo}/${ref}/${path}`,{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error(r.status);return Buffer.from(await r.arrayBuffer());}
- catch{const r=await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=${ref}`);const d=await r.json();if(!r.ok||typeof d.content!=='string')throw Error(`${path}: ${d.message}`);return Buffer.from(d.content,'base64');}
-}
-async function save(root,path,bytes,manifest){
- if(bytes.length>100000)throw Error('Unexpected source size');
- const target=root+'/'+path;await mkdir(target.slice(0,target.lastIndexOf('/')),{recursive:true});
- try{const current=await readFile(target);if(!current.equals(bytes))throw Error(`Refusing to overwrite ${target}`);}catch(e){if(e.code!=='ENOENT')throw e;await writeFile(target,bytes);}
- manifest.files.push({path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
-}
-for(const [name,prefix]of [['dbdb','data-store/code/'],['consensus','cluster/code/']]){
- const root=`labs/${name}/upstream`;await mkdir(root,{recursive:true});
- const manifest={repository:'https://github.com/aosabook/500lines',commit,license:'MIT code; see LICENSE.md',files:[]};
- await save(root,'LICENSE.md',await readFile('labs/object-model/upstream/LICENSE.md'),manifest);
- for(const f of tree.tree.filter(f=>f.type==='blob'&&f.path.startsWith(prefix)&&(/\.py$/.test(f.path)||f.path.endsWith('requirements.txt')))){
-  const bytes=await download('aosabook/500lines',commit,f.path);
-  const blobHash=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
-  if(bytes.length!==f.size||blobHash!==f.sha)throw Error('Upstream blob mismatch');
-  await save(root,f.path.slice(prefix.length),bytes,manifest);
+import {resolve,dirname,sep} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+
+export async function restorePinnedSources(root,fetchSource=fetch){
+ const pending=[];let verified=0;
+ for(const [name,prefix] of [['dbdb','data-store/code/'],['consensus','cluster/code/'],['micrograd','']]){
+  const folder=resolve(root,`labs/${name}/upstream`);
+  const manifest=JSON.parse(await readFile(resolve(folder,'manifest.json'),'utf8'));
+  if(!/^https:\/\/github\.com\/[^/]+\/[^/]+$/.test(manifest.repository)||!/^[a-f0-9]{40}$/.test(manifest.commit))throw Error('Invalid pinned repository');
+  for(const item of manifest.files){
+   if(!Number.isSafeInteger(item.bytes)||item.bytes<0||item.bytes>100000||!/^[a-f0-9]{64}$/.test(item.sha256))throw Error('Invalid pinned file metadata');
+   const target=resolve(folder,item.path);
+   if(!target.startsWith(folder+sep))throw Error('Upstream path escapes its directory');
+   for(let path=target;path!==resolve(root);path=dirname(path)){
+    try{if((await lstat(path)).isSymbolicLink())throw Error('Refusing symbolic link: '+path);}
+    catch(error){if(error.code!=='ENOENT')throw error;}
+   }
+   let bytes;
+   try{bytes=await readFile(target);}catch(error){if(error.code!=='ENOENT')throw error;}
+   if(bytes){
+    if(bytes.length!==item.bytes||createHash('sha256').update(bytes).digest('hex')!==item.sha256)throw Error('Refusing to overwrite modified file: '+target);
+    verified++;continue;
+   }
+   const path=item.path==='LICENSE.md'?'LICENSE.md':prefix+item.path;
+   const url=manifest.repository.replace('https://github.com/','https://raw.githubusercontent.com/')+'/'+manifest.commit+'/'+path;
+   const response=await fetchSource(url,{signal:AbortSignal.timeout(20000)});
+   if(!response.ok)throw Error(`HTTP ${response.status}: ${url}`);
+   const chunks=[];let length=0;
+   for await(const chunk of response.body){length+=chunk.length;if(length>item.bytes)throw Error('Unexpected source size: '+path);chunks.push(chunk);}
+   bytes=Buffer.concat(chunks);
+   if(bytes.length!==item.bytes||createHash('sha256').update(bytes).digest('hex')!==item.sha256)throw Error('Upstream checksum mismatch: '+path);
+   pending.push({target,bytes});
+  }
  }
- await writeFile(root+'/manifest.json',JSON.stringify(manifest,null,2)+'\n');console.log(name,manifest.files.length);
+ // Complete validation first; failed downloads must not partially restore a tree.
+ for(const {target,bytes} of pending){await mkdir(dirname(target),{recursive:true});await writeFile(target,bytes,{flag:'wx'});}
+ return {verified,restored:pending.length};
 }
-const microCommit='7bc720e951fe422b8f8814aa5aa1b64121d26b4c',root='labs/micrograd/upstream';
-const manifest={repository:'https://github.com/karpathy/micrograd',commit:microCommit,license:'MIT',files:[]};
-for(const path of ['LICENSE','README.md','micrograd/__init__.py','micrograd/engine.py','micrograd/nn.py','test/test_engine.py'])await save(root,path,await download('karpathy/micrograd',microCommit,path),manifest);
-await writeFile(root+'/manifest.json',JSON.stringify(manifest,null,2)+'\n');console.log('micrograd',manifest.files.length);
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+ console.log(await restorePinnedSources(fileURLToPath(new URL('../',import.meta.url))));
+}

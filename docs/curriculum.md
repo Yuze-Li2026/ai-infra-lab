@@ -46,7 +46,7 @@
 
 主资源：[CS50 Python](https://cs50.harvard.edu/python/)。
 
-诊断与复核：编写有输入输出、分支、循环、函数与异常处理的程序，说明每个测试覆盖了什么。
+诊断与复核：编写包含输入输出、字符串处理与函数的程序，解释参数和返回值；用空输入、大小写与中文案例复核。条件、循环与异常在下一阶段学习。
 
 成果标准：通过本地 Indoor Voice 检查，提交代码并解释 lower() 的行为
 
@@ -276,6 +276,8 @@ GPU、分布式、推理与可靠性
 
 补充：[Stanford CS336](https://cs336.stanford.edu/)。
 
+补充：[Triton 官方编程教程](https://triton-lang.org/main/getting-started/tutorials/index.html)。
+
 诊断与复核：解释线程与内存访问，比较 CPU oracle、同步计时与传输总耗时。
 
 成果标准：正确性容差、参考实现、重复测量与性能分析报告
@@ -298,11 +300,11 @@ GPU、分布式、推理与可靠性
 
 ### 分布式训练系统
 
-类别：方向必修。前置：张量、自动微分与框架、数据管线与可复现训练、GPU 内核与性能工程、分布式与故障恢复。
+类别：方向必修。前置：张量、自动微分与框架、数据管线与可复现训练、GPU 内核与性能工程、分布式与故障恢复、集体通信与高速网络。
 
 精读范围：PyTorch 通信 API + CS336 并行主题
 
-主资源：[PyTorch Distributed](https://docs.pytorch.org/docs/stable/distributed.html)。
+主资源：[PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/distributed.html)。
 
 补充：[Stanford CS336](https://cs336.stanford.edu/)。
 
@@ -312,7 +314,7 @@ GPU、分布式、推理与可靠性
 
 ### 推理服务与性能
 
-类别：方向必修。前置：张量、自动微分与框架、GPU 内核与性能工程、网络与存储 I/O、数据管线与可复现训练。
+类别：方向必修。前置：张量、自动微分与框架、GPU 内核与性能工程、网络与存储 I/O、数据管线与可复现训练、模型结构与计算工作负载。
 
 精读范围：vLLM 官方部署/性能文档 + CS336 推理主题
 
@@ -332,7 +334,7 @@ GPU、分布式、推理与可靠性
 
 主资源：[Site Reliability Engineering](https://sre.google/sre-book/table-of-contents/)。
 
-补充：[Kubernetes Security](https://kubernetes.io/docs/concepts/security/)；[Machine Learning Systems](https://mlsysbook.ai/)。
+补充：[Kubernetes Security](https://kubernetes.io/zh-cn/docs/concepts/security/)；[Machine Learning Systems](https://mlsysbook.ai/)。
 
 诊断与复核：制定 SLO、权限边界、日志指标、故障定位与回滚，实际演练恢复。
 
@@ -347,6 +349,8 @@ GPU、分布式、推理与可靠性
 主资源：[MLIR Toy Tutorial](https://mlir.llvm.org/docs/Tutorials/Toy/)。
 
 补充：[Deep Learning Systems](https://dlsyscourse.org/)。
+
+补充：[torch.compile 官方教程](https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)。
 
 诊断与复核：展示优化前后 IR，说明语义等价条件和后端性能边界。
 
@@ -454,6 +458,8 @@ GPU、分布式、推理与可靠性
 
 主资源：[CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-programming-guide/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
 
+异构架构选读 MLSysBook Hardware Acceleration，分别比较 GPU、TPU 与移动 NPU；目标设备的算子与工具链支持再查厂商文档。
+
 - 理解机制与边界：SIMD/SIMT、tensor core、HBM、NUMA、PCIe/NVLink、NIC、TPU/异构与机柜供电；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：沿 CUDA 与 MLSysBook Compute Infrastructure 画主机、设备与网络的数据路径
 - 测试、优化与解释：核算容量/带宽/计算上界；用原课资源核算练习解释瓶颈。带单位的预算、硬件兼容表与可证伪预测；异构硬件未实测不写已通过
@@ -480,7 +486,7 @@ GPU、分布式、推理与可靠性
 
 精读范围：AllReduce、AllGather、ReduceScatter、AlltoAll、ring/tree、RDMA、拓扑与超时。
 
-主资源：[NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)。 补充：[PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+主资源：[NCCL 官方通信指南](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html)。 补充：[PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/distributed.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
 
 - 理解机制与边界：AllReduce、AllGather、ReduceScatter、AlltoAll、ring/tree、RDMA、拓扑与超时；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：先按 PyTorch 2.10 后端表核对平台，再用小数组验证各 collective 的输出
@@ -494,7 +500,7 @@ GPU、分布式、推理与可靠性
 
 精读范围：参数、梯度、优化器、激活；梯度累积、重计算、offload、ZeRO/FSDP、分片检查点。
 
-主资源：[PyTorch FSDP 2.10 API](https://docs.pytorch.org/docs/2.10/fsdp.html)。 补充：[PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
+主资源：[PyTorch FSDP 2.10 API](https://docs.pytorch.org/docs/2.10/fsdp.html)。 补充：[PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/distributed.html)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。
 
 - 理解机制与边界：参数、梯度、优化器、激活；梯度累积、重计算、offload、ZeRO/FSDP、分片检查点；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：先核算小模型内存，再按官方 FSDP/CS336 系统作业比较分片与累积
@@ -524,6 +530,8 @@ GPU、分布式、推理与可靠性
 
 主资源：[Stanford CS336](https://cs336.stanford.edu/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
 
+PPO 选读固定在 [TRL v0.24.0](https://huggingface.co/docs/trl/v0.24.0/ppo_trainer)，同版目录也提供 GRPO。当前滚动目录已调整，旧版参数不可直接套用新版环境。
+
 - 理解机制与边界：SFT、偏好优化、RLVR、rollout/learner、奖励、同步/异步与样本版本；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：按 CS336 Assignment 5 理解 SFT 与 reasoning RL；先确定数据、奖励和评估边界
 - 测试、优化与解释：在小模型/获准环境比较样本版本、生成吞吐与训练质量；检查奖励投机。数据与奖励说明、同步协议、质量/资源报告；与原课作业政策相符
@@ -538,6 +546,8 @@ GPU、分布式、推理与可靠性
 
 主资源：[vLLM](https://docs.vllm.ai/en/latest/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
 
+混合精度另读 [PyTorch 2.10 AMP](https://docs.pytorch.org/docs/2.10/amp.html) 的 autocast、梯度缩放和算子支持；数值稳定性教材不能代替这些 API 条件。
+
 - 理解机制与边界：FP16/BF16/FP8、loss scaling、PTQ/QAT、INT8/INT4、校准、稀疏/剪枝与蒸馏；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：按 vLLM quantization 与 MLSysBook Model Compression 选一个兼容方案，不混用训练精度与权重量化
 - 测试、优化与解释：固定校准/测试数据；对照 FP32、误差、质量、显存与端到端延迟。校准来源、兼容版本、精度与性能报告；文件变小不自动证明更快
@@ -550,7 +560,7 @@ GPU、分布式、推理与可靠性
 
 精读范围：requests/limits、quota、device plugin、亲和性、拓扑、gang scheduling、弹性和队列公平。
 
-主资源：[Kubernetes 官方概念](https://kubernetes.io/docs/concepts/overview/)。 补充：[Ray 官方集群概念](https://docs.ray.io/en/latest/cluster/key-concepts.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+主资源：[Kubernetes 官方概念](https://kubernetes.io/zh-cn/docs/concepts/overview/)。 补充：[Ray 官方集群概念](https://docs.ray.io/en/latest/cluster/key-concepts.html)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
 
 - 理解机制与边界：requests/limits、quota、device plugin、亲和性、拓扑、gang scheduling、弹性和队列公平；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：沿 Kubernetes scheduling/eviction 与 Ray task/actor 概念制定小集群的调度策略
@@ -578,7 +588,7 @@ GPU、分布式、推理与可靠性
 
 精读范围：IAM/RBAC、租户隔离、密钥、供应链、模型/数据许可、PII、投毒、审计与删除。
 
-主资源：[Kubernetes Security](https://kubernetes.io/docs/concepts/security/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+主资源：[Kubernetes Security](https://kubernetes.io/zh-cn/docs/concepts/security/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
 
 - 理解机制与边界：IAM/RBAC、租户隔离、密钥、供应链、模型/数据许可、PII、投毒、审计与删除；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：按 Kubernetes Security 与 MLSysBook Security & Privacy 建模访问边界；只用合成非敏感数据
@@ -596,7 +606,7 @@ GPU、分布式、推理与可靠性
 
 - 理解机制与边界：容量规划、成本/成功任务、GPU 利用、存储/网络费用、能耗、PUE 与碳核算边界；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：用已有测量核算吞吐、闲置与恢复开销；按 MLSysBook Sustainable AI 明确统计边界
-- 测试、优化与解释：比较batch/精度策略；没有功率计只报告估算并保留假设，不制造实测电量。单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买
+- 测试、优化与解释：比较 batch/精度策略；没有功率计只报告估算并保留假设，不制造实测电量。单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买
 
 成果标准：单位完整的容量预算、假设与敏感性分析；当前云价须重新查证且先授权购买。
 
@@ -635,6 +645,8 @@ GPU、分布式、推理与可靠性
 精读范围：视觉/音频、变长序列、diffusion、推荐稀疏特征、模态同步与动态 batching。
 
 主资源：[动手学深度学习](https://zh.d2l.ai/)。 补充：[Stanford CS336](https://cs336.stanford.edu/)。 补充：[Machine Learning Systems](https://mlsysbook.ai/)。
+
+图像基础可读 D2L；音频和视频按 [SGLang 模态支持表](https://docs.sglang.io/docs/supported-models/multimodal_language_models)选模型，再查该模型的处理器和输入约定。采样率、抽帧和归一化不能从图像教程直接推定。
 
 - 理解机制与边界：视觉/音频、变长序列、diffusion、推荐稀疏特征、模态同步与动态 batching；先用主资源查明定义、假设与失败条件。
 - 设计与独立实践：选 D2L 原模型实践及 CS336 multimodality 主题；先解释样本形状与预处理

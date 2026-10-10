@@ -2,10 +2,25 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
-import {mkdtemp,mkdir,readFile,writeFile} from 'node:fs/promises';
+import {mkdtemp,mkdir,readFile,writeFile,cp,unlink} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
+import {restorePinnedSources} from '../scripts/vendor-stage-projects.mjs';
 const local=resolve('.venv-labs',process.platform==='win32'?'Scripts/python.exe':'bin/python');
 const python=process.env.LAB_TEST_PYTHON||(existsSync(local)?local:'python');
+test('pinned source restoration needs no ignored inventory and protects existing files',async()=>{
+ await mkdir('artifacts',{recursive:true});const dir=await mkdtemp(resolve('artifacts/vendor-restore-'));
+ for(const lab of ['dbdb','consensus','micrograd'])await cp(`labs/${lab}/upstream`,join(dir,`labs/${lab}/upstream`),{recursive:true});
+ const absent=join(dir,'labs/dbdb/upstream/dbdb/interface.py'),dirty=join(dir,'labs/micrograd/upstream/README.md');
+ const original=await readFile(absent),clean=await readFile(dirty);await unlink(absent);await writeFile(dirty,'changed by owner');
+ const source=async url=>{assert.match(url,/^https:\/\/raw\.githubusercontent\.com\/aosabook\/500lines\/[a-f0-9]{40}\/data-store\/code\/dbdb\/interface\.py$/);return new Response(original);};
+ await assert.rejects(restorePinnedSources(dir,source),/Refusing to overwrite/);
+ assert.equal(existsSync(absent),false);assert.equal(await readFile(dirty,'utf8'),'changed by owner');
+ await writeFile(dirty,clean);
+ await assert.rejects(restorePinnedSources(dir,async()=>new Response(Buffer.alloc(original.length))),/checksum mismatch/);
+ assert.equal(existsSync(absent),false);
+ const result=await restorePinnedSources(dir,source);assert.equal(result.restored,1);assert.deepEqual(await readFile(absent),original);
+ await restorePinnedSources(dir,async()=>{throw Error('Complete checkout must work offline');});
+});
 for(const [lab,modules,expected]of [['dbdb','portalocker',21],['consensus','fissix',46],['micrograd','torch',11]]){
  const probe=spawnSync(python,['-c',`import sys; import ${modules}; assert sys.version_info >= (3,10)`],{encoding:'utf8',windowsHide:true});
  test(`${lab}: original checks pass; broken independent submission fails without modifying files`,{skip:probe.status!==0},async()=>{

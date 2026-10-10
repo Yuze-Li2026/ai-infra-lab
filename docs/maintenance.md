@@ -4,7 +4,7 @@ AI 接手先读仓库根目录的 `AGENTS.md` 与[AI 维护流程](ai-maintenanc
 
 ## 修改和检查
 
-资源及知识内容修改 `site/catalog.json`；页面布局修改 `site/views.js` 和 `site/styles.css`，交互修改 `site/app.js`。保持目录字段规范，优先链接原资源。修改来源后执行 `node scripts/credits.mjs` 更新致谢。`create-catalog.mjs` 和一次性迁移脚本会拒绝覆盖现有成果，不是日常修改命令。
+资源及知识内容修改 `site/catalog.json`；页面布局修改 `site/views.js` 和 `site/styles.css`，交互修改 `site/app.js`。保持目录字段规范，优先链接原资源。修改来源后执行 `node scripts/credits.mjs` 更新致谢。初建与一次性迁移脚本已移除，日常修改直接维护目录数据。
 
 Node 版本最低 22。先执行 `npm ci --ignore-scripts` 安装锁定的维护依赖，再按环境指南准备 Python 实验依赖。每次变更后执行 `npm run check`，覆盖目录、Markdown 格式、链接、知识覆盖、实际测试、构建和产物哈希。完整测试缺少依赖、出现失败或跳过时均返回非零；应修复环境或代码后复验。
 
@@ -57,7 +57,7 @@ Marked 与 DOMPurify 的运行文件随源码分发，普通启动及 `npm run c
 
 CPU 依赖固定于 labs/requirements-cpu.txt，GPU Windows / CPython 3.12 复现锁为 requirements-gpu-windows-lock.txt。报告包含环境、模式、版本、测试与完整计时样本。新的实验报告需维护 site/reports.js 已知类型、catalog 的 reportCommit 和里程碑。新指南需加入 site/documents.js 的允许列表。修改里程碑或报告格式后验证旧备份兼容与跨标签页合并。
 
-运行项目解释器的 scripts/doctor.py 可只读检查版本、依赖、GPU 和工具。complete-catalog.mjs 是本轮一次性整合记录，需要实际 artifacts 报告，不是日常必跑构建命令。目录以 site/catalog.json 为唯一日常数据源。
+使用项目解释器运行 `scripts/doctor.py`，可只读检查版本、依赖、GPU 和工具。目录以 `site/catalog.json` 为唯一日常数据源；更新实验状态必须有对应环境的实际报告。
 
 ## 0.4.0 覆盖与验收更新
 

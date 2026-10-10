@@ -44,7 +44,7 @@ node scripts/lab.mjs indoor ./indoor.py
 
 尚未完成时可以先点击“记录为学习中”。编辑中的说明会暂存于本标签页，站内切换和刷新后可恢复；它不是跨设备备份，关闭标签页后不保证保留。关闭或刷新前会提醒。如果出现“尚未保存到浏览器”，应立即导出备份，避免关闭后丢失。
 
-如果已经有基础，可以提交已有项目与评估记录跳过前置节点。地图始终允许预览高级节点。资源状态显示“待补齐”时，表示项目仍在研究，不要把平台提交功能误认为已证明衔接可行。
+如果已经有基础，可以提交已有项目与评估记录跳过前置节点。地图始终允许预览高级节点。任务的“学习范围与研究状态”说明已有依据和仍需验证的部分；提交成果不会证明教学衔接或高级环境已经验收。
 
 ## 4. 保存你的学习数据
 
@@ -84,7 +84,7 @@ python3 -m venv .venv-labs
 
 已有 `.venv-labs` 时直接使用，不必重建。`node scripts/lab.mjs` 优先选择此环境；其他环境可通过 `LAB_PYTHON` 指定完整解释器路径。对象模型与入门检查无第三方依赖；DBDB 使用文件锁兼容包，共识使用 Python 2 语法转换包。依赖安装只影响这个环境。
 
-micrograd 的两项原测试需要 PyTorch；无 NVIDIA 的机器可依据 [PyTorch 官方安装入口](https://pytorch.org/get-started/locally/) 选择适合平台的 CPU 版本，不需要 GPU 才能学习自动微分。本机已授权并安装 GPU 版，Windows / CPython 3.12 的复现锁位于 `labs/requirements-gpu-windows-lock.txt`，约 3 GB，其他系统不能直接使用该 Windows wheel。
+micrograd 的两项原测试需要 PyTorch；无 NVIDIA 的机器可依据 [PyTorch 官方安装入口](https://pytorch.org/get-started/locally/) 选择适合平台的 CPU 版本，不需要 GPU 才能学习自动微分。已有 Windows 单卡复现使用的依赖锁位于 `labs/requirements-gpu-windows-lock.txt`，适用于 Windows / CPython 3.12，下载约 3 GB；其他系统不能直接使用该 Windows wheel。只做 CPU 练习无需安装这份 GPU 锁。
 
 ## 7. 导入报告，复核阶段
 

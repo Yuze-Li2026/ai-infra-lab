@@ -26,6 +26,26 @@ try{
  await page.goto(base+'/#labs');await page.locator('.lab-card').first().waitFor();
  assert.equal(await page.locator('.lab-card').count(),catalog.labs.length);
  assert.equal(await page.locator('.lab-card.lab-ready').count(),catalog.labs.filter(l=>l.command).length);
+ assert.match(await page.locator('[data-release-scope]').innerText(),new RegExp(`共 ${catalog.labs.length} 项实验入口`));
+ const documentLinks=await page.evaluate(async()=>{
+  const {allowedDocuments,renderDocument}=await import('./documents.js');
+  const documents=new Map(),missing=[];let chapters=0;
+  for(const path of allowedDocuments){
+   const response=await fetch(path);if(!response.ok)throw Error(`${path}: HTTP ${response.status}`);
+   documents.set(path,renderDocument(await response.text(),path));
+  }
+  for(const [path,{article}] of documents)for(const link of article.querySelectorAll('a[href^="#read/"]')){
+   const route=link.getAttribute('href').slice(6),split=route.indexOf('#');
+   if(split<0)continue;
+   const target=route.slice(0,split),fragment=decodeURIComponent(route.slice(split+1));if(!fragment)continue;
+   chapters++;
+   if(!documents.get(target)?.sections.has(fragment))missing.push({path,target,fragment,text:link.textContent});
+  }
+  return {documents:documents.size,chapters,missing};
+ });
+ assert.deepEqual(documentLinks.missing,[],'broken document chapters');
+ assert.ok(documentLinks.chapters>0);
+ checks.push(`${documentLinks.documents} reader documents: ${documentLinks.chapters} chapter links resolve to actual rendered headings`);
  await page.locator('[data-release-scope]').getByRole('link',{name:'环境验证状态',exact:true}).click();
  await page.waitForFunction(()=>document.activeElement?.tagName==='H2');
  assert.equal(await page.locator(':focus').innerText(),'环境验证状态');

@@ -13,7 +13,7 @@
 | 指南 | docs/*.md、site/documents.js | 文档允许列表、相对链接与构建输出 |
 | 固定原项目 | labs/*/upstream、独立 run.py | 原许可、SHA-256、兼容补丁、原断言与失败提交 |
 
-`create-catalog`、`refactor-v02` 与 `complete-catalog` 是初建/迁移记录，不是日常修改入口；不要用生成脚本覆盖人工审阅后的目录。
+目录直接维护 `site/catalog.json`。初建与一次性迁移脚本已移除，历史实现可从 Git 查阅；不要用旧脚本重建并覆盖现行目录。
 
 ## 完成一个最小修改
 
@@ -40,6 +40,10 @@ Linux 使用独立会话和进程组。Windows 先请求终止，再等待内核
 检查本人数据与脚本没有进入公开输出；检查指南的路径、模式、命令与真实结果一致。安装开发依赖后，用已有的 Edge 或 Chrome 执行 `npm run test:browser`，至少查看首页、节点详情、实验、文档和阶段复核的桌面/手机截图。无障碍扫描、键盘操作和实际文字放大分别检查，不能互相替代。文档另按[写作规范](writing-guide.md)审校；内容错误优先修复来源与解释，不能只让测试适应错误。
 
 Git 提交前检查 `git diff` 和 `git status`。不要提交 `.venv-labs`、node_modules、artifacts、个人程序、学习备份、令牌或模型权重。本站原创代码 MIT，第三方材料保留原许可。
+
+## 恢复冻结实验源码
+
+DBDB、共识与 micrograd 的冻结源码由各自 `upstream/manifest.json` 记录。`node scripts/vendor-stage-projects.mjs` 先核对现存文件，仅在有缺失时下载固定提交中的对应小文件；无需私人 artifacts 清单。字节或哈希不符、已有文件被修改时停止，整批校验通过才开始补回文件。它不升级上游版本；修改过的源码应先查明原因，不能用此命令强行覆盖。
 
 ## 更新浏览器依赖
 

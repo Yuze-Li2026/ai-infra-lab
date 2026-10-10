@@ -12,7 +12,7 @@
 .venv-labs/Scripts/python.exe -m pip install --no-cache-dir --report artifacts/gpu-install.json -r labs/requirements-gpu.txt
 ```
 
-这属于原提示词第 14 条所述大规模下载。项目所有者已明确授权，安装已完成，没有额外软件费用，没有购买云资源。最终版本锁为 `labs/requirements-gpu-windows-lock.txt`，只适用于 Windows x64 / CPython 3.12。
+此次大规模下载经项目所有者明确授权后完成，没有额外软件费用，没有购买云资源。该授权仅针对上述本机安装，不延伸到新的下载或其他使用者的设备。最终版本锁为 `labs/requirements-gpu-windows-lock.txt`，只适用于 Windows x64 / CPython 3.12。
 
 ## 验证内容
 
@@ -28,4 +28,4 @@
 
 ## 实际结果
 
-CUDA 四项补充检查与 micrograd 两项原 PyTorch 对照测试已通过。完整报告分别在 artifacts/gpu-report.json 与 artifacts/micrograd-report.json；测量边界与局限见[GPU 指南](gpu-lab.md)。本次安装不代表安装了所有高级课程工具，也不证明多卡性能。
+2026-10-09 首轮 CUDA 四类补充检查与 micrograd 两项原 PyTorch 对照测试通过。后续 GPU 运行器细化为七个检查用例，当前名称与条件见[GPU 指南](gpu-lab.md)；首轮记录不替代后续版本复验。报告分别写入 artifacts/gpu-report.json 与 artifacts/micrograd-report.json，测量边界随报告保留。本次安装不代表安装了所有高级课程工具，也不证明多卡性能。

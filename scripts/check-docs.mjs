@@ -4,7 +4,7 @@ import {marked} from '../site/vendor/marked/marked.esm.js';
 import {allowedDocuments} from '../site/documents.js';
 const root=resolve('.');
 const paths=['README.md','CREDITS.md','CONTRIBUTING.md','SECURITY.md',...(await readdir('docs')).filter(p=>p.endsWith('.md')).map(p=>'docs/'+p)];
-const repositoryDocuments=['AGENTS.md','.github/pull_request_template.md'];
+const repositoryDocuments=['AGENTS.md','.github/pull_request_template.md','labs/object-model/README.md'];
 let links=0;
 for(const path of [...paths,...repositoryDocuments]){
  if(!repositoryDocuments.includes(path)&&!allowedDocuments.has(path))throw Error(`文档没有接入站内阅读器：${path}`);

@@ -1,6 +1,6 @@
 # 来源与致谢
 
-研究日期：2026-10-09。本站主要提供原始链接与原创中文导读。随项目分发的精选第三方实验代码包括 AOSA 对象模型、DBDB、共识与 micrograd；各自 upstream 目录保留固定提交、校验和与原始许可证。初审不代表已验证完整教学效果。本站 MIT 许可证不覆盖第三方材料。
+研究日期：2026-10-10。本站主要提供原始链接与原创中文导读。随项目分发的精选第三方实验代码包括 AOSA 对象模型、DBDB、共识与 micrograd；各自 upstream 目录保留固定提交、校验和与原始许可证。初审不代表已验证完整教学效果。本站 MIT 许可证不覆盖第三方材料。
 
 ## CS50 Python
 
@@ -99,7 +99,7 @@
 - 许可：待核实，仅链接；免费阅读不等于可转载；[核查入口](https://pages.cs.wisc.edu/~remzi/OSTEP/)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
 - 验证：作者主页已访问；2026-10-08
-- 局限：项目版本、运行环境和再分发授权未验证
+- 局限：教材正文仅链接；本站仅集成 MapReduce 准备与检查，不代表全部操作系统项目已验证
 
 ## 动手学深度学习
 
@@ -143,7 +143,7 @@
 - 许可：待核实，仅链接；[核查入口](https://pdos.csail.mit.edu/6.5840/)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
 - 验证：课程主页已访问；2026-10-08
-- 局限：Go 先修、各实验本地评测与许可仍待审查
+- 局限：需补 Go；本站已核对固定 Raft 起始环境，其余原课实验与学习者实现另验
 
 ## CUDA Programming Guide
 
@@ -156,15 +156,15 @@
 - 验证：官方目录已访问；2026-10-08
 - 局限：必须固定工具链、驱动与硬件；本机实测 PyTorch 自带 CUDA 运行时，未安装 CUDA 编译工具链或验证自写内核。
 
-## PyTorch Distributed
+## PyTorch 2.10 官方 API
 
 - 原作者：PyTorch contributors
-- 来源：[PyTorch Distributed](https://docs.pytorch.org/docs/2.10/distributed.html)
+- 来源：[PyTorch 2.10 官方 API](https://docs.pytorch.org/docs/2.10/distributed.html)
 - 阅读版本：英文原文
 - 版本：2.10 API；与本地 PyTorch 2.10.0 对照
 - 许可：待逐项核实文档许可，仅链接；[核查入口](https://docs.pytorch.org/docs/stable/distributed.html)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
-- 验证：已访问 2.10 API 并核对集合通信、后端与初始化主题；本机仍只验证单卡补充检查。；2026-10-09
+- 验证：已访问 2.10 API 并核对集合通信、后端与初始化主题；本机仍只验证单卡补充检查。；2026-10-10
 - 局限：多进程/多卡通信尚未复现；滚动 stable 文档可能与锁定的 2.10 不同。
 
 ## vLLM
@@ -172,7 +172,7 @@
 - 原作者：vLLM project contributors
 - 来源：[vLLM](https://docs.vllm.ai/en/latest/)
 - 阅读版本：英文原文
-- 版本：latest 滚动文档，发行版待锁定
+- 版本：latest 滚动文档；本站 CPU 验证环境另锁定版本
 - 许可：待核实文档与代码各自许可，仅链接；[核查入口](https://docs.vllm.ai/en/latest/)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
 - 验证：官方文档入口已访问；2026-10-08
@@ -186,7 +186,7 @@
 - 版本：站点标示 2026 双卷版本
 - 许可：站点标示 CC BY-NC-SA 4.0；各工具单独核查；[核查入口](https://mlsysbook.ai/)
 - 使用方式：仅链接与原创简短导读，不镜像、不转载
-- 验证：总览、目录入口与许可页脚已访问；2026-10-09
+- 验证：总览、目录入口与许可页脚已访问；2026-10-10
 - 局限：不把教材的完整性宣称作为本项目已验证事实
 
 ## Kubernetes Security
@@ -315,10 +315,10 @@
 - 原作者：LLVM / MLIR contributors
 - 来源：[MLIR Toy Tutorial](https://mlir.llvm.org/docs/Tutorials/Toy/)
 - 阅读版本：英文原文
-- 版本：滚动教程，集成前固定 LLVM 版本
+- 版本：滚动教程；本站 Toy 构建环境另锁定 LLVM 提交
 - 许可：LLVM 文档与代码许可分别复核，暂仅链接；[核查入口](https://mlir.llvm.org/docs/Tutorials/Toy/)
 - 使用方式：只提供链接与原创导读
-- 验证：官方教程入口已访问；编译工具链尚未复现。；2026-10-08
+- 验证：官方教程已审阅；固定源码构建实际超时，七章原测试尚未执行完成，见环境验证记录；2026-10-08
 - 局限：作为编译器方向项目；不是无前置零基础教程
 
 ## A Simple Object Model
@@ -604,8 +604,8 @@
 - 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
 - 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://huggingface.co/docs/trl/index)
 - 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
-- 验证：官方首页连接各后训练方法和 trainer；只选当前任务需要的部分；2026-10-09
-- 局限：算法 API 更新快；模型/数据许可和并行训练硬件分别审核
+- 验证：官方首页连接各后训练方法和 trainer；只选当前任务需要的部分；2026-10-10
+- 局限：算法 API 更新快；模型/数据许可和并行训练硬件分别审核；PPO 选读固定在 v0.24.0，新版目录不再提供同一章节
 
 ## Nsight Systems 用户指南
 
@@ -637,7 +637,7 @@
 - 版本：在线官方文档；2026-10-09 核对，实验须另锁版本
 - 许可：仅链接；原站正文和代码分别适用其条款，未取得全文镜像授权；[核查入口](https://docs.sglang.io/)
 - 使用方式：仅链接、章节定位与本站原创练习要求；不镜像正文
-- 验证：官方入口从 docs.sglang.ai 重定向到 docs.sglang.io；提供安装、快速开始和硬件支持入口；2026-10-09
+- 验证：官方入口从 docs.sglang.ai 重定向到 docs.sglang.io；提供安装、快速开始和硬件支持入口；2026-10-10
 - 局限：不根据宣传吞吐量判断优劣；基准须相同模型、请求和质量要求
 
 ## Feast 特征平台
@@ -731,7 +731,7 @@ DBDB 作者 Taavi Burns；Clustering by Consensus 作者 Dustin J. Mitchell。�
 
 容器端口查询依据 Docker 官方 [docker container port](https://docs.docker.com/reference/cli/docker/container/port/) 与[端口发布说明](https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/)，2026-10-10 核对；仅链接并用于复验流程，不复制文档正文。
 
-MLIR Toy 源码构建取自 [LLVM 官方仓库](https://github.com/llvm/llvm-project/tree/ca7933e47d3a3451d81e72ac174dcb5aa28b59d1/mlir/examples/toy)，LLVM 22.1.8，提交 ca7933e47d3a3451d81e72ac174dcb5aa28b59d1，Apache-2.0 WITH LLVM-exception；七章原测试随上游源码在独立环境执行，本站保留接入脚本与版本记录，不再分发整套 LLVM。
+MLIR Toy 源码构建取自 [LLVM 官方仓库](https://github.com/llvm/llvm-project/tree/ca7933e47d3a3451d81e72ac174dcb5aa28b59d1/mlir/examples/toy)，LLVM 22.1.8，提交 ca7933e47d3a3451d81e72ac174dcb5aa28b59d1，Apache-2.0 WITH LLVM-exception；验证入口在独立环境获取源码、构建七章并调用原测试，是否成功以实际报告为准；本站保留接入脚本与版本记录，不再分发整套 LLVM。
 
 腾讯云实验环境选型依据腾讯云官方的 [Cloud Studio 机时计费](https://ide.cloud.tencent.com/docs/guide/billing/machine_time/how-to-purchase-compute-time/)、[机时常见问题](https://ide.cloud.tencent.com/docs/guide/billing/machine_time/FQA/)、[停止使用规则](https://ide.cloud.tencent.com/docs/guide/billing/machine_time/compute-time-introduction/)、[应用创建](https://ide.cloud.tencent.com/docs/guide/product_use/application/create-application/)、[HAI 学生优惠](https://cloud.tencent.com/act/pro/hai-edu)、[HAI 套餐](https://cloud.tencent.com/document/product/1721/112699)和[关机计费](https://cloud.tencent.com/document/product/1721/102027)，2026-10-10 核对。仅链接并概述选择条件，不再分发文档或承诺账号优惠；腾讯云保留原文权利。硬件兼容性同时核对 [Triton 3.6 官方说明](https://github.com/triton-lang/triton/tree/v3.6.0#compatibility)，不能用套餐名称替代实际设备检查。
 

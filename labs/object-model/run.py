@@ -3,7 +3,6 @@
 This is an integration adapter, not a replacement course or security sandbox.
 """
 import argparse
-import hashlib
 import importlib.util
 import io
 import json
@@ -11,11 +10,15 @@ import os
 from pathlib import Path
 import platform
 import statistics
-import subprocess
 import sys
 import time
 import tracemalloc
 import unittest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from common import atomic_json, run_safely, verify
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
+from processes import run as bounded_run
 
 ROOT = Path(__file__).resolve().parent
 UPSTREAM = ROOT / "upstream"
@@ -30,26 +33,15 @@ def load(name, path):
     return module
 
 
-def verify():
-    manifest = json.loads((UPSTREAM / "manifest.json").read_text(encoding="utf-8"))
-    for item in manifest["files"]:
-        path = (UPSTREAM / item["path"]).resolve()
-        if not path.is_relative_to(UPSTREAM.resolve()):
-            raise ValueError("Invalid manifest path")
-        if hashlib.sha256(path.read_bytes()).hexdigest() != item["sha256"]:
-            raise ValueError("Upstream checksum mismatch: " + item["path"])
-    return manifest
-
-
 def child(stage, submission):
     folder = UPSTREAM / "objmodel" / "code" / stage
-    model = load("objmodel", Path(submission) / "objmodel.py" if submission else folder / "objmodel.py")
+    load("objmodel", Path(submission) / "objmodel.py" if submission else folder / "objmodel.py")
     tests = load("upstream_tests", folder / "test_objmodel.py")
     suite = unittest.TestSuite(unittest.FunctionTestCase(fn) for name, fn in sorted(vars(tests).items())
                                if name.startswith("test_") and callable(fn))
     output = io.StringIO()
     result = unittest.TextTestRunner(stream=output, verbosity=2).run(suite)
-    return {"stage": stage, "tests": result.testsRun, "passed": result.wasSuccessful(),
+    return {"stage": stage, "tests": result.testsRun, "passed": result.testsRun > 0 and result.wasSuccessful() and not result.skipped,
             "failures": len(result.failures), "errors": len(result.errors), "details": output.getvalue()}
 
 
@@ -87,7 +79,7 @@ def main():
     parser.add_argument("--stage", choices=STAGES)
     parser.add_argument("--submission", help="Independent implementation directory; with --stage contains objmodel.py, otherwise contains all four stage directories")
     parser.add_argument("--benchmark", action="store_true", help="Measure pinned reference stages 3 and 4")
-    parser.add_argument("--output", default="artifacts/object-model-report.json")
+    parser.add_argument("--output", default=str(ROOT.parents[1] / "artifacts/object-model-report.json"))
     parser.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if sys.version_info < (3, 10):
@@ -99,7 +91,7 @@ def main():
     if args.child:
         print(json.dumps(child(args.stage, args.submission), ensure_ascii=True))
         return
-    manifest = verify()
+    manifest = verify(UPSTREAM)
     results = []
     for stage in ([args.stage] if args.stage else STAGES):
         command = [sys.executable, "-I", "-B", str(Path(__file__).resolve()), "--child", "--stage", stage]
@@ -109,12 +101,12 @@ def main():
                 submission = submission / stage
             command += ["--submission", str(submission)]
         try:
-            proc = subprocess.run(command, capture_output=True, text=True, encoding="utf-8", timeout=15)
+            proc = bounded_run(command, capture_output=True, text=True, encoding="utf-8", timeout=15)
             if proc.returncode:
                 results.append({"stage": stage, "passed": False, "error": proc.stderr[-6000:]})
             else:
                 results.append(json.loads(proc.stdout))
-        except (subprocess.TimeoutExpired, json.JSONDecodeError) as error:
+        except (TimeoutError, json.JSONDecodeError) as error:
             results.append({"stage": stage, "passed": False, "error": str(error)})
     report = {"schemaVersion": 1, "lab": "object-model", "mode": "submission" if args.submission else "reference",
               "commit": manifest["commit"], "upstreamChecksumsVerified": True,
@@ -125,11 +117,11 @@ def main():
               "limits": "Reference reproduction is not learner mastery. Tests are not exhaustive. Python-level measurements do not establish native-runtime performance. No sandbox."}
     target = Path(args.output)
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_json(target, report)
     print(json.dumps({"mode": report["mode"], "passed": report["passed"], "tests": sum(r.get("tests", 0) for r in results),
                       "report": str(target)}, ensure_ascii=True))
-    sys.exit(0 if report["passed"] else 1)
+    return 0 if report["passed"] else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() if '--child' in sys.argv else run_safely('object-model', UPSTREAM, main))

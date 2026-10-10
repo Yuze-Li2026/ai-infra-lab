@@ -55,6 +55,6 @@
 - [能力模型与持续覆盖审计](research.md)：真实能力、递归依赖、选择理由、开放缺口与更新机制。
 - [架构与工具选择](architecture.md)：模块、静态约束与复用成熟组件的依据。
 - [验收标准](acceptance.md)、[实际验证记录](verification.md)、[本地完整链验收](release-complete.md)。
-- [提示词逐项验收](requirements-audit.md)：文件夹提示词全部章节对应的证据与边界。
+- [项目要求与证据对照](requirements-audit.md)：持续维护要求、已有能力与实际边界。
 - [优化与修复记录](optimization-review.md)、[早期版本记录](release-v02.md)。
 - [来源与致谢](../CREDITS.md)、[本站许可](../LICENSE)：第三方材料保留各自作者、版本与许可。
