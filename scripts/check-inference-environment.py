@@ -77,6 +77,15 @@ def main():
             time.sleep(2)
         raise TimeoutError('vLLM readiness deadline exceeded')
 
+    def endpoint():
+        # Docker may allocate another ephemeral host port after a container restart.
+        binding = command(['docker', 'port', name, '8000/tcp']).stdout.strip()
+        assert binding.startswith('127.0.0.1:') and '\n' not in binding
+        port = int(binding.removeprefix('127.0.0.1:'))
+        assert 0 < port <= 65535
+        result.setdefault('bindings', []).append(binding)
+        return 'http://' + binding
+
     try:
         command(['docker', 'pull', VERSIONS['image']], timeout=600)
         created = True
@@ -89,9 +98,7 @@ def main():
                  'serve', VERSIONS['model'], '--revision', VERSIONS['revision'], '--host', '0.0.0.0',
                  '--port', '8000', '--dtype', 'float32', '--max-model-len', '256', '--max-num-seqs', '2',
                  '--enforce-eager', '--no-enable-log-requests'], timeout=120)
-        binding = command(['docker', 'port', name, '8000/tcp']).stdout.strip()
-        assert binding.startswith('127.0.0.1:') and '\n' not in binding
-        base = 'http://' + binding
+        base = endpoint()
         ready(600)
         result['checks'].append('pinned pretrained model loads and HTTP service becomes healthy on loopback only')
         for key in [None, 'incorrect-test-key']:
@@ -135,7 +142,10 @@ def main():
         result['checks'].append('streamed completion finishes and matches the non-streamed greedy result')
         command(['docker', 'kill', '--signal=KILL', name])
         command(['docker', 'start', name])
+        base = endpoint()
         ready(300)
+        assert request('/v1/models', key=None)[0] == 401
+        assert request('/v1/models', key='incorrect-test-key')[0] == 401
         assert completion()['text'] == first['text']
         result['checks'].append('abrupt service termination and restart restore authenticated inference from cached fixed weights')
         result['passed'] = True
