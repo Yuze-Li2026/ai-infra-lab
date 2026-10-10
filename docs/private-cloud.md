@@ -43,6 +43,10 @@
 
 Cloud Studio 额度用完会自动转按量付费，不会自动停止。打开 IDE 即占用算力，未运行程序也会消耗机时；关闭所有相关标签页后通常还需约 10 分钟释放。用完应在“应用管理”选择“停止使用”，核对状态及剩余额度。账单约有 2 小时延迟，不能仅凭暂时没有扣费通知判断已停止，见[机时介绍](https://ide.cloud.tencent.com/docs/guide/billing/machine_time/compute-time-introduction/)。不要把赠送额度视为不会产生后续费用的上限。
 
+领取后先打开右上角账户菜单，查看“算力资源包使用情况”的已使用量和总量；绑定成功不等于赠送额度已经到账。各资源包有效期仍需分别核对，不能从总机时推断。若旧资源管理地址跳回账号设置，可先用这个菜单确认总量，不必为排查领取提示而充值。
+
+按[官方创建流程](https://ide.cloud.tencent.com/docs/guide/product_use/application/create-application/)，确认模板后会直接进入工作空间；此时就可能开始消耗机时。进入后先将应用设为非公开，核对成员与预览访问权限，再放入个人作品。模板卡片中的 PyTorch/CUDA 版本仅供初选，实际版本、驱动和 GPU 必须在运行环境核对；不能把选中模板当作课程环境已就绪。
+
 [HAI 学生优惠](https://cloud.tencent.com/act/pro/hai-edu)提供半价现金券，每档每月限购一张，购买后 30 天有效。优惠页面列出 30 元面额约能抵扣 8 小时 GPU 进阶型；实际支付价、适用套餐与资格需在登录后的订单核对，不能把券面额直接当作支付金额。券抵扣完仍可能产生按量费用。
 
 [HAI 套餐](https://cloud.tencent.com/document/product/1721/112699)按性能档位提供硬件，不支持指定型号；进阶型既列有对标 A10 的 24 GB 档，也有对标 V100 的 32 GB 档。显存更大不等于架构适合课程。当前课程使用的 [Triton 3.6](https://github.com/triton-lang/triton/tree/v3.6.0#compatibility)要求 Linux 与 NVIDIA 计算能力 8.0 以上，必须核对实际分配的 GPU、驱动和课程依赖。HAI 关机后算力停止计费，默认 80 GB 云盘仅前 15 天免费保留，之后有闲置费用；扩容盘持续计费，见[关机规则](https://cloud.tencent.com/document/product/1721/102027)。

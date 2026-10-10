@@ -287,6 +287,12 @@
 
 `tests/process-tree-probe.py` 与 Node 进程回归真正启动父进程和持续写文件的后代：父进程退出后仍须按时返回、停止写入，同时让无关进程正常完成。Windows 另注入归属建立失败，确认暂停中的作品没有执行；此项是故障注入，不冒充实际操作系统拒绝。保留原有输入、中文分块输出、错误退出和课程原测试断言。
 
+### 0.5.1 增量复核
+
+本轮受控文件增至 212 个。新增 `.github/workflows/toy-compiler.yml`、`labs/compiler-validation/toy-version.json`、`scripts/check-toy-environment.py` 与 `tests/compiler-environment.test.mjs`，逐项核对固定 LLVM 提交、七章构建目标、原测试收集与执行集合、失败和跳过拒绝，以及独立构建目录。真实 Toy 编译结果单独记录，解析器测试不替代原课运行。
+
+`labs/common.py` 与 `tests/report-files.test.mjs` 核对 Windows 临时占用的有界重试、旧报告保护和真实句柄测试。CS336 检查及工作流明确 CPU 与 GPU 范围；`site/documents.js` 和浏览器回归核对表格名称、Tab 焦点与方向键滚动。腾讯云说明按官方资料核对规格、额度、过期和停机规则，来源同步 `scripts/credits.mjs` 与 `CREDITS.md`。最终附件保留同提交的完整文件清单、结构检查和哈希，不能把清单读取称为第三方全量源码语义审计。
+
 ### 接手入口
 
 集群环境新增固定镜像摘要与隔离工作流：`scripts/check-cluster-environment.py` 使用随机资源名和独立 kubeconfig，分别执行 Kubernetes 权限/服务/副本/配额/回滚、Ray 双节点/跨节点任务/actor 检查点恢复；清理仅针对本次资源。`scripts/check-ray-cluster.py` 保留真实任务异常和节点标识。JSON 结果与日志明确单宿主 CPU 范围，kubeconfig 不上传。流程是否可用以实际云端结果为准，不以本机静态检查代替。
