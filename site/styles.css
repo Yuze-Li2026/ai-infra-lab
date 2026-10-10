@@ -952,6 +952,15 @@ summary:hover {
   line-height:1.8;
   margin:20px
 }
+.lab-entry-note {
+  padding:1rem 1.25rem;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--soft);
+  font-size:.875rem;
+  line-height:1.8;
+  margin:20px 0
+}
 .error {
   color:#a23831
 }
@@ -1223,7 +1232,8 @@ main,p,h1,h2,h3,a,button,dd {
 .document-body pre code {display:block;background:transparent;color:inherit;padding:0;border:0;white-space:inherit;overflow-wrap:normal}
 .document-body :not(pre)>code {background:#edf3f2;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
 .document-body blockquote {margin:24px 0;padding:8px 20px;border-left:3px solid #349180;background:#f2f7f5}
-.document-body table {font-size:0.8125rem;line-height:1.8;min-width:460px}
+.document-body table {font-size:0.8125rem;line-height:1.8;min-width:40rem}
+.document-body th:first-child,.document-body td:first-child {min-width:7rem}
 .document-body thead {background:#f3f7f5}
 .document-body td,.document-body th {padding:12px}
 .document-body th {font-weight:600;color:var(--ink)}

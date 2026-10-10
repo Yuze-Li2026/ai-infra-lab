@@ -12,3 +12,5 @@ __pycache__/
 .private/
 .codex/
 提示词.txt
+/prompt/
+/promot/
