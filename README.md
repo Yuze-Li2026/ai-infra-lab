@@ -24,7 +24,7 @@ npm start
 - 原课工具支持 CS50 最终项目、OSTEP MapReduce、DLSys HW0–HW2、MIT Raft 和 CS336 A1/A2。环境、固定版本和命令见[原课工作流程](docs/project-workflows.md)。课程 TODO 由学习者完成。
 - 学习说明、草稿和报告摘要可以备份恢复。本人提交表示留下了成果记录，不构成独立能力认证。
 
-GPU 与系统实验需要相应的本地工具和硬件，网站不远程执行代码。完整原课、多卡、真实集群及生产服务仍须按各自条件验证；具体状态见[交付清单](docs/delivery-checklist.md)和[验证记录](docs/verification.md)。
+GPU 与系统实验需要相应的本地工具和硬件，网站不远程执行代码。完整原课、多卡、跨机集群及生产服务仍须按各自条件验证；具体状态见[交付清单](docs/delivery-checklist.md)和[验证记录](docs/verification.md)。
 
 [按实验准备环境](docs/environment-preparation.md)解释每项实验需要的工具、执行位置、成功标志和常见错误。[个人云端实验室](docs/private-cloud.md)提供独立 JupyterLab 与 SSH 配置教程；开源代码不包含任何人的实例凭据。个人实例配置与 GPU 课程验收仍需实际设备；免费 CI 和私有交互环境分别记录。
 

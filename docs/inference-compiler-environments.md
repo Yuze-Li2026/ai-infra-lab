@@ -4,7 +4,7 @@
 
 ## vLLM 推理服务
 
-需要专用 Linux amd64 机器、Docker、AVX2 或 AVX512、至少 16 GB 内存与 20 GB 空闲磁盘。依据 [vLLM CPU 安装文档](https://docs.vllm.ai/en/stable/getting_started/installation/cpu/)检查实际 CPU 指令集。官方 CPU 镜像约 1.57 GB 压缩数据，模型权重约 1.2 GB，解压与运行还需额外磁盘；先确认下载条件。该流程不安装显卡驱动。
+需要专用 Linux amd64 机器、Docker、AVX2 或 AVX512、至少 16 GB 内存与 20 GB 空闲磁盘。依据 [vLLM CPU 安装文档](https://docs.vllm.ai/en/stable/getting_started/installation/cpu/)检查实际 CPU 指令集。官方 CPU 镜像约 1.57 GB 压缩数据，[固定模型的文件清单](https://huggingface.co/Qwen/Qwen3-0.6B/tree/c1899de289a04d12100db370d81485cdf75e47ca)列出约 1.5 GB 权重，解压与运行还需额外磁盘；先确认下载条件。该流程不安装显卡驱动。
 
 使用固定摘要的 vLLM 0.31.0 CPU 镜像，模型为 Qwen 团队公开的 [Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B)，固定提交 `c1899de289a04d12100db370d81485cdf75e47ca`，模型许可 Apache-2.0。不下载浮动 `main`，不启用远程自定义代码，也不需要模型 API 付费账号；原模型服务的访问条件仍以上游为准。
 
@@ -22,9 +22,11 @@ python3 scripts/check-inference-environment.py --run
 
 脚本创建本次容器和独立权重缓存，端口只映射到宿主 `127.0.0.1`，用随机 API 密钥测试访问。它检查健康状态、匿名与错误密钥拒绝、正确密钥读取模型、顺序与双请求并发生成、错误模型拒绝、流式结束与结果一致。随后强制终止服务并重新启动，核对固定权重恢复后的推理。结束时删除本次容器与临时密钥文件，权重缓存保留在本次 `artifacts/infra-inference-*` 目录。
 
-`artifacts/inference-results.json` 的 `passed` 和 `cleanupPassed` 都应为 `true`；错误信息和经密钥遮盖的服务日志保存在 `artifacts/inference-log.json`。报告中的时间是少量集成请求的实测耗时，不能当成吞吐基准或服务承诺。生成结果用于核对系统行为，不据此声称模型知识正确。
+容器内存上限为 12 GiB，其中 KV cache 显式设置为 1 GiB，还需给权重、工作进程和首次执行的临时分配留出空间。健康检查通过只证明服务就绪，随后仍必须实际生成。
 
-启动失败先看 CPU 指令、内存和服务日志，再区分权重访问失败与框架错误。健康检查有截止时间；服务退出会立即报告失败。显存不足不适用于这个 CPU 配置，宿主 OOM 则需降低本次实验内存需求或换符合条件的机器；修改后重新记录参数。不要将 API 密钥、缓存和日志原文放入公开网站。
+`artifacts/inference-results.json` 的 `passed` 和 `cleanupPassed` 都应为 `true`；`memory` 记录 cgroup 的实际占用、峰值、上限和 OOM 事件。错误信息、容器状态和经密钥遮盖的服务日志保存在 `artifacts/inference-log.json`。报告中的时间是少量集成请求的实测耗时，不能当成吞吐基准或服务承诺。生成结果用于核对系统行为，不据此声称模型知识正确。
+
+启动失败先看 CPU 指令、内存和服务日志，再区分权重访问失败与框架错误。健康检查有截止时间；服务退出会立即报告失败。若日志显示重启成功但请求仍连接失败，用 [docker port](https://docs.docker.com/reference/cli/docker/container/port/) 查询当前映射；自动分配的宿主端口不能视为固定地址。脚本在首次启动和重启后都读取并核对回环映射，报告的 `bindings` 保存两次实际地址。显存不足不适用于这个 CPU 配置，宿主 OOM 则需降低本次实验内存需求或换符合条件的机器；修改后重新记录参数。不要将 API 密钥、缓存和日志原文放入公开网站。
 
 这个命令负责完整复验并关闭服务，不会给学习网站挂接公共推理后端。[vLLM 服务参数](https://docs.vllm.ai/en/stable/cli/serve/)说明，API 密钥仅覆盖指定 API 路径，不能保护全部端点；本流程因此只映射回环地址，不能改成公网监听后只依靠该密钥。需要长期服务时，另行设计进程管理、TLS、全路径访问控制、限流、监控与费用；低价 CPU 的学习检查不代表高并发可用。
 

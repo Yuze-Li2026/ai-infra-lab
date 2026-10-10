@@ -86,11 +86,21 @@ def main():
         result.setdefault('bindings', []).append(binding)
         return 'http://' + binding
 
+    def memory_snapshot(stage):
+        probe = command(['docker', 'exec', name, 'python3', '-c',
+                         'import json; from pathlib import Path; '
+                         'root=Path("/sys/fs/cgroup"); '
+                         'print(json.dumps({name:(root/name).read_text().strip() '
+                         'for name in ["memory.current","memory.peak","memory.max","memory.events"] '
+                         'if (root/name).is_file()}))'], expected=None)
+        if probe.returncode == 0:
+            result.setdefault('memory', []).append({'stage': stage, **json.loads(probe.stdout)})
+
     try:
         command(['docker', 'pull', VERSIONS['image']], timeout=600)
         created = True
         command(['docker', 'run', '-d', '--name', name, '--label', 'ai-infra.validation=' + name,
-                 '--memory=10g', '--shm-size=1g', '--security-opt=no-new-privileges',
+                 '--memory=12g', '--shm-size=1g', '--security-opt=no-new-privileges',
                  '-p', '127.0.0.1::8000', '--env-file', str(credentials),
                  '-e', 'VLLM_CPU_KVCACHE_SPACE=1', '-e', 'VLLM_CPU_OMP_THREADS_BIND=auto',
                  '-e', 'VLLM_NO_USAGE_STATS=1', '-e', 'DO_NOT_TRACK=1',
@@ -100,6 +110,7 @@ def main():
                  '--enforce-eager', '--no-enable-log-requests'], timeout=120)
         base = endpoint()
         ready(600)
+        memory_snapshot('ready')
         result['checks'].append('pinned pretrained model loads and HTTP service becomes healthy on loopback only')
         for key in [None, 'incorrect-test-key']:
             assert request('/v1/models', key=key)[0] == 401
@@ -121,6 +132,7 @@ def main():
             concurrent = list(pool.map(lambda _: completion(), range(2)))
         assert all(item['text'] == first['text'] for item in concurrent)
         result['requests'] = [first, *concurrent]
+        memory_snapshot('generated')
         assert request('/v1/completions', {**body, 'model': 'missing-model'})[0] in [400, 404]
         result['checks'].append('real sequential and concurrent token generation agrees; unavailable model request fails')
         stream = {**body, 'stream': True}
@@ -148,6 +160,7 @@ def main():
         assert request('/v1/models', key='incorrect-test-key')[0] == 401
         assert completion()['text'] == first['text']
         result['checks'].append('abrupt service termination and restart restore authenticated inference from cached fixed weights')
+        memory_snapshot('restarted')
         result['passed'] = True
     except BaseException as error:
         result['error'] = str(error).replace(token, '[redacted]')
@@ -156,6 +169,8 @@ def main():
         cleanup = True
         if created:
             try:
+                command(['docker', 'inspect', '--format', '{{json .State}}', name], expected=None)
+                memory_snapshot('cleanup')
                 command(['docker', 'logs', '--tail', '160', name], expected=None)
             except Exception as error:
                 logs.append({'diagnosticError': str(error).replace(token, '[redacted]')})

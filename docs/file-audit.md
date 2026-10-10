@@ -251,7 +251,33 @@
 
 ### 数量与新增环境的核对
 
+本次清点实际读取 208 个受版本控制的文件，保存逐文件大小、SHA-256 和检查方法到本地 `artifacts/file-review-current.json`。维护的 Python、JavaScript 和 JSON 逐份解析，冻结第三方继续按原清单复验；个人提示词、虚拟环境、作品和历史产物不属于公开源码清单。全文结构检查不冒充逐行语义证明，内容与差异复核沿用本页记录的方法。
+
+下列增量文件补充到前文分类清单，避免同类描述遗漏具体文件名：
+
+| 文件 | 核对内容 |
+| --- | --- |
+| `.github/pull_request_template.md` | 行为变化、实测、发布与交接，不要求学习者代写技术报告 |
+| `.github/workflows/cluster-environments.yml` | 固定工具、镜像、隔离执行与指定报告上传；核对实际 Kubernetes/Ray 成功记录 |
+| `.github/workflows/cs336-cpu.yml` | 原锁、独立 Python 环境、固定源码与完整原测试范围 |
+| `.github/workflows/inference-compiler.yml` | 编译器依赖哈希、真实模型请求、失败产物与截止时间 |
+| `.github/workflows/private-cloud.yml` | 临时 SSH 服务、公钥拒绝、严格主机核验、权限和凭据不上传 |
+| `docs/cluster-environments.md` | 前提、只读计划、实际执行、清理与单宿主限制 |
+| `docs/inference-compiler-environments.md` | 下载体积、真实命令、预期输出、重启端口与诊断 |
+| `docs/knowledge-index.md` | 全部条目由目录生成；逐项检查来源、章节、成果和环境，生成结果与目录必须一致 |
+| `labs/cluster-validation/versions.json` | 工具版本、镜像摘要、官方来源与平台边界 |
+| `labs/compiler-validation/matmul.mlir` | 初始化、形状、矩阵操作与返回值；真实 CPU 编译和数值对照 |
+| `labs/compiler-validation/requirements-linux-py312.txt` | 六项固定依赖、目标 ABI 与官方轮子哈希 |
+| `labs/private-cloud/requirements-linux-py312-lock.txt` | 控制环境完整依赖版本与实际 Linux 安装 |
+| `labs/private-cloud/requirements.txt` | 相对引用完整锁，不混入课程依赖 |
+| `labs/private-cloud/ssh_config.example` | 地址占位、密钥路径、严格主机核验、回环转发与连接失败退出 |
+| `scripts/check-cs336-environment.py` | 收集与执行集合相同、原 xfail 单列、导入错误拒绝与作业失败保留 |
+
+2026-10-10 另发现模型体积说明偏小：固定上游文件清单显示权重约 1.5 GB，已同步修正计划和教程。推理重启后的端口重新查询，且再次核对匿名/错误密钥拒绝；不通过增加超时掩盖访问旧端口的问题。维护教程改为已有仓库的提交、同提交 CI、归档恢复、部署和线上复核步骤，首次建库操作单独说明。
+
 模块、模块内的选读任务、去重后的来源和实验入口分别计数，不将引用次数计入来源总数。`scripts/catalog-counts.mjs` 从实际目录计算这些数值；维护状态输出完整口径，覆盖检查逐份核对现行指南中的数量。回归故意改错计数或移除选读项，必须拒绝过期的说明。历史审查保留当时数量，并标明版本。
+
+首页原先只显示有本地运行命令的实验数量，未呈现全部入口。现显示目录中的全部实验，辅助文字说明本地运行与原课流程的数量；浏览器和线上复验直接比较首页总数与实验台全部卡片。线上检查开始即写入未完成状态，失败时保存诊断，成功须绑定同一源码，避免遗留的旧成功报告误导发布。
 
 `labs/compiler-validation/` 的 MLIR 和依赖哈希、`scripts/check-compiler-environment.py` 的编译、数值对照、错误输入和产物恢复路径已逐项阅读。`labs/inference-validation/versions.json` 固定镜像摘要、模型提交与许可；`scripts/check-inference-environment.py` 核对回环端口、随机凭据、真实生成、并发、流式输出、异常重启和资源清理。新增工作流只上传指定诊断，不上传模型、令牌或个人文件。实际执行结果另记，脚本审查不等于运行成功。
 

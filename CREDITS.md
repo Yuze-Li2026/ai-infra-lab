@@ -729,4 +729,6 @@ DBDB 作者 Taavi Burns；Clustering by Consensus 作者 Dustin J. Mitchell。�
 
 环境复验使用 [kind/Kubernetes](https://kind.sigs.k8s.io/)、[Ray](https://github.com/ray-project/ray)、[vLLM](https://github.com/vllm-project/vllm) 和 [IREE](https://github.com/iree-org/iree) 的官方发布；固定镜像摘要、包版本和平台条件保留在 labs 的独立目录。Qwen 团队的 [Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B) 使用固定提交与 Apache-2.0 许可。镜像、安装包和模型不随本站源码或网页再分发，下载时仍须遵守各上游及其依赖的许可。环境检查由本站编写，不是这些项目的官方认证。
 
+容器端口查询依据 Docker 官方 [docker container port](https://docs.docker.com/reference/cli/docker/container/port/) 与[端口发布说明](https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/)，2026-10-10 核对；仅链接并用于复验流程，不复制文档正文。
+
 本文件由 site/catalog.json 生成；修改来源后运行 node scripts/credits.mjs。

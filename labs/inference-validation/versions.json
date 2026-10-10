@@ -6,6 +6,6 @@
   "license": "Apache-2.0",
   "modelSource": "https://huggingface.co/Qwen/Qwen3-0.6B",
   "runtimeSource": "https://docs.vllm.ai/en/stable/getting_started/installation/cpu/",
-  "metadataCheckedAt": "2026-10-09",
-  "download": "Official CPU image is about 1.57 GB compressed; model weights add about 1.2 GB. Download only on an approved experimental host."
+  "metadataCheckedAt": "2026-10-10",
+  "download": "Official CPU image is about 1.57 GB compressed; fixed model.safetensors adds about 1.5 GB. Download only on an approved experimental host."
 }

@@ -1,15 +1,21 @@
 // Optional post-deployment QA using existing Playwright and a fresh browser context.
 import {createRequire} from 'node:module';
 import {resolve} from 'node:path';
-import {readFile,writeFile} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {allowedDocuments} from '../site/documents.js';
+import {sourceSnapshot,sameSource} from '../scripts/verification-state.mjs';
 const require=createRequire(process.env.LAB_PLAYWRIGHT_ROOT?resolve(process.env.LAB_PLAYWRIGHT_ROOT,'package.json'):import.meta.url);
 const {chromium}=require('playwright');
 const base=new URL(process.env.LAB_LIVE_URL||'https://yuze-li2026.github.io/ai-infra-lab/');
 const catalog=JSON.parse(await readFile('site/catalog.json','utf8'));
 assert.equal(base.protocol,'https:');
+const before=await sourceSnapshot();
+await mkdir('artifacts',{recursive:true});
+// A launch, HTTP or interaction failure must not leave an old success current.
+let result={passed:false,url:base.href,checkedAt:new Date().toISOString(),source:{before,after:before},error:'Online verification did not complete'};
+await writeFile('artifacts/live-browser-results.json',JSON.stringify(result,null,2)+'\n');
 const browser=await chromium.launch({headless:true,...(process.env.LAB_BROWSER_PATH?{executablePath:process.env.LAB_BROWSER_PATH}:{channel:'chrome'})});
 const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true,reducedMotion:'reduce'});
 const page=await context.newPage(),checks=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
@@ -37,5 +43,6 @@ try{
  assert.equal(await page.locator('main h1').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)),originalSize*2);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));checks.push('200% text actually doubles the heading size without page overflow');
  assert.deepEqual(errors,[]);checks.push('no browser runtime errors');
- const result={passed:true,url:base.href,checkedAt:new Date().toISOString(),publicFiles:manifest.files.length,checks};await writeFile('artifacts/live-browser-results.json',JSON.stringify(result,null,2)+'\n');console.log(result);
-}finally{await context.close();await browser.close();}
+ const after=await sourceSnapshot();assert.ok(sameSource(before,after),'Source changed during online verification');
+ result={passed:true,url:base.href,checkedAt:new Date().toISOString(),source:{before,after},publicFiles:manifest.files.length,checks};console.log(result);
+}catch(error){result.error=error.message;throw error;}finally{await writeFile('artifacts/live-browser-results.json',JSON.stringify(result,null,2)+'\n');await context.close();await browser.close();}
