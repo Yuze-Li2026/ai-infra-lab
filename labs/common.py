@@ -5,6 +5,7 @@ import platform
 import sys
 import os
 import tempfile
+import time
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -48,7 +49,16 @@ def atomic_json(target, value):
             stream.write('\n')
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, target)
+        for attempt in range(6):
+            try:
+                os.replace(temporary, target)
+                break
+            except PermissionError as error:
+                # Windows scanners/readers can briefly deny delete-sharing.
+                # Retain the old report; never unlink it to force replacement.
+                if sys.platform != 'win32' or getattr(error, 'winerror', None) not in (5, 32, 33) or attempt == 5:
+                    raise
+                time.sleep(0.025 * 2**attempt)
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)

@@ -48,6 +48,30 @@ python3.12 -m venv .venv-compiler
 
 哈希不匹配应停止安装并核对版本、平台与来源，不删除 `--require-hashes`。编译错误先根据诊断查 IR 的操作、类型和形状；结果不一致时保留输入种子、误差、源码与产物哈希。这个检查没有完成 Toy 教程所有章节、编译器源码构建、动态形状、GPU 后端或优化性能研究，后续任务仍按原文进行。
 
+## MLIR Toy 七章源码与原测试
+
+面向已经学过 C++、AST 和 IR 的学习者。依据 [MLIR 构建说明](https://mlir.llvm.org/getting_started/)与 [Toy 原教程](https://mlir.llvm.org/docs/Tutorials/Toy/)，固定 LLVM 22.1.8、提交 `ca7933e47d3a3451d81e72ac174dcb5aa28b59d1`，许可为 Apache-2.0 WITH LLVM-exception。源码在执行时从官方仓库取得，本站不再分发整套 LLVM。
+
+需要 Linux x86-64、Python 3.10+、Git、CMake、Ninja、Clang 与 lld，至少 16 GB 内存、30 GiB 空闲磁盘。源码获取和编译属于大下载、长时间任务；优先使用已有专用环境或仓库的免费公开 CPU 工作流。本机流量有限时不要直接执行构建。
+
+在项目根目录查看计划，不下载或构建：
+
+```sh
+python3 scripts/check-toy-environment.py
+```
+
+环境和下载条件齐备后执行：
+
+```sh
+python3 scripts/check-toy-environment.py --run --jobs 2
+```
+
+`--jobs` 控制并行编译，范围 1–8，默认 2。命令只使用新建的 `artifacts/toy-*` 目录，保留源码与构建产物以便排错；不覆盖个人课程目录。构建开启 LLVM 断言，使用 X86 后端和 `-O1` 控制构建开销，不以这组参数评估编译器优化性能。
+
+流程编译 `toyc-ch1` 至 `toyc-ch7`、FileCheck 与 CPU JIT 运行器，收集全部原测试，再比较收集结果、源文件清单和实际执行集合。任意缺失、失败、超时或不支持的测试均不能通过。结果写入 `artifacts/toy-results.json`，完整构建日志、原始 lit JSON 和收集清单分别保留；报告记录上游提交、工具版本、七个二进制 SHA-256 与逐章计数。
+
+首次云端执行仍以实际报告为准，不能把本文命令或解析器回归当成已完成构建。失败先检查 `toy-build.log` 中第一个编译错误、磁盘与内存；收集不全时核对七章二进制和 JIT 条件，不过滤测试。修复后重新运行会保留前一次构建目录。原教程参考实现通过只证明环境与执行工具可用，个人作品仍须自己实现、解释和复核。
+
 ## 如何读取证据
 
 环境报告只证明所列安装、执行与错误路径；课程成果还需要自己的实现和解释。报告不导入个人作品通过状态。云端工作流保留结果 JSON，推理额外保留已遮盖临时密钥的诊断；不上传模型权重、凭据文件或整个个人实验目录。当前具体成功/失败与提交见[验证记录](verification.md)及仓库 Actions。

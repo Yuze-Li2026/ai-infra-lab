@@ -731,4 +731,6 @@ DBDB 作者 Taavi Burns；Clustering by Consensus 作者 Dustin J. Mitchell。�
 
 容器端口查询依据 Docker 官方 [docker container port](https://docs.docker.com/reference/cli/docker/container/port/) 与[端口发布说明](https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/)，2026-10-10 核对；仅链接并用于复验流程，不复制文档正文。
 
+MLIR Toy 源码构建取自 [LLVM 官方仓库](https://github.com/llvm/llvm-project/tree/ca7933e47d3a3451d81e72ac174dcb5aa28b59d1/mlir/examples/toy)，LLVM 22.1.8，提交 ca7933e47d3a3451d81e72ac174dcb5aa28b59d1，Apache-2.0 WITH LLVM-exception；七章原测试随上游源码在独立环境执行，本站保留接入脚本与版本记录，不再分发整套 LLVM。
+
 本文件由 site/catalog.json 生成；修改来源后运行 node scripts/credits.mjs。
