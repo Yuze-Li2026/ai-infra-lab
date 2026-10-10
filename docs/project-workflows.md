@@ -107,6 +107,8 @@ node scripts/project.mjs systems check --part a2
 
 ## 阅读结果、保留作品与故障定位
 
+维护者的 `CS336 original CPU environments` 工作流分别检查 A1 与 A2 的原锁安装、测试收集和 CPU 执行。A2 原测试中四个 Triton 用例没有 GPU 时由上游明确跳过，报告必须保留其名称：CPU 前置条件成功时仅设置 `cpuEnvironmentVerified`，完整环境的 `environmentVerified` 与 `gpuVerified` 仍为 `false`。这些跳过不计通过，也不能关闭 A2 的 GPU 验收。学习者使用上面的完整 `check`，不需要运行维护者的环境分类脚本。
+
 `check` 写入 `artifacts/course-项目-时间戳.json`、原始 `.log` 和 pytest `.xml`。缺少环境返回 1 并写失败记录；原测试失败、零测试或任何跳过均不会报告完整通过。准备失败也返回非零，并保留已有作品；网络失败时可以重试，已经准备的目录不应再次执行 `prepare`。课程执行记录不是本站六项实验的报告，暂不导入其里程碑；在知识节点提交代码、设计、执行记录和原理说明。
 
 原测试的指纹保存在作品 `.project-source.json`，变更测试会拒绝继续；CS336 明确要求学习者填写的 `tests/adapters.py` 除外。自己新增边界测试可以另建文件。指纹是复现辅助，不是防作弊签名。运行、编译和测试作品使用本地用户权限，没有安全沙箱，勿执行不信任的代码。保留自己的 README、版本锁、测试、日志、性能协议、失败原因和设计解释；个人作品不随本站发布。
