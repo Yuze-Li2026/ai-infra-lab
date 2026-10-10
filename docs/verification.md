@@ -99,6 +99,20 @@ Windows 清理最终保留 Job 成员的原始进程句柄，终止后等待这�
 
 逐文件审查的方法与范围见[文件审查](file-audit.md)，208 个受控文件的哈希清单随验证附件保存。0.5.0 是维护发布，不代表[完整交付清单](delivery-checklist.md)全部通过；多卡、跨机生产负载、异构设备、部分高级原课环境及真实教学效果仍需各自的证据。
 
+## 0.5.0 之后的验证分支
+
+2026-10-10，提交 `8ad7e675a9f90f2faad7f7bbc10bf5ba9fb4abbb` 的 [Validate 38016627137](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/38016627137)在 Windows、Ubuntu 均成功。本地同提交完整检查为 45 项通过、0 失败、0 跳过，五组默认浏览器检查通过；另在已有 RTX 5060 Laptop GPU、PyTorch 2.10.0+cu128 上复跑六种 GPU 程序，正确实现通过，错误实现和不完整恢复按预期拒绝。数量分别对应自动测试、浏览器脚本和候选程序，不能相加作为验收项总数。
+
+完整检查实际发现 Windows 报告文件原子替换偶发 `WinError 5`。现在仅对 Windows 的三类暂时占用错误有限重试；持续失败仍返回错误并保留旧报告。回归使用真实 Windows 文件句柄阻止替换，再释放并核对恢复，同时检查持续占用、失败次数和临时文件清理。没有改成先删除旧报告。
+
+同提交的 [CS336 original CPU environments 38016627220](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/38016627220)完成 A1 与 A2 的固定依赖安装和原始 CPU 测试。A2 原源码提交为 `ca8bc81a59b70516f7ebb2da4808daade877c736`，使用 Python 3.12.15、PyTorch 2.11.0+cu130；收集 14 项，其中 10 项实际执行后因课程 TODO 失败，4 项原 Triton GPU 测试因没有设备跳过。报告明确 `cpuEnvironmentVerified: true`、`environmentVerified: false`、`gpuVerified: false`、`assignmentPassed: false`；四项跳过不计通过。原课 CLI 的完整作品检查仍拒绝跳过。
+
+MLIR Toy 固定 LLVM 22.1.8 七章构建已接入独立免费 Linux 工作流。首次运行发现云端缺少 lld，随后补齐临时 runner 的链接器；[复跑 38016627151](https://github.com/Yuze-Li2026/ai-infra-lab/actions/runs/38016627151)的实际结论以完成后的日志和报告为准。正在编译、解析器回归通过或已有 IREE 结果，都不能计作 Toy 原测试通过。
+
+腾讯云学生方案已核对官方规格、赠送额度、计费与硬件限制，见[个人云端实验室](private-cloud.md#学生使用腾讯云-gpu)。没有因此创建或购买个人实例。当前验证分支的同步不等于 Pages 更新，正式站点仍须按对应发布工作流和线上清单复核；完整交付仍保留真实 Linux GPU、双卡和其他未完成条件。
+
+针对云端指南的补充无障碍检查发现，多张可滚动表格复用同一名称，长命令区域也没有键盘焦点。阅读器现为表格提供编号与列名，并允许 Tab 进入代码区域；回归实际按右方向键核对横向滚动，再使用完整 axe 规则复核这份长文档。此前八路由的扫描范围没有覆盖这份文档，不能用历史通过结果掩盖新发现。
+
 ## 0.3.0 历史检查
 
 以下计数均为对应版本的历史结果。当前目录和测试数量须读取维护状态及当前源码绑定的报告，不将不同版本或不同层级的检查相加。

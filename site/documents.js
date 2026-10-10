@@ -38,8 +38,14 @@ export function renderDocument(markdown,path){
    }else anchor.replaceWith(document.createTextNode(anchor.textContent));
   }catch{anchor.replaceWith(document.createTextNode(anchor.textContent));}
  }
- for(const table of article.querySelectorAll('table')){const wrap=document.createElement('div');wrap.className='table-wrap';wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label',table.querySelector('caption')?.textContent||'可横向滚动的数据表');table.before(wrap);wrap.append(table);}
+ let tableNumber=0;
+ for(const table of article.querySelectorAll('table')){
+  const wrap=document.createElement('div');wrap.className='table-wrap';wrap.tabIndex=0;wrap.setAttribute('role','region');
+  const description=table.querySelector('caption')?.textContent?.trim()||[...table.querySelectorAll('thead th')].map(cell=>cell.textContent.trim()).join('、')||'数据';
+  wrap.setAttribute('aria-label',`表格 ${++tableNumber}：${description}（可横向滚动）`);table.before(wrap);wrap.append(table);
+ }
  for(const pre of article.querySelectorAll('pre')){
+  pre.tabIndex=0;
   const code=pre.querySelector('code');if(!code)continue;
   const block=document.createElement('div');block.className='code-block';
   const tools=document.createElement('div');tools.className='code-tools';
